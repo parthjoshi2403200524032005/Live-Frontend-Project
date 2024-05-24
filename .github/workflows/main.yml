@@ -2,9 +2,9 @@ name: Upload Website
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20.12.0'
+          node-version: "20.12.0"
 
       - name: Install dependencies
         run: npm install
@@ -31,6 +31,10 @@ jobs:
           args: --acl public-read
         env:
           SOURCE_DIR: build/
-          AWS_S3_BUCKET: healthmudraa-web
+
+          AWS_S3_BUCKET: healthmudraa.com
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Invalidate Cloudfront
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_ID }} --paths "/*"
