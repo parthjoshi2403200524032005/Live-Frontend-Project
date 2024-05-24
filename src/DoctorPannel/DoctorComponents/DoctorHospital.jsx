@@ -370,11 +370,13 @@ const DoctorHospital = () => {
                         value={newhospital.specialities[0]}
                         onChange={forHospitalChange}
                       >
-                        {specialitiesData.map((option) => (
-                          <MenuItem key={option} value={option}>
-                            {option}
-                          </MenuItem>
-                        ))}
+                        {specialitiesData.map((option) => {
+                          return (
+                            <MenuItem key={option} value={option}>
+                              {option}
+                            </MenuItem>
+                          );
+                        })}
                       </Select>
                     </FormControl>
                   </Grid>
@@ -627,7 +629,7 @@ const DoctorHospital = () => {
                 <Grid container spacing={1} marginTop={"1rem"}>
                   {newhospital.gallery &&
                     newhospital.gallery?.map((image) => {
-                      if (image)
+                      if (image) {
                         return (
                           <Grid item>
                             <img
@@ -637,6 +639,7 @@ const DoctorHospital = () => {
                             />
                           </Grid>
                         );
+                      } else return null;
                     })}
                 </Grid>
               </Box>

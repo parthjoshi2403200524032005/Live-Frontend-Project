@@ -33,19 +33,7 @@ const HospitalDetails = () => {
     }
   }, []);
 
-  const [text, setText] = useState(false);
   const isBelow575px = useMediaQuery("(max-width: 575px)");
-
-  const textNormal =
-    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eum sint, quaerat facere nesciunt delectus ipsam voluptatibus, fugit ipsa voluptas eligendi ratione labore architecto porro voluptates quae. Aperiam cum natus eaque totam ad! Sed sequi, autem labore ea ex reprehenderit in beatae culpa itaque ullam illum quos iste corporis, voluptatum aspernatur?";
-
-  const showText = () => {
-    setText(!text);
-  };
-
-  const hideText = () => {
-    return text ? textNormal : textNormal.split(" ").slice(0, 28).join(" ");
-  };
 
   return (
     <React.Fragment>
@@ -163,7 +151,7 @@ const HospitalDetails = () => {
                             {details?.owner?.specilization.map((item, idx) => (
                               <span>
                                 {item}
-                                {idx != details.owner.specilization.length - 1
+                                {idx !== details.owner.specilization.length - 1
                                   ? ","
                                   : ""}
                               </span>
@@ -220,6 +208,7 @@ const HospitalDetails = () => {
                     className="  rounded-1 text-dark p-2 text-decoration-none position-fixed text-center"
                     href="https://tawk.to/chat/62b4a9cdb0d10b6f3e790342/1g68rej2q"
                     target="_blank"
+                    rel="noreferrer"
                     style={{
                       width: "80%",
                       background: "#53E37A",
@@ -239,12 +228,3 @@ const HospitalDetails = () => {
 };
 
 export default HospitalDetails;
-
-{
-  /* <div className="ps-2">
-          <p onClick={showText} style={{ cursor: "pointer" }}>
-            {hideText()}{" "}
-            {textNormal.split(" ").length > 28 && !text && "... Read More"}
-          </p>
-        </div> */
-}
