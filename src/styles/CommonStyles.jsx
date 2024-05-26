@@ -34,3 +34,41 @@ export const FlexFullWidth = styled(Flex)`
 export const FlexColFullWidth = styled(FlexCol)`
   width: 100%;
 `;
+
+
+//styling for video description
+export const Description = styled.div`
+.description-container {
+  max-width: 1000px;
+  background-color: rgb(229 231 235);
+  padding:10px;
+  border-radius: 0.75rem; 
+}
+
+.description {
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+}
+
+.collapsed {
+  max-height: 3.6em; 
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.expanded {
+  max-height: 100vh; 
+  white-space: normal;
+}
+
+button{
+  background-color: transparent;
+  border: none;
+  width:100%;
+}
+`;
+
+export const Title = styled.div`
+  margin-top: 3%;
+  font-weight: bold;
+`;

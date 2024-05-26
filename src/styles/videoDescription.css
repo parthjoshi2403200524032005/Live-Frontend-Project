@@ -1,0 +1,21 @@
+.description-container {
+    position: relative;
+    max-width: 600px; /* Adjust as needed */
+    margin: 0 auto;
+  }
+  
+  .description {
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+  }
+  
+  .collapsed {
+    max-height: 3.6em; /* Approximate height of 2 lines of text */
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  .expanded {
+    max-height: 100vh; /* Arbitrary large value to show the full content */
+    white-space: normal;
+  }
