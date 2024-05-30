@@ -42,7 +42,10 @@ export const Description = styled.div`
   max-width: 1000px;
   background-color: rgb(229 231 235);
   padding:10px;
-  border-radius: 0.75rem; 
+  border-radius: 0.75rem;
+  display: flex;
+  position : relative;
+
 }
 
 .description {
@@ -65,10 +68,48 @@ button{
   background-color: transparent;
   border: none;
   width:100%;
+  position: relative;
+  height: 1px;
 }
+
+p{
+  margin-bottom: 0rem;
+}
+
 `;
 
-export const Title = styled.div`
-  margin-top: 3%;
-  font-weight: bold;
+export const Heading3 = styled.div`
+
+/* PC Screen */
+@media only screen and (min-width: 1024px) {
+  .h2{
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom : 10px;
+    letter-spacing: 0em;
+  }
+}
+
+/* Tablet screens */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .h2{
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom : 10px;
+    letter-spacing: 0em;
+  } 
+}
+
+/* Mobile screens */
+@media only screen and (max-width: 767px) {
+  .h2{
+    font-size: 23px;
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom : 10px;
+    letter-spacing: 0em;
+  }
+}
 `;

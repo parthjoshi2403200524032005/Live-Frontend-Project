@@ -22,6 +22,7 @@ export const SpecificVideoWrapper = styled(Flex)`
     border-bottom-width: 1px;
     border-style: solid;
     border-color: rgb(209 213 219);
+    margin-top: 20px;
   }
   .question-container {
     display: flex;
@@ -46,6 +47,56 @@ export const SpecificVideoWrapper = styled(Flex)`
     }
     
   }
+
+  .h1{
+    margin-top: 3%;
+  }
+  .h3{
+    font-size: 20px;
+    font-weight: 700;
+  }
+  /* PC Screen */
+  @media only screen and (min-width: 1024px) {
+    .h1{
+      font-size: 45px;
+      font-weight: 700;
+    }
+    .h2{
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+  }
+
+  /* Tablet screens */
+  @media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .h1{
+      font-size: 30px;
+      font-weight: 700;
+    }
+    .h2{
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    } 
+  }
+
+  /* Mobile screens */
+  @media only screen and (max-width: 767px) {
+    .h1{
+      font-size: 25px;
+      font-weight: 700;
+    }
+    .h2{
+      font-size: 23px;
+      font-weight: 700;
+      letter-spacing: 0.025em;
+    }
+    .h3{
+      font-size: 17px;
+      font-weight: 600;
+    } 
+  }
 `;
 
 export const BookAppointmentFixedbar = styled(Flex)`
@@ -63,3 +114,5 @@ export const BookAppointmentFixedbar = styled(Flex)`
     display: none;
   }
 `;
+
+

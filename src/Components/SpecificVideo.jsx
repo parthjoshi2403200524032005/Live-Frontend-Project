@@ -12,7 +12,8 @@ import LeadGenerationForm from "./common/Lead-Generation";
 import RenderModalOrBottomSheet from "./common/RenderModalBS";
 import { Flex } from "../styles/CommonStyles";
 
-import { Description , Title } from "../styles/CommonStyles";
+import { Description } from "../styles/CommonStyles";
+
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown , faAngleUp } from '@fortawesome/free-solid-svg-icons'
@@ -99,9 +100,7 @@ function SpecificVideo() {
             />
           )}
 
-          <Title>
-          <h1>{data?.title}</h1>
-          </Title>
+          <h1 className="h1">{data?.title}</h1>
 
           <Description>
           <div className="description-container">
@@ -122,12 +121,12 @@ function SpecificVideo() {
         <div className="leadFormWrapper">
           
           <div className="qa-container">
-            <h1>Important questions <br /> answered in this video</h1>
+            <h1 className="h2">Important questions <br /> answered in this video</h1>
             {qaData.map((item, index) => (
               <div key={index} className="qa-item">
                 
                 <div className="question-container" onClick={() => toggleAnswer(index)}>
-                  <h3 className="question">
+                  <h3 className="question h3">
                     {item.question}
                   </h3>
                     {visibleIndex === index ? 
