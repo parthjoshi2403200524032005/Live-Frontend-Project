@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Videos from "./Videos";
 import { Mixpanel } from "../utils/MixPanel";
+import Howitworks from "./Howitworks";
 
 const Home = () => {
   useEffect(() => {
@@ -8,6 +9,7 @@ const Home = () => {
   }, []);
   return (
     <React.Fragment>
+      <Howitworks/>
       <Videos />
     </React.Fragment>
   );

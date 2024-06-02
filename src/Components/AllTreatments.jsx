@@ -3,12 +3,17 @@ import { filterDataService, getAllTreatments } from "../Service/Services";
 import {
   Box,
   Card,
+  CardActions,
   Button,
+  CardContent,
+  CardMedia,
+  Divider,
   Typography,
   useMediaQuery,
   createTheme,
   ThemeProvider,
   Container,
+  styled,
   TextField,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -19,6 +24,8 @@ import AlbumIcon from "@mui/icons-material/Album";
 const AllTreatments = () => {
   const location = useLocation();
   const forBelow575px = useMediaQuery("(max-width:575px)");
+  const forCardBelow575px = useMediaQuery("(max-width:425px)");
+  const forBelow500px = useMediaQuery("(max-width:450px)");
   const theme = createTheme({
     palette: {
       type: "light",
@@ -37,8 +44,18 @@ const AllTreatments = () => {
     },
   });
 
+  const StyledContent = styled("div")(() => ({
+    maxWidth: 480,
+    margin: "auto",
+    minHeight: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+  }));
+
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [specilizations, setSpecilizations] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchTerm = async (e) => {

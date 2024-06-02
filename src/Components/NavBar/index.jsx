@@ -8,6 +8,7 @@ import {
   BottomNavigation,
   BottomNavigationAction,
   IconButton,
+  Button,
 } from "@mui/material";
 import { Home, AccountCircle, MedicalServices } from "@mui/icons-material";
 import InfoIcon from "@mui/icons-material/Info";
@@ -17,6 +18,7 @@ import { NavLink, Outlet, useLocation } from "react-router-dom";
 import AccountModal from "../AccountModal";
 import Footer from "../Footer";
 import Logo from "../../assets/Logo.png";
+import { Sethscope } from "../Svgs/SvgIcons";
 import DocAccountModal from "../../DoctorPannel/DoctorComponents/DocAccountModal";
 import { MobileActionBar } from "./NavBarStyles";
 
@@ -38,6 +40,16 @@ const NavBar = () => {
 
   const forDocOpen = () => setDcopen(true);
   const forDocClose = () => setDcopen(false);
+
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
   useEffect(() => {
     setActive(location.pathname);

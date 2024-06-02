@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Flex, FlexCol } from "../../styles/CommonStyles";
 import {
@@ -48,18 +48,18 @@ const DoctorCard = ({
             </Flex>
             <FlexCol gap={2}>
               <h2 className="doctorName">
-                Dr {item?.firstname}{" "}
-                {item?.qualifications?.length > 0 &&
-                  ", " + item?.qualifications[0]?.degree}
+                {item?.firstname}{" "}
+                {/* {item?.qualifications?.length > 0 &&
+                  ", " + item?.qualifications[0]?.degree} */}
               </h2>
               <h3 className="doctorSpecilization">{item?.specilization[0]}</h3>
-              <h3 className="doctorExperience">
+              {/* <h3 className="doctorExperience">
                 {item?.experiences.map(
                   (xd) =>
                     xd.currentlyworking &&
                     xd.hosptalname + ", " + item?.location
                 )}
-              </h3>
+              </h3> */}
             </FlexCol>
           </Flex>
         </FlexCol>
