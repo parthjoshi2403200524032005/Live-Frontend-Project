@@ -30,7 +30,7 @@ const Footer = () => {
   return (
     <FooterWrapper>
       <FlexCol className="about_company">
-        <img src={Logo} style={{ width: 100 }} alt="" />
+        <img src={Logo} style={{ width: 100 }} />
         <p>
           <span style={{ fontWeight: "bold" }}>HealthMudraa</span> is a health
           information platform with various medical services. It offers

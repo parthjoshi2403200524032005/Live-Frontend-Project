@@ -1,6 +1,0 @@
-extends:
-  - react-app
-rules:
-  react-hooks/exhaustive-deps: off
-  no-mixed-operators: off
-  default-case: off

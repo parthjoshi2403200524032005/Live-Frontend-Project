@@ -1,5 +1,18 @@
 import React, { useState } from "react";
-import { Box, Typography, Tabs, Tab } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Divider,
+  Typography,
+  useMediaQuery,
+  Tabs,
+  Tab,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const TabPanel = ({ children, value, index }) => {
   return (
@@ -10,6 +23,8 @@ const TabPanel = ({ children, value, index }) => {
 };
 const HostpitalTabs = ({ details }) => {
   const [activeTab, setActiveTab] = useState(0);
+  const forBelow500px = useMediaQuery("(max-width:500px)");
+  const nav = useNavigate();
 
   const handleTabChange = (_, newValue) => {
     setActiveTab(newValue);

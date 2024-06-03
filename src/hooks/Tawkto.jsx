@@ -1,9 +1,15 @@
-import { createContext } from "react";
+import { createContext, useRef } from "react";
 import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 
 export const TawktoContext = createContext();
 
 const TawktoProvider = ({ children }) => {
+  const tawkMessengerRef = useRef();
+
+  const handleMinimize = () => {
+    tawkMessengerRef.current.minimize();
+  };
+
   return (
     <TawktoContext.Provider>
       {children}

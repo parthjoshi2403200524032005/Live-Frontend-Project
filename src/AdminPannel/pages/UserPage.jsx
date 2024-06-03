@@ -46,6 +46,16 @@ const TABLE_HEAD = [
   { id: "status", label: "Status", alignRight: false },
 ];
 
+function descendingComparator(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+}
+
 const UserPage = () => {
   const theme = createTheme({
     palette: {
@@ -65,7 +75,7 @@ const UserPage = () => {
     },
   });
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const { openModal, closeModal, ModalComponent } = useModal();
 
@@ -192,11 +202,7 @@ const UserPage = () => {
             <Typography variant="h4" gutterBottom>
               Users
             </Typography>
-            <Button
-              variant="contained"
-              startIcon={<AddIcon />}
-              onClick={openModal}
-            >
+            <Button variant="contained" startIcon={<AddIcon />} onClick={openModal}>
               New User
             </Button>
             <ModalComponent>
