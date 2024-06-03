@@ -5,9 +5,6 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@fortawesome/fontawesome-svg-core": "^6.5.2",
-    "@fortawesome/free-solid-svg-icons": "^6.5.2",
-    "@fortawesome/react-fontawesome": "^0.2.2",
     "@mui/icons-material": "^5.14.1",
     "@mui/material": "^5.14.1",
     "@tawk.to/tawk-messenger-react": "^2.0.2",
@@ -15,8 +12,10 @@
     "@testing-library/react": "^13.4.0",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
+    "bootstrap-icons": "^1.11.3",
     "dotenv": "^16.3.1",
     "env-cmd": "^10.1.0",
+    "mdb-react-ui-kit": "^8.0.0",
     "mixpanel-browser": "^2.49.0",
     "moment": "^2.29.4",
     "plyr-react": "^5.3.0",
@@ -30,8 +29,9 @@
     "react-modal-sheet": "^2.2.0",
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.14.1",
-    "react-scripts": "^5.0.1",
+    "react-scripts": "5.0.1",
     "react-select": "^5.8.0",
+    "sass": "^1.77.4",
     "styled-components": "^6.1.8",
     "web-vitals": "^2.1.4"
   },
@@ -60,8 +60,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }

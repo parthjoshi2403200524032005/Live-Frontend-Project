@@ -15,7 +15,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import AlbumIcon from "@mui/icons-material/Album";
 import { School, WorkHistory, Badge } from "@mui/icons-material";
-import { Flex, FlexCol, FlexColFullWidth , Heading3 } from "../styles/CommonStyles";
+import { Flex, FlexCol, FlexColFullWidth } from "../styles/CommonStyles";
 import { DetailsCardWrapper, DoctorMission } from "../styles/DoctorStyles";
 import { aws_url } from "../Service/Services";
 
@@ -43,25 +43,22 @@ const DoctorTabs = ({ details, loading }) => {
           <DoctorMission dangerouslySetInnerHTML={{ __html: details?.about }} />
         </Flex>
         <ExperiencesandStudies merged={true} />
-        
-        <Heading3>
-        <Typography variant="h5" component={"h5"} className="h2">
+        <Typography variant="h5" component={"h5"}>
           Registration
         </Typography>
         <Registrations />
-        <Typography variant="h5" component={"h5"} className="h2">
+        <Typography variant="h5" component={"h5"}>
           Treatments
         </Typography>
         <TreatmentsOffered />
-        <Typography variant="h5" component={"h5"} className="h2">
+        <Typography variant="h5" component={"h5"}>
           Hospitals
         </Typography>
         <Hospitals />
-        <Typography variant="h5" component={"h5"} className="h2">
+        <Typography variant="h5" component={"h5"}>
           Awards
         </Typography>
         <Awards />
-        </Heading3>
       </React.Fragment>
     );
   };
@@ -125,11 +122,13 @@ const DoctorTabs = ({ details, loading }) => {
   };
 
   const ExperiencesandStudies = ({ merged = false }) => {
+    const forBelow575px = useMediaQuery("(max-width:575px)");
+
     return (
       <FlexColFullWidth>
         <FlexCol>
           {details?.experiences.length > 0 && (
-            <Heading3><Typography variant="h5" className="h2">Experience</Typography></Heading3>
+            <Typography variant="h5">Experience</Typography>
           )}
           <Flex style={{ gap: "20px", flexWrap: "wrap" }}>
             {details.experiences &&
@@ -155,7 +154,7 @@ const DoctorTabs = ({ details, loading }) => {
         </FlexCol>
         <FlexCol>
           {details?.qualifications.length > 0 && (
-            <Heading3><Typography variant="h5" className="h2">Studies</Typography></Heading3>
+            <Typography variant="h5">Studies</Typography>
           )}
           <Flex style={{ gap: "20px", flexWrap: "wrap" }}>
             {details.qualifications &&
@@ -182,6 +181,7 @@ const DoctorTabs = ({ details, loading }) => {
   };
 
   const Registrations = () => {
+    const forBelow575px = useMediaQuery("(max-width:575px)");
     return (
       <Flex margin="10px 0">
         {details.registration &&

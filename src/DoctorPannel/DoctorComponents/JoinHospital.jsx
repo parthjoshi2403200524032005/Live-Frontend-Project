@@ -1,8 +1,10 @@
 import {
   Box,
+  TextField,
   ThemeProvider,
   Typography,
   createTheme,
+  MenuItem,
   Button,
   CircularProgress,
 } from "@mui/material";
@@ -14,6 +16,12 @@ import {
 } from "../../Service/Services";
 import toast from "react-hot-toast";
 import Select from "react-select";
+
+const options = [
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
 
 const JoinHospital = () => {
   const theme = createTheme({
@@ -33,11 +41,21 @@ const JoinHospital = () => {
       fontFamily: "Montserrat",
     },
   });
-  var searchText = "";
+  const [searchText, setSearchText] = useState("");
   const [selectedHospital, setSelectedHospital] = useState("");
   const [hospitals, setHospitals] = useState([]);
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleChange = async (e) => {
+    setSelectedHospital(e.target.value);
+  };
+
+  const handleSearch = async (e) => {
+    setSearchText(e.target.value);
+    await handleGetHospitals(e.target.value);
+  };
 
   const handleGetHospitals = async (searchTerm) => {
     const responseJson = await searchHospital(searchTerm);
@@ -152,7 +170,7 @@ const JoinHospital = () => {
                     component="p"
                     sx={{ color: "green", fontWeight: "600", fontSize: 16 }}
                   >
-                    {request.status === "Pending" ? "Sent" : request.status}
+                    {request.status == "Pending" ? "Sent" : request.status}
                   </Typography>
                 </Box>
               </Box>

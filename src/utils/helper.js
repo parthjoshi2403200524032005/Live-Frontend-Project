@@ -1,3 +1,5 @@
+const zigZag = "lovqIwGRfnYOWwK";
+
 export const getMobileOS = () => {
   var userAgent =
     typeof window != "undefined" ? window?.navigator.userAgent : "none";
@@ -50,6 +52,12 @@ const localStorageHelper = {
   },
 };
 
+export const splitArrayChunk = (arr, chunkSize) => {
+  for (let i = 0; i < arr.length; i += chunkSize) {
+    const chunk = arr.slice(i, i + chunkSize);
+  }
+};
+
 export const numberToWords = (price) => {
   const sglDigit = [
       "zero",
@@ -88,14 +96,14 @@ export const numberToWords = (price) => {
       "ninety",
     ],
     handle_tens = function (dgt, prevDgt) {
-      return 0 === dgt
+      return 0 == dgt
         ? ""
-        : " " + (1 === dgt ? dblDigit[prevDgt] : tensPlace[dgt]);
+        : " " + (1 == dgt ? dblDigit[prevDgt] : tensPlace[dgt]);
     },
     handle_utlc = function (dgt, nxtDgt, denom) {
       return (
-        (0 !== dgt && 1 !== nxtDgt ? " " + sglDigit[dgt] : "") +
-        (0 !== nxtDgt || dgt > 0 ? " " + denom : "")
+        (0 != dgt && 1 != nxtDgt ? " " + sglDigit[dgt] : "") +
+        (0 != nxtDgt || dgt > 0 ? " " + denom : "")
       );
     };
 
@@ -120,11 +128,11 @@ export const numberToWords = (price) => {
           break;
         case 2:
           words.push(
-            0 !== digit
+            0 != digit
               ? " " +
                   sglDigit[digit] +
                   " hundred" +
-                  (0 !== price[digitIdx + 1] && 0 !== price[digitIdx + 2]
+                  (0 != price[digitIdx + 1] && 0 != price[digitIdx + 2]
                     ? " and"
                     : "")
               : ""
@@ -150,11 +158,11 @@ export const numberToWords = (price) => {
           break;
         case 9:
           words.push(
-            0 !== digit
+            0 != digit
               ? " " +
                   sglDigit[digit] +
                   " hundred" +
-                  (0 !== price[digitIdx + 1] || 0 !== price[digitIdx + 2]
+                  (0 != price[digitIdx + 1] || 0 != price[digitIdx + 2]
                     ? " and"
                     : " crore")
               : ""
@@ -163,6 +171,20 @@ export const numberToWords = (price) => {
     str = words.reverse().join("") + " rupees only";
   } else str = "";
   return str;
+};
+
+export const isNBFC = (bankName) => {
+  let nfcArr = [
+    "Bajaj Finance",
+    "Shriram Finance",
+    "LIC Housing Finance Ltd.",
+    "PNB Housing Finance",
+  ];
+
+  if (nfcArr.includes(bankName)) {
+    return true;
+  }
+  return false;
 };
 
 export const FirstLetterCapitalized = (word) => {
@@ -259,8 +281,7 @@ export const decodeBase64 = (data) => {
 
 export const urlBuilder = (path) => {
   const pattern = new RegExp("\\<.*?\\>");
-  const removedHTMLPath = path
-    .toLowerCase()
+  const removedHTMLPath = new String(path.toLowerCase())
     .replace(pattern, "")
     .replace(/\s+/g, " ");
   return removedHTMLPath.split(" ").join("-");

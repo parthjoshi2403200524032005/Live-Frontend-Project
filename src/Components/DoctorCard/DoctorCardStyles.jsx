@@ -17,8 +17,7 @@ export const DoctorCardWrapper = styled(FlexCol)`
     border-radius: 50%;
   }
   .doctorName {
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 17px;
     margin: 0;
   }
   .doctorSpecilization,
@@ -30,27 +29,31 @@ export const DoctorCardWrapper = styled(FlexCol)`
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    color:#717171;
   }
 `;
 
 export const BookAppointmentShare = styled(FlexFullWidth)`
-  background-color: #133680;
+  background-color: #133682;
   justify-content: center;
   padding: 10px 10px;
+  border-radius:10px;
 `;
 
 export const BookAppointment = styled(Flex)`
   color: #fff;
-  font-weight: 600;
   text-decoration: none;
   display: flex;
   align-items: center;
+  font-size:15px;
+  letter-spacing:2px;
 `;
 
 export const VideoShareWrapper = styled(FlexFullWidth)`
   position: relative;
   .plyr {
     width: 100%;
+    border-radius:22px;
   }
   .shareIcon {
     position: absolute;
@@ -68,8 +71,9 @@ export const VideoShareWrapper = styled(FlexFullWidth)`
 `;
 
 export const HMCard = styled.div`
-  box-shadow: #1336804c 3px 3px 3px 0px;
+  box-shadow: #d6d6d6 1px 3px 2px 0px;
   border: 1px solid rgb(241, 241, 241);
   border-radius: 12px;
   overflow: hidden;
+  padding:20px;
 `;
