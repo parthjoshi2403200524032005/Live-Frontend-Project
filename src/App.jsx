@@ -23,6 +23,7 @@ import ForgotPassword from "./DoctorPannel/DoctorComponents/ForgotPassword";
 import HospitalDetails from "./Components/HospitalDetails";
 import TreatmentById from "./Components/TreatmentById";
 import AllHospitals from "./Components/AllHospitals";
+import Videos from "./Components/Videos";
 import UserProfile from "./UserPannel/UserProfile";
 import AllDoctors from "./Components/AllDoctors";
 import Page404 from "./Components/Page404";
@@ -50,6 +51,7 @@ const App = () => {
     { path: "/", element: <Home /> },
     { path: "/sitemap.xml", element: <Sitemap /> },
     { path: "/videos/:videotitle", element: <SpecificVideo /> },
+    { path: "/videos" , element: <Videos/>},
     { path: "/service", element: <Service /> },
     { path: "/about", element: <About /> },
     { path: "/plans", element: <PackageCards /> },
