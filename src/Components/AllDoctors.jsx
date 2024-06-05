@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  aws_url,
-  filterDataService,
-  getAllDoctors,
-  searchDoctors,
-} from "../Service/Services";
+import { aws_url, filterDataService, searchDoctors } from "../Service/Services";
 import {
   Box,
   Card,
@@ -18,7 +13,6 @@ import {
   createTheme,
   ThemeProvider,
   Container,
-  styled,
   TextField,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -45,18 +39,8 @@ const AllDoctors = () => {
     },
   });
 
-  const StyledContent = styled("div")(() => ({
-    maxWidth: 480,
-    margin: "auto",
-    minHeight: "100vh",
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "column",
-  }));
-
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [specilizations, setSpecilizations] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchTerm = async (e) => {

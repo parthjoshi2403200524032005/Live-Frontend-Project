@@ -133,7 +133,7 @@ const TreatmentById = () => {
                           {details?.doctorId?.specilization.map((item, idx) => (
                             <span>
                               {item}
-                              {idx != details.doctorId.specilization.length - 1
+                              {idx !== details.doctorId.specilization.length - 1
                                 ? ","
                                 : ""}
                             </span>
@@ -160,6 +160,7 @@ const TreatmentById = () => {
             className="  rounded-1 text-dark p-2 text-decoration-none position-fixed text-center"
             href="https://tawk.to/chat/62b4a9cdb0d10b6f3e790342/1g68rej2q"
             target="_blank"
+            rel="noreferrer"
             style={{ width: "80%", background: "#53E37A", bottom: "4rem" }}
           >
             Book Appointment
