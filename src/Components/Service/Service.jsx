@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, TextField, useMediaQuery } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { Helmet } from "react-helmet-async";
 import {
   Cardiology,
   Urology,
@@ -96,6 +97,13 @@ const Service = () => {
 
   return (
     <>
+
+       <Helmet>
+        <title>HealthMudraa-Services</title>
+        <meta name="description" content="Services page description comes here" />
+        <link rel ="canonical" href="/services"/>
+      </Helmet>
+    
       <FlexColFullWidth>
         <TitleWrapper>
           <H1>Medical Specialities</H1>

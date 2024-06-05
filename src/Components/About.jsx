@@ -7,6 +7,7 @@ import ImageCall from "../assets/Icon zocial-call.png";
 import ImageChat from "../assets/Group 4612.png";
 import ImageSearch from "../assets/Icon awesome-search.png";
 import FounderImg from "../assets/Group 4610.png";
+import { Helmet } from "react-helmet-async";
 
 const About = () => {
   const forBelow800px = useMediaQuery("(max-width:800px)");
@@ -15,6 +16,11 @@ const About = () => {
   }, []);
   return (
     <React.Fragment>
+        <Helmet>
+        <title>HealthMudraa-About</title>
+        <meta name="description" content="About page description comes here" />
+        <link rel ="canonical" href="/about"/>
+      </Helmet>
       <div className="container">
         <div className="my-5">
           <Typography

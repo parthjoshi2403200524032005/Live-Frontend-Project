@@ -57,14 +57,16 @@ const NavBar = () => {
 
   return (
     <React.Fragment>
-      <Box>
-        <Toolbar className="shadow">
-          <Box
+      <Box >
+        <Toolbar className="shadow" style={{width:'100%',backgroundColor:'white',height: '11vh',zIndex:'1000'}}>
+          {/* <Box
             alt="Health Mudraa"
             src={Logo}
             sx={{ width: 100, height: 44, cursor: "pointer" }}
             component={"img"}
-          />
+          /> */}
+
+          <p style={{fontSize:'1.5rem',letterSpacing:'1px',fontWeight:'600',marginLeft:'2rem',marginTop:'1rem'}}><span style={{color:'#133682'}}>Health</span><span style={{color:'red'}}>Mudraa</span></p>
           <Box sx={{ flexGrow: 3 }} />
           {!forScreenWidth && (
             <Box
@@ -80,6 +82,14 @@ const NavBar = () => {
                 to={"/"}
                 sx={{ ...CustomStyles.navLink, color: "inherit" }}
               >
+                Home
+              </Typography>
+              <Typography
+                className="text-decoration-none new"
+                component={NavLink}
+                to={"/videos"}
+                sx={{ ...CustomStyles.navLink, color: "inherit" }}
+              >
                 Videos
               </Typography>
               <Typography
@@ -90,6 +100,7 @@ const NavBar = () => {
               >
                 Services
               </Typography>
+            
               <Typography
                 className="text-decoration-none new"
                 component={NavLink}
@@ -190,6 +201,20 @@ const NavBar = () => {
               component={NavLink}
               to="/"
             />
+              <BottomNavigationAction
+              className="value"
+              label={
+                <Typography
+                  variant="subtitle1"
+                  sx={{ fontFamily: "Montserrat", fontSize: 11 }}
+                >
+                  Videos
+                </Typography>
+              }
+              icon={<MedicalServices />}
+              component={NavLink}
+              to="/videos"
+            />
             <BottomNavigationAction
               className="value"
               label={
@@ -204,6 +229,7 @@ const NavBar = () => {
               component={NavLink}
               to="/service"
             />
+               
             <BottomNavigationAction
               className="value"
               label={
@@ -236,7 +262,7 @@ const NavBar = () => {
         </MobileActionBar>
       ) : null}
       <Outlet />
-      {active === "/signup" || active === "/login" ? "" : <Footer />}
+      {/* {active === "/signup" || active === "/login" ? "" : <Footer />} */}
     </React.Fragment>
   );
 };

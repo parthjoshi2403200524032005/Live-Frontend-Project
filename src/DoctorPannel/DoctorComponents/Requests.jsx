@@ -76,7 +76,7 @@ const Requests = () => {
                   <Typography component={"p"}>{request.doctorname}</Typography>
                 </Box>
                 <Box>
-                  {request.status === "Pending" && (
+                  {request.status == "Pending" && (
                     <Box display={"flex"}>
                       <Box component={"div"}>
                         <Button
@@ -96,7 +96,7 @@ const Requests = () => {
                       </Box>
                     </Box>
                   )}
-                  {request.status === "Accept" && (
+                  {request.status == "Accept" && (
                     <Box display={"flex"} alignItems={"center"}>
                       <Box component={"div"}>
                         <Typography
@@ -120,7 +120,7 @@ const Requests = () => {
                       </Box>
                     </Box>
                   )}
-                  {request.status === "Reject" && (
+                  {request.status == "Reject" && (
                     <Box component={"div"}>
                       <Typography
                         component="p"

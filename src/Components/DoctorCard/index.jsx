@@ -53,13 +53,13 @@ const DoctorCard = ({
                   ", " + item?.qualifications[0]?.degree} */}
               </h2>
               <h3 className="doctorSpecilization">{item?.specilization[0]}</h3>
-              {/* <h3 className="doctorExperience">
+              <h3 className="doctorExperience">
                 {item?.experiences.map(
                   (xd) =>
                     xd.currentlyworking &&
                     xd.hosptalname + ", " + item?.location
                 )}
-              </h3> */}
+              </h3>
             </FlexCol>
           </Flex>
         </FlexCol>
