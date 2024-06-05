@@ -22,7 +22,7 @@ const DetailCard = ({
   const expFormat = (xd, yd) => {
     const startDate = moment(xd);
     let endDate = moment(new Date());
-    if (yd != "Present") {
+    if (yd !== "Present") {
       endDate = moment(yd);
     }
 
