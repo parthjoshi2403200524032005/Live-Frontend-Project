@@ -48,16 +48,6 @@ const TABLE_HEAD = [
   { id: "verified", label: "Verified", alignRight: false },
 ];
 
-function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
-
 const DoctorPage = () => {
   const theme = createTheme({
     palette: {
@@ -89,8 +79,6 @@ const DoctorPage = () => {
   const [data, setData] = useState([]);
   const [editid, setEditid] = useState("");
   const navigate = useNavigate();
-
-  
 
   const forGetData = async (rowsPerPage, page, searchterm) => {
     try {
@@ -172,7 +160,7 @@ const DoctorPage = () => {
   const handleChange = async (e, id) => {
     const { name, value } = e.target;
     const tempdata = [...data];
-    if (name == "verified") {
+    if (name === "verified") {
       tempdata[id][name] = !tempdata[id][name];
     } else {
       tempdata[id][name] = value;
@@ -210,11 +198,15 @@ const DoctorPage = () => {
             <Typography variant="h4" gutterBottom>
               Doctors
             </Typography>
-            <Button variant="contained" startIcon={<AddIcon />} onClick={openModal}>
+            <Button
+              variant="contained"
+              startIcon={<AddIcon />}
+              onClick={openModal}
+            >
               New Doctor
             </Button>
             <ModalComponent>
-              <Doctor closeModal={closeModal}/>
+              <Doctor closeModal={closeModal} />
             </ModalComponent>
           </Stack>
 

@@ -10,7 +10,6 @@ import {
   ThemeProvider,
   Container,
   Button,
-  Grid,
   ImageListItem,
 } from "@mui/material";
 import ImageList from "@mui/material/ImageList";
@@ -19,7 +18,6 @@ import AlbumIcon from "@mui/icons-material/Album";
 import BusinessIcon from "@mui/icons-material/Business";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import { useNavigate } from "react-router-dom";
-import { Image } from "@mui/icons-material";
 import { aws_url } from "../Service/Services";
 
 const TabPanel = ({ children, value, index }) => {
@@ -117,35 +115,6 @@ const HostpitalDetailTabs = ({ details }) => {
           </Typography>
           <Gallery />
         </div>
-      </React.Fragment>
-    );
-  };
-
-  const Others = () => {
-    return (
-      <React.Fragment>
-        <Container>
-          <Box component={"div"}>
-            <Typography
-              variant="h6"
-              component={"h6"}
-              sx={{
-                mb: 2,
-                mt: 2,
-                fontWeight: "bold",
-                fontFamily: "Montserrat",
-              }}
-            >
-              Specialities
-            </Typography>
-            <Typography component={"li"}>
-              Price starting from ₹{details.pricestarts}
-            </Typography>
-            <Typography component={"li"}>
-              Patients treated {details.treated}
-            </Typography>
-          </Box>
-        </Container>
       </React.Fragment>
     );
   };
