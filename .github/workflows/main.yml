@@ -23,7 +23,7 @@ jobs:
         run: npm install
 
       - name: Build app
-        run: npm run build
+        run: npm run build:production
 
       - name: Upload to S3
         uses: jakejarvis/s3-sync-action@master
