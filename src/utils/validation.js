@@ -1,4 +1,4 @@
-const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const mobileRegex = /[6-9]{1}[0-9]{9}/;
 export const panRegex = /[A-Z]{5}[0-9]{4}[A-Z]{1}/;
 const mobileOtpRegex = /^\d{4}$/;

@@ -29,6 +29,7 @@ export default function Nav({ openNav, onCloseNav }) {
   const { pathname } = useLocation();
 
   const isDesktop = useResponsive("up", "lg");
+  const [tempboard, setTempboard] = useState(false);
   const [id, setId] = useState("");
   const [type, setType] = useState("");
   const [email, setEmail] = useState("");
@@ -39,6 +40,7 @@ export default function Nav({ openNav, onCloseNav }) {
     }
     const tempemail = localStorage.getItem("email");
     setEmail(tempemail);
+    setTempboard(pathname.toLowerCase().includes("doctor/"));
     const tempsplit = pathname.split("/");
 
     setId(tempsplit.length > 4 ? tempsplit[tempsplit.length - 1] : "");
@@ -80,7 +82,7 @@ export default function Nav({ openNav, onCloseNav }) {
       <NavSection
         data={
           id && type
-            ? type === "doctor"
+            ? type == "doctor"
               ? doctorNavConfig(id)
               : userNavConfig(id)
             : navConfig

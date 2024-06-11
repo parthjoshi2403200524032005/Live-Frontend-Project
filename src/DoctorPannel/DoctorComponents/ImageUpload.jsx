@@ -113,7 +113,7 @@ const ImageUpload = ({
               className="imgpreview"
             />
           )}
-          {name === edit && tempimage?.preview && (
+          {name == edit && tempimage?.preview && (
             <img
               src={tempimage.preview}
               alt="profile-preview"
