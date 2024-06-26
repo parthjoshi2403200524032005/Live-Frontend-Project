@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
 function RazorPayButton({ buttonId }) {
-  const location = useLocation();
   const formRef = useRef(null); // Create a ref for the form
 
   useEffect(() => {

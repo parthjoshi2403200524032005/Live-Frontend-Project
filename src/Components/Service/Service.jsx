@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Box, TextField, useMediaQuery } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { Helmet } from "react-helmet-async";
 import {
   Cardiology,
   Urology,
@@ -19,11 +18,7 @@ import {
   Veternary,
   General,
 } from "../Svgs/SvgIcons";
-import {
-  aws_url,
-  filterDataService,
-  userServicePage,
-} from "../../Service/Services";
+import { aws_url, userServicePage } from "../../Service/Services";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Flex, FlexCol, FlexColFullWidth } from "../../styles/CommonStyles";
@@ -43,9 +38,6 @@ import {
 } from "./serviceStyles";
 
 const Service = () => {
-  const forBelow575px = useMediaQuery("(max-width:575px)");
-  const forCardBelow575px = useMediaQuery("(max-width:425px)");
-  const forBelow500px = useMediaQuery("(max-width:450px)");
   const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -69,7 +61,6 @@ const Service = () => {
   ];
 
   const [data, setData] = useState([]);
-  const [filter, setFilter] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchTerm = async (e) => {
@@ -87,7 +78,6 @@ const Service = () => {
   };
 
   const forFilterData = async (data) => {
-    setFilter([data]);
     navigate("/doctors", { state: [data] });
   };
 
@@ -97,13 +87,6 @@ const Service = () => {
 
   return (
     <>
-
-       <Helmet>
-        <title>HealthMudraa-Services</title>
-        <meta name="description" content="Services page description comes here" />
-        <link rel ="canonical" href="/services"/>
-      </Helmet>
-    
       <FlexColFullWidth>
         <TitleWrapper>
           <H1>Medical Specialities</H1>
@@ -164,6 +147,7 @@ const Service = () => {
                         <img
                           component="img"
                           src={`${aws_url}/${xd.hospitalprofileurl}`}
+                          alt=""
                         />
                         <FlexCol
                           gap={2}
