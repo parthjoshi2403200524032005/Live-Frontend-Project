@@ -34,3 +34,82 @@ export const FlexFullWidth = styled(Flex)`
 export const FlexColFullWidth = styled(FlexCol)`
   width: 100%;
 `;
+
+
+//styling for video description
+export const Description = styled.div`
+.description-container {
+  max-width: 1000px;
+  background-color: rgb(229 231 235);
+  padding:10px;
+  border-radius: 0.75rem;
+  display: flex;
+  position : relative;
+
+}
+
+.description {
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+}
+
+.collapsed {
+  max-height: 3.6em; 
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.expanded {
+  max-height: 100vh; 
+  white-space: normal;
+}
+
+button{
+  background-color: transparent;
+  border: none;
+  width:100%;
+  position: relative;
+  height: 1px;
+}
+
+p{
+  margin-bottom: 0rem;
+}
+
+`;
+
+export const Heading3 = styled.div`
+
+/* PC Screen */
+@media only screen and (min-width: 1024px) {
+  .h2{
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom : 10px;
+    letter-spacing: 0em;
+  }
+}
+
+/* Tablet screens */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .h2{
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom : 10px;
+    letter-spacing: 0em;
+  } 
+}
+
+/* Mobile screens */
+@media only screen and (max-width: 767px) {
+  .h2{
+    font-size: 23px;
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom : 10px;
+    letter-spacing: 0em;
+  }
+}
+`;
