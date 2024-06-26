@@ -54,7 +54,7 @@ const VideoFetch = () => {
     category: "",
   });
 
-  const [categories, setCategories] = useState([
+  const categories = [
     "General",
     "Brain and Nerves",
     "Bones and Muscles",
@@ -75,7 +75,7 @@ const VideoFetch = () => {
     "Kidney care",
     "Ear Nose Throat",
     "Acupressure therapy",
-  ]);
+  ];
 
   const [source, setSource] = useState(null);
   const [video, setVideo] = useState([]);

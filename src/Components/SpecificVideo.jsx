@@ -7,7 +7,7 @@ import {
   BookAppointmentFixedbar,
   SpecificVideoWrapper,
 } from "../styles/SpecificVideo";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 import LeadGenerationForm from "./common/Lead-Generation";
 import RenderModalOrBottomSheet from "./common/RenderModalBS";
 import { Flex } from "../styles/CommonStyles";
@@ -42,34 +42,12 @@ function SpecificVideo() {
       .setAttribute("style", "display:none !important");
     setShowBts(true);
   };
-
-
-
-  const maxTitleLength = 50;
-  const maxDescriptionLength = 150;
-
-  const truncate = (str, maxLength) => {
-    if (!str) return '';
-    return str.length > maxLength ? str.substring(0, maxLength - 3) + '...' : str;
-  };
-
-  const title = truncate(data?.title, maxTitleLength);
-  const description = truncate(data?.description, maxDescriptionLength);
-
-  
   return (
     <>
-
-      {/* <Helmet>
+      <Helmet>
         <title>{data?.title}</title>
         <meta name="description" content={data?.description} />
-      </Helmet> */}
-
-      <Helmet>
-        <title>{title}</title>
-        <meta name="description" content={description} />
       </Helmet>
-      
       <SpecificVideoWrapper justifyContent="center">
         <div className="videoDetails">
           {url.length > 0 && (
