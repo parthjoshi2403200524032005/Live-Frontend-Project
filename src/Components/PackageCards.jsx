@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Card,
   CardActions,
   CardContent,
@@ -9,6 +10,7 @@ import {
 } from "@mui/material";
 import React, { useEffect } from "react";
 import RazorpayButton from "./RazorpayButton";
+import { Helmet } from "react-helmet-async";
 const PackageCards = () => {
   const forBelow775px = useMediaQuery("(max-width:778px)");
   const forBelow580px = useMediaQuery("(max-width:500px)");
@@ -117,6 +119,12 @@ const PackageCards = () => {
   }, []);
   return (
     <React.Fragment>
+       <Helmet>
+        <title>HealthMudraa-Plans</title>
+        <meta name="description" content="Plans page description comes here" />
+        <link rel ="canonical" href="/plans"/>
+
+      </Helmet>
       <div className="container">
         <div className="my-5">
           <Typography
