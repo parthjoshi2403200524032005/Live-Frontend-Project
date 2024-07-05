@@ -13,12 +13,12 @@ import DoctorDashboard from "./DoctorPannel/DoctorComponents/DoctorDashboard";
 import DoctorMainProfile from "./DoctorPannel/DoctorComponents/DoctorMainProfile";
 import DoctorHospital from "./DoctorPannel/DoctorComponents/DoctorHospital";
 import DoctorPackages from "./DoctorPannel/DoctorComponents/DoctorPackages";
-import DoctorAbout from "./DoctorPannel/DoctorComponents/About";
-import Qualifications from "./DoctorPannel/DoctorComponents/Qualifications";
-import Experience from "./DoctorPannel/DoctorComponents/Experience";
-import Resgistration from "./DoctorPannel/DoctorComponents/Registration";
-import GovermentID  from "./DoctorPannel/DoctorComponents/GovermentID";
-import Awards  from "./DoctorPannel/DoctorComponents/Awards";
+// import DoctorAbout from "./DoctorPannel/DoctorComponents/About";
+// import Qualifications from "./DoctorPannel/DoctorComponents/Qualifications";
+// import Experience from "./DoctorPannel/DoctorComponents/Experience";
+// import Resgistration from "./DoctorPannel/DoctorComponents/Registration";
+// import GovermentID  from "./DoctorPannel/DoctorComponents/GovermentID";
+// import Awards  from "./DoctorPannel/DoctorComponents/Awards";
 
 import DocLogin from "./DoctorPannel/DoctorComponents/DocLogin";
 import DocSignup from "./DoctorPannel/DoctorComponents/DocSignup";
@@ -106,12 +106,12 @@ const App = () => {
     { path: "/doctor/profile/doctordetails", element: <DocDetails /> },
     { path: "/doctor/treatments", element: <DoctorPackages /> },
 
-    { path: "/doctor/about", element: <DoctorAbout /> },
-    { path: "/doctor/qualifications", element: <Qualifications /> },
-    { path: "/doctor/experience", element: <Experience /> },
-    { path: "/doctor/registration", element: <Resgistration /> },
-    { path: "/doctor/govID", element: <GovermentID /> },
-    { path: "/doctor/awards", element: <Awards /> },
+    // { path: "/doctor/about", element: <DoctorAbout /> },
+    // { path: "/doctor/qualifications", element: <Qualifications /> },
+    // { path: "/doctor/experience", element: <Experience /> },
+    // { path: "/doctor/registration", element: <Resgistration /> },
+    // { path: "/doctor/govID", element: <GovermentID /> },
+    // { path: "/doctor/awards", element: <Awards /> },
 
     { path: "/doctor/hospitalprofile", element: <DoctorHospital /> },
     { path: "/doctor/leads", element: <DoctorLeads /> },
