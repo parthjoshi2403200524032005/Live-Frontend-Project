@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import {
   Box,
   Container,
@@ -61,12 +62,13 @@ const ImageUpload = ({
     } else {
       setImage(img);
     }
+
+    let data = new FormData();
+    data.append('image', e.target.files[0]);
+    forSubmit(data);
   };
 
-  const forSubmit = async (e) => {
-    e.preventDefault();
-    let data = new FormData();
-    data.append("image", image.data);
+  const forSubmit = async (data) => {
     const response = await ProImageUpload(data);
     console.log(response);
     if (response.data.status) {
@@ -80,8 +82,8 @@ const ImageUpload = ({
     }
     if (emptyimage) {
       setImage({
-        preview: "",
-        data: "",
+        preview: '',
+        data: '',
       });
     }
   };
@@ -129,7 +131,7 @@ const ImageUpload = ({
               <input hidden accept="image/*" type="file" onChange={forChange} />
               <PhotoCamera />
             </IconButton>
-            {!card && (
+            {/* {!card && (
               <UploadButton
                 onClick={forSubmit}
                 type="button"
@@ -141,7 +143,7 @@ const ImageUpload = ({
               >
                 Upload
               </UploadButton>
-            )}
+            )} */}
           </Box>
         </Stack>
 
