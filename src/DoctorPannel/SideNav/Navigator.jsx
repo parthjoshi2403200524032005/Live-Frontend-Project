@@ -1,4 +1,11 @@
-import React from "react";
+
+import React, { useEffect, useState } from "react";
+import {
+  aws_url,
+  doctorDetailsGet,
+  doctorDetailsUpdate,
+} from "../../Service/Services";
+
 import {
   Typography,
   Divider,
@@ -29,16 +36,16 @@ const categories = [
         icon: <TextSnippetIcon />,
         link: "/doctor/treatments",
       },
-      {
-        id: "Join Hospital",
-        icon: <LocalHospitalIcon />,
-        link: "/doctor/joinhospital",
-      },
-      {
-        id: "Hospital Requests",
-        icon: <ChecklistIcon />,
-        link: "/doctor/requests",
-      },
+      // {
+      //   id: "Join Hospital",
+      //   icon: <LocalHospitalIcon />,
+      //   link: "/doctor/joinhospital",
+      // },
+      // {
+      //   id: "Hospital Requests",
+      //   icon: <ChecklistIcon />,
+      //   link: "/doctor/requests",
+      // },
       {
         id: "Hospital Profile",
         icon: <LocalHospitalIcon />,
@@ -80,6 +87,24 @@ const Navigator = (props) => {
     navigate("/doctor/login");
   };
 
+  const [form, setForm] = useState({ });
+
+  const forDoctorGet = async () => {
+    const response = await doctorDetailsGet();
+    if (response?.data.status) {
+      setForm(response.data?.data);
+      console.log("------------------------");
+      console.log(response.data);
+
+    } else {
+      console.log(response?.data.message);
+    }
+  };
+
+  useEffect(() => {
+    forDoctorGet();
+  }, []);
+
   return (
     <Drawer variant="permanent" {...other}>
       <List disablePadding>
@@ -107,6 +132,29 @@ const Navigator = (props) => {
         </ListItem>
         {categories.map(({ children }) => (
           <Box key={children[0].id}>
+
+            {form.verified ? "":
+              <ListItem disablePadding key="Quick Onboarding" component={ListItemButton}>
+                <ListItemButton
+                  className="nav-link p-2"
+                  component={NavLink}
+                  to="/doctor/quickOnboarding"
+                  sx={{ ...item }}
+                  style={({ isActive }) => ({
+                    backgroundColor: isActive ? "#133680" : "",
+                  })}
+                >
+                  <ListItemIcon sx={{ color: "#ffff" }}><AccountBoxIcon /></ListItemIcon>
+                  <Typography
+                    component="span"
+                    sx={{ fontFamily: "Montserrat", color: "#ffff" }}
+                  >
+                    Quick Onboarding
+                  </Typography>
+                </ListItemButton>
+              </ListItem>
+            }
+
             {children.map(({ id, icon, link }) => (
               <ListItem disablePadding key={id} component={ListItemButton}>
                 <ListItemButton
