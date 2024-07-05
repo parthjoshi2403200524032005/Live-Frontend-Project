@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+//import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import {
   Box,
   Container,
@@ -9,7 +9,7 @@ import {
   ThemeProvider,
   createTheme,
 } from "@mui/material";
-import { UploadButton } from "../../CustomStyles/Styles";
+//import { UploadButton } from "../../CustomStyles/Styles";
 import { ProImageUpload } from "../../Service/Services";
 import { toast } from "react-hot-toast";
 
