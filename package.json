@@ -29,9 +29,11 @@
     "react-hot-toast": "^2.4.1",
     "react-modal-sheet": "^2.2.0",
     "react-quill": "^2.0.0",
-    "react-router-dom": "^6.14.1",
+    "react-router-dom": "^6.23.1",
     "react-scripts": "^5.0.1",
     "react-select": "^5.8.0",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.8",
     "web-vitals": "^2.1.4"
   },

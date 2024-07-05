@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
-//import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import UploadFileIcon from '@mui/icons-material/UploadFile';
+import SaveAsIcon from '@mui/icons-material/SaveAs';
 import {
   Box,
   Container,
@@ -9,11 +9,11 @@ import {
   ThemeProvider,
   createTheme,
 } from "@mui/material";
-//import { UploadButton } from "../../CustomStyles/Styles";
+import { UploadButton } from "../../CustomStyles/Styles";
 import { ProImageUpload } from "../../Service/Services";
 import { toast } from "react-hot-toast";
 
-const ImageUpload = ({
+const ImageUploadFile = ({
   setForm,
   fieldname,
   imageurl,
@@ -62,13 +62,12 @@ const ImageUpload = ({
     } else {
       setImage(img);
     }
-
-    let data = new FormData();
-    data.append('image', e.target.files[0]);
-    forSubmit(data);
   };
 
-  const forSubmit = async (data) => {
+  const forSubmit = async (e) => {
+    e.preventDefault();
+    let data = new FormData();
+    data.append("image", image.data);
     const response = await ProImageUpload(data);
     console.log(response);
     if (response.data.status) {
@@ -82,8 +81,8 @@ const ImageUpload = ({
     }
     if (emptyimage) {
       setImage({
-        preview: '',
-        data: '',
+        preview: "",
+        data: "",
       });
     }
   };
@@ -122,16 +121,17 @@ const ImageUpload = ({
               className="imgpreview"
             />
           )}
-          <Box component={"div"}>
+          <Box component={"div"} style={{ border: "3px solid #133680" , padding:"20px"}}>
             <IconButton
               color="primary"
               aria-label="upload picture"
               component="label"
             >
               <input hidden accept="image/*" type="file" onChange={forChange} />
-              <PhotoCamera />
+          
+              { tempimage.preview === "" ? <UploadFileIcon fontSize="large" /> : <SaveAsIcon fontSize="large"/>}
             </IconButton>
-            {/* {!card && (
+            {!card && (
               <UploadButton
                 onClick={forSubmit}
                 type="button"
@@ -143,7 +143,7 @@ const ImageUpload = ({
               >
                 Upload
               </UploadButton>
-            )} */}
+            )}
           </Box>
         </Stack>
 
@@ -153,4 +153,4 @@ const ImageUpload = ({
   );
 };
 
-export default ImageUpload;
+export default ImageUploadFile;

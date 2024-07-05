@@ -13,6 +13,13 @@ import DoctorDashboard from "./DoctorPannel/DoctorComponents/DoctorDashboard";
 import DoctorMainProfile from "./DoctorPannel/DoctorComponents/DoctorMainProfile";
 import DoctorHospital from "./DoctorPannel/DoctorComponents/DoctorHospital";
 import DoctorPackages from "./DoctorPannel/DoctorComponents/DoctorPackages";
+// import DoctorAbout from "./DoctorPannel/DoctorComponents/About";
+// import Qualifications from "./DoctorPannel/DoctorComponents/Qualifications";
+// import Experience from "./DoctorPannel/DoctorComponents/Experience";
+// import Resgistration from "./DoctorPannel/DoctorComponents/Registration";
+// import GovermentID  from "./DoctorPannel/DoctorComponents/GovermentID";
+// import Awards  from "./DoctorPannel/DoctorComponents/Awards";
+
 import DocLogin from "./DoctorPannel/DoctorComponents/DocLogin";
 import DocSignup from "./DoctorPannel/DoctorComponents/DocSignup";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
@@ -44,6 +51,8 @@ import JoinHospital from "./DoctorPannel/DoctorComponents/JoinHospital";
 import Requests from "./DoctorPannel/DoctorComponents/Requests";
 import Sitemap from "./sitemap.xml";
 import DoctorLeads from "./DoctorPannel/DoctorComponents/DoctorLeads";
+// import DocQuickDetails from "./DoctorPannel/DoctorComponents/DocQuickDetails";
+import DocQuick from "./DoctorPannel/DoctorComponents/DocQuick";
 
 const App = () => {
   const userRoutes = [
@@ -93,8 +102,17 @@ const App = () => {
   const doctorRoutes = [
     { path: "/doctor/dashboard", element: <DoctorDashboard /> },
     { path: "/doctor/profile", element: <DoctorMainProfile /> },
+    { path: "/doctor/quickOnboarding", element: <DocQuick /> },
     { path: "/doctor/profile/doctordetails", element: <DocDetails /> },
     { path: "/doctor/treatments", element: <DoctorPackages /> },
+
+    // { path: "/doctor/about", element: <DoctorAbout /> },
+    // { path: "/doctor/qualifications", element: <Qualifications /> },
+    // { path: "/doctor/experience", element: <Experience /> },
+    // { path: "/doctor/registration", element: <Resgistration /> },
+    // { path: "/doctor/govID", element: <GovermentID /> },
+    // { path: "/doctor/awards", element: <Awards /> },
+
     { path: "/doctor/hospitalprofile", element: <DoctorHospital /> },
     { path: "/doctor/leads", element: <DoctorLeads /> },
     { path: "/doctor/fetchvideo", element: <VideoFetch /> },
