@@ -36,9 +36,6 @@ const DocProfile = () => {
     },
   });
 
-  const ITEM_HEIGHT = 48;
-  const ITEM_PADDING_TOP = 8;
-
   const [form, setForm] = useState({
     firstname: "",
     lastname: "",
