@@ -51,7 +51,7 @@ import JoinHospital from "./DoctorPannel/DoctorComponents/JoinHospital";
 import Requests from "./DoctorPannel/DoctorComponents/Requests";
 import Sitemap from "./sitemap.xml";
 import DoctorLeads from "./DoctorPannel/DoctorComponents/DoctorLeads";
-import DocQuickDetails from "./DoctorPannel/DoctorComponents/DocQuickDetails";
+// import DocQuickDetails from "./DoctorPannel/DoctorComponents/DocQuickDetails";
 import DocQuick from "./DoctorPannel/DoctorComponents/DocQuick";
 
 const App = () => {
