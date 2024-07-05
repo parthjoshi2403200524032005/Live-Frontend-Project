@@ -1,10 +1,9 @@
 
 import React, { useEffect, useState } from "react";
 import {
-  aws_url,
   doctorDetailsGet,
-  doctorDetailsUpdate,
 } from "../../Service/Services";
+//aws_url,doctorDetailsUpdate,
 
 import {
   Typography,
@@ -24,7 +23,7 @@ import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import LogoutIcon from "@mui/icons-material/Logout";
-import ChecklistIcon from "@mui/icons-material/Checklist";
+//import ChecklistIcon from "@mui/icons-material/Checklist";
 import { NavLink, useNavigate, Link } from "react-router-dom";
 
 const categories = [
