@@ -1,10 +1,8 @@
 import {
   Box,
-  TextField,
   ThemeProvider,
   Typography,
   createTheme,
-  MenuItem,
   Button,
   CircularProgress,
 } from "@mui/material";
@@ -16,14 +14,25 @@ import {
 } from "../../Service/Services";
 import toast from "react-hot-toast";
 import Select from "react-select";
-
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
+import CarouselComponent from "./App"
+import styled from 'styled-components';
 
 const JoinHospital = () => {
+
+  const ResponsiveDiv = styled.div`
+  @media (max-width: 600px) {
+        width: 400px;   
+}
+/* For medium devices (tablets, 600px to 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+        width: 600px;
+}
+/* For large devices (desktops, 900px and up) */
+@media (min-width: 901px) {
+        width: 1200px;
+}
+`;
+
   const theme = createTheme({
     palette: {
       type: "light",
@@ -41,21 +50,12 @@ const JoinHospital = () => {
       fontFamily: "Montserrat",
     },
   });
-  const [searchText, setSearchText] = useState("");
+  const [searchText] = useState("");
   const [selectedHospital, setSelectedHospital] = useState("");
   const [hospitals, setHospitals] = useState([]);
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
 
-  const handleChange = async (e) => {
-    setSelectedHospital(e.target.value);
-  };
-
-  const handleSearch = async (e) => {
-    setSearchText(e.target.value);
-    await handleGetHospitals(e.target.value);
-  };
 
   const handleGetHospitals = async (searchTerm) => {
     const responseJson = await searchHospital(searchTerm);
@@ -103,14 +103,15 @@ const JoinHospital = () => {
   useEffect(() => {
     getSendRequest();
     handleGetHospitals(searchText);
-  }, []);
+  });
 
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
-        <Typography variant="h5" component={"h5"} className="mb-2">
-          Join Hospital
-        </Typography>
+        
+        <ResponsiveDiv>
+          <CarouselComponent />
+        </ResponsiveDiv>
 
         <Box
           display={"flex"}
@@ -170,7 +171,7 @@ const JoinHospital = () => {
                     component="p"
                     sx={{ color: "green", fontWeight: "600", fontSize: 16 }}
                   >
-                    {request.status == "Pending" ? "Sent" : request.status}
+                    {request.status === "Pending" ? "Sent" : request.status}
                   </Typography>
                 </Box>
               </Box>
