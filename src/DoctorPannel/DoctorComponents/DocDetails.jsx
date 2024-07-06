@@ -605,6 +605,7 @@ const DocDetails = ({ details, setDetails }) => {
           />
         </Box>
 
+        
         <Box component={"div"} className="experiences" sx={{ marginY: 1.5 }}>
           <Typography variant="h5" component={"h5"}>
             Experiences
@@ -736,7 +737,6 @@ const DocDetails = ({ details, setDetails }) => {
             DataDeleteFunction={(index) => handleDeleteExperience(index)}
           />
         </Box>
-
         <Box component={"div"} className="registrations" sx={{ marginY: 1.5 }}>
           <Typography variant="h5" component={"h5"}>
             Registrations

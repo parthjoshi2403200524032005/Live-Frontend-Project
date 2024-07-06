@@ -3,15 +3,10 @@ import {
   Grid,
   TextField,
   Box,
-  Stack,
   Typography,
-  FormControl,
-  MenuItem,
-  Select,
   InputLabel,
-  FormControlLabel,
   CircularProgress,
-  Checkbox,
+  
 } from "@mui/material";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -20,7 +15,7 @@ import DetailCard from "./DetailCard";
 import ImageUploadFile from "./ImageUploadFile";
 import { ProImageUpload, aws_url } from "../../Service/Services";
 import { toast } from "react-hot-toast";
-import ReactQuill from "react-quill";
+//import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 const DocQuickDetails = ({ details, setDetails }) => {
@@ -32,7 +27,7 @@ const DocQuickDetails = ({ details, setDetails }) => {
     toYear: null,
     certificateurl: "",
   });
-  const [qualifications, setQualifications] = useState([]);
+  //const [qualifications, setQualifications] = useState([]);
 
   const [loading, setLoading] = useState({
     qualification: false,
@@ -41,16 +36,16 @@ const DocQuickDetails = ({ details, setDetails }) => {
     registration: false,
   });
 
-  const [exp, setExp] = useState({
-    hosptalname: "",
-    location: "",
-    desigination: "",
-    startdate: "",
-    enddate: "",
-    experienceurl: "",
-    currentlyworking: false,
-  });
-  const [experiences, setExperiences] = useState([]);
+  // const [exp, setExp] = useState({
+  //   hosptalname: "",
+  //   location: "",
+  //   desigination: "",
+  //   startdate: "",
+  //   enddate: "",
+  //   experienceurl: "",
+  //   currentlyworking: false,
+  // });
+  //const [experiences, setExperiences] = useState([]);
 
   const [reg, setReg] = useState({
     council: "",
@@ -60,15 +55,15 @@ const DocQuickDetails = ({ details, setDetails }) => {
   });
   const [registrations, setRegistrations] = useState([]);
 
-  const [govtId, setGovtId] = useState({
-    proofType: "",
-    proofNumber: "",
-    govtIdurl: "",
-  });
-  const [govIdententification, setGovIdententification] = useState([]);
+  // const [govtId, setGovtId] = useState({
+  //   proofType: "",
+  //   proofNumber: "",
+  //   govtIdurl: "",
+  // });
+  //const [govIdententification, setGovIdententification] = useState([]);
 
-  const [awardIt, setAwardIt] = useState("");
-  const [awards, setAwards] = useState([]);
+  //const [awardIt, setAwardIt] = useState("");
+  //const [awards, setAwards] = useState([]);
   const [image, setImage] = useState({ preview: "", data: "" });
 
   const [imagechanged, setImagechanged] = useState(false);
@@ -88,23 +83,23 @@ const DocQuickDetails = ({ details, setDetails }) => {
     setQual({ ...qual, [name]: value });
   };
 
-  const today = new Date().toISOString().split("T")[0];
-  const handleStartDateChange = (e) => {
-    const dated = e.target.value;
-    setExp({ ...exp, startdate: dated });
-  };
+  //const today = new Date().toISOString().split("T")[0];
+  // const handleStartDateChange = (e) => {
+  //   const dated = e.target.value;
+  //   setExp({ ...exp, startdate: dated });
+  // };
 
-  const handleEndDateChange = (e) => {
-    const dated = e.target.value;
-    if (dated >= exp.startdate) {
-      setExp({ ...exp, enddate: dated });
-    }
-  };
+  // const handleEndDateChange = (e) => {
+  //   const dated = e.target.value;
+  //   if (dated >= exp.startdate) {
+  //     setExp({ ...exp, enddate: dated });
+  //   }
+  // };
 
-  const forExpChange = (e) => {
-    const { name, value } = e.target;
-    setExp({ ...exp, [name]: value });
-  };
+  // const forExpChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setExp({ ...exp, [name]: value });
+  // };
 
   const forRegChange = (e) => {
     const { name, value } = e.target;
@@ -115,43 +110,43 @@ const DocQuickDetails = ({ details, setDetails }) => {
     setReg({ ...reg, year: date });
   };
 
-  const forGovtChange = (e) => {
-    const { name, value } = e.target;
-    setGovtId({ ...govtId, [name]: value });
-  };
+  // const forGovtChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setGovtId({ ...govtId, [name]: value });
+  // };
 
-  const forAwardsAdd = () => {
-    if (awardIt.trim() !== "") {
-      const updatedNewAWard = [...details.awards];
-      updatedNewAWard.push(awardIt);
-      setDetails((prevState) => ({
-        ...prevState,
-        awards: updatedNewAWard,
-      }));
-      setAwardIt("");
-    }
-  };
+  // const forAwardsAdd = () => {
+  //   if (awardIt.trim() !== "") {
+  //     const updatedNewAWard = [...details.awards];
+  //     updatedNewAWard.push(awardIt);
+  //     setDetails((prevState) => ({
+  //       ...prevState,
+  //       awards: updatedNewAWard,
+  //     }));
+  //     setAwardIt("");
+  //   }
+  // };
 
-  const handleEditAward = (index) => {
-    const editedAward = details.awards[index];
-    setAwardIt(editedAward);
-    const updatedAwards = details.awards.filter((_, xd) => xd !== index);
-    setDetails((prevState) => ({
-      ...prevState,
-      awards: updatedAwards,
-    }));
-  };
+  // const handleEditAward = (index) => {
+  //   const editedAward = details.awards[index];
+  //   setAwardIt(editedAward);
+  //   const updatedAwards = details.awards.filter((_, xd) => xd !== index);
+  //   setDetails((prevState) => ({
+  //     ...prevState,
+  //     awards: updatedAwards,
+  //   }));
+  // };
 
-  const handleDeleteAward = (index) => {
-    setAwards(awards.filter((_, xd) => xd !== index));
-    if (details.awards?.length > 0) {
-      const updatedApiAwards = details.awards.filter((_, xd) => xd !== index);
-      setDetails((prevState) => ({
-        ...prevState,
-        awards: updatedApiAwards,
-      }));
-    }
-  };
+  // const handleDeleteAward = (index) => {
+  //   setAwards(awards.filter((_, xd) => xd !== index));
+  //   if (details.awards?.length > 0) {
+  //     const updatedApiAwards = details.awards.filter((_, xd) => xd !== index);
+  //     setDetails((prevState) => ({
+  //       ...prevState,
+  //       awards: updatedApiAwards,
+  //     }));
+  //   }
+  // };
 
   // const [details, setDetails] = useState({
   //   qualifications: [],
@@ -165,87 +160,87 @@ const DocQuickDetails = ({ details, setDetails }) => {
   //   getDetails();
   // }, []);
 
-  const handleCurrentWork = (e) => {
-    setExp((prev) => ({
-      ...prev,
-      currentlyworking: !prev.currentlyworking,
-      enddate: !prev.currentlyworking ? "Present" : "",
-    }));
-  };
+  // const handleCurrentWork = (e) => {
+  //   setExp((prev) => ({
+  //     ...prev,
+  //     currentlyworking: !prev.currentlyworking,
+  //     enddate: !prev.currentlyworking ? "Present" : "",
+  //   }));
+  // };
 
-  const handleExperience = async () => {
-    setLoading((prev) => ({ ...prev, experience: true }));
-    let file;
-    if (imagechanged) {
-      file = await forUploadImage("experience");
-      setExp((prev) => ({ ...prev, experienceurl: file }));
-    }
-    if (
-      exp.hosptalname &&
-      exp.desigination &&
-      exp.location &&
-      exp.startdate &&
-      exp.enddate &&
-      (file || exp.experienceurl)
-    ) {
-      const updatedNewExp = [...details.experiences];
-      updatedNewExp.push({
-        ...exp,
-        experienceurl: file ? file : exp.experienceurl,
-      });
-      setDetails((prevState) => ({
-        ...prevState,
-        experiences: updatedNewExp,
-      }));
-      setExp({
-        hosptalname: "",
-        location: "",
-        desigination: "",
-        startdate: "",
-        enddate: "",
-        experienceurl: "",
-      });
-    }
-    setImage({ preview: "", data: "" });
-    setImagechanged(false);
-    setLoading((prev) => ({ ...prev, experience: false }));
-  };
+  // const handleExperience = async () => {
+  //   setLoading((prev) => ({ ...prev, experience: true }));
+  //   let file;
+  //   if (imagechanged) {
+  //     file = await forUploadImage("experience");
+  //     setExp((prev) => ({ ...prev, experienceurl: file }));
+  //   }
+  //   if (
+  //     exp.hosptalname &&
+  //     exp.desigination &&
+  //     exp.location &&
+  //     exp.startdate &&
+  //     exp.enddate &&
+  //     (file || exp.experienceurl)
+  //   ) {
+  //     const updatedNewExp = [...details.experiences];
+  //     updatedNewExp.push({
+  //       ...exp,
+  //       experienceurl: file ? file : exp.experienceurl,
+  //     });
+  //     setDetails((prevState) => ({
+  //       ...prevState,
+  //       experiences: updatedNewExp,
+  //     }));
+  //     setExp({
+  //       hosptalname: "",
+  //       location: "",
+  //       desigination: "",
+  //       startdate: "",
+  //       enddate: "",
+  //       experienceurl: "",
+  //     });
+  //   }
+  //   setImage({ preview: "", data: "" });
+  //   setImagechanged(false);
+  //   setLoading((prev) => ({ ...prev, experience: false }));
+  // };
 
-  const handleEditExperience = (index) => {
-    const experienceToEdit = details.experiences[index];
-    setExp({
-      hosptalname: experienceToEdit.hosptalname,
-      location: experienceToEdit.location,
-      desigination: experienceToEdit.desigination,
-      startdate: experienceToEdit.startdate,
-      enddate: experienceToEdit.enddate,
-      experienceurl: experienceToEdit.experienceurl,
-      currentlyworking: experienceToEdit.currentlyworking || false,
-    });
+  // const handleEditExperience = (index) => {
+  //   const experienceToEdit = details.experiences[index];
+  //   setExp({
+  //     hosptalname: experienceToEdit.hosptalname,
+  //     location: experienceToEdit.location,
+  //     desigination: experienceToEdit.desigination,
+  //     startdate: experienceToEdit.startdate,
+  //     enddate: experienceToEdit.enddate,
+  //     experienceurl: experienceToEdit.experienceurl,
+  //     currentlyworking: experienceToEdit.currentlyworking || false,
+  //   });
 
-    const updatedNewExp = details.experiences.filter((_, xd) => xd !== index);
-    setExperiences(updatedNewExp);
-    setDetails((prevState) => ({
-      ...prevState,
-      experiences: updatedNewExp,
-    }));
-    setEdit("experience");
-  };
+  //   const updatedNewExp = details.experiences.filter((_, xd) => xd !== index);
+  //   setExperiences(updatedNewExp);
+  //   setDetails((prevState) => ({
+  //     ...prevState,
+  //     experiences: updatedNewExp,
+  //   }));
+  //   setEdit("experience");
+  // };
 
-  const handleDeleteExperience = (index) => {
-    const updatedLocalExperiences = experiences.filter((_, xd) => xd !== index);
-    setExperiences(updatedLocalExperiences);
+  // const handleDeleteExperience = (index) => {
+  //   const updatedLocalExperiences = experiences.filter((_, xd) => xd !== index);
+  //   setExperiences(updatedLocalExperiences);
 
-    if (details.experiences?.length > 0) {
-      const updatedApiExperiences = details.experiences.filter(
-        (_, xd) => xd !== index
-      );
-      setDetails((prevState) => ({
-        ...prevState,
-        experiences: updatedApiExperiences,
-      }));
-    }
-  };
+  //   if (details.experiences?.length > 0) {
+  //     const updatedApiExperiences = details.experiences.filter(
+  //       (_, xd) => xd !== index
+  //     );
+  //     setDetails((prevState) => ({
+  //       ...prevState,
+  //       experiences: updatedApiExperiences,
+  //     }));
+  //   }
+  // };
   const forUploadImage = async (type) => {
     let data = new FormData();
     data.append("image", image.data);
@@ -326,8 +321,8 @@ const DocQuickDetails = ({ details, setDetails }) => {
   };
 
   const handleDeleteQualification = (index) => {
-    const updatedLocalQual = qualifications.filter((_, xd) => xd !== index);
-    setExperiences(updatedLocalQual);
+    // const updatedLocalQual = qualifications.filter((_, xd) => xd !== index);
+    // setExperiences(updatedLocalQual);
 
     if (details.qualifications?.length > 0) {
       const updatedApiQual = details.qualifications.filter(
@@ -388,7 +383,7 @@ const DocQuickDetails = ({ details, setDetails }) => {
     });
 
     const updatedNewReg = details.registration.filter((_, xd) => xd !== index);
-    setQualifications(updatedNewReg);
+    //setQualifications(updatedNewReg);
     setDetails((prevState) => ({
       ...prevState,
       registration: updatedNewReg,
@@ -411,64 +406,64 @@ const DocQuickDetails = ({ details, setDetails }) => {
     }
   };
 
-  const handleAddGovt = async () => {
-    setLoading((prev) => ({ ...prev, govt: true }));
-    if (imagechanged) {
-      console.log("upload");
-      var file = await forUploadImage("govt");
-      setGovtId((prev) => ({ ...prev, govtIdurl: file }));
-    }
-    if (
-      govtId.proofNumber &&
-      govtId.proofNumber &&
-      (file || govtId.govtIdurl)
-    ) {
-      const updatedNewGovt = [...details.govtId];
-      updatedNewGovt.push({
-        ...govtId,
-        govtIdurl: file ? file : govtId.govtIdurl,
-      });
-      setDetails((prevState) => ({
-        ...prevState,
-        govtId: updatedNewGovt,
-      }));
-      setGovtId({ proofType: "", proofNumber: "", govtIdurl: "" });
-    }
-    setImage({ preview: "", data: "" });
-    setImagechanged(false);
-    setLoading((prev) => ({ ...prev, govt: false }));
-  };
+  // const handleAddGovt = async () => {
+  //   setLoading((prev) => ({ ...prev, govt: true }));
+  //   if (imagechanged) {
+  //     console.log("upload");
+  //     var file = await forUploadImage("govt");
+  //     setGovtId((prev) => ({ ...prev, govtIdurl: file }));
+  //   }
+  //   if (
+  //     govtId.proofNumber &&
+  //     govtId.proofNumber &&
+  //     (file || govtId.govtIdurl)
+  //   ) {
+  //     const updatedNewGovt = [...details.govtId];
+  //     updatedNewGovt.push({
+  //       ...govtId,
+  //       govtIdurl: file ? file : govtId.govtIdurl,
+  //     });
+  //     setDetails((prevState) => ({
+  //       ...prevState,
+  //       govtId: updatedNewGovt,
+  //     }));
+  //     setGovtId({ proofType: "", proofNumber: "", govtIdurl: "" });
+  //   }
+  //   setImage({ preview: "", data: "" });
+  //   setImagechanged(false);
+  //   setLoading((prev) => ({ ...prev, govt: false }));
+  // };
 
-  const handleEditGovt = (index) => {
-    const govtData = details.govtId[index];
-    setGovtId({
-      proofType: govtData.proofType,
-      proofNumber: govtData.proofNumber,
-      govtIdurl: govtData.govtIdurl,
-    });
-    const updatedNewGovt = details.govtId.filter((_, xd) => xd !== index);
-    setGovIdententification(updatedNewGovt);
-    setDetails((prevState) => ({
-      ...prevState,
-      govtId: updatedNewGovt,
-    }));
-    setEdit("govt");
-  };
+  // const handleEditGovt = (index) => {
+  //   const govtData = details.govtId[index];
+  //   setGovtId({
+  //     proofType: govtData.proofType,
+  //     proofNumber: govtData.proofNumber,
+  //     govtIdurl: govtData.govtIdurl,
+  //   });
+  //   const updatedNewGovt = details.govtId.filter((_, xd) => xd !== index);
+  //   setGovIdententification(updatedNewGovt);
+  //   setDetails((prevState) => ({
+  //     ...prevState,
+  //     govtId: updatedNewGovt,
+  //   }));
+  //   setEdit("govt");
+  // };
 
-  const handleDeleteGovt = (index) => {
-    const updatedLocalGovt = govIdententification.filter(
-      (_, xd) => xd !== index
-    );
-    setRegistrations(updatedLocalGovt);
+  // const handleDeleteGovt = (index) => {
+  //   const updatedLocalGovt = govIdententification.filter(
+  //     (_, xd) => xd !== index
+  //   );
+  //   setRegistrations(updatedLocalGovt);
 
-    if (details.govtId?.length > 0) {
-      const updatedApiGovt = details.govtId.filter((_, xd) => xd !== index);
-      setDetails((prevState) => ({
-        ...prevState,
-        govtId: updatedApiGovt,
-      }));
-    }
-  };
+  //   if (details.govtId?.length > 0) {
+  //     const updatedApiGovt = details.govtId.filter((_, xd) => xd !== index);
+  //     setDetails((prevState) => ({
+  //       ...prevState,
+  //       govtId: updatedApiGovt,
+  //     }));
+  //   }
+  // };
 
   return (
     <React.Fragment>
