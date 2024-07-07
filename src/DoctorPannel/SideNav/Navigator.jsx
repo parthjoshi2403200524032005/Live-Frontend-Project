@@ -186,13 +186,13 @@ const Navigator = (props) => {
         <Box key="Logout">
           <ListItem disablePadding>
             <ListItemButton sx={item}>
-              <ListItemIcon>
+              <ListItemIcon sx={{color:"black"}}>
                 <LogoutIcon />
               </ListItemIcon>
               <ListItemText>
                 <Typography
                   component={"p"}
-                  sx={{ fontFamily: "Montserrat" }}
+                  sx={{ fontFamily: "Montserrat" , color:"black"}}
                   onClick={forLogout}
                 >
                   Logout
