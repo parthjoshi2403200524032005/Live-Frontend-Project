@@ -26,9 +26,31 @@ import {
 } from "../../Service/Services";
 import { toast } from "react-hot-toast";
 import ImageUpload from "./ImageUpload";
-import DocDetails from "./DocDetails";
+import Profile from "../../assets/user.png";
+import CarouselComponent from "./App"
+import styled from 'styled-components';
 
 const DocProfile = () => {
+
+  const ResponsiveDiv = styled.div`
+
+  @media (max-width: 600px) {
+        width: 400px;
+    
+}
+
+/* For medium devices (tablets, 600px to 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+        width: 600px;
+    
+}
+
+/* For large devices (desktops, 900px and up) */
+@media (min-width: 901px) {
+        width: 1200px;
+}
+`;
+
   const theme = createTheme({
     palette: {
       type: "light",
@@ -208,6 +230,7 @@ const DocProfile = () => {
     const response = await doctorDetailsGet();
     if (response?.data.status) {
       setForm(response.data?.data);
+      console.log(response.data.data);
     } else {
       toast.error(response?.data.message);
     }
@@ -233,11 +256,16 @@ const DocProfile = () => {
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
+        
+        <ResponsiveDiv>
+          <CarouselComponent />
+        </ResponsiveDiv>
+          
         <ImageUpload
           setForm={setForm}
           fieldname={"profilepicurl"}
           imageurl={
-            form.profilepicurl !== "" ? `${aws_url}/${form.profilepicurl}` : ""
+            form.profilepicurl !== "" ? `${aws_url}/${form.profilepicurl}` : `${Profile}`
           }
         />
         <Container>
@@ -592,21 +620,20 @@ const DocProfile = () => {
                 </Stack>
               </Grid>
             </Grid>
-            <DocDetails details={form} setDetails={setForm} />
-            <div className="d-flex justify-content-between mt-3">
-              {/* <UploadButton
-                component={Link}
-                to="/doctor/profile/doctordetails"
-                style={{ fontFamily: "Montserrat", fontWeight: "bold" }}
-              >
-                More details
-              </UploadButton> */}
-
+            {/* <DocDetails details={form} setDetails={setForm} /> */}
+            <div className="d-flex justify-content-between mt-3" style={{paddingTop:"5px" , paddingBottom:"20px" , position:"absolute" , right:"15%"}}>
               <UploadButton
                 onClick={forDoctorSubmit}
                 style={{ fontFamily: "Montserrat" }}
               >
                 Save Changes
+              </UploadButton>
+
+              <UploadButton
+                to="/doctor/about"
+                style={{ fontFamily: "Montserrat" , backgroundColor:"#133680" , color:"white" ,marginLeft:"20px" }}
+              >
+                Next
               </UploadButton>
             </div>
           </Box>
