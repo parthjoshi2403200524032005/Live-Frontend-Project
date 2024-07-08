@@ -11,7 +11,6 @@ import { Helmet } from "react-helmet";
 import LeadGenerationForm from "./common/Lead-Generation";
 import RenderModalOrBottomSheet from "./common/RenderModalBS";
 import { Flex } from "../styles/CommonStyles";
-
 import { Description } from "../styles/CommonStyles";
 
 
@@ -56,21 +55,15 @@ function SpecificVideo() {
     setData(responseJson.data.data[0]);
     setUrl(responseJson.data.data[0].link);
 
-    //demo data of question and answers
-    const demoData = [
-      { question: 'How does diabetes affect life?', answer: 'Damage to large (macrovascular) and small (microvascular) blood vessels, which can lead to heart attack, stroke, and problems with the kidneys, eyes, gums, feet and nerves.' },
-      { question: 'Can spondylosis be cured?', answer: 'This is a chronic condition, which means there no affect your quality of life.' },
-      { question: 'Can tooth cavities be fixed?', answer: 'A cavity is permanent damage that a dentist has to repair with a filling.' },
-    ];
-
-    setQaData(demoData);
+    //->
+    responseJson.data.data[0].questionsAnswers != null ? setQaData(responseJson.data.data[0].questionsAnswers) : setQaData(null) ;
   };
 
   useEffect(() => {
     if (videotitle) {
       fetchVideoData();
     }
-  }, [videotitle]);
+  },);
 
   const handleAppointmentBts = () => {
     document
@@ -121,20 +114,18 @@ function SpecificVideo() {
         <div className="leadFormWrapper">
           
           <div className="qa-container">
-            <h1 className="h2">Important questions <br /> answered in this video</h1>
-            {qaData.map((item, index) => (
+          {qaData && (<h1 className="h2">Important questions <br /> answered in this video</h1>)}
+            {qaData && qaData.map((item, index) => (
               <div key={index} className="qa-item">
-                
                 <div className="question-container" onClick={() => toggleAnswer(index)}>
                   <h3 className="question h3">
                     {item.question}
                   </h3>
-                    {visibleIndex === index ? 
-                      <FontAwesomeIcon icon={faAngleUp} /> :  
-                      <FontAwesomeIcon icon={faAngleDown} /> 
-                    }
+                  {visibleIndex === index ? 
+                    <FontAwesomeIcon icon={faAngleUp} /> :  
+                    <FontAwesomeIcon icon={faAngleDown} />
+                  }
                 </div>
-                
                 {visibleIndex === index && (
                   <p className="answer">
                     {item.answer}
@@ -142,6 +133,7 @@ function SpecificVideo() {
                 )}
               </div>
             ))}
+
           </div>
 
           <div className="leadForm">
