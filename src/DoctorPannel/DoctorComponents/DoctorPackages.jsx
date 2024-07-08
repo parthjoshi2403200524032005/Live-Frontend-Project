@@ -4,7 +4,6 @@ import {
   Container,
   FormControl,
   Grid,
-  InputLabel,
   MenuItem,
   Select,
   Stack,
@@ -23,6 +22,7 @@ import {
 } from "../../Service/Services";
 import DetailCard from "./DetailCard";
 import Searchselect from "react-select";
+import ReactQuill from "react-quill";
 
 const DoctorPackages = () => {
   const theme = createTheme({
@@ -223,7 +223,7 @@ const DoctorPackages = () => {
 
   useEffect(() => {
     getDoctorDetails();
-  }, []);
+  });
 
   return (
     <React.Fragment>
@@ -231,11 +231,12 @@ const DoctorPackages = () => {
         <Container>
           <Box component="form">
             <Box component={"div"} className="hospital" sx={{ marginY: 1.5 }}>
-              <Typography variant="h5" component={"h5"} className="mb-2">
+              <Typography variant="h5" component={"h5"} className="mb-2" style={{ fontWeight: 'bold' }}>
                 Plans
               </Typography>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={12} md={12} lg={10}>
+                <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Name Of The Hospital/Clinic</label>
                   <Searchselect
                     defaultValue={selectedHospital}
                     onChange={handlesearchSelect}
@@ -250,6 +251,7 @@ const DoctorPackages = () => {
                   />
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={10}>
+                <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Name Of The Plan</label>
                   <TextField
                     required
                     fullWidth
@@ -257,7 +259,7 @@ const DoctorPackages = () => {
                     name="package"
                     value={newpackage.package}
                     type="string"
-                    placeholder="Plans Name*"
+                    placeholder="Eg. "
                     onChange={forPackageChange}
                     InputProps={{
                       sx: {
@@ -267,7 +269,7 @@ const DoctorPackages = () => {
                   />
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={10}>
-                  <TextField
+                  {/* <TextField
                     id="multiline-text"
                     placeholder="About"
                     autoComplete="off"
@@ -277,11 +279,24 @@ const DoctorPackages = () => {
                     value={newpackage.about}
                     onChange={forPackageChange}
                     fullWidth
-                  />
+                  /> */}
+                <ReactQuill
+                  theme="snow"
+                  id="multiline-text"
+                  placeholder="About"
+                  autoComplete="off"
+                  name="about"
+                  multiline
+                  rows={4}
+                  value={newpackage.about}
+                  onChange={forPackageChange}
+                  fullWidth
+                  style={{ height: '150px' , marginBottom:"50px"}} 
+                />
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} lg={5}>
-                  <InputLabel>Min Price</InputLabel>
+                <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Minimum Price</label>
                   <TextField
                     required
                     fullWidth
@@ -289,7 +304,7 @@ const DoctorPackages = () => {
                     name="minprice"
                     value={newpackage.minprice}
                     type="number"
-                    placeholder="Min Price*"
+                    placeholder="Eg. 500"
                     onChange={forPackageChange}
                     InputProps={{
                       sx: {
@@ -300,7 +315,7 @@ const DoctorPackages = () => {
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} lg={5}>
-                  <InputLabel>Max Price</InputLabel>
+                <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Maximum Price</label>
                   <TextField
                     required
                     fullWidth
@@ -308,7 +323,7 @@ const DoctorPackages = () => {
                     name="maxprice"
                     value={newpackage.maxprice}
                     type="number"
-                    placeholder="Max Price*"
+                    placeholder="Eg. 1000"
                     onChange={forPackageChange}
                     InputProps={{
                       sx: {
@@ -319,7 +334,7 @@ const DoctorPackages = () => {
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} lg={5}>
-                  <InputLabel>No of Sessions</InputLabel>
+                <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>No. Of Sessions</label>
                   <TextField
                     required
                     fullWidth
@@ -327,7 +342,7 @@ const DoctorPackages = () => {
                     name="noofsessions"
                     value={newpackage.noofsessions}
                     type="number"
-                    placeholder="No of Sessions*"
+                    placeholder="Eg. 10"
                     onChange={forPackageChange}
                     InputProps={{
                       sx: {
@@ -338,7 +353,7 @@ const DoctorPackages = () => {
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} lg={5}>
-                  <InputLabel>No of Days</InputLabel>
+                <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>No. Of Days</label>
                   <TextField
                     required
                     fullWidth
@@ -346,7 +361,7 @@ const DoctorPackages = () => {
                     name="noofdays"
                     value={newpackage.noofdays}
                     type="number"
-                    placeholder="Avg Patients Treated*"
+                    placeholder="Eg. 24"
                     onChange={forPackageChange}
                     InputProps={{
                       sx: {
@@ -357,7 +372,7 @@ const DoctorPackages = () => {
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} lg={5}>
-                  <InputLabel>Avg Patients Treated</InputLabel>
+                <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Average Paitents Treated</label>
                   <TextField
                     required
                     fullWidth
@@ -365,7 +380,7 @@ const DoctorPackages = () => {
                     name="avgpatientstreated"
                     value={newpackage.avgpatientstreated}
                     type="number"
-                    placeholder="Avg Patients Treated*"
+                    placeholder="Eg. 200"
                     onChange={forPackageChange}
                     InputProps={{
                       sx: {
@@ -376,7 +391,7 @@ const DoctorPackages = () => {
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} lg={5}>
-                  <InputLabel>Treatment Place</InputLabel>
+                <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Treatment Place</label>
                   <FormControl fullWidth>
                     <Select
                       labelId="demo-simple-select-label"
@@ -401,11 +416,12 @@ const DoctorPackages = () => {
                 className="Inclusions"
                 sx={{ marginY: 1.5 }}
               >
-                <Typography variant="h5" component={"h5"}>
+                <Typography variant="h5" component={"h5"} style={{ fontWeight: 'bold' , marginTop:"1.5em" , marginBottom:"1em"}}>
                   Inclusions
                 </Typography>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={12} md={12} lg={10}>
+                  <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>What are included in treatment ?</label>
                     <Stack direction="row" spacing={1} alignItems="center">
                       <TextField
                         required
@@ -448,11 +464,12 @@ const DoctorPackages = () => {
                 className="Exclusions"
                 sx={{ marginY: 1.5 }}
               >
-                <Typography variant="h5" component={"h5"}>
+                <Typography variant="h5" component={"h5"} style={{ fontWeight: 'bold' , marginTop:"1.5em" , marginBottom:"1em"}}>
                   Exclusions
                 </Typography>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={12} md={12} lg={10}>
+                  <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>What are excluded in treatment ?</label>
                     <Stack direction="row" spacing={1} alignItems="center">
                       <TextField
                         required
@@ -490,9 +507,18 @@ const DoctorPackages = () => {
                 </Grid>
               </Box>
             </Box>
-            <UploadButton className="mt-3 px-4" onClick={forAddPackage}>
+            {/* <UploadButton className="mt-3 px-4" onClick={forAddPackage}>
               {edit ? "Update" : "Save changes"}
-            </UploadButton>
+            </UploadButton> */}
+
+            <div className="d-flex justify-content-between mt-3 " style={{paddingTop:"5px" , paddingBottom:"20px" , position:"absolute" , right:"15%"}}>
+              <UploadButton
+              onClick={forAddPackage}
+              style={{ fontFamily: "Montserrat" , backgroundColor:"#133680" , color:"white" , }}>
+              {edit ? "Update" : "Submit"}
+              </UploadButton>
+            </div>
+
             <DetailCard
               DataType={packages}
               TicketName={"Treatments"}
