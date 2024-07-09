@@ -29,8 +29,27 @@ import {
 } from "../../Service/Services";
 import { toast } from "react-hot-toast";
 import ImageUpload from "./ImageUpload";
+import MultiImageUpload from "./MultiImageUpload";
+import CarouselComponent from "./Slider"
+import styled from 'styled-components';
+
 
 const DoctorHospital = () => {
+
+  const ResponsiveDiv = styled.div`
+  @media (max-width: 600px) {
+        width: 400px;   
+}
+/* For medium devices (tablets, 600px to 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+        width: 600px;
+}
+/* For large devices (desktops, 900px and up) */
+@media (min-width: 901px) {
+        width: 1200px;
+}
+`;
+
   const theme = createTheme({
     palette: {
       type: "light",
@@ -103,33 +122,10 @@ const DoctorHospital = () => {
   const [doctorid, setDoctorid] = useState("");
   const [uploadedImage, setUploadImage] = useState({ galleryimage: "" });
   const [hospital, setHospital] = useState([]);
-  const [location, setLocation] = useState({
-    type: "Point",
-    coordinates: [0, 0],
-  });
+  
   const [edit, setEdit] = useState("");
   const currentYear = new Date().getFullYear();
-  const forLocation = () => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setLocation({
-            type: "Point",
-            coordinates: [position.coords.latitude, position.coords.longitude],
-          });
-          setNewhospital((prevHospital) => ({
-            ...prevHospital,
-            location: location,
-          }));
-        },
-        (error) => {
-          console.error("Error getting location:", error.message);
-        }
-      );
-    } else {
-      console.error("Geolocation is not available in this browser.");
-    }
-  };
+  
 
   const forHospitalChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -239,12 +235,12 @@ const DoctorHospital = () => {
   useEffect(() => {
     setNewhospital((prevstate) => ({
       ...prevstate,
-      gallery: [...newhospital.gallery, uploadedImage.galleryimage],
+      gallery: [...prevstate.gallery, uploadedImage.galleryimage],
     }));
   }, [uploadedImage.galleryimage]);
 
   useEffect(() => {
-    forLocation();
+    
     forGetHospitals();
   }, []);
 
@@ -254,12 +250,33 @@ const DoctorHospital = () => {
         <Container>
           <Box component="form">
             <Box component={"div"} className="hospital" sx={{ marginY: 1.5 }}>
+
+            <ResponsiveDiv>
+              <CarouselComponent />
+            </ResponsiveDiv>
+
               <Typography variant="h5" component={"h5"} className="mb-2">
                 Hospital
               </Typography>
+
+              <Grid item xs={12} sm={6} md={6} lg={5}>
+                  <Box component={"div"} className="pb-2">
+                    <InputLabel>Main Hospital Image / Logo </InputLabel>
+                    <ImageUpload
+                      setForm={setNewhospital}
+                      fieldname={"hospitalprofileurl"}
+                      imageurl={
+                        newhospital.hospitalprofileurl !== ""
+                          ? `${aws_url}/${newhospital.hospitalprofileurl}`
+                          : ""
+                      }
+                    />
+                  </Box>
+                </Grid>
+
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={12} md={12} lg={10}>
-                  <InputLabel>Hostpital Name</InputLabel>
+                <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Name Of The Hospital/Clinic</label>
                   <TextField
                     required
                     fullWidth
@@ -278,7 +295,7 @@ const DoctorHospital = () => {
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} lg={5}>
-                  <InputLabel>Location</InputLabel>
+                <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Location</label>
                   <TextField
                     required
                     fullWidth
@@ -286,7 +303,7 @@ const DoctorHospital = () => {
                     autoComplete="off"
                     name="hospitalLocation"
                     type="string"
-                    placeholder="Location*"
+                    placeholder="Eg. "
                     onChange={forHospitalChange}
                     InputProps={{
                       sx: {
@@ -297,7 +314,7 @@ const DoctorHospital = () => {
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} lg={5}>
-                  <InputLabel>Patients Treated</InputLabel>
+                <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Patients Treated</label>
                   <TextField
                     required
                     fullWidth
@@ -316,7 +333,7 @@ const DoctorHospital = () => {
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} lg={5}>
-                  <InputLabel>Consultation Price</InputLabel>
+                <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Consultation Price</label>
                   <TextField
                     required
                     fullWidth
@@ -335,7 +352,7 @@ const DoctorHospital = () => {
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} lg={5}>
-                  <InputLabel>Speciality Type</InputLabel>
+                <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Speciality Type</label>
                   <FormControl fullWidth>
                     <Select
                       labelId="demo-simple-select-label"
@@ -490,29 +507,46 @@ const DoctorHospital = () => {
                     </Typography>
                   </Stack>
                 </Grid>
-                <Grid item xs={12} sm={6} md={6} lg={5}>
-                  <Box component={"div"} className="pb-2">
-                    <InputLabel>Hospital Picture</InputLabel>
-                    <ImageUpload
-                      setForm={setNewhospital}
-                      fieldname={"hospitalprofileurl"}
-                      imageurl={
-                        newhospital.hospitalprofileurl !== ""
-                          ? `${aws_url}/${newhospital.hospitalprofileurl}`
-                          : ""
-                      }
-                    />
-                  </Box>
-                </Grid>
+                
               </Grid>
 
               <Box component={"div"} sx={{ mt: 4 }}>
                 <Typography variant="h5" component={"h5"} className="mb-2">
+                  Hospital Gallery
+                </Typography>
+                <MultiImageUpload
+                  setForm={setUploadImage}
+                  fieldname={"galleryimage"}
+                  imageurl={""}
+                  emptyimage={true}
+                />
+                <Grid container spacing={1} marginTop={"1rem"}>
+                  {newhospital.gallery &&
+                    newhospital.gallery.map((image) => {
+                      if (image) {
+                        return (
+                          <Grid item key={image}>
+                            <img
+                              src={`${aws_url}/${image}`}
+                              alt="profile-preview"
+                              className="imgpreview"
+                            />
+                          </Grid>
+                        );
+                      } else {
+                        return null;
+                      }
+                    })}
+                </Grid>
+              </Box>
+
+              <Box component={"div"} sx={{ mt: 4 }}>
+                <Typography variant="h5" component={"h5"} className="mb-2" style={{ fontWeight: 'bold' }}>
                   Infrastructure
                 </Typography>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6} md={6} lg={5}>
-                    <InputLabel>No of Branches</InputLabel>
+                  <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>No. Of Branches</label>
                     <TextField
                       required
                       fullWidth
@@ -530,7 +564,7 @@ const DoctorHospital = () => {
                     />
                   </Grid>
                   <Grid item xs={12} sm={6} md={6} lg={5}>
-                    <InputLabel>No of Beds</InputLabel>
+                  <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>No. Of Beds</label>
                     <TextField
                       required
                       fullWidth
@@ -548,7 +582,7 @@ const DoctorHospital = () => {
                     />
                   </Grid>
                   <Grid item xs={12} sm={6} md={6} lg={5}>
-                    <InputLabel>No of Doctors</InputLabel>
+                  <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>No. Of Doctors</label>
                     <TextField
                       required
                       fullWidth
@@ -566,7 +600,8 @@ const DoctorHospital = () => {
                     />
                   </Grid>
                   <Grid item xs={12} sm={6} md={6} lg={5}>
-                    <InputLabel>Established Year</InputLabel>
+                    <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Established Year</label>
+                    <div>
                     <DatePicker
                       selected={
                         newhospital.establishedyear
@@ -580,9 +615,11 @@ const DoctorHospital = () => {
                       placeholderText="To Year"
                       className="form-control"
                     />
+                    </div>
                   </Grid>
 
                   <Grid item xs={12} sm={12} md={12} lg={10}>
+                  <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>About</label>
                     <TextField
                       required
                       fullWidth
@@ -591,7 +628,7 @@ const DoctorHospital = () => {
                       autoComplete="off"
                       name="about"
                       type="number"
-                      placeholder="About*"
+                      placeholder="Eg. "
                       multiline
                       rows={4}
                       onChange={forHospitalChange}
@@ -599,6 +636,7 @@ const DoctorHospital = () => {
                   </Grid>
 
                   <Grid item xs={12} sm={12} md={12} lg={10}>
+                  <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Address</label>
                     <TextField
                       required
                       fullWidth
@@ -606,7 +644,7 @@ const DoctorHospital = () => {
                       id="multiline-text"
                       autoComplete="off"
                       name="address"
-                      placeholder="Address*"
+                      placeholder="Eg. "
                       multiline
                       rows={4}
                       onChange={forHospitalChange}
@@ -614,37 +652,16 @@ const DoctorHospital = () => {
                   </Grid>
                 </Grid>
               </Box>
-              <Box component={"div"} sx={{ mt: 4 }}>
-                <Typography variant="h5" component={"h5"} className="mb-2">
-                  Gallery
-                </Typography>
-                <ImageUpload
-                  setForm={setUploadImage}
-                  fieldname={"galleryimage"}
-                  imageurl={""}
-                  emptyimage={true}
-                />
-                <Grid container spacing={1} marginTop={"1rem"}>
-                  {newhospital.gallery &&
-                    newhospital.gallery?.map((image) => {
-                      if (image)
-                        return (
-                          <Grid item>
-                            <img
-                              src={`${aws_url}/${image}`}
-                              alt="profile-preview"
-                              className="imgpreview"
-                            />
-                          </Grid>
-                        );
-                    })}
-                </Grid>
-              </Box>
+             
             </Box>
           </Box>
-          <UploadButton className="mt-3 px-4" onClick={forSubmit}>
-            {edit !== "" ? "Update" : "Add"}
+          <div className="d-flex justify-content-between mt-3 " style={{paddingTop:"5px" , paddingBottom:"20px" , position:"absolute" , right:"15%"}}>
+          <UploadButton className="mt-3 px-4" onClick={forSubmit}
+          style={{ fontFamily: "Montserrat" , backgroundColor:"#133680" , color:"white" , }}
+          >
+            {edit !== "" ? "Update" : "Submit"}
           </UploadButton>
+          </div>
           <DetailCard
             DataType={hospital}
             TicketName={"Hospital"}
