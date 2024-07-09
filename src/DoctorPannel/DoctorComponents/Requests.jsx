@@ -8,6 +8,8 @@ import {
 } from "@mui/material";
 import { getRequests, updateRequest } from "../../Service/Services";
 import toast from "react-hot-toast";
+import ResponsiveDiv from "./styles/style"
+import CarouselComponent from "./Slider"
 
 const Requests = () => {
   const theme = createTheme({
@@ -48,11 +50,16 @@ const Requests = () => {
   };
   useEffect(() => {
     handlegetRequests();
-  }, []);
+  });
 
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
+
+        <ResponsiveDiv>
+            <CarouselComponent />
+        </ResponsiveDiv>
+
         <Typography variant="h5" component={"h5"} className="mb-2">
           Requests
         </Typography>
@@ -76,7 +83,7 @@ const Requests = () => {
                   <Typography component={"p"}>{request.doctorname}</Typography>
                 </Box>
                 <Box>
-                  {request.status == "Pending" && (
+                  {request.status === "Pending" && (
                     <Box display={"flex"}>
                       <Box component={"div"}>
                         <Button
@@ -96,7 +103,7 @@ const Requests = () => {
                       </Box>
                     </Box>
                   )}
-                  {request.status == "Accept" && (
+                  {request.status === "Accept" && (
                     <Box display={"flex"} alignItems={"center"}>
                       <Box component={"div"}>
                         <Typography
@@ -120,7 +127,7 @@ const Requests = () => {
                       </Box>
                     </Box>
                   )}
-                  {request.status == "Reject" && (
+                  {request.status === "Reject" && (
                     <Box component={"div"}>
                       <Typography
                         component="p"
