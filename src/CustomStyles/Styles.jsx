@@ -1,4 +1,5 @@
 import { Button, styled } from "@mui/material";
+import { NavLink } from 'react-router-dom';
 
 export const CustomStyles = {
   btnNav: {
@@ -104,7 +105,7 @@ export const LogButton = styled(Button)`
   }
 `;
 
-export const UploadButton = styled(Button)`
+export const UploadButton = styled(NavLink)`
   background-color: "#133680";
   color: "#ffff";
   border-radius: 6px;
@@ -112,7 +113,10 @@ export const UploadButton = styled(Button)`
   cursor: pointer;
   border: 1px solid #6c9bcf;
   padding: 0.4em;
+  padding-left: 2.4em;
+  padding-right: 2.4em;
   text-transform: none;
+  text-decoration: none;
   &:hover {
     background-color: "transparent";
   }

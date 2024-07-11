@@ -8,6 +8,8 @@ import {
 } from "@mui/material";
 import { getRequests, updateRequest } from "../../Service/Services";
 import toast from "react-hot-toast";
+import ResponsiveDiv from "./styles/style"
+import CarouselComponent from "./Slider"
 
 const Requests = () => {
   const theme = createTheme({
@@ -48,11 +50,16 @@ const Requests = () => {
   };
   useEffect(() => {
     handlegetRequests();
-  }, []);
+  });
 
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
+
+        <ResponsiveDiv>
+            <CarouselComponent />
+        </ResponsiveDiv>
+
         <Typography variant="h5" component={"h5"} className="mb-2">
           Requests
         </Typography>

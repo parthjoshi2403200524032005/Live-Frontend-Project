@@ -112,7 +112,7 @@ const Navigator = (props) => {
             <Box component={"img"} src={Logo} sx={{ width: 120 }} />
           </div>
         </Link>
-        <Divider sx={{ mt: 2, backgroundColor: "#ffff" }} />
+        <Divider sx={{ mt: 2, backgroundColor: "black" }} />
 
         <ListItem sx={{ ...item, ...itemCategory }}>
           <ListItemText className="text-center">
@@ -123,12 +123,15 @@ const Navigator = (props) => {
                 fontSize: 22,
                 fontWeight: "bold",
                 cursor: "pointer",
+                color:"black"
               }}
             >
               Doctor Panel
             </Typography>
           </ListItemText>
         </ListItem>
+
+        <Divider sx={{ backgroundColor: "black" }} />
         {categories.map(({ children }) => (
           <Box key={children[0].id}>
 
@@ -141,12 +144,13 @@ const Navigator = (props) => {
                   sx={{ ...item }}
                   style={({ isActive }) => ({
                     backgroundColor: isActive ? "#133680" : "",
+                    color: isActive ? "white" : "black",
                   })}
                 >
-                  <ListItemIcon sx={{ color: "#ffff" }}><AccountBoxIcon /></ListItemIcon>
+                  <ListItemIcon sx={{}}><AccountBoxIcon /></ListItemIcon>
                   <Typography
                     component="span"
-                    sx={{ fontFamily: "Montserrat", color: "#ffff" }}
+                    sx={{ fontFamily: "Montserrat" }}
                   >
                     Quick Onboarding
                   </Typography>
@@ -163,12 +167,13 @@ const Navigator = (props) => {
                   sx={{ ...item }}
                   style={({ isActive }) => ({
                     backgroundColor: isActive ? "#133680" : "",
+                    color: isActive ? "white" : "black",
                   })}
                 >
-                  <ListItemIcon sx={{ color: "#ffff" }}>{icon}</ListItemIcon>
+                  <ListItemIcon sx={{}}>{icon}</ListItemIcon>
                   <Typography
                     component="span"
-                    sx={{ fontFamily: "Montserrat", color: "#ffff" }}
+                    sx={{ fontFamily: "Montserrat" }}
                   >
                     {id}
                   </Typography>
@@ -181,13 +186,13 @@ const Navigator = (props) => {
         <Box key="Logout">
           <ListItem disablePadding>
             <ListItemButton sx={item}>
-              <ListItemIcon>
+              <ListItemIcon sx={{color:"black"}}>
                 <LogoutIcon />
               </ListItemIcon>
               <ListItemText>
                 <Typography
                   component={"p"}
-                  sx={{ fontFamily: "Montserrat" }}
+                  sx={{ fontFamily: "Montserrat" , color:"black"}}
                   onClick={forLogout}
                 >
                   Logout
