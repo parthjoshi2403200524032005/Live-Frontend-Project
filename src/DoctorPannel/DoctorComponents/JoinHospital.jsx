@@ -56,7 +56,6 @@ const JoinHospital = () => {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(false);
 
-
   const handleGetHospitals = async (searchTerm) => {
     const responseJson = await searchHospital(searchTerm);
     if (responseJson.data.status) {

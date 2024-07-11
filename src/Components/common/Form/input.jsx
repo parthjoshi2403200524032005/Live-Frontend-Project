@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, forwardRef } from "react";
+import React, { forwardRef } from "react";
 import { InputWrapper, FormError, FormLabel, FormGroup } from "./FormStyles";
 
 const Input = forwardRef(
@@ -25,7 +25,6 @@ const Input = forwardRef(
       tabIndex,
       onClick,
       showCaret = true,
-      label = "",
       readOnly = false,
     },
     ref

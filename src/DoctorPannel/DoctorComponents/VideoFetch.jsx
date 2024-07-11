@@ -78,7 +78,7 @@ const VideoFetch = () => {
     "Kidney care",
     "Ear Nose Throat",
     "Acupressure therapy",
-  ]);
+  ];
 
 
   const [videoInfo, setVideoInfo] = useState({

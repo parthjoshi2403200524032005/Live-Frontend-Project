@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Box, Card, TextField, Button, InputAdornment } from "@mui/material";
+import { Box, TextField, Button, InputAdornment } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import DoctorCard from "./DoctorCard";
 import Plyr from "plyr-react";
 import "plyr-react/plyr.css";
-// import ReactPlayer from "react-player";
 import { userHomePage } from "../Service/Services";
 import toast from "react-hot-toast";
 import ShareIcon from "@mui/icons-material/Share";

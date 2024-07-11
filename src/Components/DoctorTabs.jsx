@@ -125,8 +125,6 @@ const DoctorTabs = ({ details, loading }) => {
   };
 
   const ExperiencesandStudies = ({ merged = false }) => {
-    const forBelow575px = useMediaQuery("(max-width:575px)");
-
     return (
       <FlexColFullWidth>
         <FlexCol>
@@ -184,7 +182,6 @@ const DoctorTabs = ({ details, loading }) => {
   };
 
   const Registrations = () => {
-    const forBelow575px = useMediaQuery("(max-width:575px)");
     return (
       <Flex margin="10px 0">
         {details.registration &&

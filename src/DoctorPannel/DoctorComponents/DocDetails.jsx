@@ -19,7 +19,6 @@ import { UploadButton } from "../../CustomStyles/Styles";
 import DetailCard from "./DetailCard";
 import ImageUpload from "./ImageUpload";
 import { ProImageUpload, aws_url } from "../../Service/Services";
-import { toast } from "react-hot-toast";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
