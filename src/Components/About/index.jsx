@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Box, Typography, useMediaQuery } from "@mui/material";
+import { Box, Grid, Icon, Typography, useMediaQuery } from "@mui/material";
 // import ImageX from "../assets/Group 4600.png";
 // import ImageY from "../assets/Group 4601.png";
 // import ImageZ from "../assets/Group 4607.png";
@@ -8,129 +8,161 @@ import { Box, Typography, useMediaQuery } from "@mui/material";
 // // import ImageSearch from "../assets/Icon awesome-search.png";
 // import FounderImg from "../../assets/Group 4610.png";
 import TeamCard from "./TeamCard";
-import PartnersCard from './PartnersCard'
+import PartnersCard from "./PartnersCard";
+
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import MedicationIcon from "@mui/icons-material/Medication";
+
+//primary color: #133682
 
 const About = () => {
-  const forBelow800px = useMediaQuery("(max-width:800px)");
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
     <React.Fragment>
+      <div
+        className="conatiner-fluid"
+        style={{ backgroundColor: "#133682", color: "#fff" }}
+      >
+        <div className="container py-5">
+          <h1 className="text-start">About Us</h1>
+
+          <p className="w-50 my-4 fs-5 fw-normal">
+            Health Mudraa was founded in 2020 to change how people access
+            medical information and healthcare services. Our team includes
+            doctors, surgeons, management experts from IIM, engineers from IIT
+            and IIIT, and dedicated student interns.
+          </p>
+        </div>
+      </div>
       <div className="container">
-
-        
-
-        {/* Prev Code - Start */}
-
-        {/* <div className="row d-flex justify-content-center align-items-center mb-5">
-          <div className="col-lg-4 col-md-10 col-sm-10 col-10 text-center d-flex flex-column justify-content-center align-items-center my-2">
-            <Typography
-              variant="p"
-              component={"p"}
-              sx={{
-                fontFamily: "Montserrat",
-                fontSize: 18,
-                fontWeight: "bold",
-                marginTop: 1,
-              }}
-            >
-              Are you randomly searching your medical symptoms on the internet?
-            </Typography>
-            <Typography
-              variant="p"
-              component={"p"}
-              sx={{
-                fontFamily: "Montserrat",
-                fontSize: 18,
-                fontWeight: "bold",
-                marginTop: 1,
-              }}
-            >
-              Confused with lots of information and suggestions?
-            </Typography>
-            <Box
-              className="mt-5 mb-5 ImageX"
-              component={"img"}
-              id="img-ImageX"
-              src={ImageX}
-            />
-            <Typography
-              variant="p"
-              component={"p"}
-              sx={{
-                fontFamily: "Montserrat",
-                fontSize: 18,
-                fontWeight: "bold",
-                marginTop: 1,
-              }}
-            >
-              Instead open healthmudraa.com and search your doubts/medical
-              conditions
-            </Typography>
+        <div className="my-5">
+          <h1>Our Purpose</h1>
+          <p className="my-4 w-50 fs-5">
+            At Health Mudraa, our mission is to address major healthcare
+            challenges by solving key problems in the industry.
+          </p>
+          <div className="d-flex">
+            <div className="card mb-3">
+              <div className="card-body">
+                <h3 className="card-title">Wrong Medical Information</h3>
+                <p className="card-text">
+                  The internet is full of inaccurate medical advice, causing
+                  confusion and fear. We’re here to fix that by providing
+                  reliable information from trusted doctors.
+                </p>
+              </div>
+            </div>
+            <div className="card mb-3">
+              <div className="card-body">
+                <h3 className="card-title">
+                  Lack of Awareness About Treatment Options
+                </h3>
+                <p className="card-text">
+                  Many people don't know what treatments are available or how to
+                  find good doctors. We help by offering detailed information
+                  and connecting you with top healthcare professionals.
+                </p>
+              </div>
+            </div>
+            <div className="card mb-3">
+              <div className="card-body">
+                <h3 className="card-title">Fear of Hospital Bills</h3>
+                <p className="card-text">
+                  Hospital bills can be scary and confusing. We aim to make
+                  things clearer and help you understand the costs involved.
+                </p>
+              </div>
+            </div>
           </div>
-
-          <div className="col-lg-4 col-md-10 col-sm-10 col-10 d-flex flex-column justify-content-center align-items-center text-center my-2">
-            <Box
-              className="ImageY"
-              component={"img"}
-              id="img-ImageY"
-              src={ImageY}
-            />
-            <Typography
-              variant="p"
-              component={"p"}
-              sx={{
-                fontFamily: "Montserrat",
-                fontSize: 18,
-                fontWeight: "bold",
-                marginTop: 1,
-              }}
-            >
-              Instead open healthmudraa.com and search your doubts/medical
-              conditions
-            </Typography>
-          </div>
-
-          <div className="col-lg-4 col-md-10 col-sm-10 col-10 d-flex flex-column justify-content-center align-items-center text-center my-2">
-            <Box
-              className="ImageZ"
-              component={"img"}
-              id="img-ImageZ"
-              src={ImageZ}
-            />
-            <Typography
-              className="pt-3"
-              variant="p"
-              component={"p"}
-              sx={{
-                fontFamily: "Montserrat",
-                fontSize: 18,
-                fontWeight: "bold",
-                marginTop: 1,
-              }}
-            >
-              Instead open healthmudraa.com and search your doubts/medical
-              conditions
-            </Typography>
-          </div>
-        </div> */}
-        {/* Prev code - End */}
-
-         {/* Partners Component */}
-         <div className="my-5">
-          <Typography
-          varient="h2"
-          component={"h2"}
-          sx= {{fontSize: 30, fontFamily: "Montserrat", textAlign: "center", fontWeight: "bolder"}}
-          >
-             Our Trusted Partners
-          </Typography>
-
-          <PartnersCard/>
         </div>
 
-        {/* Team Component */}
+        <div className="mb-4">
+          <h1>What Makes Us Special</h1>
+          <div className="d-flex my-4">
+            <div className="card mb-3">
+              <div className="card-body">
+                <h3 className="card-title">Trustworthy Doctors' Advice</h3>
+                <p className="card-text">
+                  Get accurate medical information directly from verified
+                  doctors.
+                </p>
+              </div>
+            </div>
+            <div className="card mb-3">
+              <div className="card-body">
+                <h3 className="card-title">Personalized Health Plans</h3>
+                <p className="card-text">
+                  Receive recommendations and treatment options based on your
+                  medical history.
+                </p>
+              </div>
+            </div>
+            <div className="card mb-3">
+              <div className="card-body">
+                <h3 className="card-title">Personal Branding</h3>
+                <p className="card-text">
+                  Connect with top doctors for private practice, available both
+                  offline and online.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <q>
+          Educating people on medical treatment options and insurance while
+          using modern technologies to enhance overall well-being and organize
+          the private health sector.
+        </q>
+
+        {/* <div className="mb-4">
+        <h2>How to Use Health Mudraa</h2>
+        <p>Are you randomly searching your medical symptoms on the internet? Feeling confused with all the information out there?</p>
+        <p>Stop! Instead, visit <a href="https://healthmudraa.com">healthmudraa.com</a> to find accurate answers to your medical questions.</p>
+        <p>Not sure who to consult next?</p>
+        <ul>
+          <li><strong>Chat:</strong> Connect with our clinical coordinators, share your medical problems and reports.</li>
+          <li><strong>Search:</strong> Based on your condition, we help you find the best doctors nearby and guide you from hospital entry to discharge.</li>
+        </ul>
+      </div>
+
+      <div className="mb-4">
+        <h2>Why Choose Health Mudraa?</h2>
+        <p>Your health is our priority. Whether you need a regular checkup or advanced surgery, we're here for you. Here’s why you should choose us:</p>
+        <ul>
+          <li>Relevant and Reliable Information: Directly from verified doctors.</li>
+          <li>Evidence-Based Approach: No false claims or miracle cures.</li>
+          <li>Bill Transparency: Clear comparisons of surgery costs.</li>
+          <li>Wide Range of Health Topics: Detailed treatment information.</li>
+          <li>Medical Community and Support: Positive user reviews and support.</li>
+          <li>Doctors from Various States and Languages: Access a diverse pool of healthcare professionals.</li>
+        </ul>
+      </div> */}
+      </div>
+
+      <div className="container">
+        {/* Partners */}
+        <div className="my-5">
+          <Typography
+            varient="h2"
+            component={"h2"}
+            sx={{
+              fontSize: 30,
+              fontFamily: "Montserrat",
+              textAlign: "center",
+              fontWeight: "bolder",
+            }}
+          >
+            Our Trusted Partners
+          </Typography>
+
+          <PartnersCard />
+        </div>
+
+        {/* Teams */}
         <div className="my-5">
           {/* <Typography
             variant="h2"
@@ -145,232 +177,156 @@ const About = () => {
             Our Team
           </Typography> */}
           <Typography
-          varient="h2"
-          component={"h2"}
-          sx= {{fontSize: 30, fontFamily: "Montserrat", textAlign: "center", fontWeight: "bolder"}}
+            varient="h2"
+            component={"h2"}
+            sx={{
+              fontSize: 30,
+              fontFamily: "Montserrat",
+              textAlign: "center",
+              fontWeight: "bolder",
+            }}
           >
             The Leadership Team
           </Typography>
 
           <TeamCard />
         </div>
-      </div>
 
-      {/* <div className="p-4" style={{ backgroundColor: "#C5DFF8" }}>
-        <div className="row d-flex justify-content-center m-1">
-          <div className="col-lg-6 col-md-8 col-sm-12 col-12 mt-5">
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                flexDirection: "column",
-                textAlign: "center",
-                backgroundColor: "#FFFF",
-                padding: 4.1,
-                borderRadius: 2,
+        {/* How It Works */}
+        <div className="my-5">
+          <Typography
+            varient="h2"
+            component={"h2"}
+            sx={{
+              fontSize: 30,
+              fontFamily: "Montserrat",
+              textAlign: "center",
+              fontWeight: "bolder",
+            }}
+          >
+            How It Works
+          </Typography>
+
+          <div class="container text-center" style={{ margin: "36px 0" }}>
+            <div class="row gap-4">
+              <div
+                role="button"
+                class="col rounded pointer"
+                style={{ border: "1px solid #D9D9D9", margin: "0 30px" }}
+              >
+                <div className="content my-5">
+                  <YouTubeIcon sx={{ fontSize: "50px", color: "#133682" }} />
+                  <h5
+                    style={{
+                      fontWeight: 600,
+                      fontSize: "22px",
+                      padding: "14px 0",
+                    }}
+                  >
+                    Watch Expert Videos
+                  </h5>
+                  <div
+                    style={{ width: "85%", margin: "auto", fontSize: "21px" }}
+                  >
+                    <p>Find valuable health advice from our trusted doctors.</p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col rounded"
+                style={{ border: "1px solid #D9D9D9", margin: "0 30px" }}
+              >
+                <div className="content my-5">
+                  <CalendarMonthIcon
+                    sx={{ fontSize: "50px", color: "#133682" }}
+                  />
+                  <h5
+                    style={{
+                      fontWeight: 600,
+                      fontSize: "22px",
+                      padding: "14px 0",
+                    }}
+                  >
+                    Book an Appointment
+                  </h5>
+                  <div
+                    style={{ width: "85%", margin: "auto", fontSize: "21px" }}
+                  >
+                    <p>
+                      Schedule a consultation with the doctor of your choice.
+                    </p>
+                  </div>
+                </div>
+              </div>{" "}
+              <div
+                class="col rounded"
+                style={{ border: "1px solid #D9D9D9", margin: "0 30px" }}
+              >
+                <div className="content my-5">
+                  <MedicationIcon sx={{ fontSize: "50px", color: "#133682" }} />
+                  <h5
+                    style={{
+                      fontWeight: 600,
+                      fontSize: "22px",
+                      padding: "14px 0",
+                    }}
+                  >
+                    Get Treatment
+                  </h5>
+                  <div
+                    style={{ width: "85%", margin: "auto", fontSize: "21px" }}
+                  >
+                    <p>Receive personalized care and treatment.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Contact Deatils*/}
+        <div style={{ margin: "85px 0" }}>
+          <div
+            className="d-flex rounded justify-content-evenly align-items-center"
+            style={{
+              margin: "0 30px",
+              padding: "38px 0",
+              border: "1px solid #D9D9D9",
+            }}
+          >
+            <h2 style={{ fontWeight: 600 }}>Need Help ?</h2>
+            <div className="phone">
+              <h6 className="fs-4">Call or WhatsApp at</h6>
+              <a
+                className="fs-6 py-2 text-black fw-semibold text-decoration-none"
+                href="tel:+917349796783"
+              >
+                <strong>+91-73497 96783</strong>
+              </a>
+            </div>
+            <h5
+              style={{
+                padding: 10,
+                backgroundColor: "#133682",
+                color: "#fff",
+                borderRadius: "50%",
               }}
             >
-              <Typography
-                variant="p"
-                component={"p"}
-                sx={{
-                  fontFamily: "Montserrat",
-                  fontWeight: "bold",
-                  fontSize: 28,
-                  paddingBottom: 4,
-                }}
+              Or
+            </h5>
+            <div className="chat">
+              <h6 className="fs-4">Live chat with Health Pilots</h6>
+              <a
+                className="fs-6 py-2 fw-semibold"
+                href="#"
+                style={{ color: "#133682" }}
               >
-                Why to choose Healthmudraa ?
-              </Typography>
-              <Box sx={{ fontFamily: "Montserrat" }}>
-                <Typography variant="p" component={"p"}>
-                  Your health, our priority.
-                </Typography>
-                <Typography variant="p" component={"p"}>
-                  Wheather it's regular checkups or advanced surgery <br /> just
-                  one call for any medical needs
-                </Typography>
-              </Box>
-            </Box>
-          </div>
-        </div>
-
-        <div className="row text-center m-4 justify-content-center">
-          <div className="col-lg-3 col-md-5 col-sm-10 col-12 choose-card m-4">
-            <Typography
-              variant="p"
-              component={"p"}
-              sx={{ fontFamily: "Montserrat" }}
-            >
-              Relevant and Reliable information directly from verified doctors
-              based on medication conditions & doubtful questions
-            </Typography>
-          </div>
-
-          <div className="col-lg-3 col-md-5 col-sm-10 col-12 choose-card m-4">
-            <Typography
-              variant="p"
-              component={"p"}
-              sx={{ fontFamily: "Montserrat" }}
-            >
-              Evidence based approch
-              <br />
-              No false clains or miracle cures
-            </Typography>
-          </div>
-
-          <div className="col-lg-3 col-md-5 col-sm-10 col-12 choose-card m-4">
-            <Typography
-              variant="p"
-              component={"p"}
-              sx={{ fontFamily: "Montserrat" }}
-            >
-              Bill transparency-Surgery & cost comparisions
-            </Typography>
-          </div>
-
-          <div className="col-lg-3 col-md-5 col-sm-10 col-12 choose-card m-4">
-            <Typography
-              variant="p"
-              component={"p"}
-              sx={{ fontFamily: "Montserrat" }}
-            >
-              Wide range of health topics with treatment details
-            </Typography>
-          </div>
-
-          <div className="col-lg-3 col-md-5 col-sm-10 col-12 choose-card m-4">
-            <Typography
-              variant="p"
-              component={"p"}
-              sx={{ fontFamily: "Montserrat" }}
-            >
-              Medical community and support positive user reviews
-            </Typography>
-          </div>
-
-          <div className="col-lg-3 col-md-5 col-sm-10 col-12 choose-card m-4">
-            <Typography
-              variant="p"
-              component={"p"}
-              sx={{ fontFamily: "Montserrat" }}
-            >
-              Doctor from various states and language
-            </Typography>
-          </div>
-        </div>
-
-        <div className="row text-center m-4 justify-content-center vision-cnt">
-          <div className="col-lg-11 col-md-12 col-sm-12 col-12 choose-card m-4">
-            <Typography
-              variant="h4"
-              component={"h4"}
-              sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}
-            >
-              The Vision and Mission
-            </Typography>
-            <Typography
-              variant="p"
-              component={"p"}
-              sx={{ fontFamily: "Montserrat", padding: 2 }}
-            >
-              The World Health Organization (WHO) firmly believes that health
-              education plays a crucial role in empowering individuals,
-              <br /> communities, and societies to make informed decisions about
-              their health and well-being
-            </Typography>
-
-            <div className="text-start mission">
-              <Typography
-                variant="h4"
-                component={"h4"}
-                sx={{ fontFamily: "Montserrat" }}
-              >
-                Our Vision
-              </Typography>
-              <ul>
-                <li className="list-ty">
-                  "Appropriate, affordable and advanced healthcare services
-                  should be accessible for all"
-                </li>
-              </ul>
-            </div>
-
-            <div className="text-start mission">
-              <Typography
-                variant="h4"
-                component={"h4"}
-                sx={{ fontFamily: "Montserrat" }}
-              >
-                Our Mission
-              </Typography>
-              <ul>
-                <li className="list-ty">
-                  -Educating Publics on medical treatment Options for their
-                  illness, Insurance, wellbeing
-                </li>
-                <li className="list-ty">
-                  -Organising the un-organised private health sector by using
-                  modern Technologies
-                </li>
-              </ul>
+                Start live chat
+              </a>
             </div>
           </div>
         </div>
-
-        <Box
-          className="row justify-content-center founder"
-          sx={{
-            display: "flex",
-            flexDirection: forBelow800px ? "column" : "row",
-            alignItems: "center",
-          }}
-        >
-          <Box
-            className="col-lg-4"
-            component={"img"}
-            sx={{ width: 320, height: 420, marginBottom: 4 }}
-            src={FounderImg}
-          />
-          <Box className="col-lg-8" sx={{ marginLeft: forBelow800px ? 0 : 2 }}>
-            <Typography
-              variant="h5"
-              component={"h5"}
-              sx={{ fontFamily: "Montserrat" }}
-            >
-              Dr Dinesh Kumar Raman PT
-            </Typography>
-            <Typography variant="div" component={"div"}>
-              As a seasoned entrepreneur with expertise in software and
-              medicine, I am passionate about healthcare technologies.
-              Healthmudra is my fourth startup, aiming to tackle key challenges
-              in patient care. I started by providing solutions to our daily
-              challenges, I embarked on search for solutions to the following
-              problems:
-              <ol>
-                <li>
-                  Wrong Medical Contents: Addressing the issue of wrong medical
-                  information available on the internet and the problems it
-                  causes{" "}
-                </li>
-                <li>
-                  Lack of Treatment Options Awareness. Hepling individuals with
-                  no ideas about available Treatment options for their problems
-                  and finding good doctors for their needs.
-                </li>
-                <li>
-                  Fear of Hospital Bits: Aleviating the fear and uncertainty
-                  surrounding hospital bills. With a relentless commitment to
-                  improving heathcare I am determined to make a positive impact
-                  by empowering people to make informed decisions about their
-                  well-being. Join me on the joumey to revolutionize patient
-                  care and bring about positive changes in healthcare landscape
-                </li>
-              </ol>
-            </Typography>
-          </Box>
-        </Box>
-      </div> */}
+      </div>
     </React.Fragment>
   );
 };

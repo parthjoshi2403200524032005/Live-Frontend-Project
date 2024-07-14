@@ -16,9 +16,11 @@ import "./buttonStyle.css";
 
 const PartnersCard = () => {
   const settings = {
+    autoplay: false,
+    autoplaySpeed: 3000,
     dots: false,
     infinite: true,
-    speed: 600,
+    speed: 1100,
     slidesToShow: 5,
     className: "PartnerSlider",
     draggable: false,
@@ -31,6 +33,7 @@ const PartnersCard = () => {
           arrows: true,
           dots: true,
           draggable: true,
+          autoplay:true,
         },
       },
       {
@@ -41,6 +44,7 @@ const PartnersCard = () => {
           arrows: true,
           dots: true,
           draggable: true,
+          autoplay:true,
         },
       },
     ],

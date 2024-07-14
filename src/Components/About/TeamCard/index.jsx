@@ -17,9 +17,11 @@ import "./buttonStyle.css";
 
 const TeamCard = () => {
   const settings = {
+    autoplay:true,
+    autoplaySpeed: 3000,
     dots: true,
     infinite: true,
-    speed: 600,
+    speed: 1000,
     slidesToShow: 3,
     slidesToScroll: 3,
     className: "TeamSlider",
@@ -36,8 +38,8 @@ const TeamCard = () => {
       {
         breakpoint: 787,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 3,
+          slidesToScroll: 3,
         }
       }
     ],
@@ -92,7 +94,7 @@ const TeamCard = () => {
     <>
       <Slider style={{ margin: "36px 0" }} {...settings}>
         {teamMembers.map((person) => (
-          <Card sx={{ display: "flex", boxShadow: "none" }}>
+          <Card key={person.name} sx={{ display: "flex", boxShadow: "none" }}>
             <Box
               sx={{
                 display: "flex",
