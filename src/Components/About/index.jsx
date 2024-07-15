@@ -29,7 +29,7 @@ const About = () => {
         <div className="container py-5">
           <h1 className="text-start">About Us</h1>
 
-          <p className="w-50 my-4 fs-5 fw-normal">
+          <p className="w-xl-50 w-lg-50 w-md-50 w-sm-50 w-50 my-4 fs-5 fw-normal">
             Health Mudraa was founded in 2020 to change how people access
             medical information and healthcare services. Our team includes
             doctors, surgeons, management experts from IIM, engineers from IIT
@@ -37,43 +37,96 @@ const About = () => {
           </p>
         </div>
       </div>
+
       <div className="container">
         <div className="my-5">
           <h1>Our Purpose</h1>
-          <p className="my-4 w-50 fs-5">
+          <p className="my-4 w--100 w-50 fs-5">
             At Health Mudraa, our mission is to address major healthcare
             challenges by solving key problems in the industry.
           </p>
-          <div className="d-flex">
-            <div className="card mb-3">
-              <div className="card-body">
-                <h3 className="card-title">Wrong Medical Information</h3>
-                <p className="card-text">
-                  The internet is full of inaccurate medical advice, causing
-                  confusion and fear. We’re here to fix that by providing
-                  reliable information from trusted doctors.
-                </p>
+
+          <div class="container text-center" style={{ margin: "36px 0" }}>
+            <div class="row flex-wrap gap-4">
+              <div
+                role="button"
+                class="col rounded-3 pointer shadow-sm"
+                style={{ border: "1px solid #D9D9D9", margin: "0 30px" }}
+              >
+                <div className="content my-5">
+                  <YouTubeIcon sx={{ fontSize: "50px", color: "#133682" }} />
+                  <h5
+                    className="text-center px-2"
+                    style={{
+                      fontWeight: 600,
+                      fontSize: "22px",
+                      padding: "14px 0",
+                    }}
+                  >
+                    Medical Information
+                  </h5>
+                  <div style={{ margin: "auto", fontSize: "21px" }}>
+                    <p className="text-start px-2">
+                      The internet is full of inaccurate medical advice, causing
+                      confusion and fear. We’re here to fix that by providing
+                      reliable information from trusted doctors.
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="card mb-3">
-              <div className="card-body">
-                <h3 className="card-title">
-                  Lack of Awareness About Treatment Options
-                </h3>
-                <p className="card-text">
-                  Many people don't know what treatments are available or how to
-                  find good doctors. We help by offering detailed information
-                  and connecting you with top healthcare professionals.
-                </p>
+              <div
+                role="button"
+                class="col rounded-3 pointer shadow-sm"
+                style={{ border: "1px solid #D9D9D9", margin: "0 30px" }}
+              >
+                <div className="content my-5">
+                  <CalendarMonthIcon
+                    sx={{ fontSize: "50px", color: "#133682" }}
+                  />
+                  <h5
+                    className="text-start mx-2"
+                    style={{
+                      fontWeight: 600,
+                      fontSize: "22px",
+                      padding: "14px 0",
+                    }}
+                  >
+                    Lack of Awareness
+                  </h5>
+                  <div style={{ margin: "auto", fontSize: "21px" }}>
+                    <p className="text-start mx-2">
+                      Many people don't know what treatments are available or
+                      how to find good doctors. We help by offering detailed
+                      information and connecting you with top healthcare
+                      professionals.
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="card mb-3">
-              <div className="card-body">
-                <h3 className="card-title">Fear of Hospital Bills</h3>
-                <p className="card-text">
-                  Hospital bills can be scary and confusing. We aim to make
-                  things clearer and help you understand the costs involved.
-                </p>
+              <div
+                role="button"
+                class="col rounded-3 pointer shadow-sm"
+                style={{ border: "1px solid #D9D9D9", margin: "0 30px" }}
+              >
+                <div className="content my-5">
+                  <MedicationIcon sx={{ fontSize: "50px", color: "#133682" }} />
+                  <h5
+                    className="text-start mx-2"
+                    style={{
+                      fontWeight: 600,
+                      fontSize: "22px",
+                      padding: "14px 0",
+                    }}
+                  >
+                    Fear of Hospital Bills
+                  </h5>
+                  <div style={{ margin: "auto", fontSize: "21px" }}>
+                    <p className="text-start mx-2">
+                      Hospital bills can be scary and confusing. We aim to make
+                      things clearer and help you understand the costs involved.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -81,42 +134,119 @@ const About = () => {
 
         <div className="mb-4">
           <h1>What Makes Us Special</h1>
-          <div className="d-flex my-4">
-            <div className="card mb-3">
-              <div className="card-body">
-                <h3 className="card-title">Trustworthy Doctors' Advice</h3>
-                <p className="card-text">
-                  Get accurate medical information directly from verified
-                  doctors.
-                </p>
+          <div class="container text-center" style={{ margin: "36px 0" }}>
+            <div class="row gap-4">
+              <div
+                role="button"
+                className="col"
+                style={{ border: "1px solid #D9D9D9", margin: "0 30px" }}
+              >
+                <div className="content my-5">
+                  <YouTubeIcon sx={{ fontSize: "50px", color: "#133682" }} />
+                  <h5
+                    style={{
+                      fontWeight: 600,
+                      fontSize: "22px",
+                      padding: "14px 0",
+                    }}
+                  >
+                    Trustworthy Doctors Advice
+                  </h5>
+                  <div
+                    style={{ width: "85%", margin: "auto", fontSize: "21px" }}
+                  >
+                    <p>
+                      Get accurate medical information directly from verified
+                      doctors.
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="card mb-3">
-              <div className="card-body">
-                <h3 className="card-title">Personalized Health Plans</h3>
-                <p className="card-text">
-                  Receive recommendations and treatment options based on your
-                  medical history.
-                </p>
-              </div>
-            </div>
-            <div className="card mb-3">
-              <div className="card-body">
-                <h3 className="card-title">Personal Branding</h3>
-                <p className="card-text">
-                  Connect with top doctors for private practice, available both
-                  offline and online.
-                </p>
+              <div
+                class="col rounded"
+                style={{ border: "1px solid #D9D9D9", margin: "0 30px" }}
+              >
+                <div className="content my-5">
+                  <CalendarMonthIcon
+                    sx={{ fontSize: "50px", color: "#133682" }}
+                  />
+                  <h5
+                    style={{
+                      fontWeight: 600,
+                      fontSize: "22px",
+                      padding: "14px 0",
+                    }}
+                  >
+                    Personalized Health Plans
+                  </h5>
+                  <div
+                    style={{ width: "85%", margin: "auto", fontSize: "21px" }}
+                  >
+                    <p>
+                      Receive recommendations and treatment options based on
+                      your medical history.
+                    </p>
+                  </div>
+                </div>
+              </div>{" "}
+              <div
+                class="col rounded"
+                style={{ border: "1px solid #D9D9D9", margin: "0 30px" }}
+              >
+                <div className="content my-5">
+                  <MedicationIcon sx={{ fontSize: "50px", color: "#133682" }} />
+                  <h5
+                    style={{
+                      fontWeight: 600,
+                      fontSize: "22px",
+                      padding: "14px 0",
+                    }}
+                  >
+                    Personal Branding
+                  </h5>
+                  <div
+                    style={{ width: "85%", margin: "auto", fontSize: "21px" }}
+                  >
+                    <p>
+                      Connect with top doctors for private practice, available
+                      both offline and online.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <q>
-          Educating people on medical treatment options and insurance while
-          using modern technologies to enhance overall well-being and organize
-          the private health sector.
-        </q>
+        <section class="quote">
+          <div class="rounded">
+            <div class="d-flex align-items-center p-4">
+              <div class="text-center">
+                <img
+                  src="https://pngfreepic.com/wp-content/uploads/2022/04/Health-Care-Medicine-Health-insurance-Vector-image.png?v=1663341819"
+                  alt="Bulb"
+                  width="120"
+                />
+                <h6 className="p-1 fw-bold">Our Mission</h6>
+              </div>
+
+              <div>
+                <blockquote class="blockquote px-4 text-center fs-4">
+                  <span style={{ color: "#133682" }} className="fs-2 fw-bold">
+                    “{" "}
+                  </span>
+                  Educating people on medical treatment options and insurance
+                  while using modern technologies to enhance overall well-being
+                  and organize the private health sector.
+                  <span style={{ color: "#133682" }} className="fs-2 fw-bold">
+                    {" "}
+                    ”
+                  </span>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* <div className="mb-4">
         <h2>How to Use Health Mudraa</h2>
@@ -211,7 +341,7 @@ const About = () => {
             <div class="row gap-4">
               <div
                 role="button"
-                class="col rounded pointer"
+                className="col"
                 style={{ border: "1px solid #D9D9D9", margin: "0 30px" }}
               >
                 <div className="content my-5">

@@ -24,12 +24,14 @@ const TeamCard = () => {
     speed: 1000,
     slidesToShow: 3,
     slidesToScroll: 3,
+    rows: 2,
     className: "TeamSlider",
     arrows: false,
     responsive: [
       {
         breakpoint: 580,
         settings: {
+          rows: 1,
           slidesToShow: 1,
           slidesToScroll: 1,
           arrows: true,
@@ -38,6 +40,7 @@ const TeamCard = () => {
       {
         breakpoint: 787,
         settings: {
+          rows: 1,
           slidesToShow: 3,
           slidesToScroll: 3,
         }
@@ -88,13 +91,55 @@ const TeamCard = () => {
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8kiSH5ZSAcVoj3tAQQDoP_ux0sSricMyUg&s",
       linkedIn: "Sara Ali",
     },
+    {
+      name: "Rohit Kumar",
+      position: "Software Developer",
+      profile:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8kiSH5ZSAcVoj3tAQQDoP_ux0sSricMyUg&s",
+      linkedIn: "https://www.linkedin.com/in/mohamed-halith-smh/",
+    },
+    {
+      name: "Anjali Sharma",
+      position: "Project Manager",
+      profile:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8kiSH5ZSAcVoj3tAQQDoP_ux0sSricMyUg&s",
+      linkedIn: "Anjali Sharma",
+    },
+    {
+      name: "Ravi Verma",
+      position: "UI/UX Designer",
+      profile:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8kiSH5ZSAcVoj3tAQQDoP_ux0sSricMyUg&s",
+      linkedIn: "Ravi Verma",
+    },
+    {
+      name: "Priya Singh",
+      position: "Backend Developer",
+      profile:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8kiSH5ZSAcVoj3tAQQDoP_ux0sSricMyUg&s",
+      linkedIn: "Priya Singh",
+    },
+    {
+      name: "Arjun Mehta",
+      position: "Frontend Developer",
+      profile:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8kiSH5ZSAcVoj3tAQQDoP_ux0sSricMyUg&s",
+      linkedIn: "Arjun Mehta",
+    },
+    {
+      name: "Sara Ali",
+      position: "Data Scientist",
+      profile:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8kiSH5ZSAcVoj3tAQQDoP_ux0sSricMyUg&s",
+      linkedIn: "Sara Ali",
+    },
   ];
 
   return (
     <>
       <Slider style={{ margin: "36px 0" }} {...settings}>
         {teamMembers.map((person) => (
-          <Card key={person.name} sx={{ display: "flex", boxShadow: "none" }}>
+          <Card key={person.name} sx={{ display: "flex", boxShadow: "none", marginBottom: "18px" }}>
             <Box
               sx={{
                 display: "flex",
