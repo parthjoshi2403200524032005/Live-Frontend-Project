@@ -75,7 +75,7 @@ const PartnersCard = () => {
 
   return (
     <>
-      <Slider style={{ margin: "36px 0" }} {...settings}>
+      <Slider style={{ margin: "40px 0" }} {...settings}>
         {partners.map((data) => (
           <Card key={data.name} sx={{ display: "flex", boxShadow: "none" }}>
             <Box

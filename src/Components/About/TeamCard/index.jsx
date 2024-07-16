@@ -24,7 +24,7 @@ const TeamCard = () => {
     speed: 1000,
     slidesToShow: 3,
     slidesToScroll: 3,
-    rows: 2,
+    rows: 3,
     className: "TeamSlider",
     arrows: false,
     responsive: [
@@ -137,9 +137,9 @@ const TeamCard = () => {
 
   return (
     <>
-      <Slider style={{ margin: "36px 0" }} {...settings}>
+      <Slider style={{ margin: "42px 0" }} {...settings}>
         {teamMembers.map((person) => (
-          <Card key={person.name} sx={{ display: "flex", boxShadow: "none", marginBottom: "18px" }}>
+          <Card key={person.name} sx={{ display: "flex", boxShadow: "none", marginBottom: "22px" }}>
             <Box
               sx={{
                 display: "flex",
@@ -178,9 +178,8 @@ const TeamCard = () => {
                   {person.name}
                 </Typography>
                 <Typography
-                  sx={{ paddingLeft: 1 }}
-                  variant="subtitle1"
-                  color="text.secondary"
+                  sx={{ paddingLeft: 1, marginY: 1 }}
+                  variant="body1"
                   component="div"
                 >
                   {person.position}
