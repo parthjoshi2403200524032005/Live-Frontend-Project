@@ -6,10 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import {
   Box,
   Card,
-  CardContent,
   CardMedia,
-  IconButton,
-  Typography,
 } from "@mui/material";
 
 import "./buttonStyle.css";
@@ -18,6 +15,7 @@ const PartnersCard = () => {
   const settings = {
     autoplay: false,
     autoplaySpeed: 3000,
+    arrows: false,
     dots: false,
     infinite: true,
     speed: 1100,
@@ -30,7 +28,6 @@ const PartnersCard = () => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          arrows: true,
           dots: true,
           draggable: true,
           autoplay:true,
@@ -41,7 +38,6 @@ const PartnersCard = () => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
-          arrows: true,
           dots: true,
           draggable: true,
           autoplay:true,

@@ -18,10 +18,10 @@ import "./buttonStyle.css";
 const TeamCard = () => {
   const settings = {
     autoplay:true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 2800,
     dots: true,
     infinite: true,
-    speed: 1000,
+    speed: 900,
     slidesToShow: 3,
     slidesToScroll: 3,
     rows: 3,
@@ -31,10 +31,10 @@ const TeamCard = () => {
       {
         breakpoint: 580,
         settings: {
-          rows: 1,
           slidesToShow: 1,
           slidesToScroll: 1,
           arrows: true,
+          rows: 2,
         },
       },
       {

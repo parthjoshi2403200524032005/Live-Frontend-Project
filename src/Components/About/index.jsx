@@ -1,5 +1,13 @@
 import { useEffect } from "react";
-import { Box, Grid, Container, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Container,
+  Paper,
+  Typography,
+  Link
+} from "@mui/material";
+
 import TeamCard from "./TeamCard";
 import PartnersCard from "./PartnersCard";
 
@@ -8,14 +16,13 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import MedicationIcon from "@mui/icons-material/Medication";
 
 const primaryColor = "#133682";
-
 const Heading = ({ text, size }) => {
   return (
     <Typography
       varient="h2"
       component={"h2"}
       sx={{
-        fontSize: { xs: 30, lg: size ? 40 : 35},
+        fontSize: { xs: 30, sm: 35, lg: size ? 40 : 35 },
         letterSpacing: 1.5,
         lineHeight: "56px",
         textAlign: "center",
@@ -33,9 +40,9 @@ const Para = ({ text }) => {
       varient="h3"
       component={"h3"}
       sx={{
-        fontSize: { xs: 32, lg: 20 },
+        fontSize: {xs: 14, md: 15, lg: 20 },
         lineHeight: "28px",
-        textAlign: "center",
+        textAlign: { sm: "start", lg: "center" },
         letterSpacing: 1.03,
       }}
     >
@@ -79,7 +86,14 @@ const ContentSection = ({ Icon, title, text }) => (
           alignItems: "center",
         }}
       >
-        <Typography lineHeight={1.5} letterSpacing={1.2} fontSize={18} variant="body2">{text}</Typography>
+        <Typography
+          lineHeight={1.5}
+          letterSpacing={1.2}
+          fontSize={{xs: 16,md:18}}
+          variant="body2"
+        >
+          {text}
+        </Typography>
       </Box>
     </Paper>
   </Grid>
@@ -92,9 +106,9 @@ const About = () => {
   return (
     <>
       {/* About Section */}
-      <Box pt={12} pb={6}>
+      <Box pt={{ xs: 6, lg: 12 }} pb={6}>
         <Heading size="30" text="About Healthmudraa" />
-        <Box width="65%" m="auto" py={4}>
+        <Box width={{ xs: "90%", lg: "65%" }} m="auto" py={4}>
           <Para
             text="HealthMudraa is a health information platform offering 
           subscription-based services, including surgery assistance, physiotherapy, 
@@ -111,48 +125,48 @@ const About = () => {
         py={7}
         color="#FCFCFC"
         display="grid"
-        gridTemplateColumns="30% 30%"
+        gridTemplateColumns={{ xs: "95%", sm: "40% 40%", lg: "30% 30%" }}
         justifyContent="center"
-        gap={12}
+        gap={{xs: 8, md:12}}
       >
-        <Box textAlign="center">
+        <Box textAlign={{xs: "center", md: "start", lg: "center" }}>
           <Typography
             variant="h3"
             fontWeight="bold"
-            fontSize={32}
+            fontSize={{ xs: 28, lg: 32 }}
             letterSpacing="1.2px"
             lineHeight="44px"
           >
             Our Vission
           </Typography>
           <Typography
-            px={4}
+            px={{ sm: 0, lg: 4 }}
             mt={2}
             variant="body2"
             letterSpacing="1.2px"
-            fontSize={20}
+            fontSize={{xs: 16, md:20}}
             lineHeight="28px"
           >
             Appropriate, affordable and advanced healthcare services should be
             accessible for all
           </Typography>
         </Box>
-        <Box textAlign="center">
+        <Box textAlign={{xs: "center", md: "start", lg: "center" }}>
           <Typography
             variant="h3"
             fontWeight="bold"
-            fontSize={32}
+            fontSize={{ xs: 28, lg: 32 }}
             letterSpacing="1.2px"
             lineHeight="44px"
           >
             Our Misson
           </Typography>
           <Typography
-            px={4}
+            px={{ sm: 0, lg: 4 }}
             mt={2}
             variant="body2"
             letterSpacing="1.2px"
-            fontSize={20}
+            fontSize={{xs: 16, md:20}}
             lineHeight="28px"
           >
             Appropriate, affordable and advanced healthcare services should be
@@ -178,11 +192,11 @@ const About = () => {
       </div> */}
 
       {/* Purpose */}
-      <Box pt={10} pb={6}>
+      <Box pt={{ xs: 8, lg: 10 }} pb={6}>
         <Heading text="Our Purpose" />
 
-        <Container sx={{ marginY: 6}}>
-          <Grid container spacing={8} justifyContent="center">
+        <Container sx={{ marginY: 6 }}>
+          <Grid container spacing={{ xs: 4, lg: 8 }} justifyContent="center">
             <ContentSection
               Icon={YouTubeIcon}
               title="Medical Information"
@@ -203,11 +217,11 @@ const About = () => {
       </Box>
 
       {/* What's Sets us */}
-      <Box py={4}>
+      <Box py={{ xs: 2, lg: 4 }}>
         <Heading text="What Sets Us" />
 
-        <Container sx={{ marginY: 6}}>
-          <Grid container spacing={8} justifyContent="center">
+        <Container sx={{ marginY: 6 }}>
+          <Grid container spacing={{ xs: 4, lg: 8 }} justifyContent="center">
             <ContentSection
               Icon={YouTubeIcon}
               title="Trustworthy Doctors"
@@ -230,7 +244,7 @@ const About = () => {
         </Container>
       </Box>
 
-     {/* <section class="quote">
+      {/* <section class="quote">
           <div class="rounded">
             <div class="d-flex align-items-center p-4">
               <div class="text-center">
@@ -258,7 +272,7 @@ const About = () => {
               </div>
             </div>
           </div>
-        </section> */} 
+        </section> */}
 
       <div className="container">
         {/* Partners */}
@@ -269,134 +283,110 @@ const About = () => {
 
         {/* Teams */}
         <Box mt={12}>
-        <Heading  text={"The Leadership Team"}/>
-        <TeamCard />
+          <Heading text={"The Leadership Team"} />
+          <TeamCard />
         </Box>
-        
 
         {/* How It Works */}
         <div className="my-5">
-          <Heading text={"How It Works"}/>
+          <Heading text={"How It Works"} />
 
-          <div class="container text-center" style={{ margin: "36px 0" }}>
-            <div class="row gap-4">
-              <div
-                role="button"
-                className="col"
-                style={{ border: "1px solid #D9D9D9", margin: "0 30px" }}
-              >
-                <div className="content my-5">
-                  <YouTubeIcon sx={{ fontSize: "50px", color: "#133682" }} />
-                  <h5
-                    style={{
-                      fontWeight: 600,
-                      fontSize: "22px",
-                      padding: "14px 0",
-                    }}
-                  >
-                    Watch Expert Videos
-                  </h5>
-                  <div
-                    style={{ width: "85%", margin: "auto", fontSize: "21px" }}
-                  >
-                    <p>Find valuable health advice from our trusted doctors.</p>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="col rounded"
-                style={{ border: "1px solid #D9D9D9", margin: "0 30px" }}
-              >
-                <div className="content my-5">
-                  <CalendarMonthIcon
-                    sx={{ fontSize: "50px", color: "#133682" }}
-                  />
-                  <h5
-                    style={{
-                      fontWeight: 600,
-                      fontSize: "22px",
-                      padding: "14px 0",
-                    }}
-                  >
-                    Book an Appointment
-                  </h5>
-                  <div
-                    style={{ width: "85%", margin: "auto", fontSize: "21px" }}
-                  >
-                    <p>
-                      Schedule a consultation with the doctor of your choice.
-                    </p>
-                  </div>
-                </div>
-              </div>{" "}
-              <div
-                class="col rounded"
-                style={{ border: "1px solid #D9D9D9", margin: "0 30px" }}
-              >
-                <div className="content my-5">
-                  <MedicationIcon sx={{ fontSize: "50px", color: "#133682" }} />
-                  <h5
-                    style={{
-                      fontWeight: 600,
-                      fontSize: "22px",
-                      padding: "14px 0",
-                    }}
-                  >
-                    Get Treatment
-                  </h5>
-                  <div
-                    style={{ width: "85%", margin: "auto", fontSize: "21px" }}
-                  >
-                    <p>Receive personalized care and treatment.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Container sx={{ marginY: 6 }}>
+            <Grid container spacing={{ xs: 4, lg: 8 }} justifyContent="center">
+              <ContentSection
+                Icon={YouTubeIcon}
+                title="Watch Expert Videos"
+                text="Find valuable health advice from our trusted doctors."
+              />
+              <ContentSection
+                Icon={CalendarMonthIcon}
+                title="Book an Appointment"
+                text="Schedule a consultation with the doctor of your choice."
+              />
+              <ContentSection
+                Icon={MedicationIcon}
+                title="Get Treatment"
+                text="Receive personalized care and treatment."
+              />
+            </Grid>
+          </Container>
         </div>
 
         {/* Contact Deatils*/}
-        <div style={{ margin: "85px 0" }}>
-          <div
-            className="d-flex rounded justify-content-evenly align-items-center"
-            style={{
+        <Box sx={{ margin: "85px 0" }}>
+          <Box
+            sx={{
               margin: "0 30px",
               padding: "38px 0",
               border: "1px solid #D9D9D9",
+              borderRadius: 2,
+              display: "flex",
+              justifyContent: "space-evenly",
+              alignItems: "center",
+              flexDirection: { xs: "column", sm: "row" },
             }}
           >
-            <h2 style={{ fontWeight: 600 }}>Need Help ?</h2>
-            <div className="phone">
-              <h6 className="fs-4">Call or WhatsApp at</h6>
-              <a
-                className="fs-6 py-2 text-black fw-semibold text-decoration-none"
+            <Typography
+              variant="h2"
+              sx={{ fontWeight: 600, fontSize: { xs: "1.5rem", sm: "2rem" } }}
+            >
+              Need Help?
+            </Typography>
+            <Box
+              className="phone"
+              sx={{ textAlign: "center", mt: { xs: 2, sm: 0 }, fontSize: "1.2rem" }}
+            >
+              <Typography variant="h6">
+                Call or WhatsApp at
+              </Typography>
+              <Link
                 href="tel:+917349796783"
+                sx={{
+                  py: 2,
+                  color: "black",
+                  fontWeight: "bold",
+                  textDecoration: "underline",
+                }}
               >
-                <strong>+91-73497 96783</strong>
-              </a>
-            </div>
-            <h5
-              style={{
-                padding: 10,
+                +91-73497 96783
+              </Link>
+            </Box>
+            <Typography
+              variant="h5"
+              display={{xs: "none", md: "block"}}
+              sx={{
+                padding: 1,
                 backgroundColor: "#133682",
                 color: "#fff",
+                fontSize: "16px",
                 borderRadius: "50%",
               }}
             >
               Or
-            </h5>
-            <div className="chat">
-              <h6 className="fs-4">Live chat with Health Pilots</h6>
-              <a
-                className="fs-6 py-2 fw-semibold"
+            </Typography>
+            <Box
+              className="chat"
+              display={{xs: "none", md: "block"}}
+              sx={{ textAlign: "center", mt: { xs: 2, sm: 0 }, fontSize: "1.2rem", }}
+            >
+              <Typography variant="h6">
+                Live chat with Health Pilots
+              </Typography>
+              <Link
                 href="#"
-                style={{ color: "#133682" }}
+                sx={{
+                  
+                  py: 2,
+                  color: "#133682",
+                  fontWeight: "bold",
+                  textDecoration: "none",
+                }}
               >
                 Start live chat
-              </a>
-            </div>
-          </div>
-        </div>
+              </Link>
+            </Box>
+          </Box>
+        </Box>
       </div>
     </>
   );
