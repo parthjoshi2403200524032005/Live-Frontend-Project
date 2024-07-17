@@ -654,33 +654,6 @@ const DoctorHospital = () => {
                   </Grid>
                 </Grid>
               </Box>
-              <Box component={"div"} sx={{ mt: 4 }}>
-                <Typography variant="h5" component={"h5"} className="mb-2">
-                  Gallery
-                </Typography>
-                <ImageUpload
-                  setForm={setUploadImage}
-                  fieldname={"galleryimage"}
-                  imageurl={""}
-                  emptyimage={true}
-                />
-                <Grid container spacing={1} marginTop={"1rem"}>
-                  {newhospital.gallery &&
-                    newhospital.gallery?.map((image) => {
-                      if (image) {
-                        return (
-                          <Grid item>
-                            <img
-                              src={`${aws_url}/${image}`}
-                              alt="profile-preview"
-                              className="imgpreview"
-                            />
-                          </Grid>
-                        );
-                      } else return null;
-                    })}
-                </Grid>
-              </Box>
             </Box>
           </Box>
           <div className="d-flex justify-content-between mt-3 " style={{paddingTop:"5px" , paddingBottom:"20px" , position:"absolute" , right:"15%"}}>
