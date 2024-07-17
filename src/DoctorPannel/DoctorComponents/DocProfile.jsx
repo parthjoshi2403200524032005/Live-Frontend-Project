@@ -26,9 +26,10 @@ import {
 } from "../../Service/Services";
 import { toast } from "react-hot-toast";
 import ImageUpload from "./ImageUpload";
-import Profile from "../../assets/user.png";
+//import Profile from "../../assets/user.png";
 import CarouselComponent from "./App"
 import styled from 'styled-components';
+const DEFAULT_IMAGE = 'https://healthmudraa-assets.s3.ap-south-1.amazonaws.com/1718098598539-blank-profile-picture-973460_1280.png';
 
 const DocProfile = () => {
 
@@ -265,7 +266,7 @@ const DocProfile = () => {
           setForm={setForm}
           fieldname={"profilepicurl"}
           imageurl={
-            form.profilepicurl !== "" ? `${aws_url}/${form.profilepicurl}` : `${Profile}`
+            form.profilepicurl !== "" ? `${aws_url}/${form.profilepicurl}` : `${DEFAULT_IMAGE}`
           }
         />
         <Container>

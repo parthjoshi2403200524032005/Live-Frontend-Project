@@ -50,7 +50,7 @@ const Requests = () => {
   };
   useEffect(() => {
     handlegetRequests();
-  });
+  },[]);
 
   return (
     <React.Fragment>
