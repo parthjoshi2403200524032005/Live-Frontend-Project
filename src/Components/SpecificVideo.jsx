@@ -63,7 +63,7 @@ function SpecificVideo() {
     if (videotitle) {
       fetchVideoData();
     }
-  },);
+  },[]);
 
   const handleAppointmentBts = () => {
     document

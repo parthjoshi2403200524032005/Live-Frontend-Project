@@ -10,6 +10,7 @@ import {
   TextField,
   Typography,
   createTheme,
+  IconButton,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { UploadButton } from "../../CustomStyles/Styles";
@@ -22,7 +23,8 @@ import {
 } from "../../Service/Services";
 import DetailCard from "./DetailCard";
 import Searchselect from "react-select";
-import ReactQuill from "react-quill";
+import DeleteIcon from '@mui/icons-material/Delete';
+//import ReactQuill from "react-quill";
 
 const DoctorPackages = () => {
   const theme = createTheme({
@@ -154,6 +156,12 @@ const DoctorPackages = () => {
     }
   };
 
+  const handleDeleteInclusion = (index) => {
+    const updatedInclusions = inclusion.filter((_, i) => i !== index);
+    setInclusion(updatedInclusions);
+    setNewpackage({ ...newpackage, inclusion: updatedInclusions });
+};
+
   const forExclusionsAdd = () => {
     if (condent.exclusion.trim() !== "") {
       const updatedExclusions = [...exclusion, condent.exclusion];
@@ -162,6 +170,12 @@ const DoctorPackages = () => {
       setNewpackage({ ...newpackage, exclusion: updatedExclusions });
     }
   };
+
+  const handleDeleteExclusion = (index) => {
+    const updatedExclusions = exclusion.filter((_, i) => i !== index);
+    setExclusion(updatedExclusions);
+    setNewpackage({ ...newpackage, exclusion: updatedExclusions });
+};
 
   const getDoctorDetails = async () => {
     const responseJson = await doctorDetailsGet();
@@ -223,7 +237,7 @@ const DoctorPackages = () => {
 
   useEffect(() => {
     getDoctorDetails();
-  });
+  },[]);
 
   return (
     <React.Fragment>
@@ -269,7 +283,7 @@ const DoctorPackages = () => {
                   />
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={10}>
-                  {/* <TextField
+                  <TextField
                     id="multiline-text"
                     placeholder="About"
                     autoComplete="off"
@@ -279,8 +293,8 @@ const DoctorPackages = () => {
                     value={newpackage.about}
                     onChange={forPackageChange}
                     fullWidth
-                  /> */}
-                <ReactQuill
+                  />
+                {/* <ReactQuill
                   theme="snow"
                   id="multiline-text"
                   placeholder="About"
@@ -292,7 +306,7 @@ const DoctorPackages = () => {
                   onChange={forPackageChange}
                   fullWidth
                   style={{ height: '150px' , marginBottom:"50px"}} 
-                />
+                /> */}
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} lg={5}>
@@ -443,17 +457,19 @@ const DoctorPackages = () => {
                       </UploadButton>
                     </Stack>
                     <Box sx={{ mt: 2, flexGrow: 0.95 }}>
-                      <Typography sx={{ fontWeight: "bold", fontSize: 13 }}>
-                        Inclusions:
-                      </Typography>
-                      {inclusion.map((item, index) => (
-                        <Typography
-                          sx={{ fontWeight: "bold", fontSize: 13 }}
-                          key={index}
-                        >
-                          <li>{item}</li>
+                        <Typography sx={{ fontWeight: "bold", fontSize: 13 }}>
+                            Inclusions:
                         </Typography>
-                      ))}
+                        {inclusion.map((item, index) => (
+                            <Stack direction="row" alignItems="center" key={index}>
+                                <Typography sx={{ fontWeight: "bold", fontSize: 13 }}>
+                                    <li>{item}</li>
+                                </Typography>
+                                <IconButton onClick={() => handleDeleteInclusion(index)}>
+                                    <DeleteIcon />
+                                </IconButton>
+                            </Stack>
+                        ))}
                     </Box>
                   </Grid>
                 </Grid>
@@ -491,17 +507,19 @@ const DoctorPackages = () => {
                       </UploadButton>
                     </Stack>
                     <Box sx={{ mt: 2, flexGrow: 0.95 }}>
-                      <Typography sx={{ fontWeight: "bold", fontSize: 13 }}>
-                        Exclusions:
-                      </Typography>
-                      {exclusion.map((item, index) => (
-                        <Typography
-                          sx={{ fontWeight: "bold", fontSize: 13 }}
-                          key={index}
-                        >
-                          <li>{item}</li>
+                        <Typography sx={{ fontWeight: "bold", fontSize: 13 }}>
+                            Exclusions:
                         </Typography>
-                      ))}
+                        {exclusion.map((item, index) => (
+                            <Stack direction="row" alignItems="center" key={index}>
+                                <Typography sx={{ fontWeight: "bold", fontSize: 13 }}>
+                                    <li>{item}</li>
+                                </Typography>
+                                <IconButton onClick={() => handleDeleteExclusion(index)}>
+                                    <DeleteIcon />
+                                </IconButton>
+                            </Stack>
+                        ))}
                     </Box>
                   </Grid>
                 </Grid>
