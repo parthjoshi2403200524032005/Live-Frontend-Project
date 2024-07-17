@@ -223,7 +223,7 @@ const VideoFetch = () => {
   useEffect(() => {
     getDoctorDetails();
     console.log(video);
-  });
+  },[]);
 
   
 
@@ -418,7 +418,7 @@ const VideoFetch = () => {
           </UploadButton>
         </div>
         {
-          <div>
+          <div style={{marginTop:"6em"}}>
             <Grid
               container
               spacing={2}
