@@ -535,7 +535,7 @@ const DocProfile = () => {
                 </FormControl>
               </Grid>
 
-              <Grid item xs={12} sm={6}>
+              {/* <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
@@ -570,7 +570,7 @@ const DocProfile = () => {
                     },
                   }}
                 />
-              </Grid>
+              </Grid> */}
 
               {/* <Stack direction="row" spacing={1} alignItems="center"></Stack> */}
               <Grid item xs={12} sm={6}>
