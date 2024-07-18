@@ -12,6 +12,8 @@ import {
 //import { UploadButton } from "../../CustomStyles/Styles";
 import { ProImageUpload } from "../../Service/Services";
 import { toast } from "react-hot-toast";
+const DEFAULT_IMAGE = 'https://healthmudraa-assets.s3.ap-south-1.amazonaws.com/1718098598539-blank-profile-picture-973460_1280.png';
+const UNDEFINED_IMAGE = 'https://healthmudraa-assets.s3.ap-south-1.amazonaws.com/undefined';
 
 const ImageUpload = ({
   setForm,
@@ -108,13 +110,13 @@ const ImageUpload = ({
     <ThemeProvider theme={theme}>
       <Container>
         <Stack direction="row" alignItems="center" spacing={2}>
-          {image.preview && (
+         {image.preview && (
             <img
-              src={image.preview}
+              src={image.preview === UNDEFINED_IMAGE ? DEFAULT_IMAGE : image.preview}
               alt="profile-preview"
               className="imgpreview"
             />
-          )}
+         )}
           {name === edit && tempimage?.preview && (
             <img
               src={tempimage.preview}

@@ -120,6 +120,7 @@ const About = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  
   return (
     <>
       {/* About Section */}
@@ -348,16 +349,17 @@ const About = () => {
             >
               <Typography variant="h6">Live chat with Health Pilots</Typography>
               <Link
-                href="javascript:void(Tawk_API.toggle())"
+                onClick={() => window.Tawk_API.toggle()}
                 sx={{
                   py: 2,
                   color: "#133682",
                   fontWeight: "bold",
                   textDecoration: "none",
+                  cursor: "pointer"
                 }}
               >
                 <ChatOutlinedIcon />
-                &nbsp;Start live chat
+                &nbsp; Start live chat
               </Link>
             </Box>
           </Box>
