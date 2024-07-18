@@ -13,11 +13,11 @@ import {
 } from "@mui/material";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
-import "./buttonStyle.css";
+import "../buttonStyle.css";
 
 const TeamCard = () => {
   const settings = {
-    autoplay:true,
+    autoplay: true,
     autoplaySpeed: 2800,
     dots: true,
     infinite: true,
@@ -43,165 +43,152 @@ const TeamCard = () => {
           rows: 1,
           slidesToShow: 3,
           slidesToScroll: 3,
-        }
-      }
+        },
+      },
     ],
   };
 
   const teamMembers = [
     {
-      name: "Rohit Kumar",
-      position: "Software Developer",
-      profile:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8kiSH5ZSAcVoj3tAQQDoP_ux0sSricMyUg&s",
-      linkedIn: "https://www.linkedin.com/in/mohamed-halith-smh/",
+      name: "Dinesh Kumar",
+      position: "Co-founder",
+      profile: "dinesh.png",
+      linkedIn: "https://www.linkedin.com/in/drdineshramanpt",
     },
     {
-      name: "Anjali Sharma",
+      name: "Soham Jambhwadekar",
+      position: "SDE Intern",
+      profile: "soham.png",
+      linkedIn: "https://www.linkedin.com/in/soham-jambhwadekar-25128027b",
+    },
+    {
+      name: "Shabari Vignesh",
+      position: "SDE Intern",
+      profile: "shabari.png",
+      linkedIn: "https://www.linkedin.com/in/shabari-vignesh-73983b24b",
+    },
+    {
+      name: "Harsh Prajapati",
       position: "Project Manager",
-      profile:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8kiSH5ZSAcVoj3tAQQDoP_ux0sSricMyUg&s",
-      linkedIn: "Anjali Sharma",
+      profile: "harsh.png",
+      linkedIn: "https://www.linkedin.com/in/harsh-prajapati-3922372b5",
     },
     {
-      name: "Ravi Verma",
-      position: "UI/UX Designer",
-      profile:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8kiSH5ZSAcVoj3tAQQDoP_ux0sSricMyUg&s",
-      linkedIn: "Ravi Verma",
+      name: "Saipavan Lingamallu",
+      position: "SDE Intern",
+      profile: "saipavan.png",
+      linkedIn: "https://www.linkedin.com/in/saipavan-lingamallu-a46612224 ",
     },
     {
-      name: "Priya Singh",
-      position: "Backend Developer",
-      profile:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8kiSH5ZSAcVoj3tAQQDoP_ux0sSricMyUg&s",
-      linkedIn: "Priya Singh",
+      name: "Sumanth Divvela",
+      position: "SDE Intern",
+      profile: "sumanth.png",
+      linkedIn: "https://www.linkedin.com/in/sumanth-divvela-824755221",
     },
     {
-      name: "Arjun Mehta",
-      position: "Frontend Developer",
-      profile:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8kiSH5ZSAcVoj3tAQQDoP_ux0sSricMyUg&s",
-      linkedIn: "Arjun Mehta",
-    },
-    {
-      name: "Sara Ali",
-      position: "Data Scientist",
-      profile:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8kiSH5ZSAcVoj3tAQQDoP_ux0sSricMyUg&s",
-      linkedIn: "Sara Ali",
-    },
-    {
-      name: "Rohit Kumar",
-      position: "Software Developer",
-      profile:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8kiSH5ZSAcVoj3tAQQDoP_ux0sSricMyUg&s",
-      linkedIn: "https://www.linkedin.com/in/mohamed-halith-smh/",
-    },
-    {
-      name: "Anjali Sharma",
+      name: "Yashraj Singh",
       position: "Project Manager",
-      profile:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8kiSH5ZSAcVoj3tAQQDoP_ux0sSricMyUg&s",
-      linkedIn: "Anjali Sharma",
+      profile: "yashraj.png",
+      linkedIn: "https://www.linkedin.com/in/yashraj-singh-507063245",
     },
     {
-      name: "Ravi Verma",
-      position: "UI/UX Designer",
-      profile:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8kiSH5ZSAcVoj3tAQQDoP_ux0sSricMyUg&s",
-      linkedIn: "Ravi Verma",
+      name: "Mohamed Halith",
+      position: "SDE Intern",
+      profile: "halith.png",
+      linkedIn: "https://www.linkedin.com/in/mohamed-halith-smh",
     },
     {
-      name: "Priya Singh",
+      name: "Himani Mathur",
+      position: "UI/UX Intern",
+      profile: "himani.png",
+      linkedIn: "https://www.linkedin.com/in/himani-mathur",
+    },
+    {
+      name: "Asad Shah",
       position: "Backend Developer",
-      profile:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8kiSH5ZSAcVoj3tAQQDoP_ux0sSricMyUg&s",
-      linkedIn: "Priya Singh",
+      profile: "asad.png",
+      linkedIn: "https://www.linkedin.com/in/asad-shah-904198285",
     },
     {
-      name: "Arjun Mehta",
-      position: "Frontend Developer",
-      profile:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8kiSH5ZSAcVoj3tAQQDoP_ux0sSricMyUg&s",
-      linkedIn: "Arjun Mehta",
-    },
-    {
-      name: "Sara Ali",
-      position: "Data Scientist",
-      profile:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8kiSH5ZSAcVoj3tAQQDoP_ux0sSricMyUg&s",
-      linkedIn: "Sara Ali",
+      name: "Mahima Kabra",
+      position: "UI/UX Intern",
+      profile: "mahima.png",
+      linkedIn: "https://www.linkedin.com/in/mahimakabra",
     },
   ];
 
   return (
-    <>
-      <Slider style={{ margin: "42px 0" }} {...settings}>
-        {teamMembers.map((person) => (
-          <Card key={person.name} sx={{ display: "flex", boxShadow: "none", marginBottom: "22px" }}>
-            <Box
+    <Slider style={{ margin: "42px 0" }} {...settings}>
+      {teamMembers.map((person) => (
+        <Card
+          key={person.name}
+          sx={{ boxShadow: "none", marginBottom: "22px"
+           }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", lg: "row" },
+            }}
+          >
+            <CardMedia
+              component="img"
               sx={{
-                display: "flex",
-                flexDirection: { xs: "column", lg: "row" },
+                width: 140,
+                borderRadius: "50%",
+                padding: 1,
+                margin: "auto",
+                transition: "transform .3s ease",
+              }}
+              className="profile-img"
+              image={`/Team/${person.profile}`}
+              alt={person.name}
+            />
+            <CardContent
+              sx={{
+                flex: "1 0 auto",
+                textAlign: { xs: "center", lg: "start" },
               }}
             >
-              <CardMedia
-                component="img"
+              <Typography
+                component="div"
                 sx={{
-                  width: 140,
-                  borderRadius: "50%",
-                  padding: 1,
-                  margin: "auto",
+                  fontWeight: "bold",
+                  padding: 0,
+                  paddingLeft: 1,
+                  margin: 0,
+                  fontSize: "22px",
+                  letterSpacing: 0.6
                 }}
-                image={person.profile}
-                alt={person.name}
-              />
-              <CardContent
-                sx={{
-                  flex: "1 0 auto",
-                  textAlign: { xs: "center", lg: "start" },
-                }}
+                variant="h5"
               >
-                <Typography
-                  component="div"
-                  sx={{
-                    fontWeight: "bold",
-                    padding: 0,
-                    paddingLeft: 1,
-                    margin: 0,
-                    fontSize: "22px",
-                    letterSpacing: "none",
-                  }}
-                  variant="h5"
-                >
-                  {person.name}
+                {person.name}
+              </Typography>
+
+              <Typography
+                sx={{ paddingLeft: 1, marginY: 1 }}
+                variant="body1"
+                component="div"
+              >
+                {person.position}
+              </Typography>
+
+              <IconButton
+                component="a"
+                href={person.linkedIn}
+                target="_blank"
+                sx={{ borderRadius: 3 }}
+              >
+                <LinkedInIcon sx={{ color: "#0077B5" }} />
+                <Typography color="black" sx={{ fontSize: 16, paddingLeft: 1 }}>
+                  LinkedIn
                 </Typography>
-                <Typography
-                  sx={{ paddingLeft: 1, marginY: 1 }}
-                  variant="body1"
-                  component="div"
-                >
-                  {person.position}
-                </Typography>
-                <IconButton
-                  component="a"
-                  href={person.linkedIn}
-                  target="_blank"
-                  sx={{ borderRadius: 3 }}
-                >
-                  <LinkedInIcon sx={{ color: "#0077B5" }} />
-                  <Typography sx={{ fontSize: 16, paddingLeft: 1 }}>
-                    LinkedIn
-                  </Typography>
-                </IconButton>
-                {/* </Box> */}
-              </CardContent>
-            </Box>
-          </Card>
-        ))}
-      </Slider>
-    </>
+              </IconButton>
+            </CardContent>
+          </Box>
+        </Card>
+      ))}
+    </Slider>
   );
 };
 

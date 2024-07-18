@@ -3,13 +3,9 @@ import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {
-  Box,
-  Card,
-  CardMedia,
-} from "@mui/material";
+import { Box, Card, CardMedia } from "@mui/material";
 
-import "./buttonStyle.css";
+import "../buttonStyle.css";
 
 const PartnersCard = () => {
   const settings = {
@@ -30,7 +26,7 @@ const PartnersCard = () => {
           slidesToScroll: 2,
           dots: true,
           draggable: true,
-          autoplay:true,
+          autoplay: true,
         },
       },
       {
@@ -40,7 +36,7 @@ const PartnersCard = () => {
           slidesToScroll: 3,
           dots: true,
           draggable: true,
-          autoplay:true,
+          autoplay: true,
         },
       },
     ],
@@ -53,49 +49,50 @@ const PartnersCard = () => {
     },
     {
       name: "Fortis HealthCare",
-      src: "fortis.png"
+      src: "fortis.png",
     },
     {
       name: "Lilavati Hospital",
-      src: "lilavati.png"
+      src: "lilavati.png",
     },
     {
       name: "Medanta",
-      src: "medanta.png"
+      src: "medanta.png",
     },
     {
-      name:"Chennai Meenakshi",
-      src: "meenakshi.png"
-    }
+      name: "Chennai Meenakshi",
+      src: "meenakshi.png",
+    },
   ];
 
   return (
-    <>
-      <Slider style={{ margin: "40px 0" }} {...settings}>
-        {partners.map((data) => (
-          <Card key={data.name} sx={{ display: "flex", boxShadow: "none" }}>
-            <Box
+    <Slider style={{ margin: "40px 0" }} {...settings}>
+      {partners.map((data) => (
+        <Card key={data.name} sx={{ display: "flex", boxShadow: "none" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", lg: "row" },
+            }}
+          >
+            <CardMedia
+              component="img"
               sx={{
-                display: "flex",
-                flexDirection: { xs: "column", lg: "row" },
+                transition: "transform .3s ease",
+                padding: 1,
+                margin: "auto",
+                "&:hover": {
+                  transform: "scale(1.1)",
+                  cursor: "pointer",
+                },
               }}
-            >
-              <CardMedia
-                component="img"
-                sx={{
-                  // width: 120,
-                  // borderRadius: "50%",
-                  padding: 1,
-                  margin: "auto",
-                }}
-                image={require(`../../../assets/Partners/${data.src}`)}
-                alt={data.name}
-              />
-            </Box>
-          </Card>
-        ))}
-      </Slider>
-    </>
+              image={require(`../../../assets/Partners/${data.src}`)}
+              alt={data.name}
+            />
+          </Box>
+        </Card>
+      ))}
+    </Slider>
   );
 };
 

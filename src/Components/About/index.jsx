@@ -1,19 +1,22 @@
 import { useEffect } from "react";
-import {
-  Box,
-  Grid,
-  Container,
-  Paper,
-  Typography,
-  Link
-} from "@mui/material";
+import { Box, Grid, Container, Paper, Typography, Link } from "@mui/material";
 
 import TeamCard from "./TeamCard";
 import PartnersCard from "./PartnersCard";
 
+import MedicalServicesOutlinedIcon from "@mui/icons-material/MedicalServicesOutlined";
+import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
+import LocalHospitalOutlinedIcon from "@mui/icons-material/LocalHospitalOutlined";
+
+import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
+import TodayOutlinedIcon from "@mui/icons-material/TodayOutlined";
+import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOutlined";
+
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import MedicationIcon from "@mui/icons-material/Medication";
+
+import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 
 const primaryColor = "#133682";
 const Heading = ({ text, size }) => {
@@ -40,7 +43,7 @@ const Para = ({ text }) => {
       varient="h3"
       component={"h3"}
       sx={{
-        fontSize: {xs: 14, md: 15, lg: 20 },
+        fontSize: { xs: 14, md: 15, lg: 20 },
         lineHeight: "28px",
         textAlign: { sm: "start", lg: "center" },
         letterSpacing: 1.03,
@@ -59,20 +62,34 @@ const ContentSection = ({ Icon, title, text }) => (
         border: "1px solid #D9D9D9",
         borderRadius: 3,
         cursor: "pointer",
-        boxShadow: 1,
+        boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px;",
         p: 3,
         py: 5,
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
         flexGrow: 1,
+        transition: "background-color 250ms linear",
+        "&:hover": {
+          backgroundColor: primaryColor,
+          color: "#FDFDFD",
+          boxShadow:
+            "rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px",
+          "& .info-icon": {
+            color: "#FDFDFD",
+          },
+        },
       }}
     >
       <Box sx={{ textAlign: "center" }}>
-        <Icon sx={{ fontSize: 50, color: "#133682" }} />
+        <Icon
+          className="info-icon"
+          sx={{ fontSize: 50, color: primaryColor }}
+        />
         <Typography
           variant="h5"
           lineHeight={2}
+          letterSpacing-={1.5}
           sx={{ fontWeight: 600, fontSize: 24, py: 1.5 }}
         >
           {title}
@@ -88,8 +105,8 @@ const ContentSection = ({ Icon, title, text }) => (
       >
         <Typography
           lineHeight={1.5}
-          letterSpacing={1.2}
-          fontSize={{xs: 16,md:18}}
+          letterSpacing={1.09}
+          fontSize={{ xs: 16, md: 18 }}
           variant="body2"
         >
           {text}
@@ -127,9 +144,9 @@ const About = () => {
         display="grid"
         gridTemplateColumns={{ xs: "95%", sm: "40% 40%", lg: "30% 30%" }}
         justifyContent="center"
-        gap={{xs: 8, md:12}}
+        gap={{ xs: 8, md: 12 }}
       >
-        <Box textAlign={{xs: "center", md: "start", lg: "center" }}>
+        <Box textAlign={{ xs: "center", md: "start", lg: "center" }}>
           <Typography
             variant="h3"
             fontWeight="bold"
@@ -144,14 +161,14 @@ const About = () => {
             mt={2}
             variant="body2"
             letterSpacing="1.2px"
-            fontSize={{xs: 16, md:20}}
+            fontSize={{ xs: 16, md: 20 }}
             lineHeight="28px"
           >
             Appropriate, affordable and advanced healthcare services should be
             accessible for all
           </Typography>
         </Box>
-        <Box textAlign={{xs: "center", md: "start", lg: "center" }}>
+        <Box textAlign={{ xs: "center", md: "start", lg: "center" }}>
           <Typography
             variant="h3"
             fontWeight="bold"
@@ -166,7 +183,7 @@ const About = () => {
             mt={2}
             variant="body2"
             letterSpacing="1.2px"
-            fontSize={{xs: 16, md:20}}
+            fontSize={{ xs: 16, md: 20 }}
             lineHeight="28px"
           >
             Appropriate, affordable and advanced healthcare services should be
@@ -175,22 +192,6 @@ const About = () => {
         </Box>
       </Box>
 
-      {/* <div
-        className="conatiner-fluid"
-        style={{ backgroundColor: "#133682", color: "#fff" }}
-      >
-        <div className="container py-5">
-          <h1 className="text-start">About Us</h1>
-
-          <p className="w-xl-50 w-lg-50 w-md-50 w-sm-50 w-50 my-4 fs-5 fw-normal">
-            Health Mudraa was founded in 2020 to change how people access
-            medical information and healthcare services. Our team includes
-            doctors, surgeons, management experts from IIM, engineers from IIT
-            and IIIT, and dedicated student interns.
-          </p>
-        </div>
-      </div> */}
-
       {/* Purpose */}
       <Box pt={{ xs: 8, lg: 10 }} pb={6}>
         <Heading text="Our Purpose" />
@@ -198,17 +199,17 @@ const About = () => {
         <Container sx={{ marginY: 6 }}>
           <Grid container spacing={{ xs: 4, lg: 8 }} justifyContent="center">
             <ContentSection
-              Icon={YouTubeIcon}
+              Icon={MedicalServicesOutlinedIcon}
               title="Medical Information"
               text="The internet is full of inaccurate medical advice, causing confusion and fear. We’re here to fix that by providing reliable information from trusted doctors."
             />
             <ContentSection
-              Icon={CalendarMonthIcon}
+              Icon={CampaignOutlinedIcon}
               title="Lack of Awareness"
               text="Many people don't know what treatments are available or how to find good doctors. We help by offering detailed information and connecting you with top healthcare professionals."
             />
             <ContentSection
-              Icon={MedicationIcon}
+              Icon={LocalHospitalOutlinedIcon}
               title="Fear of Hospital Bills"
               text="Hospital bills can be scary and confusing. We aim to make things clearer and help you understand the costs involved."
             />
@@ -223,19 +224,19 @@ const About = () => {
         <Container sx={{ marginY: 6 }}>
           <Grid container spacing={{ xs: 4, lg: 8 }} justifyContent="center">
             <ContentSection
-              Icon={YouTubeIcon}
+              Icon={HandshakeOutlinedIcon}
               title="Trustworthy Doctors"
               text="Get accurate medical information directly from verified
                       doctors."
             />
             <ContentSection
-              Icon={CalendarMonthIcon}
+              Icon={TodayOutlinedIcon}
               title="Health Plans"
               text=" Receive recommendations and treatment options based on
                       your medical history."
             />
             <ContentSection
-              Icon={MedicationIcon}
+              Icon={WorkspacePremiumOutlinedIcon}
               title=" Personal Branding"
               text="Connect with top doctors for private practice, available
                       both offline and online."
@@ -243,36 +244,6 @@ const About = () => {
           </Grid>
         </Container>
       </Box>
-
-      {/* <section class="quote">
-          <div class="rounded">
-            <div class="d-flex align-items-center p-4">
-              <div class="text-center">
-                <img
-                  src="https://pngfreepic.com/wp-content/uploads/2022/04/Health-Care-Medicine-Health-insurance-Vector-image.png?v=1663341819"
-                  alt="Bulb"
-                  width="120"
-                />
-                <h6 className="p-1 fw-bold">Our Mission</h6>
-              </div>
-
-              <div>
-                <blockquote class="blockquote px-4 text-center fs-4">
-                  <span style={{ color: "#133682" }} className="fs-2 fw-bold">
-                    “{" "}
-                  </span>
-                  Educating people on medical treatment options and insurance
-                  while using modern technologies to enhance overall well-being
-                  and organize the private health sector.
-                  <span style={{ color: "#133682" }} className="fs-2 fw-bold">
-                    {" "}
-                    ”
-                  </span>
-                </blockquote>
-              </div>
-            </div>
-          </div>
-        </section> */}
 
       <div className="container">
         {/* Partners */}
@@ -334,11 +305,13 @@ const About = () => {
             </Typography>
             <Box
               className="phone"
-              sx={{ textAlign: "center", mt: { xs: 2, sm: 0 }, fontSize: "1.2rem" }}
+              sx={{
+                textAlign: "center",
+                mt: { xs: 2, sm: 0 },
+                fontSize: "1.2rem",
+              }}
             >
-              <Typography variant="h6">
-                Call or WhatsApp at
-              </Typography>
+              <Typography variant="h6">Call or WhatsApp at</Typography>
               <Link
                 href="tel:+917349796783"
                 sx={{
@@ -353,7 +326,7 @@ const About = () => {
             </Box>
             <Typography
               variant="h5"
-              display={{xs: "none", md: "block"}}
+              display={{ xs: "none", md: "block" }}
               sx={{
                 padding: 1,
                 backgroundColor: "#133682",
@@ -366,23 +339,25 @@ const About = () => {
             </Typography>
             <Box
               className="chat"
-              display={{xs: "none", md: "block"}}
-              sx={{ textAlign: "center", mt: { xs: 2, sm: 0 }, fontSize: "1.2rem", }}
+              display={{ xs: "none", md: "block" }}
+              sx={{
+                textAlign: "center",
+                mt: { xs: 2, sm: 0 },
+                fontSize: "1.2rem",
+              }}
             >
-              <Typography variant="h6">
-                Live chat with Health Pilots
-              </Typography>
+              <Typography variant="h6">Live chat with Health Pilots</Typography>
               <Link
-                href="#"
+                href="javascript:void(Tawk_API.toggle())"
                 sx={{
-                  
                   py: 2,
                   color: "#133682",
                   fontWeight: "bold",
                   textDecoration: "none",
                 }}
               >
-                Start live chat
+                <ChatOutlinedIcon />
+                &nbsp;Start live chat
               </Link>
             </Box>
           </Box>
