@@ -102,7 +102,13 @@ const DoctorHospital = () => {
   ];
   const [newhospital, setNewhospital] = useState({
     hospitalName: "",
-    location: {},
+    location: {
+      "type": "Point",
+      "coordinates": [
+          0,
+          0
+      ]
+    },
     speciality: "",
     specialities: [],
     pricestarts: 0,
