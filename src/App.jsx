@@ -8,6 +8,9 @@ import Login from "./Components/Login";
 import SignUp from "./Components/SignUp";
 import PackageCards from "./Components/PackageCards";
 import About from "./Components/About";
+import PrivacyPolicy from "./Components/privacypolicy"
+import TermofUse from "./Components/termofuse";
+import RefundPolicy from "./Components/refundpolicy";
 import Paperbase from "./DoctorPannel/SideNav/PaperBase";
 import DoctorDashboard from "./DoctorPannel/DoctorComponents/DoctorDashboard";
 import DoctorMainProfile from "./DoctorPannel/DoctorComponents/DoctorMainProfile";
@@ -72,6 +75,9 @@ const App = () => {
     { path: "/treatments/:id", element: <TreatmentById /> },
     { path: "/genereatesitemap.xml", element: <Sitemap /> },
     { path: "*", element: <Page404 /> },
+    { path: "/privacypolicy", element: <PrivacyPolicy /> },
+    { path: "/termofuse", element: <TermofUse /> },
+    { path: "/refundpolicy", element: <RefundPolicy /> },
   ];
 
   const authRoutes = [
