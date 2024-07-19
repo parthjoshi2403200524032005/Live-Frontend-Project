@@ -10,6 +10,7 @@ import { Button, Typography } from "@mui/material";
 import { Sethscope } from "./Svgs/SvgIcons";
 import DocAccountModal from "../DoctorPannel/DoctorComponents/DocAccountModal";
 
+
 const Footer = () => {
   const navigate = useNavigate();
   const [dcopen, setDcopen] = useState(false);
@@ -86,9 +87,9 @@ const Footer = () => {
         <ul>
           <li onClick={() => handleLink("/about")}>About Us</li>
           <li onClick={() => handleLink("/about")}>Contact Us</li>
-          <li>Term of Use</li>
-          <li>Privacy Policy</li>
-          <li>Refund Policy</li>
+          <li onClick={() => handleLink("/termofuse")}>Term of Use</li>
+          <li onClick={() => handleLink("/privacypolicy")}>Privacy Policy</li>
+          <li onClick={() => handleLink("/refundpolicy")}>Refund Policy</li>
           <li>Add Your Hospital/Clinic</li>
         </ul>
       </FlexCol>
