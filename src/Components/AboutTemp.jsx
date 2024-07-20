@@ -3,10 +3,11 @@ import { Box, Typography, useMediaQuery } from "@mui/material";
 import ImageX from "../assets/Group 4600.png";
 import ImageY from "../assets/Group 4601.png";
 import ImageZ from "../assets/Group 4607.png";
-import ImageCall from "../assets/Icon zocial-call.png";
-import ImageChat from "../assets/Group 4612.png";
-import ImageSearch from "../assets/Icon awesome-search.png";
+// import ImageCall from "../assets/Icon zocial-call.png";
+// import ImageChat from "../assets/Group 4612.png";
+// import ImageSearch from "../assets/Icon awesome-search.png";
 import FounderImg from "../assets/Group 4610.png";
+import TeamCard from "./About/TeamCard";
 
 const About = () => {
   const forBelow800px = useMediaQuery("(max-width:800px)");
@@ -16,15 +17,10 @@ const About = () => {
   return (
     <React.Fragment>
       <div className="container">
-        <div className="my-5">
-          <Typography
-            variant="p"
-            component={"p"}
-            sx={{ fontFamily: "Montserrat", fontWeight: "bold", fontSize: 24 }}
-          >
-            How to use Health Mudraa
-          </Typography>
-        </div>
+
+        
+
+        {/* Prev Code - Start */}
 
         <div className="row d-flex justify-content-center align-items-center mb-5">
           <div className="col-lg-4 col-md-10 col-sm-10 col-10 text-center d-flex flex-column justify-content-center align-items-center my-2">
@@ -118,86 +114,31 @@ const About = () => {
             </Typography>
           </div>
         </div>
+        {/* Prev code - End */}
 
-        <div className="row d-flex justify-content-center">
+        {/* Team Component */}
+        <div className="my-5">
           <Typography
-            variant="p"
-            component={"p"}
+            variant="h2"
+            component={"h2"}
             sx={{
               fontFamily: "Montserrat",
-              fontSize: 24,
               fontWeight: "bold",
-              marginTop: 1,
+              fontSize: 22,
+              textAlign: "center",
             }}
           >
-            You don't know whom to consult next ?
+            Our Team
+          </Typography>
+          <Typography
+          varient="h2"
+          component={"h2"}
+          sx= {{fontSize: 30, fontFamily: "Montserrat", textAlign: "center", fontWeight: "bolder"}}
+          >
+            The Leadership Team
           </Typography>
 
-          <div className="col-lg-6 col-md-12 col-sm-12 col-11 col-sm p-3">
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "#FFFF",
-                padding: "28px",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  margin: 12,
-                }}
-              >
-                <img className="ImageCall" src={ImageCall} alt="ImageCall" />
-                <img className="ImageChat" src={ImageChat} alt="ImageChat" />
-              </div>
-              <Typography
-                style={{ fontFamily: "Montserrat", textAlign: "center" }}
-              >
-                Chat with healthmudraa clinical coordinators,
-                <br /> Share your medical problems and report
-              </Typography>
-            </div>
-          </div>
-
-          <div className="col-lg-6 col-md-12 col-sm-12 col-11 p-3">
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "#FFFF",
-                padding: "28px",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  margin: 12,
-                }}
-              >
-                <img
-                  className="ImageSearch"
-                  src={ImageSearch}
-                  alt="ImageSearch"
-                />
-              </div>
-              <Typography
-                style={{ fontFamily: "Montserrat", textAlign: "center" }}
-              >
-                According to your medical condition, We choose best doctors
-                around your location. we guide you from Entering hospital/Clink
-                to Discharge
-              </Typography>
-            </div>
-          </div>
+          <TeamCard />
         </div>
       </div>
 
