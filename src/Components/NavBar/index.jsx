@@ -62,10 +62,18 @@ const NavBar = () => {
                 alignItems: "center",
               }}
             >
-              <Typography
+               <Typography
                 className="text-decoration-none new"
                 component={NavLink}
                 to={"/"}
+                sx={{ ...CustomStyles.navLink, color: "inherit" }}
+              >
+                Home
+              </Typography>
+              <Typography
+                className="text-decoration-none new"
+                component={NavLink}
+                to={"/videos"}
                 sx={{ ...CustomStyles.navLink, color: "inherit" }}
               >
                 Videos
