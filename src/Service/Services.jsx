@@ -4,6 +4,7 @@ const accessToken = localStorage.getItem("accessToken");
 
 const url = process.env.REACT_APP_BASE_URL;
 // const url = 'http://localhost:8080';
+// const url='https://health-mudhra-backend.vercel.app';
 
 export const aws_url =
   "https://healthmudraa-assets.s3.ap-south-1.amazonaws.com";
@@ -420,6 +421,7 @@ export const getDoctorVideos = async (id) => {
 };
 
 export const createDoctorVideo = async (data) => {
+  console.log(`triggeredd ${accessToken}`)
   return await Axiosinstance.post(`${url}/video/`, data, {
     headers: {
       "Content-Type": "application/json",
