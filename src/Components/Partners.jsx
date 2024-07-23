@@ -1,6 +1,4 @@
 import React from 'react'
-import partners from './partners.png';
-import transperant from './transperant.png'
 import apollotransperant from './apollotransperant.png'
 import fortisransperant from './fortistransperant.png'
 import lilavathitransperant from './lilavathitransperant.png'

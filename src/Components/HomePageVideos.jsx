@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, TextField, Button, InputAdornment } from "@mui/material";
-import { Search } from "@mui/icons-material";
+import { Button} from "@mui/material";
 import DoctorCard from "./DoctorCard";
 import Plyr from "plyr-react";
 import "plyr-react/plyr.css";
@@ -12,34 +11,34 @@ import { useNavigate } from "react-router-dom";
 import RenderModalOrBottomSheet from "../Components/common/RenderModalBS";
 import LeadGenerationForm from "../Components/common/Lead-Generation";
 
-export default function () {
+const HomePageVideos = () => {
 
     const [doctor, setDoctor] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [searchTerm, setSearchTerm] = useState("");
-    const [currentPage, setCurrentPage] = useState(1);
+    // const [searchTerm, setSearchTerm] = useState("");
+    const currentPage = 1;
     const itemsPerPage = 6;
     const navigate = useNavigate();
     const [isBtsVisible, setShowBts] = useState(false);
     const [doctorId, setDoctorId] = useState("");
   
-    const handleSearch = async (e) => {
-      e.preventDefault();
-      try {
-        const response = await userHomePage(searchTerm);
-        if (response?.data.status) {
-          setLoading(true);
-          setDoctor(response.data?.data);
-          console.log(response.data?.data);
-          setLoading(false);
-        } else {
-          setLoading(false);
-          toast.error(response.data?.message);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    // const handleSearch = async (e) => {
+    //   e.preventDefault();
+    //   try {
+    //     const response = await userHomePage(searchTerm);
+    //     if (response?.data.status) {
+    //       setLoading(true);
+    //       setDoctor(response.data?.data);
+    //       console.log(response.data?.data);
+    //       setLoading(false);
+    //     } else {
+    //       setLoading(false);
+    //       toast.error(response.data?.message);
+    //     }
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
   
     const doctorDetails = async () => {
       const response = await userHomePage();
@@ -56,32 +55,32 @@ export default function () {
       }
     };
   
-    const handleShareVideo = async (link) => {
-      const webShareSupported =
-        typeof window !== "undefined" ? "canShare" in window?.navigator : false;
+    // const handleShareVideo = async (link) => {
+    //   const webShareSupported =
+    //     typeof window !== "undefined" ? "canShare" in window?.navigator : false;
   
-      if (webShareSupported) {
-        const data = {
-          url: window.location.href,
-          title: `Checkout this information health video ${link}!`,
-          text: `Hey, I'd like to recommend Healthmudraa to learn more health related cure before going any pharma and avoid taking random medicines`,
-        };
-        if (navigator.canShare(data)) {
-          try {
-            await navigator.share(data);
-          } catch (err) {
-            if (err.name !== "AbortError") {
-              console.error(err.name, err.message);
-            }
-          } finally {
-            return;
-          }
-        }
-      } else {
-        navigator.clipboard.writeText(link);
-        toast.success("Copied link to share");
-      }
-    };
+    //   if (webShareSupported) {
+    //     const data = {
+    //       url: window.location.href,
+    //       title: `Checkout this information health video ${link}!`,
+    //       text: `Hey, I'd like to recommend Healthmudraa to learn more health related cure before going any pharma and avoid taking random medicines`,
+    //     };
+    //     if (navigator.canShare(data)) {
+    //       try {
+    //         await navigator.share(data);
+    //       } catch (err) {
+    //         if (err.name !== "AbortError") {
+    //           console.error(err.name, err.message);
+    //         }
+    //       } finally {
+    //         return;
+    //       }
+    //     }
+    //   } else {
+    //     navigator.clipboard.writeText(link);
+    //     toast.success("Copied link to share");
+    //   }
+    // };
   
     useEffect(() => {
       doctorDetails();
@@ -97,9 +96,9 @@ export default function () {
       e.preventDefault();
     };
   
-    const loadMore = () => {
-      setCurrentPage((prevPage) => prevPage + 1);
-    };
+    // const loadMore = () => {
+    //   setCurrentPage((prevPage) => prevPage + 1);
+    // };
   
     const displayedDoctors = doctor.slice(0, currentPage * itemsPerPage);
 
@@ -216,3 +215,6 @@ export default function () {
   </>
   )
 }
+
+
+export default HomePageVideos;

@@ -1,5 +1,6 @@
 import React from 'react'
 import './Pricing.css'
+import { Link } from 'react-router-dom'
 
 export default function Pricing() {
   return (
@@ -24,7 +25,7 @@ export default function Pricing() {
                             <li><i className="bi bi-check"></i>24/7 Customer Support</li>
                             <li><i className="bi bi-check"></i>Hospitalization Support</li>
                         </ul>
-                        <a href="#" class="btn btn-block btn-primary text- my-3" style={{width:'95%',borderRadius:'0.6rem'}}>Buy The Plan</a>
+                        <Link to='/'  class="btn btn-block btn-primary text- my-3" style={{width:'95%',borderRadius:'0.6rem'}}>Buy The Plan</Link>
                     </div>
                 </div>
             </div>
@@ -42,7 +43,7 @@ export default function Pricing() {
       <li><i className="bi bi-check"></i> 24/7 Customer Support</li>
       <li><i className="bi bi-check"></i> Hospitalization Support</li>
     </ul>
-                        <a href="#" class="btn btn-block btn-primary my-3" style={{width:'95%',borderRadius:'0.6rem'}}>Buy The Plan</a>
+                        <Link to='/' class="btn btn-block btn-primary my-3" style={{width:'95%',borderRadius:'0.6rem'}}>Buy The Plan</Link>
                     </div>
                 </div>
             </div>
@@ -60,7 +61,7 @@ export default function Pricing() {
                             <li><i className="bi bi-check"></i>24/7 Customer Support</li>
                             <li><i className="bi bi-check"></i>Hospitalization Support</li>
                         </ul>
-                        <a href="#" class="btn btn-block my-3" style={{width:'95%',borderRadius:'0.6rem'}}>Buy The Plan</a>
+                        <Link to='/' class="btn btn-block my-3" style={{width:'95%',borderRadius:'0.6rem'}}>Buy The Plan</Link>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import heroimg from './heroimg.png'
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
   return (<>
@@ -67,12 +68,12 @@ export default function Hero() {
 			</div>
 
 			<div class="lc-block d-grid gap-2 d-md-flex justify-content-md-start my-4">
-                <a class="btn btn-primary px-4 me-md-2" href="#" role="button" style={{padding:'0.7rem',backgroundColor:'#133682'}}>Watch Videos</a>
-				<a class="btn btn-outline-secondary px-4" href="#" role="button" style={{padding:'0.7rem',color:'#133682',backgroundColor:'white'}}>Consult Doctor</a>
+                <Link to='/videos' class="btn btn-primary px-4 me-md-2"  role="button" style={{padding:'0.7rem',backgroundColor:'#133682'}}>Watch Videos</Link>
+				<Link to='/services'  class="btn btn-outline-secondary px-4" role="button" style={{padding:'0.7rem',color:'#133682',backgroundColor:'white'}}>Consult Doctor</Link>
 			</div>
 		</div>
 		<div class="col-lg-55 " >
-			<div class="lc-block"><img class="rounded-start w-100" src={heroimg} alt="Photo by Diego PH" width="720"/></div>
+			<div class="lc-block"><img class="rounded-start w-100" src={heroimg} alt=""  width="720"/></div>
 		</div>
 	</div>
 </div>

@@ -255,32 +255,32 @@ const Videos = () => {
     }
   };
 
-  const handleShareVideo = async (link) => {
-    const webShareSupported =
-      typeof window != "undefined" ? "canShare" in window?.navigator : false;
+  // const handleShareVideo = async (link) => {
+  //   const webShareSupported =
+  //     typeof window != "undefined" ? "canShare" in window?.navigator : false;
 
-    if (webShareSupported) {
-      const data = {
-        url: window.location.href,
-        title: `Checkout this information health video ${link}!`,
-        text: `Hey, I'd like to recommend Healthmudraa to learn more health related cure before going any pharma and avoid taking random medicines`,
-      };
-      if (navigator.canShare(data)) {
-        try {
-          await navigator.share(data);
-        } catch (err) {
-          if (err.name !== "AbortError") {
-            console.error(err.name, err.message);
-          }
-        } finally {
-          return;
-        }
-      }
-    } else {
-      navigator.clipboard.writeText(link);
-      toast.success("Copied link to share");
-    }
-  };
+  //   if (webShareSupported) {
+  //     const data = {
+  //       url: window.location.href,
+  //       title: `Checkout this information health video ${link}!`,
+  //       text: `Hey, I'd like to recommend Healthmudraa to learn more health related cure before going any pharma and avoid taking random medicines`,
+  //     };
+  //     if (navigator.canShare(data)) {
+  //       try {
+  //         await navigator.share(data);
+  //       } catch (err) {
+  //         if (err.name !== "AbortError") {
+  //           console.error(err.name, err.message);
+  //         }
+  //       } finally {
+  //         return;
+  //       }
+  //     }
+  //   } else {
+  //     navigator.clipboard.writeText(link);
+  //     toast.success("Copied link to share");
+  //   }
+  // };
 
   useEffect(() => {
     doctorDetails();
