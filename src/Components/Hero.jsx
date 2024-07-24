@@ -14,6 +14,8 @@ export default function Hero() {
 .col-lg-55{
 	max-width:45vw;
 }
+	.row {
+  --bs-gutter-x: 0rem;
 
 		
           @media (max-width: 850px) {
@@ -69,7 +71,7 @@ export default function Hero() {
 
 			<div class="lc-block d-grid gap-2 d-md-flex justify-content-md-start my-4">
                 <Link to='/videos' class="btn btn-primary px-4 me-md-2"  role="button" style={{padding:'0.7rem',backgroundColor:'#133682'}}>Watch Videos</Link>
-				<Link to='/services'  class="btn btn-outline-secondary px-4" role="button" style={{padding:'0.7rem',color:'#133682',backgroundColor:'white'}}>Consult Doctor</Link>
+				<Link to='/plans'  class="btn btn-outline-secondary px-4" role="button" style={{padding:'0.7rem',color:'#133682',backgroundColor:'white'}}>Consult Doctor</Link>
 			</div>
 		</div>
 		<div class="col-lg-55 " >

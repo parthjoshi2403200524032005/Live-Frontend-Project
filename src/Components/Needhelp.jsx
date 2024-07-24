@@ -29,7 +29,7 @@ export default function Needhelp() {
       </style>
     <div style={{marginTop:'6rem',display:'flex',justifyContent:'center',flexWrap:'wrap',alignItems:'center'}} >
  
- <div className="cont" style={{width:'80%',border:'1px solid black',padding:'3rem',borderRadius:'10px'}}>
+ <div className="cont" style={{width:'80%',border:'1px solid black',padding:'15px',borderRadius:'10px'}}>
         <div className="innercont" style={{display:'flex',justifyContent:'space-around',alignItems:'center'}}>
             <div className="needhelp">
             <h2 style={{fontWeight:'600'}}>Need Help?</h2>
