@@ -10,7 +10,7 @@ export default function Pricing() {
     <div className="innerplans my-5" style={{width:'100%'}}>
     <section class="pricing py-2">
     <div class="container" style={{width:'80%',display:'flex',justifyContent:'center',alignItems:'center'}} >
-        <div class="row">
+        <div class="row" style={{ '--bs-gutter-x': '1.5rem' }}>
             
             <div class="col-lg-4" style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
                 <div class="card mb-5 mb-lg-0">
