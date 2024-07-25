@@ -151,7 +151,7 @@ function Awards() {
             </UploadButton>
 
             <UploadButton
-              to="/doctor/registration"
+              to="/doctor/joinhospital"
               style={{ fontFamily: "Montserrat" , backgroundColor:"#133680" , color:"white" ,marginLeft:"20px" }}
             >
               Next

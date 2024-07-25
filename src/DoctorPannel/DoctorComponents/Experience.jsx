@@ -49,26 +49,34 @@ function Experience() {
         about: "",
       });
       const forDoctorGet = async () => {
-        const response = await doctorDetailsGet();
-        if (response?.data.status) {
-          setDetails(response.data?.data);
-          console.log(response.data.data);
-        } else {
-          toast.error(response?.data.message);
+        try {
+          const response = await doctorDetailsGet();
+          console.log("Doctor Get Response:", response);
+          if (response?.data.status) {
+            setDetails(response.data?.data);
+            console.log(response.data.data);
+          } else {
+            toast.error(response?.data.message);
+          }
+        } catch (error) {
+          toast.error("Error occurred while fetching doctor details!");
         }
       };
+
       const forDoctorSubmit = async () => {
         try {
           const responseJson = await doctorDetailsUpdate(details);
+          console.log("Doctor Submit Response:", responseJson);
           if (responseJson.data.status) {
             toast.success(responseJson.data.message);
           } else {
             toast.error(responseJson.data.message);
           }
         } catch (error) {
-          toast.error("Error occured!");
+          toast.error("Error occurred while submitting doctor details!");
         }
       };
+
     
       useEffect(() => {
         forDoctorGet();
@@ -123,43 +131,120 @@ function Experience() {
         }));
       };
     
+      // const handleExperience = async () => {
+      //   setLoading((prev) => ({ ...prev, experience: true }));
+      //   let file;
+      //   if (imagechanged) {
+      //     file = await forUploadImage("experience");
+      //     setExp((prev) => ({ ...prev, experienceurl: file }));
+      //   }
+      //   if (
+      //     exp.hosptalname &&
+      //     exp.desigination &&
+      //     exp.location &&
+      //     exp.startdate &&
+      //     exp.enddate &&
+      //     (file || exp.experienceurl)
+      //   ) {
+      //     const updatedNewExp = [...details.experiences];
+      //     updatedNewExp.push({
+      //       ...exp,
+      //       experienceurl: file ? file : exp.experienceurl,
+      //     });
+      //     setDetails((prevState) => ({
+      //       ...prevState,
+      //       experiences: updatedNewExp,
+      //     }));
+      //     setExp({
+      //       hosptalname: "",
+      //       location: "",
+      //       desigination: "",
+      //       startdate: "",
+      //       enddate: "",
+      //       experienceurl: "",
+      //     });
+      //   }
+      //   setImage({ preview: "", data: "" });
+      //   setImagechanged(false);
+      //   setLoading((prev) => ({ ...prev, experience: false }));
+      // };
+
       const handleExperience = async () => {
         setLoading((prev) => ({ ...prev, experience: true }));
+
         let file;
         if (imagechanged) {
-          file = await forUploadImage("experience");
-          setExp((prev) => ({ ...prev, experienceurl: file }));
+          try {
+            file = await forUploadImage("experience");
+            if (!file) {
+              throw new Error("Failed to upload image.");
+            }
+            setExp((prev) => ({ ...prev, experienceurl: file }));
+          } catch (error) {
+            toast.error("Error uploading image. Please try again.");
+            setLoading((prev) => ({ ...prev, experience: false }));
+            return;
+          }
         }
-        if (
-          exp.hosptalname &&
-          exp.desigination &&
-          exp.location &&
-          exp.startdate &&
-          exp.enddate &&
-          (file || exp.experienceurl)
-        ) {
-          const updatedNewExp = [...details.experiences];
-          updatedNewExp.push({
-            ...exp,
-            experienceurl: file ? file : exp.experienceurl,
-          });
-          setDetails((prevState) => ({
-            ...prevState,
-            experiences: updatedNewExp,
-          }));
-          setExp({
-            hosptalname: "",
-            location: "",
-            desigination: "",
-            startdate: "",
-            enddate: "",
-            experienceurl: "",
-          });
+
+        if (!exp.hosptalname) {
+          toast.error("Hospital name is required.");
+          setLoading((prev) => ({ ...prev, experience: false }));
+          return;
         }
+        if (!exp.location) {
+          toast.error("Location is required.");
+          setLoading((prev) => ({ ...prev, experience: false }));
+          return;
+        }
+        if (!exp.desigination) {
+          toast.error("Designation is required.");
+          setLoading((prev) => ({ ...prev, experience: false }));
+          return;
+        }
+        if (!exp.startdate) {
+          toast.error("Start date is required.");
+          setLoading((prev) => ({ ...prev, experience: false }));
+          return;
+        }
+        if (!exp.enddate) {
+          toast.error("End date is required.");
+          setLoading((prev) => ({ ...prev, experience: false }));
+          return;
+        }
+
+        if (!file && !exp.experienceurl) {
+          toast.error("Please upload an experience certificate.");
+          setLoading((prev) => ({ ...prev, experience: false }));
+          return;
+        }
+
+        const updatedNewExp = [...details.experiences];
+        updatedNewExp.push({
+          ...exp,
+          experienceurl: file ? file : exp.experienceurl,
+        });
+
+        setDetails((prevState) => ({
+          ...prevState,
+          experiences: updatedNewExp,
+        }));
+
+        setExp({
+          hosptalname: "",
+          location: "",
+          desigination: "",
+          startdate: "",
+          enddate: "",
+          experienceurl: "",
+        });
+
         setImage({ preview: "", data: "" });
         setImagechanged(false);
+
         setLoading((prev) => ({ ...prev, experience: false }));
       };
+
     
       const handleEditExperience = (index) => {
         const experienceToEdit = details.experiences[index];
