@@ -83,7 +83,7 @@ const ImageUploadFile = ({
       setImage({
         preview: "",
         data: "",
-      });
+      }); 
     }
   };
 

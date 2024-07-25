@@ -5,6 +5,7 @@ import {
   createTheme,
   Button,
   CircularProgress,
+  TextField,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
@@ -13,25 +14,23 @@ import {
   getSentRequest,
 } from "../../Service/Services";
 import toast from "react-hot-toast";
-import Select from "react-select";
-import CarouselComponent from "./App"
-import styled from 'styled-components';
+import CarouselComponent from "./App";
+import styled from "styled-components";
 
 const JoinHospital = () => {
-
   const ResponsiveDiv = styled.div`
-  @media (max-width: 600px) {
-        width: 400px;   
-}
-/* For medium devices (tablets, 600px to 900px) */
-@media (min-width: 601px) and (max-width: 900px) {
-        width: 600px;
-}
-/* For large devices (desktops, 900px and up) */
-@media (min-width: 901px) {
-        width: 1200px;
-}
-`;
+    @media (max-width: 600px) {
+      width: 400px;
+    }
+    /* For medium devices (tablets, 600px to 900px) */
+    @media (min-width: 601px) and (max-width: 900px) {
+      width: 600px;
+    }
+    /* For large devices (desktops, 900px and up) */
+    @media (min-width: 901px) {
+      width: 1200px;
+    }
+  `;
 
   const theme = createTheme({
     palette: {
@@ -50,7 +49,8 @@ const JoinHospital = () => {
       fontFamily: "Montserrat",
     },
   });
-  const [searchText] = useState("");
+
+  const [searchText, setSearchText] = useState("");
   const [selectedHospital, setSelectedHospital] = useState("");
   const [hospitals, setHospitals] = useState([]);
   const [requests, setRequests] = useState([]);
@@ -59,16 +59,13 @@ const JoinHospital = () => {
   const handleGetHospitals = async (searchTerm) => {
     const responseJson = await searchHospital(searchTerm);
     if (responseJson.data.status) {
-      console.log(responseJson.data.data);
-      const result = [];
-      for (let key of responseJson.data.data) {
-        const temp = {
-          value: key._id,
-          label: key.hospitalName + ", " + key.hospitalLocation,
-        };
-        result.push(temp);
-      }
+      const result = responseJson.data.data.map((key) => ({
+        value: key._id,
+        label: `${key.hospitalName}, ${key.hospitalLocation}`,
+      }));
       setHospitals(result);
+    } else {
+      setHospitals([]); // Clear hospitals if no results
     }
   };
 
@@ -77,12 +74,11 @@ const JoinHospital = () => {
     setLoading(true);
     if (!selectedHospital) {
       setLoading(false);
-      toast.error("Please send hospital to send the request");
+      toast.error("Please select a hospital to send the request");
       return;
     }
     const requestBody = { hospitalId: selectedHospital?.value };
     const responseJson = await sendRequest(requestBody);
-    console.log(responseJson);
     if (responseJson.data.status) {
       toast.success(responseJson.data.message);
     } else {
@@ -102,12 +98,11 @@ const JoinHospital = () => {
   useEffect(() => {
     getSendRequest();
     handleGetHospitals(searchText);
-  });
+  }, [searchText]);
 
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
-        
         <ResponsiveDiv>
           <CarouselComponent />
         </ResponsiveDiv>
@@ -117,19 +112,62 @@ const JoinHospital = () => {
           marginTop={"0.5rem"}
           justifyContent={"space-around"}
         >
-          <Box style={{ width: "80%" }}>
-            <Select
-              defaultValue={selectedHospital}
-              onChange={setSelectedHospital}
-              options={hospitals}
-              styles={{
-                control: (provided) => ({
-                  ...provided,
-                  width: "100%", // Set the width to 80%
-                }),
+          <Box style={{ width: "80%", position: "relative" }}>
+            <TextField
+              value={searchText}
+              onChange={(e) => {
+                setSearchText(e.target.value);
+                handleGetHospitals(e.target.value); // Fetch suggestions as user types
               }}
-              isSearchable
+              placeholder="Search for a hospital..."
+              fullWidth
             />
+            {searchText && hospitals.length > 0 && (
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: "100%",
+                  left: 0,
+                  width: "100%",
+                  border: "1px solid #ccc",
+                  backgroundColor: "white",
+                  borderRadius: "4px",
+                  zIndex: 10,
+                }}
+              >
+                {hospitals.map((hospital) => (
+                  <Box
+                    key={hospital.value}
+                    onClick={() => {
+                      setSelectedHospital(hospital);
+                      setSearchText(hospital.label); // Optionally set search text to selected value
+                      setHospitals([]); // Clear suggestions after selection
+                    }}
+                    sx={{
+                      padding: "8px",
+                      borderBottom: "1px solid #ddd",
+                      cursor: "pointer",
+                      "&:hover": {
+                        backgroundColor: "#f0f0f0",
+                      },
+                    }}
+                  >
+                    {hospital.label}
+                  </Box>
+                ))}
+                {hospitals.length === 0 && (
+                  <Typography
+                    sx={{
+                      padding: "8px",
+                      textAlign: "center",
+                      color: "#999",
+                    }}
+                  >
+                    No hospitals found
+                  </Typography>
+                )}
+              </Box>
+            )}
           </Box>
           <Button
             variant="contained"
