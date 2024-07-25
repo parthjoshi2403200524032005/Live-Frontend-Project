@@ -15,7 +15,7 @@ import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import { CustomStyles } from "../../CustomStyles/Styles";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import AccountModal from "../AccountModal";
-import Footer from "../Footer";
+import TestFooter from "../TestFooter";
 import Logo from "../../assets/Logo.png";
 import DocAccountModal from "../../DoctorPannel/DoctorComponents/DocAccountModal";
 import { MobileActionBar } from "./NavBarStyles";
@@ -250,7 +250,7 @@ const NavBar = () => {
         </MobileActionBar>
       ) : null}
       <Outlet />
-      {active === "/signup" || active === "/login" ? "" : <Footer />}
+      {active === "/signup" || active === "/login" ? "" : <TestFooter/>}
     </React.Fragment>
   );
 };
