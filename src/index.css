@@ -11,6 +11,8 @@ body {
   @media screen and (max-width: 471px) {
     padding-bottom: 60px;
   }
+   /* please inform me if you faced any issue beacuse of this */
+  overflow-x: hidden; 
 }
 
 .card-main {

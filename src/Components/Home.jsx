@@ -35,7 +35,6 @@ const Home = () => {
       <Pricing/>
       <Needhelp/>
       <FrequentlyAskedQuestions/>
-      {/* <Footer2/> */}
     </React.Fragment>
   );
 };
