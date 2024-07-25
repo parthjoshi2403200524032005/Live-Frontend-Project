@@ -9,13 +9,16 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { Toaster } from "react-hot-toast";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { HelmetProvider } from 'react-helmet-async';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <HelmetProvider>
     <BrowserRouter>
         <App />
     </BrowserRouter>
+    </HelmetProvider>
     <Toaster position="top-right"
   reverseOrder={false}/>
   </React.StrictMode>

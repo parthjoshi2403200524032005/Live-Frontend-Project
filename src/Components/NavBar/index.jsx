@@ -62,22 +62,30 @@ const NavBar = () => {
                 alignItems: "center",
               }}
             >
-              <Typography
+               <Typography
                 className="text-decoration-none new"
                 component={NavLink}
                 to={"/"}
                 sx={{ ...CustomStyles.navLink, color: "inherit" }}
               >
-                Videos
+                Home
               </Typography>
               <Typography
+                className="text-decoration-none new"
+                component={NavLink}
+                to={"/videos"}
+                sx={{ ...CustomStyles.navLink, color: "inherit" }}
+              >
+                Videos
+              </Typography>
+              {/* <Typography
                 className="text-decoration-none new"
                 component={NavLink}
                 to={"/service"}
                 sx={{ ...CustomStyles.navLink, color: "inherit" }}
               >
                 Services
-              </Typography>
+              </Typography> */}
               <Typography
                 className="text-decoration-none new"
                 component={NavLink}
@@ -178,7 +186,25 @@ const NavBar = () => {
               component={NavLink}
               to="/"
             />
-            <BottomNavigationAction
+
+            
+<BottomNavigationAction
+              className="value"
+              label={
+                <Typography
+                  variant="subtitle1"
+                  sx={{ fontFamily: "Montserrat", fontSize: 11 }}
+                >
+                  Videos
+                </Typography>
+              }
+              icon={<MedicalServices />}
+              component={NavLink}
+              to="/videos"
+            />
+
+
+            {/* <BottomNavigationAction
               className="value"
               label={
                 <Typography
@@ -191,7 +217,7 @@ const NavBar = () => {
               icon={<MedicalServices />}
               component={NavLink}
               to="/service"
-            />
+            /> */}
             <BottomNavigationAction
               className="value"
               label={
