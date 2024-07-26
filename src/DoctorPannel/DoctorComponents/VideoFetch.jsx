@@ -492,6 +492,7 @@
 
 
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Card,
@@ -695,8 +696,12 @@ const VideoFetch = () => {
     }
   };
 
+  const navigate = useNavigate();
+
   const getDoctorDetails = async () => {
     const responseJson = await doctorDetailsGet();
+    if(!responseJson.data.data.verified) navigate("/doctor/alert");
+
     if (responseJson.data.status) {
       const doctorid = responseJson.data.data._id;
       const videos = await getDoctorVideos(doctorid);

@@ -56,6 +56,7 @@ import Sitemap from "./sitemap.xml";
 import DoctorLeads from "./DoctorPannel/DoctorComponents/DoctorLeads";
 // import DocQuickDetails from "./DoctorPannel/DoctorComponents/DocQuickDetails";
 import DocQuick from "./DoctorPannel/DoctorComponents/DocQuick";
+import Alert from "./DoctorPannel/DoctorComponents/Alert";
 import Videos from "./Components/Videos";
 
 const App = () => {
@@ -127,6 +128,7 @@ const App = () => {
     { path: "/user/dashboard", element: <UserProfile /> },
     { path: "/doctor/joinhospital", element: <JoinHospital /> },
     { path: "/doctor/requests", element: <Requests /> },
+    { path: "/doctor/alert", element: <Alert /> },
     { path: "*", element: <Page404 /> },
   ];
 
