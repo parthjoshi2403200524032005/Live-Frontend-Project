@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   FormControlLabel,
@@ -220,6 +221,7 @@ const DocProfile = () => {
     awards: [],
     about: "",
   });
+  const navigate = useNavigate();
 
   const forProfileChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -235,6 +237,8 @@ const DocProfile = () => {
     } else {
       toast.error(response?.data.message);
     }
+
+    if(!response.data.data.verified) navigate("/doctor/alert");
   };
 
   useEffect(() => {

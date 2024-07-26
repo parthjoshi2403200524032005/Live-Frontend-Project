@@ -10,11 +10,17 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+//import { useNavigate } from "react-router-dom";
 
 const DoctorLeads = () => {
   const [leads, setLeads] = useState([]);
+
+  //const navigate = useNavigate();
+
   const fetchDoctorLeads = async () => {
     const response = await getDoctorLeads();
+    //if(!response.data.data.verified) navigate("/doctor/alert");
+
     if (response?.data.status) {
       setLeads(response.data);
     }

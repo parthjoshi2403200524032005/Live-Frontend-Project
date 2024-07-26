@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@emotion/react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Container,
@@ -177,8 +178,12 @@ const DoctorPackages = () => {
     setNewpackage({ ...newpackage, exclusion: updatedExclusions });
 };
 
+  const navigate = useNavigate();
+
   const getDoctorDetails = async () => {
     const responseJson = await doctorDetailsGet();
+    if(!responseJson.data.data.verified) navigate("/doctor/alert");
+
     setPackages(responseJson?.data.data.treatments);
     const result = [];
     const hospitaltemp = {};
