@@ -323,7 +323,7 @@ const SignUp = () => {
                     </div>
                     <div className="d-flex justify-content-start mt-1">
                       By signing up,I agree to{" "}
-                      <Link href="#" style={{ paddingLeft: 2.8 }}>
+                      <Link to="/termofuse" style={{ paddingLeft: 2.8 }}>
                         terms
                       </Link>
                     </div>

@@ -30,11 +30,11 @@ const categories = [
   {
     children: [
       { id: "Profile", icon: <AccountBoxIcon />, link: "/doctor/profile" },
-      {
-        id: "Treatments",
-        icon: <TextSnippetIcon />,
-        link: "/doctor/treatments",
-      },
+      // {
+      //   id: "Treatments",
+      //   icon: <TextSnippetIcon />,
+      //   link: "/doctor/treatments",
+      // },
       // {
       //   id: "Join Hospital",
       //   icon: <LocalHospitalIcon />,

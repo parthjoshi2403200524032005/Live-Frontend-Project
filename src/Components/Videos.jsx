@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Box, TextField, Button, InputAdornment } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import DoctorCard from "./DoctorCard";
@@ -12,6 +12,9 @@ import { Flex, FlexCol } from "../styles/CommonStyles";
 import { useNavigate } from "react-router-dom";
 import RenderModalOrBottomSheet from "../Components/common/RenderModalBS";
 import LeadGenerationForm from "../Components/common/Lead-Generation";
+import debounce from "lodash/debounce";
+import { useInView } from "react-intersection-observer";
+import { Helmet } from "react-helmet-async";
 
 const Videos = () => {
   const [doctor, setDoctor] = useState([]);
@@ -21,33 +24,48 @@ const Videos = () => {
   const [isBtsVisible, setShowBts] = useState(false);
   const [doctorId, setDoctorId] = useState("");
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
+  const handleSearch = async (term) => {
     try {
-      const response = await userHomePage(searchTerm);
+      setLoading(true);
+      const response = await userHomePage(term);
       if (response?.data.status) {
-        setLoading(true);
         setDoctor(response.data?.data);
-        console.log(response.data?.data);
-        setLoading(false);
       } else {
-        setLoading(false);
         toast.error(response.data?.message);
       }
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
-  const doctorDetails = async () => {
-    const response = await userHomePage();
-    if (response?.data.status) {
-      setLoading(true);
-      setDoctor(response.data?.data);
-      setLoading(false);
+  const debouncedSearch = useCallback(
+    debounce((term) => handleSearch(term), 500),
+    []
+  );
+
+  useEffect(() => {
+    if (searchTerm) {
+      debouncedSearch(searchTerm);
     } else {
+      doctorDetails();
+    }
+  }, [searchTerm, debouncedSearch]);
+
+  const doctorDetails = async () => {
+    try {
+      setLoading(true);
+      const response = await userHomePage();
+      if (response?.data.status) {
+        setDoctor(response.data?.data);
+      } else {
+        toast.error(response.data?.message);
+      }
       setLoading(false);
-      toast.error(response.data?.message);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
     }
   };
 
@@ -58,8 +76,8 @@ const Videos = () => {
     if (webShareSupported) {
       const data = {
         url: window.location.href,
-        title: `Checkout this information health video ${link}!`,
-        text: `Hey, I'd like to recommend Healthmudraa to learn more health related cure before going any pharma and avoid taking random medicines`,
+        title: `Checkout this informative health video ${link}!`,
+        text: `Hey, I'd like to recommend Healthmudraa to learn more about health-related cures before going to any pharma and avoid taking random medicines`,
       };
       if (navigator.canShare(data)) {
         try {
@@ -78,10 +96,6 @@ const Videos = () => {
     }
   };
 
-  useEffect(() => {
-    doctorDetails();
-  }, []);
-
   const handleAppointmentBts = (e, doctorId) => {
     document
       .querySelector(".widget-visible")
@@ -94,6 +108,11 @@ const Videos = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Healthmudraa-Videos</title>
+        <meta name="description" content="Videos page description comes here" />
+      </Helmet>
+      
       <Box display="flex" justifyContent="center" marginTop={"1rem"}>
         <TextField
           value={searchTerm}
@@ -103,7 +122,7 @@ const Videos = () => {
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <Button onClick={handleSearch}>
+                <Button onClick={() => debouncedSearch(searchTerm)}>
                   <Search />
                 </Button>
               </InputAdornment>
@@ -117,57 +136,18 @@ const Videos = () => {
           <div className="spinner"></div>
         ) : (
           <div className="row justify-content-center">
+            <div className="col-12 text-center my-10">
+              <h1 className="fw-bold my-5">Expert Health Advice</h1>
+            </div>
             {doctor.length > 0 &&
-              doctor.map((item, idx) => (
-                <div
-                  className="col-lg-4 col-md-6 col-sm-12 col-12"
-                  style={{ marginBottom: "20px", borderRadius: "12px" }}
-                >
-                  <HMCard
-                    onClick={() => {
-                      navigate(
-                        `/videos/${decodeURIComponent(
-                          item.title.split(" ").join("-").toString()
-                        )}`
-                      );
-                    }}
-                  >
-                    <FlexCol>
-                      <VideoShareWrapper>
-                        {item.video.link.length > 0 && (
-                          <Plyr
-                            source={{
-                              type: "video",
-                              sources: [
-                                {
-                                  src: item.video.link,
-                                  provider: "youtube",
-                                },
-                              ],
-                            }}
-                          />
-                        )}
-                        <ShareIcon
-                          className="shareIcon"
-                          sx={{ fontSize: "1rem", marginRight: "0.5rem" }}
-                          onClick={() =>
-                            handleShareVideo(
-                              `https://healthmudraa.com/videos/${decodeURIComponent(
-                                item.title.split(" ").join("-").toString()
-                              )}`
-                            )
-                          }
-                        />
-                      </VideoShareWrapper>
-
-                      <DoctorCard
-                        item={item}
-                        videocode={item.title}
-                        handleBtsModal={handleAppointmentBts}
-                      />
-                    </FlexCol>
-                  </HMCard>
-                </div>
+              doctor.map((item) => (
+                <LazyLoadVideoCard
+                  key={item.id}
+                  item={item}
+                  navigate={navigate}
+                  handleShareVideo={handleShareVideo}
+                  handleAppointmentBts={handleAppointmentBts}
+                />
               ))}
           </div>
         )}
@@ -184,12 +164,71 @@ const Videos = () => {
       >
         <Flex padding="20px">
           <LeadGenerationForm
-            title="Want to book appointment with doctor?"
+            title="Want to book an appointment with a doctor?"
             doctorid={doctorId}
           />
         </Flex>
       </RenderModalOrBottomSheet>
     </>
+  );
+};
+
+const LazyLoadVideoCard = ({ item, navigate, handleShareVideo, handleAppointmentBts }) => {
+  const { ref, inView } = useInView({
+    triggerOnce: true, // Load the video only once when it comes into view
+    threshold: 0.5, // Load the video when 50% of it is in view
+  });
+
+  return (
+    <div
+      className="col-lg-4 col-md-6 col-sm-12 col-12"
+      style={{ marginBottom: "20px", borderRadius: "12px" }}
+      ref={ref}
+    >
+      <HMCard
+        onClick={() => {
+          navigate(
+            `/videos/${decodeURIComponent(
+              item.title.split(" ").join("-").toString()
+            )}`
+          );
+        }}
+      >
+        <FlexCol>
+          <VideoShareWrapper>
+            {inView && item.video.link.length > 0 && (
+              <Plyr
+                source={{
+                  type: "video",
+                  sources: [
+                    {
+                      src: item.video.link,
+                      provider: "youtube",
+                    },
+                  ],
+                }}
+              />
+            )}
+            <ShareIcon
+              className="shareIcon"
+              sx={{ fontSize: "1rem", marginRight: "0.5rem" }}
+              onClick={() =>
+                handleShareVideo(
+                  `https://healthmudraa.com/videos/${decodeURIComponent(
+                    item.title.split(" ").join("-").toString()
+                  )}`
+                )
+              }
+            />
+          </VideoShareWrapper>
+          <DoctorCard
+            item={item}
+            videocode={item.title}
+            handleBtsModal={handleAppointmentBts}
+          />
+        </FlexCol>
+      </HMCard>
+    </div>
   );
 };
 

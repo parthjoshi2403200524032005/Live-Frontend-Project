@@ -56,24 +56,6 @@ const TeamCard = () => {
       linkedIn: "https://www.linkedin.com/in/drdineshramanpt",
     },
     {
-      name: "Soham Jambhwadekar",
-      position: "SDE Intern",
-      profile: "soham.png",
-      linkedIn: "https://www.linkedin.com/in/soham-jambhwadekar-25128027b",
-    },
-    {
-      name: "Shabari Vignesh",
-      position: "SDE Intern",
-      profile: "shabari.png",
-      linkedIn: "https://www.linkedin.com/in/shabari-vignesh-73983b24b",
-    },
-    {
-      name: "Harsh Prajapati",
-      position: "Project Manager",
-      profile: "harsh.png",
-      linkedIn: "https://www.linkedin.com/in/harsh-prajapati-3922372b5",
-    },
-    {
       name: "Saipavan Lingamallu",
       position: "SDE Intern",
       profile: "saipavan.png",
@@ -104,8 +86,20 @@ const TeamCard = () => {
       linkedIn: "https://www.linkedin.com/in/himani-mathur",
     },
     {
+      name: "Soham Jambhwadekar",
+      position: "SDE Intern",
+      profile: "soham.png",
+      linkedIn: "https://www.linkedin.com/in/soham-jambhwadekar-25128027b",
+    },
+    {
+      name: "Shabari Vignesh",
+      position: "SDE Intern",
+      profile: "shabari.png",
+      linkedIn: "https://www.linkedin.com/in/shabari-vignesh-73983b24b",
+    },
+    {
       name: "Asad Shah",
-      position: "Backend Developer",
+      position: "UI/UX Intern",
       profile: "asad.png",
       linkedIn: "https://www.linkedin.com/in/asad-shah-904198285",
     },
