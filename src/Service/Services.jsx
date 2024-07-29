@@ -5,7 +5,7 @@ const accessToken = localStorage.getItem("accessToken");
 
 
 const url = process.env.REACT_APP_BASE_URL;
-//const url = 'http://localhost:8080';
+// const url = 'http://localhost:8080';
 // const url='https://health-mudhra-backend.vercel.app';
 
 
@@ -46,6 +46,11 @@ export const videoHomePage = async (videocode) => {
     `${url}/homepage/videos?videocode=${videocode}`
   );
 };
+
+//Power Search
+export const AiSearch = async (data) => {
+  return await Axiosinstance.post(`${url}/homepage/ai-search`, {search: data});
+}
 
 export const filterDataService = async (data) => {
   return await Axiosinstance.post(`${url}/doctors/specilizeddoctors`, data);

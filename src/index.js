@@ -7,21 +7,20 @@ import { BrowserRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { Toaster } from "react-hot-toast";
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import { HelmetProvider } from 'react-helmet-async';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { HelmetProvider } from "react-helmet-async";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  <>
     <HelmetProvider>
-    <BrowserRouter>
+      <BrowserRouter>
         <App />
-    </BrowserRouter>
+      </BrowserRouter>
     </HelmetProvider>
-    <Toaster position="top-right"
-  reverseOrder={false}/>
-  </React.StrictMode>
+    <Toaster position="top-right" reverseOrder={false} />
+  </>
 );
 
 // If you want to start measuring performance in your app, pass a function

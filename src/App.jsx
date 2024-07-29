@@ -57,12 +57,14 @@ import DoctorLeads from "./DoctorPannel/DoctorComponents/DoctorLeads";
 // import DocQuickDetails from "./DoctorPannel/DoctorComponents/DocQuickDetails";
 import DocQuick from "./DoctorPannel/DoctorComponents/DocQuick";
 import Videos from "./Components/Videos";
+import Search from "./Components/Search";
 
 const App = () => {
   const userRoutes = [
     { path: "/", element: <Home /> },
     { path: "/sitemap.xml", element: <Sitemap /> },
     { path: "/videos" , element: <Videos/>},
+    { path: "/search/:query", element: <Search/>},
     { path: "/videos/:videotitle", element: <SpecificVideo /> },
     { path: "/service", element: <Service /> },
     { path: "/about", element: <About /> },
