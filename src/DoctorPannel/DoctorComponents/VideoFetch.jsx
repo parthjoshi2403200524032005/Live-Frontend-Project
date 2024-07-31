@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Card,
@@ -261,6 +262,7 @@ const VideoFetch = () => {
   };
 
 
+
   const [doctorid, setDoctorid] = useState('');
   const [lastAdded, setLastAdded] = useState(null);
   const [initialChannelId, setinitialChannelId] = useState('');
@@ -268,8 +270,13 @@ const VideoFetch = () => {
   const [channelVideos, setChannelVideos] = useState([]);
   const [error, setError] = useState('');
 
+  const navigate = useNavigate();
+
+
   const getDoctorDetails = async () => {
     const responseJson = await doctorDetailsGet();
+    if(!responseJson.data.data.verified) navigate("/doctor/alert");
+
     if (responseJson.data.status) {
       console.log('details in videofetch about doctor',responseJson.data)
       const doctorid = responseJson.data.data._id;

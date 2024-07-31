@@ -47,6 +47,11 @@ export const videoHomePage = async (videocode) => {
   );
 };
 
+//Power Search
+export const AiSearch = async (data) => {
+  return await Axiosinstance.post(`${url}/homepage/ai-search`, {search: data});
+}
+
 export const filterDataService = async (data) => {
   return await Axiosinstance.post(`${url}/doctors/specilizeddoctors`, data);
 };

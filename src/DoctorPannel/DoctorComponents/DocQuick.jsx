@@ -112,26 +112,50 @@ const DocProfile = () => {
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
-
-      <div style={{ width: "100%", backgroundColor: "#dae1f0", display: "flex", alignItems: "stretch", marginBottom: "30px" ,  borderTopRightRadius: "10px", borderBottomRightRadius: "10px" }}>
-        <div style={{ width: "15px", backgroundColor: "#133680" }}></div>
-        <p style={{ padding: "1em" , marginBottom:"0px" }}>For Quick Onboarding, kindly provide the necessary details for verification by selecting EITHER qualifications OR registration.</p>
-      </div>
-
+        <div
+          style={{
+            width: "100%",
+            backgroundColor: "#dae1f0",
+            display: "flex",
+            alignItems: "stretch",
+            marginBottom: "30px",
+            borderTopRightRadius: "10px",
+            borderBottomRightRadius: "10px",
+          }}
+        >
+          <div style={{ width: "15px", backgroundColor: "#133680" }}></div>
+          <p style={{ padding: "1em", marginBottom: "0px" }}>
+            To facilitate your Easy onboarding process, please provide the
+            necessary details with certificate copies for verification. Kindly
+            include Basic Details, 1 Qualifications (Minimum Bachelor's Degree),
+            1 Professional Registration in respective fields
+          </p>
+        </div>
 
         <ImageUpload
           setForm={setForm}
           fieldname={"profilepicurl"}
           imageurl={
-            form.profilepicurl !== "" ? `${aws_url}/${form.profilepicurl}` : "https://healthmudraa-assets.s3.ap-south-1.amazonaws.com/1718098598539-blank-profile-picture-973460_1280.png"
+            form.profilepicurl !== ""
+              ? `${aws_url}/${form.profilepicurl}`
+              : "https://healthmudraa-assets.s3.ap-south-1.amazonaws.com/1718098598539-blank-profile-picture-973460_1280.png"
           }
         />
-        
+
         <Container>
           <Box component="form" noValidate sx={{ mt: 3, mb: 2 }}>
             <Grid container spacing={2} key={form._id}>
               <Grid item xs={12} sm={6}>
-                <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>First Name</label>
+                <label
+                  htmlFor="firstname"
+                  style={{
+                    paddingBottom: "5px",
+                    fontSize: "18px",
+                    paddingTop: "10px",
+                  }}
+                >
+                  First Name
+                </label>
                 <TextField
                   required
                   fullWidth
@@ -150,7 +174,16 @@ const DocProfile = () => {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-              <label htmlFor="lastname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Last Name</label>
+                <label
+                  htmlFor="lastname"
+                  style={{
+                    paddingBottom: "5px",
+                    fontSize: "18px",
+                    paddingTop: "10px",
+                  }}
+                >
+                  Last Name
+                </label>
                 <TextField
                   required
                   fullWidth
@@ -169,7 +202,16 @@ const DocProfile = () => {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-              <label htmlFor="email" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"18px" }}>Email ID</label>
+                <label
+                  htmlFor="email"
+                  style={{
+                    paddingBottom: "5px",
+                    fontSize: "18px",
+                    paddingTop: "18px",
+                  }}
+                >
+                  Email ID
+                </label>
                 <TextField
                   disabled
                   required
@@ -189,7 +231,16 @@ const DocProfile = () => {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-              <label htmlFor="mobile" style={{ paddingBottom: "5px", fontSize: "18px" , paddingTop:"18px" }}>Mobile Number</label>
+                <label
+                  htmlFor="mobile"
+                  style={{
+                    paddingBottom: "5px",
+                    fontSize: "18px",
+                    paddingTop: "18px",
+                  }}
+                >
+                  Mobile Number
+                </label>
                 <TextField
                   required
                   fullWidth
@@ -207,15 +258,25 @@ const DocProfile = () => {
                   }}
                 />
               </Grid>
-              
             </Grid>
             <DocQuickDetails details={form} setDetails={setForm} />
 
-            <div className="d-flex justify-content-between mt-3 " style={{paddingTop:"5px" , paddingBottom:"20px" , position:"absolute" , right:"15%"}}>
-
+            <div
+              className="d-flex justify-content-between mt-3 "
+              style={{
+                paddingTop: "5px",
+                paddingBottom: "20px",
+                position: "absolute",
+                right: "15%",
+              }}
+            >
               <UploadButton
                 onClick={forDoctorSubmit}
-                style={{ fontFamily: "Montserrat" , backgroundColor:"#133680" , color:"white" , }}
+                style={{
+                  fontFamily: "Montserrat",
+                  backgroundColor: "#133680",
+                  color: "white",
+                }}
               >
                 Submit
               </UploadButton>

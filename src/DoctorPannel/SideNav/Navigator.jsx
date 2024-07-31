@@ -19,7 +19,7 @@ import {
 import Logo from "../../assets/Logo.png";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
-import TextSnippetIcon from "@mui/icons-material/TextSnippet";
+//import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -30,11 +30,11 @@ const categories = [
   {
     children: [
       { id: "Profile", icon: <AccountBoxIcon />, link: "/doctor/profile" },
-      {
-        id: "Treatments",
-        icon: <TextSnippetIcon />,
-        link: "/doctor/treatments",
-      },
+      // {
+      //   id: "Treatments",
+      //   icon: <TextSnippetIcon />,
+      //   link: "/doctor/treatments",
+      // },
       // {
       //   id: "Join Hospital",
       //   icon: <LocalHospitalIcon />,
