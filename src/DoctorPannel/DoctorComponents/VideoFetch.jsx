@@ -78,7 +78,7 @@ const addVideosToDatabase = async (doctorid,channelId, channelVideos, setChannel
     });
 
     if (response.ok) {
-      const result = await response.json();
+      // const result = await response.json();
       setChannelId(''); // Clear the input
       setChannelVideos([]); // Clear the videos display
       alert('Videos added to database successfully!');
