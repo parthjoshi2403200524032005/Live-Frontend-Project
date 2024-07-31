@@ -48,6 +48,10 @@ const Search = () => {
     window.scrollTo(0, 0);
     setSearchInput(query);
     APISearch(query);
+
+    return () => {
+      window.speechSynthesis.cancel();
+    };
   }, []);
   return (
     <>
