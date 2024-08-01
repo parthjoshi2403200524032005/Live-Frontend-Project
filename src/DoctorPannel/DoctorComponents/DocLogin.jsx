@@ -1,28 +1,25 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import {
   Box,
   ThemeProvider,
   createTheme,
   Card,
-  useMediaQuery,
   InputAdornment,
   IconButton,
 } from "@mui/material";
 import { LogButton } from "../../CustomStyles/Styles";
-import Logo from "../../assets/Logo.png";
-import { doctorLogin ,doctorDetailsGet } from "../../Service/Services";
+
+import DoctorSign from "../../assets/docsignin.jpg";
+import UserIcon from "../../Components/Svgs/User.svg"; // Import the user icon
+import { doctorLogin, doctorDetailsGet } from "../../Service/Services";
 import CircularProgress from "@mui/material/CircularProgress";
 import { toast } from "react-hot-toast";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const DocLogin = () => {
-  const forBelow800px = useMediaQuery("(max-width:800px)");
-  const forBelow991px = useMediaQuery("(max-width:991px)");
-  const forBelow1080px = useMediaQuery("(max-width:1200px)");
-
   const theme = createTheme({
     palette: {
       type: "light",
@@ -69,9 +66,10 @@ const DocLogin = () => {
         } else {
           console.log(response?.data.message);
         }
- 
-        response.data.data.verified ? navigate("/doctor/profile") : navigate("/doctor/quickOnboarding");
-        
+
+        response.data.data.verified
+          ? navigate("/doctor/profile")
+          : navigate("/doctor/quickOnboarding");
       } catch (error) {
         toast.error("Invalid credentials!");
       }
@@ -91,151 +89,231 @@ const DocLogin = () => {
           fontWeight: "bold",
           height: "100vh",
           display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          backgroundColor: "#D7E7FF",
         }}
       >
         <ThemeProvider theme={theme}>
-          <div className="container">
+          <Box
+            component="img"
+            src={DoctorSign}
+            style={{ width: "50%", height: "100vh", objectFit: "cover" }}
+          />
+          <Box
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "0 20px",
+              width: "50%",
+            }}
+          >
             <div
-              className={`row justify-content-around align-items-center ${
-                forBelow800px ? "text-center" : ""
-              }`}
+              style={{
+                color: "#363636",
+                textAlign: "center",
+                fontFamily: "Poppins",
+                fontSize: "36px",
+                fontWeight: 600,
+                marginBottom: "20px",
+              }}
             >
-              <div
-                className="col-lg-6 col-md-8 col-sm-10 col-12"
-                style={{
-                  textAlign: "center",
-                  marginTop: forBelow991px ? 150 : 30,
-                  marginBottom: 40,
-                }}
-              >
-                <div style={{ color: "#133680", fontSize: 20 }}>
-                  Are you a Doctor/Medical Professional looking to join
-                  healthmudraa
-                </div>
-                <Box
-                  sx={{
-                    width: 120,
-                    height: 32,
-                    border: "none",
-                    backgroundColor: "#133680",
-                    color: "#FFFF",
-                    borderRadius: 1,
-                    m: 2,
-                  }}
-                  component={"button"}
-                  onClick={() => navigate("/doctor/signup")}
-                >
-                  Sign up
-                </Box>
-              </div>
-
-              <div
-                className={`${
-                  forBelow1080px ? "col-lg-5" : "col-lg-4"
-                } col-md-8 col-sm-10 col-12`}
-              >
-                <Card
-                  sx={{
-                    p: 3.4,
-                    zIndex: 1,
-                    py: 4.2,
-                    mb: forBelow991px ? 14 : "",
-                  }}
-                >
-                  <Box component="form" sx={{ mt: 1 }}>
-                    <Link to="/">
-                      <div className=" d-flex justify-content-center">
-                        <Box
-                          component={"img"}
-                          src={Logo}
-                          style={{ width: 210 }}
-                        />
-                      </div>
-                    </Link>
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="email"
-                      autoComplete="off"
-                      type="email"
-                      placeholder="Email"
-                      onChange={doctorChange}
-                      name="email"
-                      InputProps={{
-                        style: {
-                          height: "2.2em",
-                          fontFamily: "Montserrat",
-                        },
-                      }}
-                    />
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="password"
-                      type={showPassword ? "text" : "password"}
-                      id="password"
-                      placeholder="Password"
-                      onChange={doctorChange}
-                      InputProps={{
-                        style: {
-                          height: "2.2em",
-                          fontFamily: "Montserrat",
-                        },
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <IconButton
-                              aria-label="toggle password visibility"
-                              onClick={togglePasswordVisibility}
-                              edge="end"
-                            >
-                              {showPassword ? (
-                                <VisibilityOff />
-                              ) : (
-                                <Visibility />
-                              )}
-                            </IconButton>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                    <LogButton
-                      fullWidth
-                      type="button"
-                      style={{
-                        fontFamily: "Montserrat",
-                        fontSize: 18,
-                        fontWeight: "bold",
-                      }}
-                      onClick={forDoctorLogin}
-                      disabled={isLoading}
-                      startIcon={
-                        isLoading ? (
-                          <CircularProgress size={20} color="inherit" />
-                        ) : null
-                      }
-                    >
-                      {isLoading ? "Logging in..." : "Login"}
-                    </LogButton>
-
-                    {/* <LogButton fullWidth type="button" style={{ fontFamily: 'Montserrat', fontSize: 18, fontWeight: 'bold' }} onClick={forDoctorLogin} disabled={isLoading}> {isLoading ? 'Loading...' : 'Login'} </LogButton> */}
-                    <div className="d-flex justify-content-end mt-3">
-                      <Box
-                        component={"a"}
-                        onClick={() => navigate("/doctor/forgotpassword")}
-                        sx={{ cursor: "pointer" }}
-                      >
-                        Forgot password?
-                      </Box>
-                    </div>
-                  </Box>
-                </Card>
-              </div>
+              Login To Continue
             </div>
-          </div>
+            <Card
+              sx={{
+                p: 3.4,
+                zIndex: 1,
+                py: 4.2,
+                width: "100%",
+                maxWidth: "534px",
+                flexShrink: 0,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "transparent",
+                boxShadow: "none",
+              }}
+            >
+              <Box component="form" sx={{ width: "100%", mt: 1 }}>
+                <div
+                  style={{
+                    color: "#363636",
+                    fontFamily: "Poppins",
+                    fontSize: "16px",
+                    fontWeight: 700,
+                    lineHeight: "normal",
+                    marginBottom: "0px", // Remove space below the label
+                    marginTop: "0px",
+                    marginLeft: "14px", // Remove space above the label
+                  }}
+                >
+                  Email/Phone Number
+                </div>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  autoComplete="off"
+                  type="email"
+                  placeholder="Type your email or phone number"
+                  onChange={doctorChange}
+                  name="email"
+                  InputProps={{
+                    style: {
+                      height: "59px",
+                      fontFamily: "Montserrat",
+                      padding: "17px 16px",
+                      borderRadius: "14px",
+                      border: "1px solid #858181",
+                      background: "var(--Background-Background, #FFF)",
+                      marginBottom: "0px", // Remove space below the input
+                    },
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <img src={UserIcon} alt="user icon" />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+                <div
+                  style={{
+                    color: "#363636",
+                    fontFamily: "Poppins",
+                    fontSize: "16px",
+                    fontWeight: 700,
+                    lineHeight: "normal",
+                    marginBottom: "0px", // Remove space below the label
+                    marginTop: "16px",
+                    marginLeft: "14px", // Space above the label, adjust if needed
+                  }}
+                >
+                  Password
+                </div>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  placeholder="Type your password"
+                  onChange={doctorChange}
+                  InputProps={{
+                    style: {
+                      height: "59px",
+                      fontFamily: "Montserrat",
+                      padding: "17px 16px",
+                      borderRadius: "14px",
+                      border: "1px solid #858181",
+                      background: "var(--Background-Background, #FFF)",
+                      marginBottom: "0px", // Remove space below the input
+                    },
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={togglePasswordVisibility}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginTop: "20px",
+                  }}
+                >
+                  <div>
+                    <input
+                      type="checkbox"
+                      id="rememberMe"
+                      name="rememberMe"
+                      style={{
+                        accentColor: "#133682",
+                      }}
+                    />
+                    <label
+                      htmlFor="rememberMe"
+                      style={{
+                        marginLeft: "10px",
+                        fontFamily: "Poppins",
+                        color: "#133682",
+                      }}
+                    >
+                      Remember Me
+                    </label>
+                  </div>
+                  <Box
+                    component={"a"}
+                    onClick={() => navigate("/doctor/forgotpassword")}
+                    sx={{
+                      cursor: "pointer",
+                      fontFamily: "Poppins",
+                      color: "#133680",
+                    }}
+                  >
+                    Forgot Password?
+                  </Box>
+                </div>
+                <LogButton
+                  fullWidth
+                  type="button"
+                  style={{
+                    fontWeight: "bold",
+                    height: "59px",
+                    fontFamily: "Montserrat",
+                    marginTop: "25px",
+                    borderRadius: "14px",
+                    width: "100%",
+                    background: "#133682",
+                    color: "#ffffff",
+                  }}
+                  onClick={forDoctorLogin}
+                  disabled={isLoading}
+                  startIcon={
+                    isLoading ? (
+                      <CircularProgress size={20} color="inherit" />
+                    ) : null
+                  }
+                >
+                  {isLoading ? "Logging in..." : "Login"}
+                </LogButton>
+                <div style={{ marginTop: "20px", textAlign: "center" }}>
+                  <div
+                    style={{
+                      color: "#000000",
+                      fontSize: "16px",
+                      fontFamily: "Poppins",
+                      fontWeight: 500,
+                      letterSpacing: "0.32px",
+                      lineHeight: "normal",
+                    }}
+                  >
+                    Don't have an account?{" "}
+                    <span
+                      style={{
+                        fontWeight: 600,
+                        color: "#133682",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => navigate("/doctor/signup")}
+                    >
+                      Sign Up
+                    </span>
+                  </div>
+                </div>
+              </Box>
+            </Card>
+          </Box>
         </ThemeProvider>
       </Box>
     </React.Fragment>
