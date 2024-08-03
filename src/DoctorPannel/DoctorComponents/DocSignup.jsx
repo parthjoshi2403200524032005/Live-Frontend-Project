@@ -1,49 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Card,
-  Checkbox,
   ThemeProvider,
-  Typography,
   createTheme,
-  useMediaQuery,
   TextField,
-  MenuItem,
   InputAdornment,
   IconButton,
 } from "@mui/material";
 import { LogButton } from "../../CustomStyles/Styles";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "../../assets/Logo.png";
-import { doctorSignup } from "../../Service/Services";
+
+import { doctorSignup, sendOtp } from "../../Service/Services";
 import CircularProgress from "@mui/material/CircularProgress";
 import toast from "react-hot-toast";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import PhoneIcon from "@mui/icons-material/Phone";
+import PersonIcon from "@mui/icons-material/Person";
+import DoctorSign from "../../assets/docsignin.jpg";
 
 const DocSignup = () => {
-  const countryCodes = [
-    { value: "+91", label: "+91(IND)" },
-    { value: "+1", label: "+1(USA)" },
-    { value: "+44", label: "+44(UK)" },
-  ];
-
-  const [countryCode, setCountryCode] = useState("+91");
-  const [mobileNumber, setMobileNumber] = useState("");
-  const nav = useNavigate();
-
-  const forCountryCode = (e) => {
-    setCountryCode(e.target.value);
-  };
-
-  const forMobileNumber = (e) => {
-    setMobileNumber(e.target.value);
-  };
-
-  const forBelow800px = useMediaQuery("(max-width:800px)");
-  const forBelow991px = useMediaQuery("(max-width:991px)");
-  const forBelow1080px = useMediaQuery("(max-width:1200px)");
-
   const theme = createTheme({
     palette: {
       type: "light",
@@ -56,12 +33,17 @@ const DocSignup = () => {
       text: {
         primary: "#000000",
       },
-      typography: {
-        fontFamily: "Montserrat",
-      },
     },
   });
 
+  const countryCodes = [
+    { value: "+91", label: "+91(IND)" },
+    { value: "+1", label: "+1(USA)" },
+    { value: "+44", label: "+44(UK)" },
+  ];
+
+  const [countryCode, setCountryCode] = useState("+91");
+  const [mobileNumber, setMobileNumber] = useState("");
   const [doctor, setDoctor] = useState({
     email: "",
     mobile: null,
@@ -69,11 +51,43 @@ const DocSignup = () => {
     confirmpassword: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+
+  const [isOtpSent, setIsOtpSent] = useState(false);
+  const [isOtpVerifying, setIsOtpVerifying] = useState(false);
+  const [otpInput, setOtpInput] = useState("");
+  const [otpTimer, setOtpTimer] = useState(300);
+  const [otpTimerRunning, setOtpTimerRunning] = useState(false);
+  const [agreeTerms, setAgreeTerms] = useState(false); // State for terms checkbox
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    let timer;
+    if (otpTimerRunning) {
+      timer = setInterval(() => {
+        setOtpTimer((prev) => {
+          if (prev <= 1) {
+            clearInterval(timer);
+            setOtpTimerRunning(false);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [otpTimerRunning]);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const forCountryCode = (e) => {
+    setCountryCode(e.target.value);
+  };
+
+  const forMobileNumber = (e) => {
+    setMobileNumber(e.target.value);
   };
 
   const doctorChange = (e) => {
@@ -88,27 +102,18 @@ const DocSignup = () => {
       setIsLoading(true);
       if (password !== confirmpassword) {
         toast.error("Password does not match");
+        setIsLoading(false);
       } else {
         try {
-          const data = {
-            ...doctor,
-            countrycode: countryCode,
-            mobile: mobileNumber,
-          };
-          const response = await doctorSignup(data);
-          if (response?.data) {
-            localStorage.setItem("accessToken", response.data.accessToken);
-            localStorage.setItem("refreshToken", response.data.refreshToken);
-            localStorage.setItem("type", "doctors");
-            navigate("/doctor/profile");
-            toast.success("Account created successfully!");
-          } else {
-            toast.error("Failed to create account");
-          }
+          await sendOtp({ email });
+          setIsOtpSent(true);
+          setOtpTimer(300);
+          setOtpTimerRunning(true);
+          setIsLoading(false);
         } catch (error) {
-          toast.error("An error occurred during signup");
+          toast.error("An error occurred while sending OTP");
+          setIsLoading(false);
         }
-        setIsLoading(false);
       }
     } else {
       toast.error("All fields are required!");
@@ -117,6 +122,44 @@ const DocSignup = () => {
       }
     }
   };
+
+  const verifyOtp = async () => {
+    if (otpInput) {
+      setIsOtpVerifying(true);
+      try {
+        const { email, password } = doctor;
+        const data = {
+          email,
+          otp: otpInput,
+          password,
+          countrycode: countryCode,
+          mobile: mobileNumber,
+        };
+        const response = await doctorSignup(data);
+        if (response?.data) {
+          localStorage.setItem("accessToken", response.data.accessToken);
+          localStorage.setItem("refreshToken", response.data.refreshToken);
+          localStorage.setItem("type", "doctors");
+          navigate("/doctor/profile");
+          toast.success("Account created successfully!");
+        } else {
+          toast.error("Failed to verify OTP");
+        }
+      } catch (error) {
+        toast.error("An error occurred during OTP verification");
+      }
+      setIsOtpVerifying(false);
+    } else {
+      toast.error("Please enter the OTP");
+    }
+  };
+
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${minutes}:${secs < 10 ? `0${secs}` : secs}`;
+  };
+
   return (
     <React.Fragment>
       <Box
@@ -126,68 +169,69 @@ const DocSignup = () => {
           fontWeight: "bold",
           height: "100vh",
           display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          backgroundColor: "#D7E7FF",
         }}
       >
         <ThemeProvider theme={theme}>
-          <div className="container">
+          <Box
+            component="img"
+            src={DoctorSign}
+            style={{ width: "50%", height: "100vh", objectFit: "cover" }}
+          />
+          <Box
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "0 20px",
+              width: "50%",
+            }}
+          >
             <div
-              className={`row justify-content-around align-items-center ${
-                forBelow800px ? "text-center" : ""
-              }`}
+              style={{
+                color: "#363636",
+                textAlign: "center",
+                fontFamily: "Poppins",
+                fontSize: "36px",
+                fontWeight: 600,
+                marginBottom: "20px",
+              }}
             >
-              <div
-                className="col-lg-6 col-md-9 col-sm-10 col-11"
-                style={{
-                  textAlign: "center",
-                  marginTop: forBelow991px ? 270 : 30,
-                  marginBottom: 40,
-                }}
-              >
-                <div style={{ color: "#133680", fontSize: 20 }}>
-                  Are you a Doctor/Medical Professional looking to login
-                  healthmudraa
-                </div>
-                <Box
-                  sx={{
-                    width: 120,
-                    height: 32,
-                    border: "none",
-                    backgroundColor: "#133680",
-                    color: "#FFFF",
-                    borderRadius: 1,
-                    m: 2,
-                  }}
-                  component={"button"}
-                  onClick={() => nav("/doctor/login")}
-                >
-                  Login
-                </Box>
-              </div>
-
-              <div
-                className={`${
-                  forBelow1080px ? "col-lg-6" : "col-lg-5"
-                } col-md-9 col-sm-11 col-12`}
-              >
-                <Card
-                  sx={{
-                    p: 3.4,
-                    zIndex: 1,
-                    py: 4.2,
-                    mb: forBelow991px ? 13 : "",
-                  }}
-                >
-                  <Box component="form" sx={{ mt: 1 }}>
-                    <div className=" d-flex justify-content-center">
-                      <Link to={"/"}>
-                        <Box
-                          component={"img"}
-                          src={Logo}
-                          style={{ width: 210 }}
-                        />
-                      </Link>
+              Create an account
+            </div>
+            <Card
+              sx={{
+                p: 3.4,
+                zIndex: 1,
+                py: 4.2,
+                width: "100%",
+                maxWidth: "534px",
+                flexShrink: 0,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "transparent",
+                boxShadow: "none",
+              }}
+            >
+              <Box component="form" sx={{ width: "100%", mt: 1 }}>
+                {!isOtpSent ? (
+                  <>
+                    <div
+                      style={{
+                        color: "#363636",
+                        fontFamily: "Poppins",
+                        fontSize: "16px",
+                        fontWeight: 700,
+                        lineHeight: "normal",
+                        marginBottom: "0px",
+                        marginTop: "0px",
+                        marginLeft: "14px",
+                      }}
+                    >
+                      Email
                     </div>
                     <TextField
                       margin="normal"
@@ -196,145 +240,305 @@ const DocSignup = () => {
                       id="email"
                       autoComplete="off"
                       type="email"
-                      placeholder="Email"
-                      name="email"
+                      placeholder="Type your email"
                       onChange={doctorChange}
+                      name="email"
                       InputProps={{
                         style: {
-                          height: "2.2em",
+                          height: "59px",
                           fontFamily: "Montserrat",
+                          padding: "17px 16px",
+                          borderRadius: "14px",
+                          border: "1px solid #858181",
+                          background: "#FFF",
+                          marginBottom: "0px",
                         },
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton edge="end">
+                              <PersonIcon />
+                            </IconButton>
+                          </InputAdornment>
+                        ),
                       }}
                     />
-                    <div className="d-flex">
-                      <TextField
-                        select
-                        value={countryCode}
-                        onChange={forCountryCode}
-                        variant="outlined"
-                        InputProps={{
-                          style: {
-                            height: "2.2em",
-                            fontFamily: "Montserrat",
-                            marginRight: "10px",
-                          },
-                        }}
-                      >
-                        {countryCodes.map((option) => (
-                          <MenuItem
-                            sx={{ fontFamily: "Montserrat" }}
-                            key={option.value}
-                            value={option.value}
-                          >
-                            {option.label}
-                          </MenuItem>
-                        ))}
-                      </TextField>
-
-                      <TextField
-                        fullWidth
-                        type="number"
-                        variant="outlined"
-                        autoComplete="off"
-                        value={mobileNumber}
-                        placeholder="Mobile Number"
-                        name="mob"
-                        onChange={forMobileNumber}
-                        InputProps={{
-                          style: {
-                            height: "2.2em",
-                            fontFamily: "Montserrat",
-                          },
-                        }}
-                      />
+                    <div
+                      style={{
+                        color: "#363636",
+                        fontFamily: "Poppins",
+                        fontSize: "16px",
+                        fontWeight: 700,
+                        lineHeight: "normal",
+                        marginBottom: "0px",
+                        marginTop: "16px",
+                        marginLeft: "14px",
+                      }}
+                    >
+                      Mobile Number
                     </div>
-
                     <TextField
                       margin="normal"
                       required
                       fullWidth
-                      name="password"
-                      type={showPassword ? "text" : "password"}
+                      id="mobileNumber"
+                      name="mobileNumber"
+                      placeholder="Type your mobile number"
+                      onChange={forMobileNumber}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment
+                            position="start"
+                            style={{
+                              borderRight: "1px solid #858181",
+                              paddingRight: "8px",
+                            }}
+                          >
+                            <select
+                              value={countryCode}
+                              onChange={forCountryCode}
+                              style={{
+                                border: "none",
+                                background: "transparent",
+                                fontFamily: "Montserrat",
+                                fontSize: "14px",
+                                outline: "none",
+                                cursor: "pointer",
+                              }}
+                            >
+                              {countryCodes.map((option) => (
+                                <option key={option.value} value={option.value}>
+                                  {option.label}
+                                </option>
+                              ))}
+                            </select>
+                          </InputAdornment>
+                        ),
+                        style: {
+                          height: "59px",
+                          fontFamily: "Montserrat",
+                          padding: "17px 16px",
+                          borderRadius: "14px",
+                          border: "1px solid #858181",
+                          background: "#FFF",
+                          marginBottom: "0px",
+                        },
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton edge="end">
+                              <PhoneIcon />
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                    <div
+                      style={{
+                        color: "#363636",
+                        fontFamily: "Poppins",
+                        fontSize: "16px",
+                        fontWeight: 700,
+                        lineHeight: "normal",
+                        marginBottom: "0px",
+                        marginTop: "16px",
+                        marginLeft: "14px",
+                      }}
+                    >
+                      Password
+                    </div>
+                    <TextField
+                      margin="normal"
+                      required
+                      fullWidth
                       id="password"
-                      placeholder="Password"
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Type your password"
                       onChange={doctorChange}
+                      name="password"
                       InputProps={{
                         style: {
-                          height: "2.2em",
+                          height: "59px",
                           fontFamily: "Montserrat",
+                          padding: "17px 16px",
+                          borderRadius: "14px",
+                          border: "1px solid #858181",
+                          background: "#FFF",
+                          marginBottom: "0px",
                         },
                         endAdornment: (
                           <InputAdornment position="end">
                             <IconButton
-                              aria-label="toggle password visibility"
                               onClick={togglePasswordVisibility}
                               edge="end"
                             >
                               {showPassword ? (
-                                <VisibilityOff />
-                              ) : (
                                 <Visibility />
+                              ) : (
+                                <VisibilityOff />
                               )}
                             </IconButton>
                           </InputAdornment>
                         ),
                       }}
                     />
-
+                    <div
+                      style={{
+                        color: "#363636",
+                        fontFamily: "Poppins",
+                        fontSize: "16px",
+                        fontWeight: 700,
+                        lineHeight: "normal",
+                        marginBottom: "0px",
+                        marginTop: "16px",
+                        marginLeft: "14px",
+                      }}
+                    >
+                      Confirm Password
+                    </div>
                     <TextField
                       margin="normal"
                       required
                       fullWidth
-                      name="confirmpassword"
-                      type="password"
-                      id="confirm_password"
-                      placeholder="Confirm Password"
+                      id="confirmpassword"
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Type your confirm password"
                       onChange={doctorChange}
+                      name="confirmpassword"
                       InputProps={{
                         style: {
-                          height: "2.2em",
+                          height: "59px",
                           fontFamily: "Montserrat",
+                          padding: "17px 16px",
+                          borderRadius: "14px",
+                          border: "1px solid #858181",
+                          background: "#FFF",
+                          marginBottom: "0px",
                         },
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              onClick={togglePasswordVisibility}
+                              edge="end"
+                            >
+                              {showPassword ? (
+                                <Visibility />
+                              ) : (
+                                <VisibilityOff />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
                       }}
                     />
                     <LogButton
-                      type="button"
-                      onClick={forDoctorSignup}
+                      variant="contained"
+                      color="primary"
                       fullWidth
-                      style={{
-                        fontFamily: "Montserrat",
-                        fontSize: 18,
-                        fontWeight: "bold",
-                      }}
+                      onClick={forDoctorSignup}
                       disabled={isLoading}
-                      startIcon={
-                        isLoading ? (
-                          <CircularProgress size={20} color="inherit" />
-                        ) : null
-                      }
+                      style={{
+                        fontWeight: "bold",
+                        height: "59px",
+                        fontFamily: "Montserrat",
+                        marginTop: "25px",
+                        borderRadius: "14px",
+                        width: "100%",
+                        background: "#133682",
+                        color: "#ffffff",
+                      }}
                     >
-                      {isLoading ? "Sign up..." : "Signup"}
+                      {isLoading ? <CircularProgress size={24} /> : "Sign Up"}
                     </LogButton>
-                    <div className="d-flex align-items-center mt-3">
-                      <Checkbox
-                        value="remember"
-                        style={{ height: 20, width: 20, marginRight: 4 }}
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        marginTop: "16px",
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        required
+                        checked={agreeTerms}
+                        onChange={() => setAgreeTerms(!agreeTerms)}
+                        style={{ marginRight: "10px" }}
                       />
-                      <Typography variant="p" component={"p"}>
-                        Receive relevant offers and promotional emails
-                      </Typography>
+                      <div style={{ marginTop:"22px", fontSize: "16px",fontstyle: "normal",color:"#717171",fontWeight:"400" }}>
+                        Receive relevant offers and promotional emails By
+                        signing up,I agree to{" "}
+                        <Link to="/termofuse" style={{ color: "#2B75EC" }}>
+                          Terms
+                        </Link>
+                      </div>
                     </div>
-                    <div className="d-flex justify-content-start mt-1">
-                      By signing up,I agree to{" "}
-                      <Link to="/termofuse" style={{ paddingLeft: 2.8 }}>
-                        terms
+                    <Box mt={2} textAlign="center">
+                      Already have an account?{" "}
+                      <Link
+                        to="/doctor/login"
+                        style={{ color: "#133680", textDecoration: "none" }}
+                      >
+                        Sign In
                       </Link>
-                    </div>
+                    </Box>
+                  </>
+                ) : (
+                  <Box textAlign="center">
+                    <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="otp"
+                      label="OTP"
+                      name="otp"
+                      placeholder="Enter OTP"
+                      value={otpInput}
+                      onChange={(e) => setOtpInput(e.target.value)}
+                      InputProps={{
+                        style: {
+                          height: "59px",
+                          fontFamily: "Montserrat",
+                          padding: "17px 16px",
+                          borderRadius: "14px",
+                          border: "1px solid #858181",
+                          background: "#FFF",
+                          marginBottom: "0px",
+                        },
+                      }}
+                    />
+                    <Box mt={2}>
+                      {otpTimer > 0 ? (
+                        <div>OTP is valid for: {formatTime(otpTimer)}</div>
+                      ) : (
+                        <div>OTP has expired. Please request a new one.</div>
+                      )}
+                    </Box>
+                    <LogButton
+                      variant="contained"
+                      color="primary"
+                      fullWidth
+                      onClick={verifyOtp}
+                      disabled={isOtpVerifying}
+                      style={{
+                        fontWeight: "bold",
+                        height: "59px",
+                        fontFamily: "Montserrat",
+                        marginTop: "25px",
+                        borderRadius: "14px",
+                        width: "100%",
+                        background: "#133682",
+                        color: "#ffffff",
+                      }}
+                    >
+                      {isOtpVerifying ? (
+                        <CircularProgress size={24} />
+                      ) : (
+                        "Verify OTP"
+                      )}
+                    </LogButton>
                   </Box>
-                </Card>
-              </div>
-            </div>
-          </div>
+                )}
+              </Box>
+            </Card>
+          </Box>
         </ThemeProvider>
       </Box>
     </React.Fragment>
