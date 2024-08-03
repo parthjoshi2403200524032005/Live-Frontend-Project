@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Chip,
@@ -220,8 +221,12 @@ const DoctorHospital = () => {
     forGetHospitals();
   };
 
+  const navigate = useNavigate();
+
   const forGetHospitals = async () => {
     const response = await doctorDetailsGet();
+    if(!response.data.data.verified) navigate("/doctor/alert");
+
     if (response.data?.data.hospitals) {
       setHospital(response.data?.data.hospitals);
       setDoctorid(response?.data.data?._id);

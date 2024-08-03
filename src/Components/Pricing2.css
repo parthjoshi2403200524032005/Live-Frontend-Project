@@ -1,0 +1,14 @@
+.card-custom {
+    width: 381px;
+    height: 488px;
+    transition: width 0.3s ease, height 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .center-button {
+    align-self: center;
+    margin-left: 30px;
+  }
+  

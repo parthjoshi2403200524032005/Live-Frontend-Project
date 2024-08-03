@@ -120,24 +120,22 @@ const About = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   return (
     <>
       {/* About Section */}
       <Box pt={{ xs: 6, lg: 12 }} pb={6}>
-        <Heading size="30" text="About Healthmudraa" />
+        <Heading size="30" text="About Health Mudraa" />
         <Box width={{ xs: "90%", lg: "65%" }} m="auto" py={4}>
           <Para
-            text="HealthMudraa is a health information platform offering 
-          subscription-based services, including surgery assistance, physiotherapy, 
-          nursing, and insurance. We address misinformation, raise awareness of treatment options, 
-          and alleviate fears about hospital bills. Join us in empowering people to make informed healthcare 
-          decisions and revolutionizing patient care."
+            text="Health Mudraa was founded in 2020 to change how people access medical information 
+          and healthcare services. Our team includes doctors, surgeons, management experts 
+          from IIM, engineers from IIT and IIIT, and dedicated student interns."
           />
         </Box>
       </Box>
 
-      {/* Vision Mission */}
+      {/* Vision | Mission */}
       <Box
         bgcolor={primaryColor}
         py={7}
@@ -187,71 +185,67 @@ const About = () => {
             fontSize={{ xs: 16, md: 20 }}
             lineHeight="28px"
           >
-            Appropriate, affordable and advanced healthcare services should be
-            accessible for all
+            Educating Publics on medical treatment Options for their illness,
+            Insurance, wellbeing
           </Typography>
         </Box>
       </Box>
 
-      {/* Purpose */}
-      <Box pt={{ xs: 8, lg: 10 }} pb={6}>
-        <Heading text="Our Purpose" />
-
-        <Container sx={{ marginY: 6 }}>
-          <Grid container spacing={{ xs: 4, lg: 8 }} justifyContent="center">
-            <ContentSection
-              Icon={MedicalServicesOutlinedIcon}
-              title="Medical Information"
-              text="The internet is full of inaccurate medical advice, causing confusion and fear. We’re here to fix that by providing reliable information from trusted doctors."
-            />
-            <ContentSection
-              Icon={CampaignOutlinedIcon}
-              title="Lack of Awareness"
-              text="Many people don't know what treatments are available or how to find good doctors. We help by offering detailed information and connecting you with top healthcare professionals."
-            />
-            <ContentSection
-              Icon={LocalHospitalOutlinedIcon}
-              title="Fear of Hospital Bills"
-              text="Hospital bills can be scary and confusing. We aim to make things clearer and help you understand the costs involved."
-            />
-          </Grid>
-        </Container>
-      </Box>
-
-      {/* What's Sets us */}
-      <Box py={{ xs: 2, lg: 4 }}>
-        <Heading text="What Sets Us" />
-
-        <Container sx={{ marginY: 6 }}>
-          <Grid container spacing={{ xs: 4, lg: 8 }} justifyContent="center">
-            <ContentSection
-              Icon={HandshakeOutlinedIcon}
-              title="Trustworthy Doctors"
-              text="Get accurate medical information directly from verified
-                      doctors."
-            />
-            <ContentSection
-              Icon={TodayOutlinedIcon}
-              title="Health Plans"
-              text=" Receive recommendations and treatment options based on
-                      your medical history."
-            />
-            <ContentSection
-              Icon={WorkspacePremiumOutlinedIcon}
-              title=" Personal Branding"
-              text="Connect with top doctors for private practice, available
-                      both offline and online."
-            />
-          </Grid>
-        </Container>
-      </Box>
-
       <div className="container">
+      {/* How It Works */}
+      <div className="my-5">
+        <Heading text={"How It Works"} />
+
+        <Container sx={{ marginY: 6 }}>
+          <Grid container spacing={{ xs: 4, lg: 8 }} justifyContent="center">
+            <ContentSection
+              Icon={YouTubeIcon}
+              title="Watch Expert Videos"
+              text="Find valuable health advice from our trusted doctors."
+            />
+            <ContentSection
+              Icon={CalendarMonthIcon}
+              title="Book an Appointment"
+              text="Schedule a consultation with the doctor of your choice."
+            />
+            <ContentSection
+              Icon={MedicationIcon}
+              title="Get Treatment"
+              text="Receive personalized care and treatment."
+            />
+          </Grid>
+        </Container>
+      </div>
         {/* Partners */}
         <div className="my-5">
           <Heading text={"Our Trusted Partners"} />
           <PartnersCard />
         </div>
+
+        {/* Purpose */}
+        <Box pt={{ xs: 8, lg: 10 }} pb={6}>
+          <Heading text="Our Purpose" />
+
+          <Container sx={{ marginY: 6 }}>
+            <Grid container spacing={{ xs: 4, lg: 8 }} justifyContent="center">
+              <ContentSection
+                Icon={MedicalServicesOutlinedIcon}
+                title="Medical Information"
+                text="The internet is full of inaccurate medical advice, causing confusion and fear. We’re here to fix that by providing reliable information from trusted doctors."
+              />
+              <ContentSection
+                Icon={CampaignOutlinedIcon}
+                title="Lack of Awareness"
+                text="Many people don't know what treatments are available or how to find good doctors. We help by offering detailed information and connecting you with top healthcare professionals."
+              />
+              <ContentSection
+                Icon={LocalHospitalOutlinedIcon}
+                title="Fear of Hospital Bills"
+                text="Hospital bills can be scary and confusing. We aim to make things clearer and help you understand the costs involved."
+              />
+            </Grid>
+          </Container>
+        </Box>
 
         {/* Teams */}
         <Box mt={12}>
@@ -259,30 +253,33 @@ const About = () => {
           <TeamCard />
         </Box>
 
-        {/* How It Works */}
-        <div className="my-5">
-          <Heading text={"How It Works"} />
+        {/* What's Sets us */}
+        <Box py={{ xs: 2, lg: 4 }}>
+          <Heading text="What Sets Us" />
 
           <Container sx={{ marginY: 6 }}>
             <Grid container spacing={{ xs: 4, lg: 8 }} justifyContent="center">
               <ContentSection
-                Icon={YouTubeIcon}
-                title="Watch Expert Videos"
-                text="Find valuable health advice from our trusted doctors."
+                Icon={HandshakeOutlinedIcon}
+                title="Trustworthy Doctors"
+                text="Get accurate medical information directly from verified
+                      doctors."
               />
               <ContentSection
-                Icon={CalendarMonthIcon}
-                title="Book an Appointment"
-                text="Schedule a consultation with the doctor of your choice."
+                Icon={TodayOutlinedIcon}
+                title="Health Plans"
+                text=" Receive recommendations and treatment options based on
+                      your medical history."
               />
               <ContentSection
-                Icon={MedicationIcon}
-                title="Get Treatment"
-                text="Receive personalized care and treatment."
+                Icon={WorkspacePremiumOutlinedIcon}
+                title=" Personal Branding"
+                text="Connect with top doctors for private practice, available
+                      both offline and online."
               />
             </Grid>
           </Container>
-        </div>
+        </Box>
 
         {/* Contact Deatils*/}
         <Box sx={{ margin: "85px 0" }}>
@@ -355,7 +352,7 @@ const About = () => {
                   color: "#133682",
                   fontWeight: "bold",
                   textDecoration: "none",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 }}
               >
                 <ChatOutlinedIcon />

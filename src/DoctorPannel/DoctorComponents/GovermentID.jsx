@@ -59,16 +59,16 @@ function GovermentID() {
         }
       };
       const forDoctorSubmit = async () => {
-        try {
-          const responseJson = await doctorDetailsUpdate(details);
-          if (responseJson.data.status) {
-            toast.success(responseJson.data.message);
-          } else {
-            toast.error(responseJson.data.message);
+          try {
+            const responseJson = await doctorDetailsUpdate(details);
+            if (responseJson.data.status) {
+              toast.success(responseJson.data.message);
+            } else {
+              toast.error(responseJson.data.message);
+            }
+          } catch (error) {
+            toast.error("Error occured!");
           }
-        } catch (error) {
-          toast.error("Error occured!");
-        }
       };
     
       useEffect(() => {
@@ -108,33 +108,88 @@ function GovermentID() {
         return " ";
       };
     
+      // const handleAddGovt = async () => {
+      //   setLoading((prev) => ({ ...prev, govt: true }));
+      //   if (imagechanged) {
+      //     console.log("upload");
+      //     var file = await forUploadImage("govt");
+      //     setGovtId((prev) => ({ ...prev, govtIdurl: file }));
+      //   }
+      //   if (
+      //     govtId.proofNumber &&
+      //     govtId.proofNumber &&
+      //     (file || govtId.govtIdurl)
+      //   ) {
+      //     const updatedNewGovt = [...details.govtId];
+      //     updatedNewGovt.push({
+      //       ...govtId,
+      //       govtIdurl: file ? file : govtId.govtIdurl,
+      //     });
+      //     setDetails((prevState) => ({
+      //       ...prevState,
+      //       govtId: updatedNewGovt,
+      //     }));
+      //     setGovtId({ proofType: "", proofNumber: "", govtIdurl: "" });
+      //   }
+      //   setImage({ preview: "", data: "" });
+      //   setImagechanged(false);
+      //   setLoading((prev) => ({ ...prev, govt: false }));
+      // };
+
       const handleAddGovt = async () => {
         setLoading((prev) => ({ ...prev, govt: true }));
+
+        let file;
         if (imagechanged) {
-          console.log("upload");
-          var file = await forUploadImage("govt");
-          setGovtId((prev) => ({ ...prev, govtIdurl: file }));
+          try {
+            file = await forUploadImage("govt");
+            if (!file) {
+              throw new Error("Failed to upload image.");
+            }
+            setGovtId((prev) => ({ ...prev, govtIdurl: file }));
+          } catch (error) {
+            toast.error("Error uploading image. Please try again.");
+            setLoading((prev) => ({ ...prev, govt: false }));
+            return;
+          }
         }
-        if (
-          govtId.proofNumber &&
-          govtId.proofNumber &&
-          (file || govtId.govtIdurl)
-        ) {
-          const updatedNewGovt = [...details.govtId];
-          updatedNewGovt.push({
-            ...govtId,
-            govtIdurl: file ? file : govtId.govtIdurl,
-          });
-          setDetails((prevState) => ({
-            ...prevState,
-            govtId: updatedNewGovt,
-          }));
-          setGovtId({ proofType: "", proofNumber: "", govtIdurl: "" });
+
+        if (!govtId.proofType) {
+          toast.error("Proof type is required.");
+          setLoading((prev) => ({ ...prev, govt: false }));
+          return;
         }
+        if (!govtId.proofNumber) {
+          toast.error("Proof number is required.");
+          setLoading((prev) => ({ ...prev, govt: false }));
+          return;
+        }
+
+        if (!file && !govtId.govtIdurl) {
+          toast.error("Please upload a government ID certificate.");
+          setLoading((prev) => ({ ...prev, govt: false }));
+          return;
+        }
+
+        const updatedNewGovt = [...details.govtId];
+        updatedNewGovt.push({
+          ...govtId,
+          govtIdurl: file ? file : govtId.govtIdurl,
+        });
+
+        setDetails((prevState) => ({
+          ...prevState,
+          govtId: updatedNewGovt,
+        }));
+
+        setGovtId({ proofType: "", proofNumber: "", govtIdurl: "" });
+
         setImage({ preview: "", data: "" });
         setImagechanged(false);
+
         setLoading((prev) => ({ ...prev, govt: false }));
       };
+
     
       const handleEditGovt = (index) => {
         const govtData = details.govtId[index];
@@ -257,7 +312,7 @@ function GovermentID() {
             </UploadButton>
 
             <UploadButton
-              to="/doctor/registration"
+              to="/doctor/awards"
               style={{ fontFamily: "Montserrat" , backgroundColor:"#133680" , color:"white" ,marginLeft:"20px" }}
             >
               Next

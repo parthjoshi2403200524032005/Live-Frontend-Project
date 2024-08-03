@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { LogButton } from "../../CustomStyles/Styles";
 import Logo from "../../assets/Logo.png";
-import { doctorLogin } from "../../Service/Services";
+import { doctorLogin ,doctorDetailsGet } from "../../Service/Services";
 import CircularProgress from "@mui/material/CircularProgress";
 import { toast } from "react-hot-toast";
 import Visibility from "@mui/icons-material/Visibility";
@@ -62,7 +62,16 @@ const DocLogin = () => {
         localStorage.setItem("refreshToken", doctData.data.refreshToken);
         localStorage.setItem("type", "doctors");
         toast.success("Successfully logged in!");
-        navigate("/doctor/profile");
+
+        const response = await doctorDetailsGet();
+        if (response?.data.status) {
+          console.log(response.data.data.verified);
+        } else {
+          console.log(response?.data.message);
+        }
+ 
+        response.data.data.verified ? navigate("/doctor/profile") : navigate("/doctor/quickOnboarding");
+        
       } catch (error) {
         toast.error("Invalid credentials!");
       }

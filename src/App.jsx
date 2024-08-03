@@ -56,13 +56,16 @@ import Sitemap from "./sitemap.xml";
 import DoctorLeads from "./DoctorPannel/DoctorComponents/DoctorLeads";
 // import DocQuickDetails from "./DoctorPannel/DoctorComponents/DocQuickDetails";
 import DocQuick from "./DoctorPannel/DoctorComponents/DocQuick";
+import Alert from "./DoctorPannel/DoctorComponents/Alert";
 import Videos from "./Components/Videos";
+import Search from "./Components/Search";
 
 const App = () => {
   const userRoutes = [
     { path: "/", element: <Home /> },
     { path: "/sitemap.xml", element: <Sitemap /> },
     { path: "/videos" , element: <Videos/>},
+    { path: "/search/:query", element: <Search/>},
     { path: "/videos/:videotitle", element: <SpecificVideo /> },
     { path: "/service", element: <Service /> },
     { path: "/about", element: <About /> },
@@ -127,6 +130,7 @@ const App = () => {
     { path: "/user/dashboard", element: <UserProfile /> },
     { path: "/doctor/joinhospital", element: <JoinHospital /> },
     { path: "/doctor/requests", element: <Requests /> },
+    { path: "/doctor/alert", element: <Alert /> },
     { path: "*", element: <Page404 /> },
   ];
 
