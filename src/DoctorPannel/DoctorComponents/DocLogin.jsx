@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import {
@@ -10,7 +10,7 @@ import {
   IconButton,
 } from "@mui/material";
 import { LogButton } from "../../CustomStyles/Styles";
-
+import DocmobileLogin from "./DocmobileLogin";
 import DoctorSign from "../../assets/docsignin.jpg";
 import UserIcon from "../../Components/Svgs/User.svg"; // Import the user icon
 import { doctorLogin, doctorDetailsGet } from "../../Service/Services";
@@ -39,7 +39,9 @@ const DocLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-
+  const [isMobile, setIsMobile] = useState(
+    window.matchMedia("(max-width: 750px)").matches
+  );
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -48,6 +50,13 @@ const DocLogin = () => {
     const { name, value } = e.target;
     setDoctor({ ...doctor, [name]: value });
   };
+
+  useEffect(() => {
+    const handleResize = () =>
+      setIsMobile(window.matchMedia("(max-width: 750px)").matches);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const forDoctorLogin = async () => {
     if (doctor.email && doctor.password) {
@@ -79,8 +88,9 @@ const DocLogin = () => {
       toast.error("Please enter your credentials");
     }
   };
-
-  return (
+  return isMobile ? (
+    <DocmobileLogin />
+  ) : (
     <React.Fragment>
       <Box
         component={"div"}

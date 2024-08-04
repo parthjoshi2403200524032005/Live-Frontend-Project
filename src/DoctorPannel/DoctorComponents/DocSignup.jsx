@@ -19,6 +19,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import PhoneIcon from "@mui/icons-material/Phone";
 import PersonIcon from "@mui/icons-material/Person";
 import DoctorSign from "../../assets/docsignin.jpg";
+import DocmobileSignup from "./DocmobileSignup";
 
 const DocSignup = () => {
   const theme = createTheme({
@@ -52,7 +53,7 @@ const DocSignup = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
+  const [isMobile, setIsMobile] = useState(window.matchMedia('(max-width: 750px)').matches);
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [isOtpVerifying, setIsOtpVerifying] = useState(false);
   const [otpInput, setOtpInput] = useState("");
@@ -60,6 +61,12 @@ const DocSignup = () => {
   const [otpTimerRunning, setOtpTimerRunning] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false); // State for terms checkbox
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.matchMedia('(max-width: 750px)').matches);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     let timer;
@@ -160,7 +167,9 @@ const DocSignup = () => {
     return `${minutes}:${secs < 10 ? `0${secs}` : secs}`;
   };
 
-  return (
+  return isMobile ? (
+    <DocmobileSignup/>
+  ) : (
     <React.Fragment>
       <Box
         component={"div"}
