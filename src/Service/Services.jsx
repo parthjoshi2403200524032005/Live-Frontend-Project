@@ -37,9 +37,6 @@ export const userLogin = async (data) => {
 export const userSignup = async (data) => {
   return await Axiosinstance.post(`${url}/users/signup`, data);
 };
-export const sendOtpUser = async (data) => {
-  return await Axiosinstance.post(`${url}/users/sendotp`, data)
-}
 
 export const userHomePage = async (searchTerm = "") => {
   return await Axiosinstance.get(

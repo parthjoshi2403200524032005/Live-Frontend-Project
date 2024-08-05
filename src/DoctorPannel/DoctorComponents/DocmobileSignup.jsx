@@ -5,6 +5,7 @@ import {
   IconButton,
   Typography,
   CircularProgress,
+  
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -29,7 +30,7 @@ const DocmobileSignup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [otpInput, setOtpInput] = useState("");
-  const [otpTimer, setOtpTimer] = useState(600);
+  const [otpTimer, setOtpTimer] = useState(300);
   const [otpTimerRunning, setOtpTimerRunning] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false); // State for terms checkbox
   const navigate = useNavigate();
@@ -76,12 +77,7 @@ const DocmobileSignup = () => {
 
   const forDoctorSignup = async () => {
     const { email, password, confirmpassword } = doctor;
-  
-    if (!agreeTerms) {
-      toast.error("Agree to terms and conditions");
-      return;
-    }
-  
+
     if (email && password && confirmpassword) {
       setIsLoading(true);
       if (password !== confirmpassword) {
@@ -91,7 +87,7 @@ const DocmobileSignup = () => {
         try {
           await sendOtp({ email });
           setIsOtpSent(true);
-          setOtpTimer(600);
+          setOtpTimer(300);
           setOtpTimerRunning(true);
           setIsLoading(false);
         } catch (error) {
@@ -106,7 +102,6 @@ const DocmobileSignup = () => {
       }
     }
   };
-  
 
   const verifyOtp = async () => {
     if (otpInput) {
@@ -233,7 +228,7 @@ const DocmobileSignup = () => {
                   boxShadow: "0px 0px 25px 0px rgba(0, 0, 0, 0.05)",
                   color: "rgba(38, 38, 38, 0.80)",
                   fontFamily: "Poppins, sans-serif",
-
+                  
                   border: "none",
                   outline: "none",
                 }}
@@ -270,7 +265,7 @@ const DocmobileSignup = () => {
                     border: "none",
                     backgroundColor: "#FFF",
                     fontFamily: "Poppins, sans-serif",
-
+                    
                     outline: "none",
                     cursor: "pointer",
                     padding: "10px",
@@ -303,7 +298,7 @@ const DocmobileSignup = () => {
                     boxShadow: "0px 0px 25px 0px rgba(0, 0, 0, 0.05)",
                     color: "rgba(38, 38, 38, 0.80)",
                     fontFamily: "Poppins, sans-serif",
-
+                    
                     fontStyle: "normal",
                     fontWeight: "400",
                     lineHeight: "normal",
@@ -427,10 +422,10 @@ const DocmobileSignup = () => {
             >
               <input
                 type="checkbox"
-                
+                required
                 checked={agreeTerms}
                 onChange={() => setAgreeTerms(!agreeTerms)}
-                style={{ marginLeft: "20px", marginRight: "10px" }}
+                style={{ marginLeft: "20px" ,marginRight:"10px" }}
               />
               <div
                 style={{
@@ -454,11 +449,7 @@ const DocmobileSignup = () => {
             <Typography
               variant="body1"
               component="p"
-              style={{
-                margin: "20px 0",
-                fontSize: "18px",
-                fontFamily: "Poppins",
-              }}
+              style={{ margin: "20px 0", fontSize: "18px" }}
             >
               We have sent an OTP to your email. Please enter it below to verify
               your account.
@@ -523,11 +514,7 @@ const DocmobileSignup = () => {
           Already have an account?{" "}
           <Link
             to="/doctor/login"
-            style={{
-              color: "rgba(66, 126, 255, 0.80)",
-              fontWeight: 600,
-              textDecoration: "none",
-            }}
+            style={{ color: "rgba(66, 126, 255, 0.80)",fontWeight: 600, textDecoration: "none" }}
           >
             Sign In
           </Link>
