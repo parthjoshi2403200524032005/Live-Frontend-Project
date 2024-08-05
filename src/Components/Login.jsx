@@ -1,25 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import TextField from "@mui/material/TextField";
 import {
   Box,
-  Card,
   ThemeProvider,
   createTheme,
-  TextField,
+  Card,
+  useMediaQuery,
+  CircularProgress,
   InputAdornment,
   IconButton,
 } from "@mui/material";
 import { LogButton } from "../CustomStyles/Styles";
-import { Link, useNavigate } from "react-router-dom";
-import { userLogin } from "../Service/Services"; // Adjust as per your service file
-import CircularProgress from "@mui/material/CircularProgress";
-import toast from "react-hot-toast";
+import Logo from "../assets/Logo.png";
+import { toast } from "react-hot-toast";
+import { userLogin } from "../Service/Services";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import PersonIcon from "@mui/icons-material/Person";
-import UserSign from "../assets/userdoc.jpeg"; // Update with your user image
-import UsermobileLogin from "./UsermobileLogin";
 
 const Login = () => {
+  const forBelow800px = useMediaQuery("(max-width:800px)");
+  const forBelow991px = useMediaQuery("(max-width:991px)");
+  const forBelow1080px = useMediaQuery("(max-width:1200px)");
+
   const theme = createTheme({
     palette: {
       type: "light",
@@ -35,58 +38,45 @@ const Login = () => {
     },
   });
 
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
+  const navigate = useNavigate();
+  const [user, setUser] = useState({ email: "", password: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
-  const [isMobile, setIsMobile] = useState(
-    window.matchMedia("(max-width: 750px)").matches
-  );
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  useEffect(() => {
-    const handleResize = () =>
-      setIsMobile(window.matchMedia("(max-width: 750px)").matches);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-  const userChange = (e) => {
-    const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
+
+  const forChange = (event) => {
+    setUser({
+      ...user,
+      [event.target.name]: event.target.value,
+    });
   };
 
-  const forUserLogin = async () => {
-    const { email, password } = user;
-
-    if (email && password) {
+  const forLogin = async () => {
+    if (user.email && user.password) {
       setIsLoading(true);
+
       try {
-        const response = await userLogin({ email, password });
-        if (response?.data) {
-          localStorage.setItem("accessToken", response.data.accessToken);
-          localStorage.setItem("refreshToken", response.data.refreshToken);
-          localStorage.setItem("type", "users");
-          navigate("/user/dashboard");
-          toast.success("Logged in successfully!");
-        } else {
-          toast.error("Failed to login");
-        }
+        const userData = await userLogin(user);
+        localStorage.setItem("hmId", userData.data.id);
+        localStorage.setItem("accessToken", userData.data.accessToken);
+        localStorage.setItem("refreshToken", userData.data.refreshToken);
+        localStorage.setItem("type", "users");
+        navigate("/user/dashboard");
+        toast.success("Successfully logged in!");
       } catch (error) {
-        toast.error("An error occurred during login");
+        toast.error("Invalid credentials!");
       }
+
       setIsLoading(false);
     } else {
-      toast.error("All fields are required!");
+      toast.error("Please enter your credentials");
     }
   };
 
-  return isMobile ? (
-    <UsermobileLogin />
-  ) : (
+  return (
     <React.Fragment>
       <Box
         component={"div"}
@@ -95,212 +85,142 @@ const Login = () => {
           fontWeight: "bold",
           height: "100vh",
           display: "flex",
-          backgroundColor: "#D7E7FF",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <ThemeProvider theme={theme}>
-          <Box
-            component="img"
-            src={UserSign}
-            style={{ width: "50%", height: "100vh", objectFit: "cover" }}
-          />
-          <Box
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              padding: "0 20px",
-              width: "50%",
-            }}
-          >
+          <div className="container">
             <div
-              style={{
-                color: "#363636",
-                textAlign: "center",
-                fontFamily: "Poppins",
-                fontSize: "36px",
-                fontWeight: 600,
-                marginBottom: "20px",
-              }}
+              className={`row justify-content-around align-items-center ${
+                forBelow800px ? "text-center" : ""
+              }`}
             >
-              Login
-            </div>
-            <Card
-              sx={{
-                p: 3.4,
-                zIndex: 1,
-                py: 4.2,
-                width: "100%",
-                maxWidth: "534px",
-                flexShrink: 0,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "transparent",
-                boxShadow: "none",
-              }}
-            >
-              <Box component="form" sx={{ width: "100%", mt: 1 }}>
-                <div
-                  style={{
-                    color: "#363636",
-                    fontFamily: "Poppins",
-                    fontSize: "16px",
-                    fontWeight: 700,
-                    lineHeight: "normal",
-                    marginBottom: "0px",
-                    marginTop: "0px",
-                    marginLeft: "14px",
-                  }}
-                >
-                  Email
+              <div
+                className="col-lg-6 col-md-8 col-sm-10 col-11"
+                style={{
+                  textAlign: "center",
+                  marginTop: forBelow991px ? 150 : 30,
+                  marginBottom: 40,
+                }}
+              >
+                <div style={{ color: "#133680", fontSize: 20 }}>
+                  Are you new looking to join healthmudraa
                 </div>
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="email"
-                  autoComplete="off"
-                  type="email"
-                  placeholder="Type your email"
-                  onChange={userChange}
-                  name="email"
-                  InputProps={{
-                    style: {
-                      height: "59px",
-                      fontFamily: "Montserrat",
-                      padding: "17px 16px",
-                      borderRadius: "14px",
-                      border: "1px solid #858181",
-                      background: "#FFF",
-                      marginBottom: "0px",
-                    },
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton edge="end">
-                          <PersonIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
+                <Box
+                  sx={{
+                    width: 120,
+                    height: 32,
+                    border: "none",
+                    backgroundColor: "#133680",
+                    color: "#FFFF",
+                    borderRadius: 1,
+                    m: 2,
                   }}
-                />
-                <div
-                  style={{
-                    color: "#363636",
-                    fontFamily: "Poppins",
-                    fontSize: "16px",
-                    fontWeight: 700,
-                    lineHeight: "normal",
-                    marginBottom: "0px",
-                    marginTop: "16px",
-                    marginLeft: "14px",
+                  component={"button"}
+                  onClick={() => navigate("/signup")}
+                >
+                  Sign up
+                </Box>
+              </div>
+
+              <div
+                className={`${
+                  forBelow1080px ? "col-lg-5" : "col-lg-4"
+                } col-md-8 col-sm-10 col-12`}
+              >
+                <Card
+                  sx={{
+                    p: 3.4,
+                    zIndex: 1,
+                    py: 4.2,
+                    mb: forBelow991px ? 14 : "",
                   }}
                 >
-                  Password
-                </div>
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Type your password"
-                  onChange={userChange}
-                  name="password"
-                  InputProps={{
-                    style: {
-                      height: "59px",
-                      fontFamily: "Montserrat",
-                      padding: "17px 16px",
-                      borderRadius: "14px",
-                      border: "1px solid #858181",
-                      background: "#FFF",
-                      marginBottom: "0px",
-                    },
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          onClick={togglePasswordVisibility}
-                          edge="end"
-                        >
-                          {showPassword ? <Visibility /> : <VisibilityOff />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginTop: "20px",
-                  }}
-                >
-                  <div>
-                    <input
-                      type="checkbox"
-                      id="rememberMe"
-                      name="rememberMe"
-                      style={{
-                        accentColor: "#133682",
+                  <Box component="form" sx={{ mt: 1 }}>
+                    <Link to="/">
+                      <div className=" d-flex justify-content-center">
+                        <Box
+                          component={"img"}
+                          src={Logo}
+                          style={{ width: 210 }}
+                        />
+                      </div>
+                    </Link>
+                    <TextField
+                      margin="normal"
+                      autoComplete="off"
+                      required
+                      fullWidth
+                      id="email"
+                      placeholder="Mobile Number/Email"
+                      onChange={forChange}
+                      name="email"
+                      InputProps={{
+                        style: {
+                          height: "2.2em",
+                          fontFamily: "Montserrat",
+                        },
                       }}
                     />
-                    <label
-                      htmlFor="rememberMe"
-                      style={{
-                        marginLeft: "10px",
-                        fontFamily: "Poppins",
-                        color: "#133682",
+                    <TextField
+                      margin="normal"
+                      autoComplete="off"
+                      required
+                      fullWidth
+                      name="password"
+                      type={showPassword ? "text" : "password"}
+                      id="password"
+                      placeholder="Password"
+                      onChange={forChange}
+                      InputProps={{
+                        style: {
+                          height: "2.2em",
+                          fontFamily: "Montserrat",
+                        },
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={togglePasswordVisibility}
+                              edge="end"
+                            >
+                              {showPassword ? (
+                                <VisibilityOff />
+                              ) : (
+                                <Visibility />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
                       }}
+                    />
+                    <LogButton
+                      fullWidth
+                      type="button"
+                      style={{
+                        fontFamily: "Montserrat",
+                        fontSize: 18,
+                        fontWeight: "bold",
+                      }}
+                      onClick={forLogin}
+                      disabled={isLoading}
+                      startIcon={
+                        isLoading ? (
+                          <CircularProgress size={20} color="inherit" />
+                        ) : null
+                      }
                     >
-                      Remember Me
-                    </label>
-                  </div>
-                  <Box
-                    component={"a"}
-                    sx={{
-                      cursor: "pointer",
-                      fontFamily: "Poppins",
-                      color: "#133680",
-                    }}
-                  >
-                    Forgot Password?
+                      {isLoading ? "Logging in..." : "Login"}
+                    </LogButton>
+                    <div className="d-flex justify-content-end mt-3">
+                      <Link href="#">Forgot password?</Link>
+                    </div>
                   </Box>
-                </div>
-                <LogButton
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                  onClick={forUserLogin}
-                  disabled={isLoading}
-                  style={{
-                    fontWeight: "bold",
-                    height: "59px",
-                    fontFamily: "Montserrat",
-                    marginTop: "25px",
-                    borderRadius: "14px",
-                    width: "100%",
-                    background: "#133682",
-                    color: "#ffffff",
-                  }}
-                >
-                  {isLoading ? <CircularProgress size={24} /> : "Login"}
-                </LogButton>
-                <Box mt={2} textAlign="center">
-                  Don’t have an account?{" "}
-                  <Link
-                    to="/signup"
-                    style={{ color: "#133680", textDecoration: "none" }}
-                  >
-                    Sign Up
-                  </Link>
-                </Box>
-              </Box>
-            </Card>
-          </Box>
+                </Card>
+              </div>
+            </div>
+          </div>
         </ThemeProvider>
       </Box>
     </React.Fragment>
