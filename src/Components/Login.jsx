@@ -4,7 +4,6 @@ import {
   Card,
   ThemeProvider,
   createTheme,
-  Typography,
   TextField,
   InputAdornment,
   IconButton,
@@ -231,8 +230,8 @@ const Login = () => {
                       </InputAdornment>
                     ),
                   }}
-                  />
-                  <div
+                />
+                <div
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
@@ -262,7 +261,6 @@ const Login = () => {
                   </div>
                   <Box
                     component={"a"}
-                    
                     sx={{
                       cursor: "pointer",
                       fontFamily: "Poppins",
