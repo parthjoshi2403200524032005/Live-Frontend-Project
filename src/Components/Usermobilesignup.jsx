@@ -1,23 +1,18 @@
 import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Card,
-  IconButton,
-  Typography,
-  CircularProgress,
-} from "@mui/material";
+import { Box, Card, Typography, IconButton } from "@mui/material";
+import { LogButton } from "../CustomStyles/Styles";
+import { Link, useNavigate } from "react-router-dom";
+import { userSignup, sendOtp } from "../Service/Services";
+import CircularProgress from "@mui/material/CircularProgress";
+import toast from "react-hot-toast";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import PhoneIcon from "@mui/icons-material/Phone";
 import PersonIcon from "@mui/icons-material/Person";
-import { LogButton } from "../../CustomStyles/Styles"; // Adjust the import path
-import LogoImage from "../../assets/image.png"; // Adjust the import path
-import { Link, useNavigate } from "react-router-dom";
-import { doctorSignup, sendOtp } from "../../Service/Services";
-import { toast } from "react-hot-toast";
 
-const DocmobileSignup = () => {
-  const [doctor, setDoctor] = useState({
+import LogoImage from "../assets/image.png";
+const UsermobileSignup = () => {
+  const [user, setUser] = useState({
     email: "",
     mobile: null,
     password: "",
@@ -69,19 +64,19 @@ const DocmobileSignup = () => {
     setMobileNumber(e.target.value);
   };
 
-  const doctorChange = (e) => {
+  const userChange = (e) => {
     const { name, value } = e.target;
-    setDoctor({ ...doctor, [name]: value });
+    setUser({ ...user, [name]: value });
   };
 
-  const forDoctorSignup = async () => {
-    const { email, password, confirmpassword } = doctor;
-  
+  const forUserSignup = async () => {
+    const { email, password, confirmpassword } = user;
+
     if (!agreeTerms) {
       toast.error("Agree to terms and conditions");
       return;
     }
-  
+
     if (email && password && confirmpassword) {
       setIsLoading(true);
       if (password !== confirmpassword) {
@@ -106,13 +101,12 @@ const DocmobileSignup = () => {
       }
     }
   };
-  
 
   const verifyOtp = async () => {
     if (otpInput) {
       setIsLoading(true);
       try {
-        const { email, password } = doctor;
+        const { email, password } = user;
         const data = {
           email,
           otp: otpInput,
@@ -120,12 +114,12 @@ const DocmobileSignup = () => {
           countrycode: countryCode,
           mobile: mobileNumber,
         };
-        const response = await doctorSignup(data);
+        const response = await userSignup(data);
         if (response?.data) {
           localStorage.setItem("accessToken", response.data.accessToken);
           localStorage.setItem("refreshToken", response.data.refreshToken);
-          localStorage.setItem("type", "doctors");
-          navigate("/doctor/profile");
+          localStorage.setItem("type", "users");
+          navigate("/user/dashboard");
           toast.success("Account created successfully!");
         } else {
           toast.error("Failed to verify OTP");
@@ -222,7 +216,7 @@ const DocmobileSignup = () => {
                 type="email"
                 name="email"
                 placeholder="Type your email"
-                onChange={doctorChange}
+                onChange={userChange}
                 style={{
                   width: "100%",
                   height: "100%",
@@ -233,7 +227,6 @@ const DocmobileSignup = () => {
                   boxShadow: "0px 0px 25px 0px rgba(0, 0, 0, 0.05)",
                   color: "rgba(38, 38, 38, 0.80)",
                   fontFamily: "Poppins, sans-serif",
-
                   border: "none",
                   outline: "none",
                 }}
@@ -270,7 +263,6 @@ const DocmobileSignup = () => {
                     border: "none",
                     backgroundColor: "#FFF",
                     fontFamily: "Poppins, sans-serif",
-
                     outline: "none",
                     cursor: "pointer",
                     padding: "10px",
@@ -303,7 +295,6 @@ const DocmobileSignup = () => {
                     boxShadow: "0px 0px 25px 0px rgba(0, 0, 0, 0.05)",
                     color: "rgba(38, 38, 38, 0.80)",
                     fontFamily: "Poppins, sans-serif",
-
                     fontStyle: "normal",
                     fontWeight: "400",
                     lineHeight: "normal",
@@ -312,7 +303,6 @@ const DocmobileSignup = () => {
                   }}
                 />
               </div>
-
               <div
                 style={{
                   position: "absolute",
@@ -339,7 +329,7 @@ const DocmobileSignup = () => {
                 type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Type your password"
-                onChange={doctorChange}
+                onChange={userChange}
                 style={{
                   width: "100%",
                   height: "100%",
@@ -377,7 +367,7 @@ const DocmobileSignup = () => {
                 type={showPassword ? "text" : "password"}
                 name="confirmpassword"
                 placeholder="Confirm your password"
-                onChange={doctorChange}
+                onChange={userChange}
                 style={{
                   width: "100%",
                   height: "100%",
@@ -405,7 +395,7 @@ const DocmobileSignup = () => {
 
             <LogButton
               variant="contained"
-              onClick={forDoctorSignup}
+              onClick={forUserSignup}
               style={{
                 marginTop: "20px",
                 backgroundColor: "#133682",
@@ -427,7 +417,6 @@ const DocmobileSignup = () => {
             >
               <input
                 type="checkbox"
-                
                 checked={agreeTerms}
                 onChange={() => setAgreeTerms(!agreeTerms)}
                 style={{ marginLeft: "20px", marginRight: "10px" }}
@@ -436,12 +425,12 @@ const DocmobileSignup = () => {
                 style={{
                   marginTop: "22px",
                   fontSize: "16px",
-                  fontstyle: "normal",
+                  fontStyle: "normal",
                   color: "#717171",
                   fontWeight: "400",
                 }}
               >
-                Receive relevant offers and promotional emails By signing up,I
+                Receive relevant offers and promotional emails. By signing up, I
                 agree to{" "}
                 <Link to="/termofuse" style={{ color: "#2B75EC" }}>
                   Terms
@@ -522,7 +511,7 @@ const DocmobileSignup = () => {
         >
           Already have an account?{" "}
           <Link
-            to="/doctor/login"
+            to="/login"
             style={{
               color: "rgba(66, 126, 255, 0.80)",
               fontWeight: 600,
@@ -537,4 +526,4 @@ const DocmobileSignup = () => {
   );
 };
 
-export default DocmobileSignup;
+export default UsermobileSignup;

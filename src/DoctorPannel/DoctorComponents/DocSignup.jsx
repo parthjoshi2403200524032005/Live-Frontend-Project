@@ -4,6 +4,7 @@ import {
   Card,
   ThemeProvider,
   createTheme,
+  Typography,
   TextField,
   InputAdornment,
   IconButton,
@@ -53,19 +54,22 @@ const DocSignup = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.matchMedia('(max-width: 750px)').matches);
+  const [isMobile, setIsMobile] = useState(
+    window.matchMedia("(max-width: 750px)").matches
+  );
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [isOtpVerifying, setIsOtpVerifying] = useState(false);
   const [otpInput, setOtpInput] = useState("");
-  const [otpTimer, setOtpTimer] = useState(300);
+  const [otpTimer, setOtpTimer] = useState(600);
   const [otpTimerRunning, setOtpTimerRunning] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false); // State for terms checkbox
   const navigate = useNavigate();
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.matchMedia('(max-width: 750px)').matches);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    const handleResize = () =>
+      setIsMobile(window.matchMedia("(max-width: 750px)").matches);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
@@ -104,7 +108,12 @@ const DocSignup = () => {
 
   const forDoctorSignup = async () => {
     const { email, password, confirmpassword } = doctor;
-
+  
+    if (!agreeTerms) {
+      toast.error("Agree to terms and conditions");
+      return;
+    }
+  
     if (email && password && confirmpassword) {
       setIsLoading(true);
       if (password !== confirmpassword) {
@@ -114,7 +123,7 @@ const DocSignup = () => {
         try {
           await sendOtp({ email });
           setIsOtpSent(true);
-          setOtpTimer(300);
+          setOtpTimer(600);
           setOtpTimerRunning(true);
           setIsLoading(false);
         } catch (error) {
@@ -129,6 +138,7 @@ const DocSignup = () => {
       }
     }
   };
+  
 
   const verifyOtp = async () => {
     if (otpInput) {
@@ -168,7 +178,7 @@ const DocSignup = () => {
   };
 
   return isMobile ? (
-    <DocmobileSignup/>
+    <DocmobileSignup />
   ) : (
     <React.Fragment>
       <Box
@@ -471,7 +481,15 @@ const DocSignup = () => {
                         onChange={() => setAgreeTerms(!agreeTerms)}
                         style={{ marginRight: "10px" }}
                       />
-                      <div style={{ marginTop:"22px", fontSize: "16px",fontstyle: "normal",color:"#717171",fontWeight:"400" }}>
+                      <div
+                        style={{
+                          marginTop: "22px",
+                          fontSize: "16px",
+                          fontstyle: "normal",
+                          color: "#717171",
+                          fontWeight: "400",
+                        }}
+                      >
                         Receive relevant offers and promotional emails By
                         signing up,I agree to{" "}
                         <Link to="/termofuse" style={{ color: "#2B75EC" }}>
@@ -491,6 +509,14 @@ const DocSignup = () => {
                   </>
                 ) : (
                   <Box textAlign="center">
+                    <Typography
+                      variant="body1"
+                      component="p"
+                      style={{ margin: "20px 0", fontSize: "18px" }}
+                    >
+                      We have sent an OTP to your email. Please enter it below
+                      to verify your account.
+                    </Typography>
                     <TextField
                       margin="normal"
                       required
