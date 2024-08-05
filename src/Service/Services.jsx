@@ -2,12 +2,9 @@ import { Axiosinstance } from "./AxiosInterceptors";
 const accessToken = localStorage.getItem("accessToken");
 // ${aws_url}/
 
-
-
 const url = process.env.REACT_APP_BASE_URL;
 //const url = 'http://localhost:8080';
 // const url='https://health-mudhra-backend.vercel.app';
-
 
 export const aws_url =
   "https://healthmudraa-assets.s3.ap-south-1.amazonaws.com";
@@ -20,8 +17,8 @@ export const doctorSignup = async (data) => {
   return await Axiosinstance.post(`${url}/doctors/signup`, data);
 };
 export const sendOtp = async (data) => {
-  return await Axiosinstance.post(`${url}/doctors/sendotp`, data)
-}
+  return await Axiosinstance.post(`${url}/doctors/sendotp`, data);
+};
 export const doctorForgotPassword = async (data) => {
   return await Axiosinstance.post(`${url}/doctors/forgotpassword`, data);
 };
@@ -51,8 +48,10 @@ export const videoHomePage = async (videocode) => {
 
 //Power Search
 export const AiSearch = async (data) => {
-  return await Axiosinstance.post(`${url}/homepage/ai-search`, {search: data});
-}
+  return await Axiosinstance.post(`${url}/homepage/ai-search`, {
+    search: data,
+  });
+};
 
 export const filterDataService = async (data) => {
   return await Axiosinstance.post(`${url}/doctors/specilizeddoctors`, data);
@@ -431,7 +430,7 @@ export const getDoctorVideos = async (id) => {
 };
 
 export const createDoctorVideo = async (data) => {
-  console.log(`triggeredd ${accessToken}`)
+  console.log(`triggeredd ${accessToken}`);
   return await Axiosinstance.post(`${url}/video/`, data, {
     headers: {
       "Content-Type": "application/json",
