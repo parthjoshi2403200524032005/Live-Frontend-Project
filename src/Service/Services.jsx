@@ -30,7 +30,9 @@ export const doctorUploadPassword = async (data) => {
 export const userLogin = async (data) => {
   return await Axiosinstance.post(`${url}/users/signin`, data);
 };
-
+export const userForgotPassword = async (data) => {
+  return await Axiosinstance.post(`${url}/users/forgotpassword`, data);
+};
 export const userSignup = async (data) => {
   return await Axiosinstance.post(`${url}/users/signup`, data);
 };

@@ -196,6 +196,7 @@ const UsermobileLogin = () => {
           </div>
           <Box
             component="span"
+            onClick={() => navigate("/forgotpassword")}
             style={{
               color: "rgba(38, 38, 38, 0.40)",
               textAlign: "right",

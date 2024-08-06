@@ -6,9 +6,10 @@ import Service from "./Components/Service/Service";
 import DoctorProfile from "./Components/DoctorProfile";
 import Login from "./Components/Login";
 import SignUp from "./Components/SignUp";
+
 import PackageCards from "./Components/PackageCards";
 import About from "./Components/About";
-import PrivacyPolicy from "./Components/privacypolicy"
+import PrivacyPolicy from "./Components/privacypolicy";
 import TermofUse from "./Components/termofuse";
 import RefundPolicy from "./Components/refundpolicy";
 import Paperbase from "./DoctorPannel/SideNav/PaperBase";
@@ -20,8 +21,8 @@ import DoctorAbout from "./DoctorPannel/DoctorComponents/About";
 import Qualifications from "./DoctorPannel/DoctorComponents/Qualifications";
 import Experience from "./DoctorPannel/DoctorComponents/Experience";
 import Resgistration from "./DoctorPannel/DoctorComponents/Registration";
-import GovermentID  from "./DoctorPannel/DoctorComponents/GovermentID";
-import Awards  from "./DoctorPannel/DoctorComponents/Awards";
+import GovermentID from "./DoctorPannel/DoctorComponents/GovermentID";
+import Awards from "./DoctorPannel/DoctorComponents/Awards";
 
 import DocLogin from "./DoctorPannel/DoctorComponents/DocLogin";
 import DocSignup from "./DoctorPannel/DoctorComponents/DocSignup";
@@ -59,13 +60,15 @@ import DocQuick from "./DoctorPannel/DoctorComponents/DocQuick";
 import Alert from "./DoctorPannel/DoctorComponents/Alert";
 import Videos from "./Components/Videos";
 import Search from "./Components/Search";
+import Forgotpassword from "./Components/forgotpassword";
+
 
 const App = () => {
   const userRoutes = [
     { path: "/", element: <Home /> },
     { path: "/sitemap.xml", element: <Sitemap /> },
-    { path: "/videos" , element: <Videos/>},
-    { path: "/search/:query", element: <Search/>},
+    { path: "/videos", element: <Videos /> },
+    { path: "/search/:query", element: <Search /> },
     { path: "/videos/:videotitle", element: <SpecificVideo /> },
     { path: "/service", element: <Service /> },
     { path: "/about", element: <About /> },
@@ -82,12 +85,14 @@ const App = () => {
     { path: "*", element: <Page404 /> },
     { path: "/privacypolicy", element: <PrivacyPolicy /> },
     { path: "/termofuse", element: <TermofUse /> },
+    
     { path: "/refundpolicy", element: <RefundPolicy /> },
   ];
 
   const authRoutes = [
     { path: "/login", element: <Login /> },
     { path: "/signup", element: <SignUp /> },
+  { path: "/forgotpassword", element: <Forgotpassword/> },
     { path: "/doctor/login", element: <DocLogin /> },
     { path: "/doctor/signup", element: <DocSignup /> },
     { path: "/doctor/forgotpassword", element: <ForgotPassword /> },

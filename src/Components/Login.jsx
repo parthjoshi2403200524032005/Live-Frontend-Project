@@ -261,6 +261,7 @@ const Login = () => {
                   </div>
                   <Box
                     component={"a"}
+                    onClick={() => navigate("/forgotpassword")}
                     sx={{
                       cursor: "pointer",
                       fontFamily: "Poppins",
