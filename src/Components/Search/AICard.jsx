@@ -1,4 +1,4 @@
-import { AutoAwesome, VolumeUp } from "@mui/icons-material";
+import { VolumeUp } from "@mui/icons-material";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import { Box, Typography, IconButton } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -19,7 +19,7 @@ const AICard = ({ apiResults, primaryColor }) => {
       if (selectedVoice) {
         speech.voice = selectedVoice;
       } else {
-        toast.error("An Error occured, please try again...");
+        toast.error("An Error occurred, please try again...");
         console.warn("Desired voice not found, using default.");
         // Optionally set a fallback voice here
       }
@@ -62,16 +62,38 @@ const AICard = ({ apiResults, primaryColor }) => {
         position: "relative",
       }}
     >
-      <Typography
+      <Box
+        display="flex"
+        alignItems="center"
         padding="18px 12px"
-        fontSize={22}
-        lineHeight="100%"
-        color={primaryColor}
-        variant="h5"
       >
-        <AutoAwesome sx={{ fontSize: "21px" }} /> What AI says about your
-        Questions ?
-      </Typography>
+        <Typography
+          fontSize={22}
+          lineHeight="100%"
+          color={primaryColor}
+          variant="h5"
+        >
+          What AI says about your Questions?
+        </Typography>
+        <IconButton
+          title="Tap to play/ stop..."
+          onClick={speakContent}
+          sx={{
+            marginLeft: "auto",
+            width: "25px",
+            height: "27px",
+            flexShrink: 0,
+            backgroundColor: primaryColor,
+            color: "white",
+            "&:hover": {
+              backgroundColor: primaryColor,
+              opacity: 0.8,
+            },
+          }}
+        >
+          {isSpeaking ? <VolumeOffIcon /> : <VolumeUp sx={{ fontSize: "21px" }} />}
+        </IconButton>
+      </Box>
 
       {!apiResults.aiData ? (
         <ChatDataLoad />
@@ -96,23 +118,6 @@ const AICard = ({ apiResults, primaryColor }) => {
               ></div>
             )}
           </Typography>
-          <IconButton
-            title="Tap to play/ stop..."
-            onClick={speakContent}
-            sx={{
-              position: "absolute",
-              bottom: "16px",
-              right: "16px",
-              backgroundColor: primaryColor,
-              color: "white",
-              "&:hover": {
-                backgroundColor: primaryColor,
-                opacity: 0.8,
-              },
-            }}
-          >
-            {isSpeaking ? <VolumeOffIcon /> : <VolumeUp />}
-          </IconButton>
         </Box>
       )}
     </Box>

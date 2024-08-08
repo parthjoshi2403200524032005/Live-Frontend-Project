@@ -4,6 +4,7 @@ export const FormGrp = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  
   input[type="text"] {
     ::placeholder {
       /* Recent browsers */
@@ -29,6 +30,7 @@ export const AnimatedBox = styled.div`
   font-family: var(--font);
   color: white;
   border-radius: var(--border-width);
+  background-color: #007BFF; 
 
   &::after {
     position: absolute;
@@ -55,6 +57,7 @@ export const InnerDiv = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
+  background-color: #E0F0FF;
 `;
 
 export const FormTitle = styled.h2`

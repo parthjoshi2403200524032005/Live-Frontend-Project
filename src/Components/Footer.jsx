@@ -10,7 +10,6 @@ import { Button, Typography } from "@mui/material";
 import { Sethscope } from "./Svgs/SvgIcons";
 import DocAccountModal from "../DoctorPannel/DoctorComponents/DocAccountModal";
 
-
 const Footer = () => {
   const navigate = useNavigate();
   const [dcopen, setDcopen] = useState(false);

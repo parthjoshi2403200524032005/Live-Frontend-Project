@@ -1,17 +1,14 @@
 import { Box, IconButton, InputBase, Typography } from "@mui/material";
-
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
 import { AiSearch } from "../../Service/Services";
 import VideoCard from "./VideoCard";
-
 import SearchIcon from "@mui/icons-material/Search";
 import "./styles.css";
-
 import AICard from "./AICard";
 import VideosLoad from "./ShimmerUI/VideosLoad";
 import MobileAICard from "./MobileAICard";
+import LeadGenerationForm from "../common/Lead-Generation"; // Import the form component
 
 const primaryColor = "#133682";
 
@@ -52,7 +49,8 @@ const Search = () => {
     return () => {
       window.speechSynthesis.cancel();
     };
-  }, []);
+  }, [query]);
+
   return (
     <>
       <Box
@@ -72,32 +70,30 @@ const Search = () => {
                 position: "relative",
                 borderRadius: "44px",
                 backgroundColor: "#FFF",
-                boxShadow:
-                  "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;",
                 width: "100%",
-                maxWidth: "630px",
+                maxWidth: "1207px",
                 margin: "auto",
                 display: "flex",
                 alignItems: "center",
+                border: '1px solid #007BFF',
               }}
             >
               <InputBase
                 type="search"
                 required={true}
-                placeholder="Ask any questions related to your health....."
+                placeholder="Search for Treatments,Doctors or Hospitals"
                 inputProps={{ "aria-label": "search" }}
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 sx={{
-                  //   color: "w",
                   width: "100%",
                   "& .MuiInputBase-input": {
-                    padding: "14px 16px",
+                    padding: "12.5px 20px",
                     paddingRight: "48px",
                     fontSize: { xs: "14px", sm: "18px" },
                     fontWeight: 400,
                     "&::placeholder": {
-                      color: primaryColor,
+                      color: " #007BFF",
                       opacity: 1,
                     },
                   },
@@ -109,7 +105,7 @@ const Search = () => {
                   padding: "12px",
                   position: "absolute",
                   right: 0,
-                  color: primaryColor,
+                  color: "#133682 ",
                 }}
                 aria-label="search"
               >
@@ -119,19 +115,81 @@ const Search = () => {
           </form>
         </Box>
 
-        <Box
-          display={{ xs: "block", md: "none" }}
-          sx={{ padding: { xs: "12px 0", sm: "25px 0" } }}
-        >
+        {/* Mobile View: AI Results First, then Videos, then Form */}
+        <Box display={{ xs: "block", md: "none" }} sx={{ padding: "12px 0" }}>
           <MobileAICard apiResults={apiResults} primaryColor={primaryColor} />
         </Box>
 
-        {/* API Data */}
+        {/* Mobile View: Videos */}
+        <Box display={{ xs: "block", md: "none" }} sx={{ padding: "12px 0" }}>
+          <Box
+            padding="14px 24px"
+            sx={{
+              background: "#F2F2F2",
+              boxShadow: "0px 0px 4px 0px rgba(0, 0, 0, 0.25)",
+              borderRadius: "12px",
+            }}
+          >
+            <Typography
+              padding="6px 0 25px 0"
+              fontSize={22}
+              lineHeight="100%"
+              color={primaryColor}
+              variant="h5"
+            >
+              Expert Doctors Opinion
+            </Typography>
+
+            {!apiResults.videos ? (
+              <VideosLoad />
+            ) : apiResults.videos.length === 0 ? (
+              <h3>No Videos Found... </h3>
+            ) : (
+              <Box
+                sx={{
+                  marginTop: 2,
+                  display: "grid",
+                  gridTemplateColumns: {
+                    xs: "1fr",
+                    sm: "1fr 1fr",
+                    md: "1fr 1fr 1fr",
+                  },
+                  gap: "24px",
+                  rowGap: "16px",
+                  width: "100%",
+                }}
+              >
+                {apiResults.videos.map((video, index) => (
+                  <VideoCard key={index} video={video} />
+                ))}
+              </Box>
+            )}
+          </Box>
+        </Box>
+
+        {/* Mobile View: Lead Generation Form */}
+        <Box display={{ xs: "block", md: "none" }} sx={{ padding: "12px 0" }}>
+          <Box
+            sx={{
+              background: "#F2F2F2",
+              boxShadow: "0px 0px 4px 0px rgba(0, 0, 0, 0.25)",
+              borderRadius: "12px",
+              padding: 0, // Set padding to 0
+            }}
+          >
+            <LeadGenerationForm
+              title="Want to book appointment with the Doctor?"
+              subtitle=""
+              doctorid={123} // Replace with actual doctor ID if needed
+            />
+          </Box>
+        </Box>
+
+        {/* Desktop View: Original Layout */}
         <Box sx={{ padding: { xs: "12px 0", sm: "25px 0" } }}>
           <Box
             sx={{
-              display: { xs: "block", md: "grid" },
-              gridTemplateColumns: "68% 32%",
+              display: { xs: "none", md: "flex" },
               margin: { xs: "16px 8px", sm: "16px 25px" },
               gap: 5,
             }}
@@ -142,7 +200,8 @@ const Search = () => {
               sx={{
                 background: "#F2F2F2",
                 boxShadow: "0px 0px 4px 0px rgba(0, 0, 0, 0.25)",
-                borderRadius: "12px",
+                borderRadius: "10px",
+                flex: 2,
               }}
             >
               <Typography
@@ -165,13 +224,13 @@ const Search = () => {
                     marginTop: 2,
                     display: "grid",
                     gridTemplateColumns: {
-                      xs: "auto",
-                      sm: "auto auto",
-                      md: "auto auto auto",
+                      xs: "1fr",
+                      sm: "1fr 1fr",
+                      md: "1fr 1fr 1fr",
                     },
-                    gap: 2,
-                    rowGap: 3,
-                    idth: "100%",
+                    gap: "24px",
+                    rowGap: "16px",
+                    width: "100%",
                   }}
                 >
                   {apiResults.videos.map((video, index) => (
@@ -181,9 +240,26 @@ const Search = () => {
               )}
             </Box>
 
-            {/* AI Results */}
-            <Box display={{ xs: "none", md: "block" }}>
+            {/* AI Results and Lead Generation Form */}
+            <Box
+              display={{ xs: "none", md: "block" }}
+              sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 3 }}
+            >
               <AICard apiResults={apiResults} primaryColor={primaryColor} />
+              <Box
+                sx={{
+                  background: "#F2F2F2",
+                  boxShadow: "0px 0px 4px 0px rgba(0, 0, 0, 0.25)",
+                  borderRadius: "12px",
+                  padding: 0, // Set padding to 0
+                }}
+              >
+                <LeadGenerationForm
+                  title="Want to book appointment with the Doctor?"
+                  subtitle=""
+                  doctorid={123} // Replace with actual doctor ID if needed
+                />
+              </Box>
             </Box>
           </Box>
         </Box>
