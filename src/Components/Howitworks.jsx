@@ -48,7 +48,7 @@ export default function HowItWorks() {
     bottom: isMobile ? "10px" : "20px",
     left: "50%",
     transform: "translateX(-50%)",
-    width: isMobile ? "100%" : "358.325px",
+    width: isMobile ? "95%" : "358.325px",
     height: "60.191px",
     background: isHovered ? "var(--900, #133682)" : "#FFF",
     borderRadius: "15.048px",
