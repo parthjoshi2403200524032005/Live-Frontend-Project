@@ -2,6 +2,7 @@ import { AutoAwesome, Search } from "@mui/icons-material";
 import { Box, IconButton, InputBase, Typography } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const images = [
   { main: "/HeroMockup/img1.jpg", preview: "/HeroMockup/img1_prev.webp" },
@@ -9,7 +10,7 @@ const images = [
   { main: "/HeroMockup/img3.jpg", preview: "/HeroMockup/img3_prev.webp" },
 ];
 
-const primaryColor = "#133682";
+const primaryColor = "#1B5AE3";
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -21,6 +22,8 @@ const Hero = () => {
     console.log(serachValue);
   };
 
+  const isSmallScreen = useMediaQuery("(max-width:600px)");
+
   return (
     <Box
       borderRadius={2}
@@ -31,54 +34,45 @@ const Hero = () => {
       }}
     >
       {/* Text Info */}
-      <Box sx={{ paddingTop: 12, textAlign: "center" }}>
+      <Box sx={{ paddingTop: 6, textAlign: "center" }}>
         <Typography
           variant="h1"
-          fontSize={{ xs: "25px", sm: "45px", md: "64px" }}
+          fontSize={{ xs: "32px", sm: "32px", md: "64px" }}
           fontWeight="600"
           letterSpacing="3.2px"
-          lineHeight="72px"
+          lineHeight={{ xs: "40px", sm: "40px", md: "72px" }}
           color="#000"
           component="h2"
         >
-          {"Watch > Connect > Heal."}
+          Watch &gt; Connect {isSmallScreen && <br />} &gt; Heal.
         </Typography>
-        <Typography
-          sx={{ paddingY: "15px" }}
-          color="#FD2621"
-          variant="h2"
-          fontSize={{ xs: "19px", sm: "35px", md: "36px" }}
-          fontWeight="600"
-          lineHeight={{ xs: "35px", sm: "68px", md: "72px" }}
-          letterSpacing="1.8px"
-        >
-          Solutions directly form Expert Doctors
-        </Typography>
+
         <Typography
           variant="h2"
-          color="#000"
-          fontSize={{ xs: "19px", sm: "32px", md: "36px" }}
+          color="#818181"
+          fontSize={{ xs: "16px", sm: "32px", md: "36px" }}
           fontWeight="500"
-          lineHeight={{ xs: "38px", sm: "72px" }}
+          lineHeight={{ xs: "54px", sm: "72px" }}
           letterSpacing="1.8px"
         >
-          Expert <span style={{ color: primaryColor }}>Doctors</span> +{" "}
-          <span style={{ color: primaryColor }}>AI</span> assistant
+          <span style={{ color: primaryColor }}>Expert </span> Doctors + AI
+          <span style={{ color: primaryColor }}> assistant</span>
         </Typography>
       </Box>
 
       {/* Search */}
-      <Box sx={{ flexGrow: 1, marginTop: { xs: "30px", md: "40px" } }}>
+      <Box
+        sx={{ flexGrow: 1, marginTop: { xs: "1 0px", sm: "24", md: "49px" } }}
+      >
         <form onSubmit={handleSearchSubmit}>
           <Box
             sx={{
               position: "relative",
               borderRadius: "44px",
               backgroundColor: "#FFF",
-              boxShadow:
-                "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;",
-              width: { xs: "90%", sm: "100%" },
-              maxWidth: "630px",
+              border: "2px solid #487AE8",
+              width: { xs: "90%", sm: "90%", md: "90%" },
+              maxWidth: "2030px",
               margin: "auto",
               display: "flex",
               alignItems: "center",
@@ -87,7 +81,7 @@ const Hero = () => {
             <InputBase
               type="search"
               required={true}
-              placeholder="Ask any questions related to your health....."
+              placeholder="Search for Treatments, Doctors, or Hospitals"
               inputProps={{ "aria-label": "search" }}
               value={serachValue}
               onChange={(e) => setSearchValue(e.target.value)}
@@ -99,7 +93,7 @@ const Hero = () => {
                   fontSize: { xs: "14px", sm: "18px" },
                   fontWeight: 400,
                   "&::placeholder": {
-                    color: primaryColor,
+                    color: "rgba(0, 0, 0, 0.60)",
                     opacity: 1,
                   },
                 },
@@ -229,9 +223,9 @@ const Hero = () => {
                 letterSpacing: "0.8px",
               }}
             >
-              Schedule a consultation with the doctor of your choice. Schedule a
-              consultation with the doctor of your choice. Schedule a
-              consultation with the doctor of you....
+              AI provides accurate, personalized health insights, addressing
+              your medical concerns with reliable, data-driven answers tailored
+              for your well-being!
             </Typography>
           </Box>
         </Box>

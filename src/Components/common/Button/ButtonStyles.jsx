@@ -110,7 +110,7 @@ export const AnimatedButtonWrapper = styled.button`
   cursor: pointer;
   overflow: hidden;
   &:hover {
-    background-color: #2a3241;
+    background-color: #133682;
   }
   .spinner-border {
     width: 24px;

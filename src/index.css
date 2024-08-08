@@ -1,18 +1,19 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@320&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600");
+@import url("https://fonts.googleapis.com/css2?family=Helvetica:wght@400;700&display=swap");
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  font-family: "DM Sans", sans-serif !important;
+
+  font-family: "Poppins", sans-serif;
 }
 
 body {
   @media screen and (max-width: 471px) {
     padding-bottom: 60px;
   }
-   /* please inform me if you faced any issue beacuse of this */
-  overflow-x: hidden; 
+  /* please inform me if you faced any issue beacuse of this */
+  overflow-x: hidden;
 }
 
 .card-main {
