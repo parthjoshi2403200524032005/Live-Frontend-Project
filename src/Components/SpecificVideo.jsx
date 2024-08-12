@@ -12,65 +12,52 @@ import LeadGenerationForm from "./common/Lead-Generation";
 import RenderModalOrBottomSheet from "./common/RenderModalBS";
 import { Flex } from "../styles/CommonStyles";
 import { Description } from "../styles/CommonStyles";
-
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown , faAngleUp } from '@fortawesome/free-solid-svg-icons'
 
 function SpecificVideo() {
-  // const location = useLocation();
-  // const queryParams = new URLSearchParams(location.search);
-  // const videocode = queryParams.get("videocode");
-  // const doctor = queryParams.get("doctor");
   const { videotitle } = useParams();
   const [url, setUrl] = useState("");
-
   const [data, setData] = useState(null);
   const [isBtsVisible, setShowBts] = useState(false);
-
-  //useState for status of video description
   const [isExpanded, setIsExpanded] = useState(false);
-
-  //function to toggle video description
-  const toggleDescription = () => {
-    setIsExpanded(!isExpanded);
-  };
-
-  //State to store question and answers fetched from api
   const [qaData, setQaData] = useState([]);
-
-  //state to track which question does user wants to view
   const [visibleIndex, setVisibleIndex] = useState(null);
 
-  //answer toggle
+  const toggleDescription = () => setIsExpanded(!isExpanded);
+
   const toggleAnswer = (index) => {
     setVisibleIndex(visibleIndex === index ? null : index);
   };
-  
 
   const fetchVideoData = async () => {
-    var videoTitle2 = videotitle.split("-").join(" ");
-    const responseJson = await videoHomePage(videoTitle2);
-    console.log(responseJson.data.data[0]);
-    setData(responseJson.data.data[0]);
-    setUrl(responseJson.data.data[0].link);
-
-    //->
-    responseJson.data.data[0].questionsAnswers != null ? setQaData(responseJson.data.data[0].questionsAnswers) : setQaData(null) ;
+    try {
+      var videoTitle2 = videotitle.split("-").join(" ");
+      const responseJson = await videoHomePage(videoTitle2);
+      if (responseJson?.data?.data?.length > 0) {
+        const videoData = responseJson.data.data[0];
+        setData(videoData);
+        setUrl(videoData.link);
+        setQaData(videoData.questionsAnswers || []);
+      } else {
+        console.error("No data found for the provided video title.");
+      }
+    } catch (error) {
+      console.error("Failed to fetch video data:", error);
+    }
   };
 
   useEffect(() => {
     if (videotitle) {
       fetchVideoData();
     }
-  },[]);
+  }, [videotitle]);
 
   const handleAppointmentBts = () => {
-    document
-      .querySelector(".widget-visible")
-      .setAttribute("style", "display:none !important");
+    document.querySelector(".widget-visible")?.setAttribute("style", "display:none !important");
     setShowBts(true);
   };
+
   return (
     <>
       <Helmet>
@@ -79,16 +66,11 @@ function SpecificVideo() {
       </Helmet>
       <SpecificVideoWrapper justifyContent="center">
         <div className="videoDetails">
-          {url.length > 0 && (
+          {url && (
             <Plyr
               source={{
                 type: "video",
-                sources: [
-                  {
-                    src: url,
-                    provider: "youtube",
-                  },
-                ],
+                sources: [{ src: url, provider: "youtube" }],
               }}
             />
           )}
@@ -96,45 +78,39 @@ function SpecificVideo() {
           <h1 className="h1">{data?.title}</h1>
 
           <Description>
-          <div className="description-container">
-            <p className={isExpanded ? 'description expanded' : 'description collapsed'}>
-              {data?.description}
-            </p>
-            <button onClick={toggleDescription}>
-              {isExpanded ? <FontAwesomeIcon icon={faAngleUp} /> :  <FontAwesomeIcon icon={faAngleDown} /> }
-            </button>
-            
-          </div>
+            <div className="description-container">
+              <p className={isExpanded ? 'description expanded' : 'description collapsed'}>
+                {data?.description}
+              </p>
+              <button onClick={toggleDescription}>
+                {isExpanded ? <FontAwesomeIcon icon={faAngleUp} /> : <FontAwesomeIcon icon={faAngleDown} />}
+              </button>
+            </div>
           </Description>
 
           <DoctorProfile doctorid={data?.doctorId} subprofile={true} />
         </div>
 
-        
         <div className="leadFormWrapper">
-          
-          <div className="qa-container">
-          {qaData && (<h1 className="h2">Important questions <br /> answered in this video</h1>)}
-            {qaData && qaData.map((item, index) => (
-              <div key={index} className="qa-item">
-                <div className="question-container" onClick={() => toggleAnswer(index)}>
-                  <h3 className="question h3">
-                    {item.question}
-                  </h3>
-                  {visibleIndex === index ? 
-                    <FontAwesomeIcon icon={faAngleUp} /> :  
-                    <FontAwesomeIcon icon={faAngleDown} />
-                  }
-                </div>
-                {visibleIndex === index && (
-                  <p className="answer">
-                    {item.answer}
-                  </p>
-                )}
+          {qaData.length > 0 && <h1 className="h2">Important questions <br /> answered in this video</h1>}
+          {qaData.map((item, index) => (
+            <div key={index} className="qa-item">
+              <div className="question-container" onClick={() => toggleAnswer(index)}>
+                <h3 className="question h3">
+                  {item.question}
+                </h3>
+                {visibleIndex === index ? 
+                  <FontAwesomeIcon icon={faAngleUp} /> :  
+                  <FontAwesomeIcon icon={faAngleDown} />
+                }
               </div>
-            ))}
-
-          </div>
+              {visibleIndex === index && (
+                <p className="answer">
+                  {item.answer}
+                </p>
+              )}
+            </div>
+          ))}
 
           <div className="leadForm">
             <LeadGenerationForm
@@ -143,7 +119,6 @@ function SpecificVideo() {
             />
           </div>
         </div>
-      
       </SpecificVideoWrapper>
       <BookAppointmentFixedbar onClick={handleAppointmentBts}>
         Book Appointment Now
@@ -151,9 +126,7 @@ function SpecificVideo() {
       <RenderModalOrBottomSheet
         isVisible={isBtsVisible}
         onClose={() => {
-          document
-            .querySelector(".widget-visible")
-            .setAttribute("style", "display:block !important");
+          document.querySelector(".widget-visible")?.setAttribute("style", "display:block !important");
           setShowBts(false);
         }}
       >
