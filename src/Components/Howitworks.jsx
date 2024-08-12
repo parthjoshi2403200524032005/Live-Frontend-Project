@@ -114,9 +114,8 @@ export default function HowItWorks() {
         width: "100%",
         maxWidth: "1280px",
 
-        borderRadius: "22.572px",
-        background: "#FFFFFF",
-        boxShadow: "0px 0px 8.652px 0px rgba(0, 0, 0, 0.25)",
+        
+        
         ...containerStyle,
         textAlign: "center",
       }}

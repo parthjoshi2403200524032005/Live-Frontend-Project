@@ -1,13 +1,13 @@
-import React from 'react';
-import Slider from 'react-slick';
-import apollotransperant from './apollotransperant.png';
-import fortisransperant from './fortistransperant.png';
-import lilavathitransperant from './lilavathitransperant.png';
-import medantatransperant from './medantatransperant.png';
-import meenakshitransperant from './meenakshitransperant.png';
-import { Typography, useMediaQuery } from '@mui/material';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import React from "react";
+import Slider from "react-slick";
+import apollotransperant from "./apollotransperant.png";
+import fortisransperant from "./fortistransperant.png";
+import lilavathitransperant from "./lilavathitransperant.png";
+import medantatransperant from "./medantatransperant.png";
+import meenakshitransperant from "./meenakshitransperant.png";
+import { Typography, useMediaQuery } from "@mui/material";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Heading = ({ text, size }) => {
   return (
@@ -44,7 +44,7 @@ const settings = {
       breakpoint: 580,
       settings: {
         autoplay: true,
-  autoplaySpeed: 3000,
+        autoplaySpeed: 3000,
         slidesToShow: 2,
         slidesToScroll: 2,
         dots: true,
@@ -68,20 +68,20 @@ const settings = {
 };
 
 export default function Partners() {
-  const isSmallScreen = useMediaQuery('(max-width: 576px)');
+  const isSmallScreen = useMediaQuery("(max-width: 576px)");
 
   return (
     <div
       className="bg-sm-primary"
       style={{
-        marginTop: '6rem',
+        marginTop: "3rem",
 
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        width: '85%',
-        marginLeft: 'auto',
-        marginRight: 'auto',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: "85%",
+        marginLeft: "auto",
+        marginRight: "auto",
       }}
     >
       <style>
@@ -132,8 +132,8 @@ export default function Partners() {
             }
 
             .partner-image {
-              max-width: 100px;
-              max-height: 100px;
+              max-width: 94px;
+              max-height: 87px;
               flex-shrink: 0;
               margin-bottom: 0;
             }
@@ -152,42 +152,68 @@ export default function Partners() {
       <Heading text={"Our Trusted Partners"} />
       <p
         className="d-none d-sm-flex text-md mt-4 text-gray-500 font-normal leading-5"
-        style={{ color: 'rgba(38, 38, 38, 0.60)', fontSize:'22px', fontFamily:'Helvetica' }}
+        style={{
+          color: "rgba(38, 38, 38, 0.60)",
+          fontSize: "22px",
+          fontFamily: "Helvetica",
+        }}
       >
-        Our hospital partners are the renowned healthcare institutions dedicated to providing exceptional
-        patient care and innovative medical solutions. With a team of experienced healthcare professionals
-        and state-of-the-art facilities, they deliver top-notch services that align with our mission to
-        improve healthcare accessibility and outcomes.
+        We work with Countries Top Hospitals, around the world
       </p>
       <p
         className="d-sm-none text-center text-sm mt-4 text-gray-500 font-normal leading-7"
-        style={{ color: '#A1A1A1', fontSize:'16px', letterSpacing:'0.8px', fontWeight:'400', fontFamily:'Helvetica' }}
+        style={{
+          color: "#A1A1A1",
+          fontSize: "16px",
+          letterSpacing: "0.8px",
+          fontWeight: "400",
+          fontFamily: "Helvetica",
+        }}
       >
-        Our hospital partners are the renowned healthcare institutions dedicated to providing exceptional
-        patient care and innovative medical solutions.
+        We work with Countries Top Hospitals, around the world
       </p>
       <div
         className="inside"
         style={{
-          marginTop: '1rem',
-          width: '100%',
+          marginTop: "1rem",
+          width: "100%",
         }}
       >
         <Slider {...settings}>
           <div>
-            <img className="partner-image" src={apollotransperant} alt="Apollo" />
+            <img
+              className="partner-image"
+              src={apollotransperant}
+              alt="Apollo"
+            />
           </div>
           <div>
-            <img className="partner-image" src={fortisransperant} alt="Fortis" />
+            <img
+              className="partner-image"
+              src={fortisransperant}
+              alt="Fortis"
+            />
           </div>
           <div>
-            <img className="partner-image" src={lilavathitransperant} alt="Lilavati" />
+            <img
+              className="partner-image"
+              src={lilavathitransperant}
+              alt="Lilavati"
+            />
           </div>
           <div>
-            <img className="partner-image" src={medantatransperant} alt="Medanta" />
+            <img
+              className="partner-image"
+              src={medantatransperant}
+              alt="Medanta"
+            />
           </div>
           <div>
-            <img className="partner-image" src={meenakshitransperant} alt="Meenakshi" />
+            <img
+              className="partner-image"
+              src={meenakshitransperant}
+              alt="Meenakshi"
+            />
           </div>
         </Slider>
       </div>

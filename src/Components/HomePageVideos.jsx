@@ -93,9 +93,7 @@ const HomePageVideos = () => {
           width: "100%",
           maxWidth: "1280px",
           margin: "auto",
-          borderRadius: "22.572px",
-          background: "#FFFFFF",
-          boxShadow: "0px 0px 8.652px 0px rgba(0, 0, 0, 0.25)",
+
           padding: "50px 20px 100px",
           textAlign: "center",
           marginTop: "80px",
