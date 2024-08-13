@@ -114,8 +114,6 @@ export default function HowItWorks() {
         width: "100%",
         maxWidth: "1280px",
 
-        
-        
         ...containerStyle,
         textAlign: "center",
       }}
@@ -176,6 +174,7 @@ export default function HowItWorks() {
                 height: "300px",
                 objectFit: "cover",
                 borderRadius: "10px",
+                marginLeft: "35px",
               }}
             />
           </div>
@@ -183,9 +182,9 @@ export default function HowItWorks() {
             onMouseEnter={() => handleMouseEnter("button1")}
             onMouseLeave={handleMouseLeave}
             style={buttonStyle(hoveredButton === "button1")}
-            onClick={() => setNavigateTo("/plans")}
+            onClick={() => setNavigateTo("/videos")}
           >
-            <span>Discover Videos</span>
+            <span onClick={() => navigate("/videos")}>Discover Videos</span>
             <GoArrowUpRight
               style={{
                 width: "30px",
@@ -213,7 +212,7 @@ export default function HowItWorks() {
               textTransform: "capitalize",
             }}
           >
-            Get Treatment
+            Book Consultation
           </h3>
           <p
             style={{
@@ -238,6 +237,7 @@ export default function HowItWorks() {
                 height: "169px",
                 objectFit: "cover",
                 borderRadius: "12px",
+                marginLeft: "60px",
               }}
             />
           </div>
@@ -247,7 +247,7 @@ export default function HowItWorks() {
             style={buttonStyle(hoveredButton === "button2")}
             onClick={() => setNavigateTo("/plans")}
           >
-            <span>Book An Appointment</span>
+            <span onClick={() => navigate("/plans")}>Book An Appointment</span>
             <GoArrowUpRight
               style={{
                 width: "30px",
@@ -296,6 +296,7 @@ export default function HowItWorks() {
             alt=""
             style={{
               width: "40%",
+              marginLeft: "120px",
             }}
           />
           <div>
@@ -307,6 +308,7 @@ export default function HowItWorks() {
                 height: "270px",
                 objectFit: "cover",
                 borderRadius: "12px",
+                marginLeft: "50px",
               }}
             />
           </div>

@@ -37,13 +37,10 @@ import {
 } from "react-icons/fa";
 import { IoLocationOutline } from "react-icons/io5";
 import NewNavbar from "../../Components/NavBar/New_Navbar";
-import Dashboard from "./Dashboard";
 
-const DashboardAppPage = () => {
+function Dashboard() {
   return (
-    <>
-      <NewNavbar />
-      <main className="sm:space-y-24 space-y-20 mt-24">
+    <main className="sm:space-y-24 space-y-20 mt-24">
         {/* Smart Section */}
         <div className="max-w-7xl mx-auto bg-[#F0F3FF] py-12 rounded-[10px]">
           <div className="flex flex-col items-center">
@@ -433,8 +430,8 @@ const DashboardAppPage = () => {
           </div>
         </div>
 
-        {/* Medical Report */}
-        <div className="hidden sm:block max-w-7xl mx-auto bg-[#F0F3FF] py-12 rounded-[10px]">
+        {/* Medical Record */}
+        <div className="hidden sm:block max-w-7xl mx-auto bg-[#F0F3FF] py-12 rounded-[10px] ">
           <div className=" px-11 flex flex-col gap-4 font-normal">
             <h1 className="text-4xl leading-5 font-bold">Medical Records</h1>
             <p className="tracking-wider font-medium">
@@ -557,240 +554,7 @@ const DashboardAppPage = () => {
           </div>
         </div>
       </main>
+  )
+}
 
-      {/* laptop Size Footer */}
-      <footer className="hidden sm:block mt-5">
-        <div className="top">
-          <div className="pages">
-            <ul>
-              <h3 className="fh">Suggestions</h3>
-              <li>
-                <a href="#">Top 10 Hospitals</a>
-              </li>
-              <li>
-                <a href="#">Top 10 Doctors</a>
-              </li>
-              <li>
-                <a href="#">Most Chosen Treatments</a>
-              </li>
-            </ul>
-
-            <ul>
-              <h3 className="fh">Services</h3>
-              <li>
-                <a>
-                  <Link to="/videos">Home</Link>
-                </a>
-              </li>
-              <li>
-                <a>
-                  <Link to="/doctors">Find A Doctor</Link>
-                </a>
-              </li>
-              <li>
-                <a>
-                  <Link to="/plans">Plans</Link>
-                </a>
-              </li>
-              <li>
-                <a>
-                  <Link to="hospitals">Add your Hospital/clinic</Link>
-                </a>
-              </li>
-            </ul>
-
-            <ul>
-              <h3 className="fh">Link</h3>
-              <li>
-                <a>
-                  <Link to="/doctor/login">Doctor Login</Link>
-                </a>
-              </li>
-              <li>
-                <a>
-                  <Link to="/about">About us</Link>
-                </a>
-              </li>
-              <li>
-                <a>
-                  <Link to="/privacypolicy">Privacy Policy</Link>
-                </a>
-              </li>
-              <li>
-                <a>
-                  <Link to="/about">Career</Link>
-                </a>
-              </li>
-              <li>
-                <a>
-                  <Link to="/refundpolicy">Refund Policy</Link>
-                </a>
-              </li>
-              <li>
-                <a>
-                  <Link to="/termofuse">Terms Of Use</Link>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="newsletter">
-            <h3>
-              Health<span>Mudraa</span>
-            </h3>
-          </div>
-        </div>
-
-        <div className="cs">
-          <h3 className="fh">Contact Us</h3>
-          <p>
-            #2594/1, 3rd Floor, 15th Cross, 27th Main Rd, 1st Sector, HSR
-            Layout, Bengaluru, Karnataka 560102
-          </p>
-        </div>
-        <div className="social">
-          <a href="https://www.linkedin.com/company/healthmudraa/">
-            <FaLinkedin style={{ color: "rgba(19, 54, 130, 1)" }} size={24} />
-          </a>
-          <a href="https://www.facebook.com/healthmudraa/">
-            <FaFacebook style={{ color: "rgba(19, 54, 130, 1)" }} size={24} />
-          </a>
-          <a href="https://www.instagram.com/healthmudraa/">
-            <FaInstagram style={{ color: "rgba(19, 54, 130, 1)" }} size={24} />
-          </a>
-          <a href="https://x.com/HealthMudraa">
-            <FaTwitter style={{ color: "rgba(19, 54, 130, 1)" }} size={24} />
-          </a>
-          <a href="https://www.youtube.com/@healthmudraa">
-            <FaYoutube style={{ color: "rgba(19, 54, 130, 1)" }} size={24} />
-          </a>
-        </div>
-        <div className="info">
-          <div className="copyright">
-            &copy; HealthMudraa,All Rights Reserved
-          </div>
-        </div>
-      </footer>
-
-      {/*  Mobile footer */}
-      <footer className="bg-[#D3E9FD] w-full  sm:hidden block">
-        <div className="">
-          {/* Heading */}
-          <div className="flex justify-center pt-4">
-            <span className="text-[#133682] text-2xl font-bold mr-1">
-              Health
-            </span>
-            <span className="ml-1 text-[#FD2621] text-2xl font-bold">
-              Mudraa
-            </span>
-          </div>
-
-          {/* Second Component */}
-          <div className="flex mt-3 p-0 justify-between ">
-            <div className=" flex flex-col ml-4">
-              <h3 className="text-lg font-normal">Important Links</h3>
-              <a>
-                <Link
-                  to="/doctor/login"
-                  className="no-underline text-[#26262699] font-poppins text-sm"
-                >
-                  Doctor login
-                </Link>
-              </a>
-
-              <a>
-                <Link
-                  to="/plans"
-                  className="no-underline text-[#26262699] font-poppins text-sm"
-                >
-                  Our plans
-                </Link>
-              </a>
-
-              <a>
-                <Link
-                  to="#"
-                  className="no-underline text-[#26262699] font-poppins text-sm"
-                >
-                  Our Expert Doctors
-                </Link>
-              </a>
-            </div>
-
-            <div className="flex flex-col mr-4">
-              <h3 className="text-lg font-normal ">Legal</h3>
-              <a>
-                <Link
-                  to="#"
-                  className="no-underline text-[#26262699] font-poppins text-sm "
-                >
-                  Terms And Condition
-                </Link>
-              </a>
-
-              <a>
-                <Link
-                  to="/privacypolicy"
-                  className="no-underline text-[#26262699] font-poppins text-sm"
-                >
-                  Privacy Policy
-                </Link>
-              </a>
-
-              <a>
-                <Link
-                  to="/refundpolicy"
-                  className="no-underline text-[#26262699] font-poppins text-sm"
-                >
-                  Refund Policy
-                </Link>
-              </a>
-            </div>
-          </div>
-
-          {/* Third Component */}
-          <div className="sm:hidden block">
-            <h3 className="text-lg font-normal text-center pt-4">Contact Us</h3>
-            <div className=" flex justify-center items-center">
-              <IoLocationOutline className="text-[#133682] w- 4 h-4 mr-1" />
-              <span className=" text-[8px] text-left text-[#242424] font-normal  leading-[1.5]">
-                #2594/1, 3rd Floor, 15th Cross, 27th Main Rd, 1st Sector, HSR
-                Layout, <br /> Bengaluru, Karnataka 560102
-              </span>
-            </div>
-          </div>
-
-          {/* Icon Part */}
-          <div className="flex mt-4 p-0 justify-between mx-4">
-            <a href="https://www.linkedin.com/company/healthmudraa/">
-              <FaLinkedin style={{ color: "rgba(19, 54, 130, 1)" }} size={10} />
-            </a>
-            <a href="https://www.facebook.com/healthmudraa/">
-              <FaFacebook style={{ color: "rgba(19, 54, 130, 1)" }} size={10} />
-            </a>
-            <a href="https://www.instagram.com/healthmudraa/">
-              <FaInstagram
-                style={{ color: "rgba(19, 54, 130, 1)" }}
-                size={10}
-              />
-            </a>
-            <a href="https://x.com/HealthMudraa">
-              <FaTwitter style={{ color: "rgba(19, 54, 130, 1)" }} size={10} />
-            </a>
-            <a href="https://www.youtube.com/@healthmudraa">
-              <FaYoutube style={{ color: "rgba(19, 54, 130, 1)" }} size={10} />
-            </a>
-          </div>
-
-          {/* fourth Part */}
-          <div className="text-center py-2">
-            <span className=" text-[8px]  text-[#242424] font-normal  leading-[1.5] capitalize">
-              all rights are with health mudraa
-            </span>
-          </div>
-        </div>
-      </footer>
-    </>
-  );
-};
-
-export default DashboardAppPage;
+export default Dashboard;

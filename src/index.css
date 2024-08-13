@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600");
 @import url("https://fonts.googleapis.com/css2?family=Helvetica:wght@400;700&display=swap");
 * {
@@ -10,7 +14,8 @@
 
 body {
   @media screen and (max-width: 471px) {
-    padding-bottom: 60px;
+    padding-bottom: 0px;
+    /* Todo */
   }
   /* please inform me if you faced any issue beacuse of this */
   overflow-x: hidden;
@@ -236,11 +241,28 @@ body {
 }
 
 .new.active {
-  background-color: #133680;
-  color: #ffff;
-  padding: 4px 8px;
-  border-radius: 4px;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 1000;
+  line-height: 24px;
+  color: #000;
+  opacity: 0.7;
 }
+
+/* .newNav{
+  color: #454545;
+  opacity: 0.5;
+  color: inherit;
+} */
+
+/* .newStyle.active {
+  
+    background-color: #133680;
+    color: #000;
+    padding: 4px 8px;
+    border-radius: 4px;
+} */
+
 
 @media (max-width: 1024px) {
   .ImageX {
@@ -323,3 +345,37 @@ body {
 .disabled {
   color: "#133680";
 }
+
+/* dashboard */
+.rounded-custom {
+  border-radius: 27px;
+}
+
+.bg-custom {
+  background: var(--Background-Background, #FFF);
+}
+
+.shadow-custom {
+  box-shadow: 0px 4px 18.8px 0px rgba(0, 0, 0, 0.20);
+}
+
+.mobile-rounded-custom {
+  border-radius: 15px;
+}
+
+.mobile-border-custom {
+  border: 1px solid rgba(0, 0, 0, 0.10);
+}
+
+.PHP-rounded-custom {
+  border-radius: 17px;
+}
+
+.PHP-bg-custom {
+  background: var(--Background-Background, #FFF);
+}
+
+.PHP-shadow-custom {
+  box-shadow: 0px 4px 11.3px 0px rgba(0, 0, 0, 0.25);
+}
+
