@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import CaretDown from './CaretDown.svg'
 import {
   Box,
   Card,
@@ -37,7 +38,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 
 //const API = 'AIzaSyBwikqQA3u5E5dbiyNvOrIA4wUF9jd4Gm4';
-const API ='AIzaSyBGjfbfmq3yLfJ7jpkQwJoCSaN2kDfqlmQ';
+const API = 'AIzaSyBGjfbfmq3yLfJ7jpkQwJoCSaN2kDfqlmQ';
 //  const doctorId = '6691445df662fec383fb71d3'; // Demo valid doctor ID
 
 
@@ -276,7 +277,7 @@ const VideoFetch = () => {
 
   const getDoctorDetails = async () => {
     const responseJson = await doctorDetailsGet();
-    if(!responseJson.data.data.verified) navigate("/doctor/alert");
+    if (!responseJson.data.data.verified) navigate("/doctor/alert");
 
     if (responseJson.data.status) {
       console.log('details in videofetch about doctor', responseJson.data)
@@ -311,7 +312,23 @@ const VideoFetch = () => {
     setChannelVideos(channelVideos.filter(video => video.id.videoId !== videoId));
   };
 
+  const [isOpen1, setIsOpen1] = useState(false);
 
+  const toggleDropdown1 = () => {
+    setIsOpen1(!isOpen1);
+  };
+
+  const [isOpen2, setIsOpen2] = useState(false);
+
+  const toggleDropdown2 = () => {
+    setIsOpen2(!isOpen2);
+  };
+
+  const [isOpen3, setIsOpen3] = useState(false);
+
+  const toggleDropdown3 = () => {
+    setIsOpen3(!isOpen3);
+  };
 
   return (
     <React.Fragment>
@@ -326,63 +343,170 @@ const VideoFetch = () => {
         <div>
           {/* Display message if channelId is already linked */}
           {initialChannelId ? (
-            <Typography className="my-4" variant="h3" component="h3" style={{ color: 'red', fontWeight: 'bold',fontSize:'30px' }}>
+            <Typography className="my-4" variant="h3" component="h3" style={{ color: 'red', fontWeight: 'bold', fontSize: '30px' }}>
               Channel already linked to HealthMudraa.com
             </Typography>
           ) : (
             <div>
-              <Typography variant="h5" component="h5" className="position-relative" style={{ fontWeight: 'bold' }}>
-                Connect Your Youtube Channel
-                {/* <span class="badge text-bg-success mx-2 mb-2" style={{position:'absolute',top:'-10px'}}>Recommended</span> */}
-              </Typography>
-              <form onSubmit={handleChannelSubmit}>
-                <TextField
-                  fullWidth
-                  label="Enter Your Youtube Channel Id here"
-                  value={channelId}
-                  onChange={(e) => setChannelId(e.target.value)}
-                  margin="normal"
-                  required
-                />
-                <Button type="submit" variant="contained" color="primary" className='my-2'>
-                  connect channel
-                </Button>
-              </form>
-              <div className="my-4">
-                <div className="st1">
-                  <p style={{ fontSize: '20px', fontWeight: '600',letterSpacing:'1px'  }}>How to :</p>
-                  <ul>
-                    <li>Go to your Youtube Account </li>
-                    <li>click “ View Your Channel “ </li>
-                    <li>Now go to top link and copy only half of link and paste here.
-                      Eg - UComtHWcgd1L6tg6jxxxxxxxx</li>
-                    <li>check the videos you want to add in Health Mudraa, you can delete some if its unnecessary, then click
-                      “Add to Health Mudraa “ </li>
-                  </ul>
+              <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+                <h2>Videos Available in Your Channel</h2>
+                <p>This Is One Time Process, Remaining upcoming videos will take care by Health Mudraa bot</p>
+
+                <form onSubmit={handleChannelSubmit} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '1rem' }}>
+                  <span style={{ marginRight: '0.5rem' }}>https://www.youtube.com/channel/</span>
+                  <TextField
+                    label=""
+                    value={channelId}
+                    onChange={(e) => setChannelId(e.target.value)}
+                    margin="normal"
+                    required
+                    variant="outlined"
+                    style={{ marginRight: '0.5rem' }}
+                  />
+                  <Button type="submit" variant="contained" color="primary">
+                    Add to Health Mudraa
+                  </Button>
+                </form>
+              </div>
+
+              <div className="my-4" style={{margin: "70px 150px"}}>
+                <div className="dropdown" style={{ borderBottom: '1px solid #ddd', padding: '10px 0' }}>
+                  <button
+                    onClick={toggleDropdown1}
+                    style={{
+                      fontSize: '18px',
+                      fontWeight: 'bold',
+                      color: '#333',
+                      backgroundColor: 'transparent',
+                      border: 'none',
+                      cursor: 'pointer',
+                      textAlign: 'left',
+                      width: '100%',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      marginBottom:"10px"
+
+                    }}
+                  >
+                    How to Connect your channel
+                    <img
+                      src={CaretDown}
+                      alt="Caret Down"
+                      style={{
+                        transform: isOpen1 ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.2s',
+                      }}
+                    />
+
+                  </button>
+                  {isOpen1 && (
+                    <div className="st1" style={{ paddingTop: '10px', paddingLeft: '20px', color: '#555' }}>
+                      <ul style={{ listStyleType: 'disc', paddingLeft: '20px' }}>
+                        <li>Go to your Youtube Account </li>
+                        <li>Click “View Your Channel“ </li>
+                        <li>
+                          Now go to top link and copy only half of link and paste here.
+                          <br />
+                          Eg - UComtHWcgd1L6tg6jxxxxxxxx
+                        </li>
+                        <li>
+                          Check the videos you want to add in Health Mudraa, you can delete some if it's unnecessary, then click
+                          “Add to Health Mudraa“
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+                </div>
+                <div className="dropdown" style={{ borderBottom: '1px solid #ddd', padding: '10px 0' }}>
+                  <button
+                    onClick={toggleDropdown2}
+                    style={{
+                      fontSize: '18px',
+                      fontWeight: 'bold',
+                      color: '#333',
+                      backgroundColor: 'transparent',
+                      border: 'none',
+                      cursor: 'pointer',
+                      textAlign: 'left',
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '0',
+                       marginBottom:"10px"
+                    }}
+                  >
+                    Why it's Recommended
+                    <img
+                      src={CaretDown}
+                      alt="Caret Down"
+                      style={{
+                        transform: isOpen2 ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.2s',
+                      }}
+                    />
+                  </button>
+
+
+                  {isOpen2 && (
+                    <div className="st2" style={{ paddingTop: '10px', paddingLeft: '20px', color: '#555' }}>
+                      <ul style={{ listStyleType: 'disc', paddingLeft: '20px' }}>
+                        <li>Connect Your Youtube Channel Once, HealthMudraa Will Manage it!</li>
+                        <li>We can reduce your work; our software will automatically import already uploaded videos and future videos too!</li>
+                        <li>
+                          You can upload videos as usual on YouTube, and we will make it for you in HealthMudraa. We can get video
+                          titles, descriptions, and keywords from whatever you entered on YouTube.
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </div>
 
+                <div className="dropdown" style={{ borderBottom: '1px solid #ddd', padding: '10px 0' }}>
+                  <button
+                    onClick={toggleDropdown3}
+                    style={{
+                      fontSize: '18px',
+                      fontWeight: 'bold',
+                      color: '#333',
+                      backgroundColor: 'transparent',
+                      border: 'none',
+                      cursor: 'pointer',
+                      textAlign: 'left',
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center', 
+                      justifyContent: 'space-between', 
+                      marginBottom:"10px",
+                      padding: '0',
+                    }}
+                  >
+                    Tips
+                    <img
+                      src={CaretDown}
+                      alt="Caret Down"
+                      style={{
+                        transform: isOpen3 ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.2s',
+                      }}
+                    />
+                  </button>
 
-                <div className="st2">
-
-                  <p style={{ fontSize: '20px', fontWeight: '600',letterSpacing:'1px' }}>Why its Recommended :</p>
-                  <ul>
-                    <li>Connect Your Youtube Channel Once,HealthMudraa Will Manage it !!! </li>
-                    <li>We can Reduce Your Work,Our Software will automatically import already uploaded videos and future videos too !! </li>
-                    <li>You can Upload Videos as usual in youtube and we will make it for you in healthmudraa,We can get Video title,description,keywords from whatever you entered in youtube</li>
-                  </ul>
-                </div>
-
-
-                <div className="st3">
-
-                <p style={{ fontSize: '20px', fontWeight: '600',letterSpacing:'1px'  }}>Tips :</p>
-                  <ul>
-                    <li>Most Important tip is Add Q&A (Type video topic on Google , Go to section “People also ask” , Take relevant Questions
-                      and Answer it from Your words for better reach in Google)</li>
-                    <li>We can Reduce Your Work,Our Software will automatically import already uploaded videos and future videos too !! </li>
-                    <li>Same Video with Title - We suggest you to edit each video Title, description, keywords, category in 
-                    Health Mudraa for better SEO ranking at Google. Google will read this Health Mudraa video as new video in Internet</li>
-                  </ul>
+                  {isOpen3 && (
+                    <div className="st3" style={{ paddingTop: '10px', paddingLeft: '20px', color: '#555' }}>
+                      <ul style={{ listStyleType: 'disc', paddingLeft: '20px' }}>
+                        <li>
+                          Most important tip is to add Q&A (Type video topic on Google, go to the section “People also ask,” take relevant questions
+                          and answer them in your own words for better reach on Google).
+                        </li>
+                        <li>We can reduce your work; our software will automatically import already uploaded videos and future videos too!</li>
+                        <li>
+                          Same video with title - We suggest you edit each video title, description, keywords, and category in
+                          Health Mudraa for better SEO ranking on Google. Google will read this Health Mudraa video as a new video on the Internet.
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
               {error && <Typography color="error">{error}</Typography>}
@@ -426,9 +550,6 @@ const VideoFetch = () => {
                   Add Videos to database and link my channel id
                 </Button>
               )}
-                 <div style={{display:'flex',justifyContent:'center',alignItems:'center',fontSize:'30px',fontWeight:'600'}}>
-                    Or
-                 </div>
             </div>
           )}
         </div>
@@ -436,7 +557,7 @@ const VideoFetch = () => {
 
 
         <ThemeProvider theme={theme}>
-          <Typography variant="h5" component={"h5"} className="mb-2" style={{ fontWeight: 'bold' }}>
+          <Typography variant="h5" component={"h5"} className="mb-2" style={{ fontWeight: 'bold' , marginTop:'100px', textAlign:'center'}}>
             Upload A Single Video
           </Typography>
           <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop: "18px" }}>Import URL</label>
@@ -625,54 +746,54 @@ const VideoFetch = () => {
           </div>
         </ThemeProvider>
         {
-                 <div style={{marginTop:"6em"}}>
-                   <Grid
-                     container
-                     spacing={2}
-                     sx={{
-                       display: "flex",
-                       justifyContent: "center",
-                       alignItems: "center",
-                       mt: 4,
-                     }}
-                   >
-                     {video !== "undefined" &&
-                       video.map((video, index) => (
-                         <Grid item key={video._id} xs={12} sm={6} md={6} lg={6}>
-                           <Card className="m-2">
-                             <Box component={"div"}>
-                               {video.link.length > 0 && (
-                                 <Plyr
-                                   source={{
-                                     type: "video",
-                                     sources: [
-                                       {
-                                         src: video.link,
-                                         provider: "youtube",
-                                       },
-                                     ],
-                                   }}
-                                 />
-                               )}
-       
-                               <CardContent>
-                                 <Typography component={"p"}>{video.title}</Typography>
-                               </CardContent>
-                               <CardActions>
-                                 <IconButton onClick={() => handleUpdate(index)}>
-                                   <EditIcon />
-                                 </IconButton>
-                                 <IconButton onClick={() => deleteVideo(video._id)}>
-                                   <DeleteIcon />
-                                 </IconButton>
-                               </CardActions>
-                             </Box>
-                           </Card>
-                         </Grid>
-                       ))}
-                   </Grid>
-                 </div>
-               }
+          <div style={{ marginTop: "6em" }}>
+            <Grid
+              container
+              spacing={2}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                mt: 4,
+              }}
+            >
+              {video !== "undefined" &&
+                video.map((video, index) => (
+                  <Grid item key={video._id} xs={12} sm={6} md={6} lg={6}>
+                    <Card className="m-2">
+                      <Box component={"div"}>
+                        {video.link.length > 0 && (
+                          <Plyr
+                            source={{
+                              type: "video",
+                              sources: [
+                                {
+                                  src: video.link,
+                                  provider: "youtube",
+                                },
+                              ],
+                            }}
+                          />
+                        )}
+
+                        <CardContent>
+                          <Typography component={"p"}>{video.title}</Typography>
+                        </CardContent>
+                        <CardActions>
+                          <IconButton onClick={() => handleUpdate(index)}>
+                            <EditIcon />
+                          </IconButton>
+                          <IconButton onClick={() => deleteVideo(video._id)}>
+                            <DeleteIcon />
+                          </IconButton>
+                        </CardActions>
+                      </Box>
+                    </Card>
+                  </Grid>
+                ))}
+            </Grid>
+          </div>
+        }
 
       </ThemeProvider>
     </React.Fragment>

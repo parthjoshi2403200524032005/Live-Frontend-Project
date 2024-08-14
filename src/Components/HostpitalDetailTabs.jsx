@@ -403,7 +403,7 @@ const HostpitalDetailTabs = ({ details }) => {
                 <ImageListItem key={item.img}>
                   <img
                     srcSet={`${aws_url}/${item}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                    src={`${aws_url}/${item}?w=164&h=164&fit=crop&auto=format`}
+                    src={`${item}?w=164&h=164&fit=crop&auto=format`}
                     alt={item}
                     loading="lazy"
                   />
