@@ -117,7 +117,7 @@ const JoinHospital = () => {
               value={searchText}
               onChange={(e) => {
                 setSearchText(e.target.value);
-                handleGetHospitals(e.target.value); // Fetch suggestions as user types
+                handleGetHospitals(e.target.value); 
               }}
               placeholder="Search for a hospital..."
               fullWidth
