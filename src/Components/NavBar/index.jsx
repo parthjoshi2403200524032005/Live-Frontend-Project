@@ -241,7 +241,7 @@ const Navbar = () => {
               to="/videos"
             />
 
-             <BottomNavigationAction
+             {/* <BottomNavigationAction
               className="value"
               label={
                 <Typography
@@ -254,7 +254,7 @@ const Navbar = () => {
               icon={<MedicalServices />}
               component={NavLink}
               to="/service"
-            /> 
+            />  */}
             <BottomNavigationAction
               className="value"
               label={
