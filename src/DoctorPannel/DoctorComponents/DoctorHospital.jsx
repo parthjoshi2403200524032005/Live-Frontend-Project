@@ -31,64 +31,25 @@ import {
 import { toast } from "react-hot-toast";
 import ImageUpload from "./ImageUpload";
 import MultiImageUpload from "./MultiImageUpload";
-import CarouselComponent from "./Slider";
-import styled from "styled-components";
-import { IoClose } from "react-icons/io5";
-import UploadFile from "./UploadFile.jsx";
+import CarouselComponent from "./Slider"
+import styled from 'styled-components';
+
 
 const DoctorHospital = () => {
-  const handleUploadPhoto = async (e) => {
-    const file = e.target.files[0];
-
-    const uploadPhoto = await UploadFile(file);
-
-    setUploadPhoto(uploadPhoto.url);
-
-    setNewhospital((preve) => {
-      return {
-        ...preve,
-        gallery: [...(preve.gallery || []), uploadPhoto.url],
-      };
-    });
-  };
-  const handleClearUploadPhoto = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    setUploadPhoto(null);
-  };
-
-  const handleUploadPhoto2 = async (e) => {
-    const file = e.target.files[0];
-
-    const uploadPhoto2 = await UploadFile(file);
-
-    setUploadPhoto2(uploadPhoto2.url);
-
-    setNewhospital((prev) => ({
-      ...prev,
-      gallery2: [...(prev.gallery2 || []), uploadPhoto2.url],
-    }));
-  }; 
-
-  const handleClearUploadPhoto2 = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    setUploadPhoto2(null);
-  };
 
   const ResponsiveDiv = styled.div`
-    @media (max-width: 600px) {
-      width: 400px;
-    }
-    /* For medium devices (tablets, 600px to 900px) */
-    @media (min-width: 601px) and (max-width: 900px) {
-      width: 600px;
-    }
-    /* For large devices (desktops, 900px and up) */
-    @media (min-width: 901px) {
-      width: 1200px;
-    }
-  `;
+  @media (max-width: 600px) {
+        width: 400px;   
+}
+/* For medium devices (tablets, 600px to 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+        width: 600px;
+}
+/* For large devices (desktops, 900px and up) */
+@media (min-width: 901px) {
+        width: 1200px;
+}
+`;
 
   const theme = createTheme({
     palette: {
@@ -143,8 +104,11 @@ const DoctorHospital = () => {
   const [newhospital, setNewhospital] = useState({
     hospitalName: "",
     location: {
-      type: "Point",
-      coordinates: [0, 0],
+      "type": "Point",
+      "coordinates": [
+          0,
+          0
+      ]
     },
     speciality: "",
     specialities: [],
@@ -159,18 +123,16 @@ const DoctorHospital = () => {
     hospitalprofileurl: "",
     currentlyworking: false,
     gallery: [],
-    gallery2: [],
     establishedyear: "",
     doctorid: "",
   });
   const [doctorid, setDoctorid] = useState("");
   const [uploadedImage, setUploadImage] = useState({ galleryimage: "" });
   const [hospital, setHospital] = useState([]);
-  const [uploadPhoto, setUploadPhoto] = useState("");
-  const [uploadPhoto2, setUploadPhoto2] = useState("");
-
+  
   const [edit, setEdit] = useState("");
   const currentYear = new Date().getFullYear();
+  
 
   const forHospitalChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -202,63 +164,49 @@ const DoctorHospital = () => {
     setNewhospital({ ...hospitalToEdit });
   };
 
-const forSubmit = async () => {
-  try {
-    if (
-      newhospital.hospitalName &&
-      newhospital.speciality &&
-      newhospital.location &&
-      newhospital.pricestarts &&
-      newhospital.treated &&
-      newhospital.branches &&
-      newhospital.noofbeds &&
-      newhospital.noofdoctors &&
-      newhospital.about &&
-      newhospital.pricestarts &&
-      newhospital.hospitalLocation &&
-      newhospital.currentlyworking
-    ) {
-      if (edit) {
-        await handleHospitalUpdate();
-      } else {
-        const response = await doctorHospitalsPost({
-          ...newhospital,
-          owner: doctorid,
-        });
-        if (response?.data?.status) {
-          setHospital((prevHospitals) => [
-            ...prevHospitals,
-            response.data.data,
-          ]);
-          toast.success("Hospital information submitted successfully!");
+  const forSubmit = async () => {
+    try {
+      if (
+        newhospital.hospitalName &&
+        newhospital.speciality &&
+        newhospital.location &&
+        newhospital.pricestarts &&
+        newhospital.treated &&
+        newhospital.branches &&
+        newhospital.noofbeds &&
+        newhospital.noofdoctors &&
+        newhospital.about &&
+        newhospital.pricestarts &&
+        newhospital.hospitalLocation &&
+        newhospital.hospitalprofileurl &&
+        newhospital.currentlyworking
+      ) {
+        setNewhospital(newhospital);
+        if (edit) {
+          handleHospitalUpdate();
         } else {
-          toast.error("Failed to submit hospital information!");
+          await doctorHospitalsPost({ ...newhospital, owner: doctorid });
         }
+
+        setNewhospital({
+          hospitalName: "",
+          hospitalLocation: "",
+          speciality: "",
+          pricestarts: 0,
+          treated: 0,
+          branches: 0,
+          noofbeds: 0,
+          noofdoctors: 0,
+          about: "",
+          address: "",
+          hospitalprofileurl: "",
+          currentlyworking: false,
+        });
       }
-      setNewhospital({
-        hospitalName: "",
-        hospitalLocation: "",
-        speciality: "",
-        pricestarts: 0,
-        treated: 0,
-        branches: 0,
-        noofbeds: 0,
-        noofdoctors: 0,
-        about: "",
-        address: "",
-        hospitalprofileurl: "",
-        currentlyworking: false,
-        gallery: [],
-        establishedyear: "",
-        doctorid: "",
-      });
+    } catch (error) {
+      toast.error("Error occured!");
     }
-  } catch (error) {
-    toast.error("Error occurred!");
-  }
-};
-
-
+  };
   const handleHospitalUpdate = async () => {
     const responseJson = await doctorHospitalsUpdate(
       { ...newhospital, owner: doctorid },
@@ -277,7 +225,7 @@ const forSubmit = async () => {
 
   const forGetHospitals = async () => {
     const response = await doctorDetailsGet();
-    if (!response.data.data.verified) navigate("/doctor/alert");
+    if(!response.data.data.verified) navigate("/doctor/alert");
 
     if (response.data?.data.hospitals) {
       setHospital(response.data?.data.hospitals);
@@ -303,6 +251,7 @@ const forSubmit = async () => {
   }, [uploadedImage.galleryimage]);
 
   useEffect(() => {
+    
     forGetHospitals();
   }, []);
 
@@ -312,72 +261,33 @@ const forSubmit = async () => {
         <Container>
           <Box component="form">
             <Box component={"div"} className="hospital" sx={{ marginY: 1.5 }}>
-              <ResponsiveDiv>
-                <CarouselComponent />
-              </ResponsiveDiv>
+
+            <ResponsiveDiv>
+              <CarouselComponent />
+            </ResponsiveDiv>
 
               <Typography variant="h5" component={"h5"} className="mb-2">
                 Hospital
               </Typography>
 
               <Grid item xs={12} sm={6} md={6} lg={5}>
-                <Box component={"div"} className="pb-2">
-                  <InputLabel>Main Hospital Image / Logo </InputLabel>
-                  {/* <ImageUpload
-                    setForm={setNewhospital}
-                    fieldname={"hospitalprofileurl"}
-                    imageurl={
-                      newhospital.hospitalprofileurl !== ""
-                        ? `${aws_url}/${newhospital.hospitalprofileurl}`
-                        : ""
-                    }
-                  /> */}
-
-                  {/* '''''''''''''''''''''''''''''''''''''''''''''' */}
-                  <div className="flex flex-col gap-1">
-                    <label htmlFor="profile_pic">
-                      Photo :
-                      <div className="h-14 bg-slate-200 flex justify-center items-center border rounded hover:border-primary cursor-pointer">
-                        <p className="text-sm max-w-[300px] text-ellipsis line-clamp-1">
-                          {uploadPhoto2?.name
-                            ? uploadPhoto2?.name
-                            : "Upload profile photo"}
-                        </p>
-                        {uploadPhoto2?.name && (
-                          <button
-                            className="text-lg ml-2 hover:text-red-600"
-                            onClick={handleClearUploadPhoto2}
-                          >
-                            <IoClose />
-                          </button>
-                        )}
-                      </div>
-                    </label>
-                    <input
-                      type="file"
-                      id="profile_pic"
-                      name="profile_pic"
-                      className="bg-slate-100 px-2 py-1 focus:outline-primary hidden"
-                      onChange={handleUploadPhoto2}
+                  <Box component={"div"} className="pb-2">
+                    <InputLabel>Main Hospital Image / Logo </InputLabel>
+                    <ImageUpload
+                      setForm={setNewhospital}
+                      fieldname={"hospitalprofileurl"}
+                      imageurl={
+                        newhospital.hospitalprofileurl !== ""
+                          ? `${aws_url}/${newhospital.hospitalprofileurl}`
+                          : ""
+                      }
                     />
-                  </div>
-
-                  {/* '''''''''''''''''''''''''''''''''''''''''''''' */}
-                </Box>
-              </Grid>
+                  </Box>
+                </Grid>
 
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={12} md={12} lg={10}>
-                  <label
-                    htmlFor="firstname"
-                    style={{
-                      paddingBottom: "5px",
-                      fontSize: "18px",
-                      paddingTop: "10px",
-                    }}
-                  >
-                    Name Of The Hospital/Clinic
-                  </label>
+                <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Name Of The Hospital/Clinic</label>
                   <TextField
                     required
                     fullWidth
@@ -396,16 +306,7 @@ const forSubmit = async () => {
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} lg={5}>
-                  <label
-                    htmlFor="firstname"
-                    style={{
-                      paddingBottom: "5px",
-                      fontSize: "18px",
-                      paddingTop: "10px",
-                    }}
-                  >
-                    Location
-                  </label>
+                <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Location</label>
                   <TextField
                     required
                     fullWidth
@@ -424,16 +325,7 @@ const forSubmit = async () => {
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} lg={5}>
-                  <label
-                    htmlFor="firstname"
-                    style={{
-                      paddingBottom: "5px",
-                      fontSize: "18px",
-                      paddingTop: "10px",
-                    }}
-                  >
-                    Patients Treated
-                  </label>
+                <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Patients Treated</label>
                   <TextField
                     required
                     fullWidth
@@ -452,16 +344,7 @@ const forSubmit = async () => {
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} lg={5}>
-                  <label
-                    htmlFor="firstname"
-                    style={{
-                      paddingBottom: "5px",
-                      fontSize: "18px",
-                      paddingTop: "10px",
-                    }}
-                  >
-                    Consultation Price
-                  </label>
+                <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Consultation Price</label>
                   <TextField
                     required
                     fullWidth
@@ -480,16 +363,7 @@ const forSubmit = async () => {
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} lg={5}>
-                  <label
-                    htmlFor="firstname"
-                    style={{
-                      paddingBottom: "5px",
-                      fontSize: "18px",
-                      paddingTop: "10px",
-                    }}
-                  >
-                    Speciality Type
-                  </label>
+                <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Speciality Type</label>
                   <FormControl fullWidth>
                     <Select
                       labelId="demo-simple-select-label"
@@ -646,48 +520,19 @@ const forSubmit = async () => {
                     </Typography>
                   </Stack>
                 </Grid>
+                
               </Grid>
 
               <Box component={"div"} sx={{ mt: 4 }}>
                 <Typography variant="h5" component={"h5"} className="mb-2">
                   Hospital Gallery
                 </Typography>
-                {/* <MultiImageUpload
+                <MultiImageUpload
                   setForm={setUploadImage}
                   fieldname={"galleryimage"}
                   imageurl={""}
                   emptyimage={true}
-                /> */}
-
-                {/* --------------------------------- */}
-                <div className="flex flex-col gap-1">
-                  <label htmlFor="profile_pic">
-                    Photo :
-                    <div className="h-14 bg-slate-200 flex justify-center items-center border rounded hover:border-primary cursor-pointer">
-                      <p className="text-sm max-w-[300px] text-ellipsis line-clamp-1">
-                        {uploadPhoto?.name
-                          ? uploadPhoto?.name
-                          : "Upload profile photo"}
-                      </p>
-                      {uploadPhoto?.name && (
-                        <button
-                          className="text-lg ml-2 hover:text-red-600"
-                          onClick={handleClearUploadPhoto}
-                        >
-                          <IoClose />
-                        </button>
-                      )}
-                    </div>
-                  </label>
-                  <input
-                    type="file"
-                    id="profile_pic"
-                    name="profile_pic"
-                    className="bg-slate-100 px-2 py-1 focus:outline-primary hidden"
-                    onChange={handleUploadPhoto}
-                  />
-                </div>
-                {/* ----------------------------------- */}
+                />
                 <Grid container spacing={1} marginTop={"1rem"}>
                   {newhospital.gallery &&
                     newhospital.gallery.map((image) => {
@@ -709,26 +554,12 @@ const forSubmit = async () => {
               </Box>
 
               <Box component={"div"} sx={{ mt: 4 }}>
-                <Typography
-                  variant="h5"
-                  component={"h5"}
-                  className="mb-2"
-                  style={{ fontWeight: "bold" }}
-                >
+                <Typography variant="h5" component={"h5"} className="mb-2" style={{ fontWeight: 'bold' }}>
                   Infrastructure
                 </Typography>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6} md={6} lg={5}>
-                    <label
-                      htmlFor="firstname"
-                      style={{
-                        paddingBottom: "5px",
-                        fontSize: "18px",
-                        paddingTop: "10px",
-                      }}
-                    >
-                      No. Of Branches
-                    </label>
+                  <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>No. Of Branches</label>
                     <TextField
                       required
                       fullWidth
@@ -746,16 +577,7 @@ const forSubmit = async () => {
                     />
                   </Grid>
                   <Grid item xs={12} sm={6} md={6} lg={5}>
-                    <label
-                      htmlFor="firstname"
-                      style={{
-                        paddingBottom: "5px",
-                        fontSize: "18px",
-                        paddingTop: "10px",
-                      }}
-                    >
-                      No. Of Beds
-                    </label>
+                  <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>No. Of Beds</label>
                     <TextField
                       required
                       fullWidth
@@ -773,16 +595,7 @@ const forSubmit = async () => {
                     />
                   </Grid>
                   <Grid item xs={12} sm={6} md={6} lg={5}>
-                    <label
-                      htmlFor="firstname"
-                      style={{
-                        paddingBottom: "5px",
-                        fontSize: "18px",
-                        paddingTop: "10px",
-                      }}
-                    >
-                      No. Of Doctors
-                    </label>
+                  <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>No. Of Doctors</label>
                     <TextField
                       required
                       fullWidth
@@ -800,44 +613,26 @@ const forSubmit = async () => {
                     />
                   </Grid>
                   <Grid item xs={12} sm={6} md={6} lg={5}>
-                    <label
-                      htmlFor="firstname"
-                      style={{
-                        paddingBottom: "5px",
-                        fontSize: "18px",
-                        paddingTop: "10px",
-                      }}
-                    >
-                      Established Year
-                    </label>
+                    <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Established Year</label>
                     <div>
-                      <DatePicker
-                        selected={
-                          newhospital.establishedyear
-                            ? new Date(newhospital.establishedyear, 0, 1)
-                            : null
-                        }
-                        onChange={handleEstdYearChange}
-                        dateFormat="yyyy"
-                        showYearPicker
-                        maxDate={new Date(currentYear, 11, 31)}
-                        placeholderText="To Year"
-                        className="form-control"
-                      />
+                    <DatePicker
+                      selected={
+                        newhospital.establishedyear
+                          ? new Date(newhospital.establishedyear, 0, 1)
+                          : null
+                      }
+                      onChange={handleEstdYearChange}
+                      dateFormat="yyyy"
+                      showYearPicker
+                      maxDate={new Date(currentYear, 11, 31)}
+                      placeholderText="To Year"
+                      className="form-control"
+                    />
                     </div>
                   </Grid>
 
                   <Grid item xs={12} sm={12} md={12} lg={10}>
-                    <label
-                      htmlFor="firstname"
-                      style={{
-                        paddingBottom: "5px",
-                        fontSize: "18px",
-                        paddingTop: "10px",
-                      }}
-                    >
-                      About
-                    </label>
+                  <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>About</label>
                     <TextField
                       required
                       fullWidth
@@ -854,16 +649,7 @@ const forSubmit = async () => {
                   </Grid>
 
                   <Grid item xs={12} sm={12} md={12} lg={10}>
-                    <label
-                      htmlFor="firstname"
-                      style={{
-                        paddingBottom: "5px",
-                        fontSize: "18px",
-                        paddingTop: "10px",
-                      }}
-                    >
-                      Address
-                    </label>
+                  <label htmlFor="firstname" style={{ paddingBottom: "5px", fontSize: "18px", paddingTop:"10px" }}>Address</label>
                     <TextField
                       required
                       fullWidth
@@ -881,26 +667,12 @@ const forSubmit = async () => {
               </Box>
             </Box>
           </Box>
-          <div
-            className="d-flex justify-content-between mt-3 "
-            style={{
-              paddingTop: "5px",
-              paddingBottom: "20px",
-              position: "absolute",
-              right: "15%",
-            }}
+          <div className="d-flex justify-content-between mt-3 " style={{paddingTop:"5px" , paddingBottom:"20px" , position:"absolute" , right:"15%"}}>
+          <UploadButton className="mt-3 px-4" onClick={forSubmit}
+          style={{ fontFamily: "Montserrat" , backgroundColor:"#133680" , color:"white" , }}
           >
-            <UploadButton
-              className="mt-3 px-4"
-              onClick={forSubmit}
-              style={{
-                fontFamily: "Montserrat",
-                backgroundColor: "#133680",
-                color: "white",
-              }}
-            >
-              {edit !== "" ? "Update" : "Submit"}
-            </UploadButton>
+            {edit !== "" ? "Update" : "Submit"}
+          </UploadButton>
           </div>
           <DetailCard
             DataType={hospital}
