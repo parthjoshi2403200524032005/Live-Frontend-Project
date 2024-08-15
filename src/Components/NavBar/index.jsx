@@ -111,14 +111,14 @@ const Navbar = () => {
                     Videos
                   </Typography>
 
-                  <Typography
+                 {/*  <Typography
                     className="text-decoration-none new text-[#454545] opacity-45 text-[16px] "
                     component={NavLink}
                     to={"/service"}
                     sx={{ ...CustomStyles.navLink }}
                   >
                     Services
-                  </Typography>
+                  </Typography>  */}
 
                   <Typography
                     className="text-decoration-none new text-[#454545] opacity-45 text-[16px]"
