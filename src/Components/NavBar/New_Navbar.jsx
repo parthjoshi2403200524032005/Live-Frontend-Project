@@ -20,7 +20,7 @@ import Logo from "../../assets/Logo.png";
 import DocAccountModal from "../../DoctorPannel/DoctorComponents/DocAccountModal";
 import { MobileActionBar } from "./NavBarStyles";
 
-const Navbar = () => {
+const NewNavBar = () => {
   const theme = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
@@ -47,14 +47,13 @@ const Navbar = () => {
   return (
     <React.Fragment>
       <Box>
-        <div className="">
-          {/* md:shadow-none  shadow */}
-          <Toolbar className=" flex     justify-between max-w-8xl md:shadow-none shadow mt-4 h-[38px] md:h-[100px]">
+        <div className="shadow">
+          <Toolbar className=" flex  max-w-8xl mx-auto justify-between mt-4 h-[38px] md:h-[100px]">
             <div
               className="md:block hidden cursor-pointer pl-4 "
               onClick={() => navigate("/")}
             >
-              <span className="text-[#133682] text-2xl font-medium text-center font-dm-sans" >
+              <span className="text-[#133682] text-2xl font-medium text-center font-dm-sans">
                 Health
               </span>
               <span className="text-[#FD2621] text-2xl font-medium font-dm-sans">
@@ -62,8 +61,7 @@ const Navbar = () => {
               </span>
             </div>
 
-            {/* Mobile Screen Navbar */}
-            <div className=" mx-auto md:hidden flex justify-center items-center">
+            <div className="mx-auto md:hidden flex justify-center items-center ">
               <div
                 className=" text-center  cursor-pointer"
                 onClick={() => navigate("/")}
@@ -76,7 +74,7 @@ const Navbar = () => {
                 </span>
               </div>
             </div>
-            <div className="md:hidden flex ">
+            <div className="md:hidden flex">
               <Box sx={{ display: { xs: "flex", md: "flex" } }}>
                 <IconButton size="large" onClick={forOpen} color="inherit">
                   <AccountCircle />
@@ -111,14 +109,14 @@ const Navbar = () => {
                     Videos
                   </Typography>
 
-                  {/* <Typography
+                  <Typography
                     className="text-decoration-none new text-[#454545] opacity-45 text-[16px] "
                     component={NavLink}
                     to={"/service"}
                     sx={{ ...CustomStyles.navLink }}
                   >
                     Services
-                  </Typography> */}
+                  </Typography>
 
                   <Typography
                     className="text-decoration-none new text-[#454545] opacity-45 text-[16px]"
@@ -176,7 +174,7 @@ const Navbar = () => {
               handleMouseLeave={handleMouseLeave}
             />
           </Button> */}
-            <div className="md:flex hidden pr-4 w-8 h-8 items-center justify-center">
+            <div className="md:block hidden">
               <Box sx={{ display: { xs: "flex", md: "flex" } }}>
                 <IconButton size="large" onClick={forOpen} color="inherit">
                   <AccountCircle />
@@ -199,7 +197,7 @@ const Navbar = () => {
       )}
 
       {/* Mobile Size */}
-      {forScreenWidth ? (
+      {/* {forScreenWidth ? (
         <MobileActionBar>
           <BottomNavigation
             onChange={forNavChange}
@@ -285,11 +283,11 @@ const Navbar = () => {
             />
           </BottomNavigation>
         </MobileActionBar>
-      ) : null}
+      ) : null} */}
       <Outlet />
-      {active === "/signup" || active === "/login" ? "" : <TestFooter />}
+      {/* {active === "/signup" || active === "/login" ? "" : <TestFooter />} */}
     </React.Fragment>
   );
 };
 
-export default Navbar;
+export default NewNavBar;
