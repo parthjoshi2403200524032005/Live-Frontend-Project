@@ -13,17 +13,16 @@ import { Home, AccountCircle, MedicalServices } from "@mui/icons-material";
 import InfoIcon from "@mui/icons-material/Info";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import { CustomStyles } from "../../CustomStyles/Styles";
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import AccountModal from "../AccountModal";
 import TestFooter from "../TestFooter";
 import Logo from "../../assets/Logo.png";
 import DocAccountModal from "../../DoctorPannel/DoctorComponents/DocAccountModal";
 import { MobileActionBar } from "./NavBarStyles";
 
-const Navbar = () => {
+const NavBar = () => {
   const theme = useTheme();
   const location = useLocation();
-  const navigate = useNavigate();
   const forScreenWidth = useMediaQuery(theme.breakpoints.down("md"));
   const [active, setActive] = useState(location.pathname);
   const [open, setOpen] = useState(false);
@@ -47,101 +46,67 @@ const Navbar = () => {
   return (
     <React.Fragment>
       <Box>
-        <div className="">
-          {/* md:shadow-none  shadow */}
-          <Toolbar className=" flex     justify-between max-w-8xl  shadow-md mt-4 h-[38px] md:h-[72px]">
-            <div
-              className="md:block hidden cursor-pointer pl-4 "
-              onClick={() => navigate("/")}
+        <Toolbar className="shadow">
+          <Box
+            alt="Health Mudraa"
+            src={Logo}
+            sx={{ width: 100, height: 44, cursor: "pointer" }}
+            component={"img"}
+          />
+          <Box sx={{ flexGrow: 3 }} />
+          {!forScreenWidth && (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
             >
-              <span className="text-[#133682] text-2xl font-medium text-center font-dm-sans">
-                Health
-              </span>
-              <span className="text-[#FD2621] text-2xl font-medium font-dm-sans">
-                Mudraa
-              </span>
-            </div>
-
-            {/* Mobile Screen Navbar */}
-            <div className=" mx-auto md:hidden flex justify-center items-center">
-              <div
-                className=" text-center  cursor-pointer"
-                onClick={() => navigate("/")}
+               <Typography
+                className="text-decoration-none new"
+                component={NavLink}
+                to={"/"}
+                sx={{ ...CustomStyles.navLink, color: "inherit" }}
               >
-                <span className="text-[#133682] text-2xl font-medium font-dm-sans">
-                  Health
-                </span>
-                <span className="text-[#FD2621] text-2xl font-medium font-dm-sans">
-                  Mudraa
-                </span>
-              </div>
-            </div>
-            <div className="md:hidden flex ">
-              <Box sx={{ display: { xs: "flex", md: "flex" } }}>
-                <IconButton size="large" onClick={forOpen} color="inherit">
-                  <AccountCircle />
-                </IconButton>
-              </Box>
-            </div>
+                Home
+              </Typography>
+              <Typography
+                className="text-decoration-none new"
+                component={NavLink}
+                to={"/videos"}
+                sx={{ ...CustomStyles.navLink, color: "inherit" }}
+              >
+                Videos
+              </Typography>
+              {/* <Typography
+                className="text-decoration-none new"
+                component={NavLink}
+                to={"/service"}
+                sx={{ ...CustomStyles.navLink, color: "inherit" }}
+              >
+                Services
+              </Typography> */}
+              <Typography
+                className="text-decoration-none new"
+                component={NavLink}
+                to={"/plans"}
+                sx={{ ...CustomStyles.navLink, color: "inherit" }}
+              >
+                Plans
+              </Typography>
+              <Typography
+                className="text-decoration-none new"
+                component={NavLink}
+                to={"/about"}
+                sx={{ ...CustomStyles.navLink, color: "inherit" }}
+              >
+                About
+              </Typography>
+            </Box>
+          )}
+          <Box sx={{ flexGrow: 1 }} />
 
-            {/* <Box sx={{ flexGrow: 3 }} /> */}
-            <div className="">
-              {!forScreenWidth && (
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Typography
-                    className="text-decoration-none new text-[#454545] opacity-45 text-[16px]"
-                    component={NavLink}
-                    to={"/"}
-                    sx={{ ...CustomStyles.navLink }}
-                  >
-                    Home
-                  </Typography>
-                  <Typography
-                    className="text-decoration-none new text-[#454545] opacity-45 text-[16px] "
-                    component={NavLink}
-                    to={"/videos"}
-                    sx={{ ...CustomStyles.navLink }}
-                  >
-                    Videos
-                  </Typography>
-
-                  {/* <Typography
-                    className="text-decoration-none new text-[#454545] opacity-45 text-[16px] "
-                    component={NavLink}
-                    to={"/service"}
-                    sx={{ ...CustomStyles.navLink }}
-                  >
-                    Services
-                  </Typography> */}
-
-                  <Typography
-                    className="text-decoration-none new text-[#454545] opacity-45 text-[16px]"
-                    component={NavLink}
-                    to={"/plans"}
-                    sx={{ ...CustomStyles.navLink }}
-                  >
-                    Plans
-                  </Typography>
-                  <Typography
-                    className="text-decoration-none new text-[#454545] opacity-45 text-[16px]"
-                    component={NavLink}
-                    to={"/about"}
-                    sx={{ ...CustomStyles.navLink }}
-                  >
-                    About
-                  </Typography>
-                </Box>
-              )}
-            </div>
-            {/* <Box sx={{ flexGrow: 1 }} /> */}
-
-            {/* <Button
+          {/* <Button
             onClick={forDocOpen}
             variant="outlined"
             onMouseEnter={handleMouseEnter}
@@ -176,15 +141,13 @@ const Navbar = () => {
               handleMouseLeave={handleMouseLeave}
             />
           </Button> */}
-            <div className="md:flex hidden pr-4 w-8 h-8 items-center justify-center">
-              <Box sx={{ display: { xs: "flex", md: "flex" } }}>
-                <IconButton size="large" onClick={forOpen} color="inherit">
-                  <AccountCircle />
-                </IconButton>
-              </Box>
-            </div>
-          </Toolbar>
-        </div>
+
+          <Box sx={{ display: { xs: "flex", md: "flex" } }}>
+            <IconButton size="large" onClick={forOpen} color="inherit">
+              <AccountCircle />
+            </IconButton>
+          </Box>
+        </Toolbar>
       </Box>
       {open && (
         <AccountModal forClose={forClose} forOpen={forOpen} open={open} />
@@ -197,9 +160,7 @@ const Navbar = () => {
           dcopen={dcopen}
         />
       )}
-
-      {/* Mobile Size */}
-      {/* {forScreenWidth ? (
+      {forScreenWidth ? (
         <MobileActionBar>
           <BottomNavigation
             onChange={forNavChange}
@@ -226,7 +187,8 @@ const Navbar = () => {
               to="/"
             />
 
-            <BottomNavigationAction
+            
+<BottomNavigationAction
               className="value"
               label={
                 <Typography
@@ -241,7 +203,8 @@ const Navbar = () => {
               to="/videos"
             />
 
-             <BottomNavigationAction
+
+            {/* <BottomNavigationAction
               className="value"
               label={
                 <Typography
@@ -254,7 +217,7 @@ const Navbar = () => {
               icon={<MedicalServices />}
               component={NavLink}
               to="/service"
-            /> 
+            /> */}
             <BottomNavigationAction
               className="value"
               label={
@@ -285,11 +248,11 @@ const Navbar = () => {
             />
           </BottomNavigation>
         </MobileActionBar>
-      ) : null} */}
+      ) : null}
       <Outlet />
-      {active === "/signup" || active === "/login" ? "" : <TestFooter />}
+      {active === "/signup" || active === "/login" ? "" : <TestFooter/>}
     </React.Fragment>
   );
 };
 
-export default Navbar;
+export default NavBar;
