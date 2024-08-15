@@ -18,6 +18,7 @@ import {
   Radio,
   Switch,
   Stack,
+  Checkbox,
 } from "@mui/material";
 import { UploadButton } from "../../CustomStyles/Styles";
 import {
@@ -28,30 +29,27 @@ import {
 import { toast } from "react-hot-toast";
 import ImageUpload from "./ImageUpload";
 //import Profile from "../../assets/user.png";
-import CarouselComponent from "./App"
-import styled from 'styled-components';
-const DEFAULT_IMAGE = 'https://healthmudraa-assets.s3.ap-south-1.amazonaws.com/1718098598539-blank-profile-picture-973460_1280.png';
+import CarouselComponent from "./App";
+import styled from "styled-components";
+const DEFAULT_IMAGE =
+  "https://healthmudraa-assets.s3.ap-south-1.amazonaws.com/1718098598539-blank-profile-picture-973460_1280.png";
 
 const DocProfile = () => {
-
   const ResponsiveDiv = styled.div`
+    @media (max-width: 600px) {
+      width: 400px;
+    }
 
-  @media (max-width: 600px) {
-        width: 400px;
-    
-}
+    /* For medium devices (tablets, 600px to 900px) */
+    @media (min-width: 601px) and (max-width: 900px) {
+      width: 600px;
+    }
 
-/* For medium devices (tablets, 600px to 900px) */
-@media (min-width: 601px) and (max-width: 900px) {
-        width: 600px;
-    
-}
-
-/* For large devices (desktops, 900px and up) */
-@media (min-width: 901px) {
-        width: 1200px;
-}
-`;
+    /* For large devices (desktops, 900px and up) */
+    @media (min-width: 901px) {
+      width: 1200px;
+    }
+  `;
 
   const theme = createTheme({
     palette: {
@@ -220,6 +218,7 @@ const DocProfile = () => {
     govtId: [],
     awards: [],
     about: "",
+    hospitalvisits: true,
   });
   const navigate = useNavigate();
 
@@ -232,13 +231,20 @@ const DocProfile = () => {
   const forDoctorGet = async () => {
     const response = await doctorDetailsGet();
     if (response?.data.status) {
-      setForm(response.data?.data);
+      const doctorData = response.data?.data;
+
+      // Set default value if not present
+      if (doctorData.hospitalvisits === undefined) {
+        doctorData.hospitalvisits = true;
+      }
+
+      setForm(doctorData);
       console.log(response.data.data);
     } else {
       toast.error(response?.data.message);
     }
 
-    if(!response.data.data.verified) navigate("/doctor/alert");
+    if (!response.data.data.verified) navigate("/doctor/alert");
   };
 
   useEffect(() => {
@@ -261,16 +267,17 @@ const DocProfile = () => {
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
-        
         <ResponsiveDiv>
           <CarouselComponent />
         </ResponsiveDiv>
-          
+
         <ImageUpload
           setForm={setForm}
           fieldname={"profilepicurl"}
           imageurl={
-            form.profilepicurl !== "" ? `${aws_url}/${form.profilepicurl}` : `${DEFAULT_IMAGE}`
+            form.profilepicurl !== ""
+              ? `${aws_url}/${form.profilepicurl}`
+              : `${DEFAULT_IMAGE}`
           }
         />
         <Container>
@@ -577,7 +584,7 @@ const DocProfile = () => {
               </Grid> */}
 
               {/* <Stack direction="row" spacing={1} alignItems="center"></Stack> */}
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} >
                 <Stack
                   direction="row"
                   spacing={1}
@@ -586,22 +593,74 @@ const DocProfile = () => {
                     border: "1px solid #9E9FA8",
                     padding: 0.28,
                     borderRadius: 1,
+                    justifyContent: "space-between",
+                    width: "1150px", // Increased width here
                   }}
                 >
-                  <Typography className="ms-2">Home Visit</Typography>
-                  <Switch
-                    name="homevisit"
-                    checked={form.homevisit}
-                    onChange={forProfileChange}
-                    inputProps={{ "aria-label": "controlled" }}
-                  />
-                  <Typography>
-                    {form.homevisit || form.homevisit ? "Yes" : "No"}
-                  </Typography>
+                  <div
+                    style={{
+                      width: "300px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      textAlign: "center",
+                    }}
+                  >
+                    <Typography className="ms-2">
+                      Clinic/hospital visits
+                    </Typography>
+                    <Checkbox
+                      name="hospitalvisits"
+                      checked={form.hospitalvisits}
+                      onChange={forProfileChange}
+                      inputProps={{ "aria-label": "controlled" }}
+                    />
+                    <Typography>
+                      {form.hospitalvisits ? "Yes" : "No"}
+                    </Typography>
+                  </div>
+
+                  <div
+                    style={{
+                      width: "300px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      textAlign: "center",
+                    }}
+                  >
+                    <Typography className="ms-2">Home Visit</Typography>
+                    <Checkbox
+                      name="homevisit"
+                      checked={form.homevisit}
+                      onChange={forProfileChange}
+                      inputProps={{ "aria-label": "controlled" }}
+                    />
+                    <Typography>{form.homevisit ? "Yes" : "No"}</Typography>
+                  </div>
+
+                  <div
+                    style={{
+                      width: "300px", // Adjusted width for this section
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      textAlign: "center",
+                    }}
+                  >
+                    <Typography className="ms-2">Online Visit</Typography>
+                    <Checkbox
+                      name="onlinevisit"
+                      checked={form.onlinevisit}
+                      onChange={forProfileChange}
+                      inputProps={{ "aria-label": "controlled" }}
+                    />
+                    <Typography>{form.onlinevisit ? "Yes" : "No"}</Typography>
+                  </div>
                 </Stack>
               </Grid>
 
-              <Grid item xs={12} sm={6}>
+              {/* <Grid item xs={12} sm={6}>
                 <Stack
                   direction="row"
                   spacing={1}
@@ -612,21 +671,20 @@ const DocProfile = () => {
                     borderRadius: 1,
                   }}
                 >
-                  <Typography className="ms-2">Online Visit</Typography>
-                  <Switch
-                    name="onlinevisit"
-                    checked={form.onlinevisit}
-                    onChange={forProfileChange}
-                    inputProps={{ "aria-label": "controlled" }}
-                  />
-                  <Typography>
-                    {form.onlinevisit || form.onlinevisit ? "Yes" : "No"}
-                  </Typography>
+                  
                 </Stack>
-              </Grid>
+              </Grid> */}
             </Grid>
             {/* <DocDetails details={form} setDetails={setForm} /> */}
-            <div className="d-flex justify-content-between mt-3" style={{paddingTop:"5px" , paddingBottom:"20px" , position:"absolute" , right:"15%"}}>
+            <div
+              className="d-flex justify-content-between mt-3"
+              style={{
+                paddingTop: "5px",
+                paddingBottom: "20px",
+                position: "absolute",
+                right: "15%",
+              }}
+            >
               <UploadButton
                 onClick={forDoctorSubmit}
                 style={{ fontFamily: "Montserrat" }}
@@ -636,7 +694,12 @@ const DocProfile = () => {
 
               <UploadButton
                 to="/doctor/about"
-                style={{ fontFamily: "Montserrat" , backgroundColor:"#133680" , color:"white" ,marginLeft:"20px" }}
+                style={{
+                  fontFamily: "Montserrat",
+                  backgroundColor: "#133680",
+                  color: "white",
+                  marginLeft: "20px",
+                }}
               >
                 Next
               </UploadButton>
