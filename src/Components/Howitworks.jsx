@@ -138,8 +138,9 @@ export default function HowItWorks() {
         }}
       >
         {/* First Card */}
-        <div style={{ ...cardStyle, background: "#BEB4FB" }}>
+        <div style={{ ...cardStyle, background: "#BEB4FB" }} className="flex flex-col justify-center items-center">
           <h3
+          className="mt-5"
             style={{
               color: "var(--Background-Background, #FFF)",
               textAlign: "center",
@@ -200,7 +201,7 @@ export default function HowItWorks() {
         </div>
 
         {/* Second Card */}
-        <div style={{ ...cardStyle, background: "#FDB093" }}>
+        <div style={{ ...cardStyle, background: "#FDB093" }} className="flex flex-col">
           <h3
             style={{
               color: "var(--Background-Background, #FFF)",
@@ -229,7 +230,7 @@ export default function HowItWorks() {
           >
             Schedule a consultation with the doctor of your choice
           </p>
-          <div>
+          <div className="flex justify-center items-center">
             <img
               src={hww2}
               alt=""
@@ -291,14 +292,16 @@ export default function HowItWorks() {
           >
             Schedule a consultation with the doctor of your choice
           </p>
-          <img
+        <div className="flex justify-center items-center">
+        <img
             src={hww4i}
             alt=""
             style={{
               width: "40%",
             }}
           />
-          <div>
+        </div>
+          <div className="flex justify-center items-center">
             <img
               src={hww3}
               alt=""

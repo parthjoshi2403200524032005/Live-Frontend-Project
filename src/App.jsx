@@ -98,6 +98,7 @@ const App = () => {
     { path: "/doctor/forgotpassword", element: <ForgotPassword /> },
     { path: "/doctor/resetpassword", element: <PasswordReset /> },
     { path: "*", element: <Page404 /> },
+    { path: "/dashboard", element: <DashboardAppPage /> },
   ];
 
   const adminRoutes = [

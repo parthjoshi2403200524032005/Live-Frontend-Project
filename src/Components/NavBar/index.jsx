@@ -54,7 +54,7 @@ const Navbar = () => {
               className="md:block hidden cursor-pointer pl-4 "
               onClick={() => navigate("/")}
             >
-              <span className="text-[#133682] text-2xl font-medium text-center font-dm-sans" >
+              <span className="text-[#133682] text-2xl font-medium text-center font-dm-sans">
                 Health
               </span>
               <span className="text-[#FD2621] text-2xl font-medium font-dm-sans">
@@ -111,6 +111,7 @@ const Navbar = () => {
                     Videos
                   </Typography>
 
+
                  {/*  <Typography
                     className="text-decoration-none new text-[#454545] opacity-45 text-[16px] "
                     component={NavLink}
@@ -118,6 +119,7 @@ const Navbar = () => {
                     sx={{ ...CustomStyles.navLink }}
                   >
                     Services
+
                   </Typography>  */}
 
                   <Typography

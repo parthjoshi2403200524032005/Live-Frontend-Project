@@ -70,7 +70,7 @@ const Login = () => {
           localStorage.setItem("accessToken", response.data.accessToken);
           localStorage.setItem("refreshToken", response.data.refreshToken);
           localStorage.setItem("type", "users");
-          navigate("/user/dashboard");
+          navigate("/dashboard");
           toast.success("Logged in successfully!");
         } else {
           toast.error("Failed to login");
