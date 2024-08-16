@@ -110,15 +110,17 @@ const Navbar = () => {
                   >
                     Videos
                   </Typography>
-                  {/* 
-                  <Typography
+
+
+                 {/*  <Typography
                     className="text-decoration-none new text-[#454545] opacity-45 text-[16px] "
                     component={NavLink}
                     to={"/service"}
                     sx={{ ...CustomStyles.navLink }}
                   >
                     Services
-                  </Typography> */}
+
+                  </Typography>  */}
 
                   <Typography
                     className="text-decoration-none new text-[#454545] opacity-45 text-[16px]"
@@ -241,7 +243,7 @@ const Navbar = () => {
               to="/videos"
             />
 
-            {/* <BottomNavigationAction
+{/*              <BottomNavigationAction
               className="value"
               label={
                 <Typography
@@ -254,7 +256,7 @@ const Navbar = () => {
               icon={<MedicalServices />}
               component={NavLink}
               to="/service"
-            />  */}
+            />      */}
             <BottomNavigationAction
               className="value"
               label={
