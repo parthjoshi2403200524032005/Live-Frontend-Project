@@ -1,6 +1,3 @@
-
-
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Flex, FlexCol } from "../../styles/CommonStyles";
@@ -19,17 +16,11 @@ const DoctorCard = ({
 }) => {
   const navigate = useNavigate();
 
-  // const handleShareVideo = (link) => {
-  //   navigator.clipboard.writeText(link);
-  //   toast.success("Copied link to share");
-  // };
-
-  // const tempFunction = (url) => {
-  //   console.log(decodeURIComponent(url.toString()));
-  // };
+  // Default image if profilepicurl is not available
+  const defaultImage = "https://healthmudraa.com/static/media/user.0a4ae0bf5495eda6ef9a.png"; 
 
   return (
-    <>
+    <> 
       <DoctorCardWrapper key={item?._id} style={{ cursor: "pointer" }}>
         <FlexCol padding="12px">
           <h1 className="videoHomePageTitle">{item?.title}</h1>
@@ -45,7 +36,7 @@ const DoctorCard = ({
             <Flex width="80px" height="80px">
               <img
                 className="doctorImage"
-                src={`${aws_url}/${item?.profilepicurl}`}
+                src={item?.profilepicurl ? `${aws_url}/${item?.profilepicurl}` : defaultImage}
                 alt="doctor_image"
               />
             </Flex>
@@ -75,3 +66,4 @@ const DoctorCard = ({
 };
 
 export default DoctorCard;
+
