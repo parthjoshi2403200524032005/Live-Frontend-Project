@@ -3,17 +3,6 @@ const accessToken = localStorage.getItem("accessToken");
 // ${aws_url}/
 
 
-
-
-
-
-
-
-
-
-
-
-
 const url = process.env.REACT_APP_BASE_URL;
 // const url = "http://localhost:8080";
 

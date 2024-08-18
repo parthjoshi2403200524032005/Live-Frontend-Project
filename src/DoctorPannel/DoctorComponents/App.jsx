@@ -68,7 +68,7 @@ const CarouselComponent = () => {
       </CarouselContainer>
 
       <OpenPanelButton onClick={() => setIsPanelOpen(true)}>
-       Categories
+       Profile Sections
       </OpenPanelButton>
 
       {isPanelOpen && (
@@ -162,8 +162,10 @@ const SlickSlide = styled.div`
 `;
 
 const OpenPanelButton = styled.button`
-  position: fixed;
-  right: 20px;
+  // position: fixed;
+  width: 150px;
+  margin-top: 10px;
+  margin-bottom: 30px;
   padding: 5px 5px;
   font-size: 16px;
   background-color: #133680;
