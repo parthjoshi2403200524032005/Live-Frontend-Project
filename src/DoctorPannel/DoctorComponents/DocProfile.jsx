@@ -584,9 +584,9 @@ const DocProfile = () => {
               </Grid> */}
 
               {/* <Stack direction="row" spacing={1} alignItems="center"></Stack> */}
-              <Grid item xs={12} >
+              <Grid item xs={12}>
                 <Stack
-                  direction="row"
+                  direction={{ xs: "column", sm: "row" }} // Stack items in a column on smaller screens and in a row on larger screens
                   spacing={1}
                   alignItems="center"
                   sx={{
@@ -594,12 +594,13 @@ const DocProfile = () => {
                     padding: 0.28,
                     borderRadius: 1,
                     justifyContent: "space-between",
-                    width: "1150px", // Increased width here
+                    width: "100%", // Use 100% to make the Stack responsive
                   }}
                 >
                   <div
                     style={{
-                      width: "300px",
+                      width: "100%", // Full width for each div
+                      maxWidth: "300px", // Set a max-width to control the maximum size of each div
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
@@ -622,7 +623,8 @@ const DocProfile = () => {
 
                   <div
                     style={{
-                      width: "300px",
+                      width: "100%",
+                      maxWidth: "300px",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
@@ -641,7 +643,8 @@ const DocProfile = () => {
 
                   <div
                     style={{
-                      width: "300px", // Adjusted width for this section
+                      width: "100%",
+                      maxWidth: "300px",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",

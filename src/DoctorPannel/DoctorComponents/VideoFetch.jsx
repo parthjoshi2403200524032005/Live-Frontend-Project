@@ -118,7 +118,7 @@ const VideoFetch = () => {
       },
     },
     typography: {
-      fontFamily: "Montserrat",
+      
     },
   });
 
@@ -342,7 +342,7 @@ align-items: flex-start;
 flex: 1 0 0;}
           .my-8{
           color: var(--On-surface, #262626);
-font-family: "DM Sans ", sans-serif;
+
 font-size: 20px;
 font-style: normal;
 font-weight: 700;
@@ -391,7 +391,7 @@ letter-spacing: 1px;}
                     color: "",
                     fontWeight: "bold",
                     fontSize: "30px",
-                    fontFamily: "'DM Sans', sans-serif",
+                    
                   }}
                 >
                   Your YouTube Channel is{" "}
@@ -652,6 +652,7 @@ letter-spacing: 1px;}
                   alignItems: "center",
                   fontSize: "30px",
                   fontWeight: "600",
+                  
                 }}
               >
                 Or
@@ -665,7 +666,7 @@ letter-spacing: 1px;}
             variant="h5"
             component={"h5"}
             className="mb-2"
-            style={{ fontWeight: "bold", textAlign: "center" }}
+            style={{ fontWeight: "bold", textAlign: "center" ,marginTop:"30px"}}
           >
             Upload A Single Video
           </Typography>
@@ -942,7 +943,7 @@ letter-spacing: 1px;}
                 edit ? updateVideo() : handlePost();
               }}
               style={{
-                fontFamily: "Montserrat",
+                
                 backgroundColor: "#133680",
                 color: "white",
               }}
