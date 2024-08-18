@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Slider from 'react-slick';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 const CarouselComponent = () => {
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
+
   const settings = {
     dots: false,
     infinite: false,
@@ -44,7 +46,7 @@ const CarouselComponent = () => {
         { id: "Qualifications", link: "/doctor/qualifications" },
         { id: "Experience", link: "/doctor/experience" },
         { id: "Registration", link: "/doctor/registration" },
-        { id: "Goverment ID", link: "/doctor/govID" },
+        { id: "Government ID", link: "/doctor/govID" },
         { id: "Awards", link: "/doctor/awards" },
         { id: "Join Hospital", link: "/doctor/joinhospital" },
       ],
@@ -52,17 +54,38 @@ const CarouselComponent = () => {
   ];
 
   return (
-    <CarouselContainer>
-      <Slider {...settings}>
-        {categories[0].children.map(category => (
-          <SlickSlide key={category.id}>
-            <CarouselButton to={category.link}>
+    <>
+      <CarouselContainer>
+        <Slider {...settings}>
+          {categories[0].children.map(category => (
+            <SlickSlide key={category.id}>
+              <CarouselButton to={category.link}>
+                {category.id}
+              </CarouselButton>
+            </SlickSlide>
+          ))}
+        </Slider>
+      </CarouselContainer>
+
+      <OpenPanelButton onClick={() => setIsPanelOpen(true)}>
+       Profile Sections
+      </OpenPanelButton>
+
+      {isPanelOpen && (
+        <SidePanel>
+          
+          {categories[0].children.map(category => (
+            <PanelButton key={category.id} to={category.link} style={{
+              marginTop: "35px",
+            }} onClick={() => setIsPanelOpen(false)}>
               {category.id}
-            </CarouselButton>
-          </SlickSlide>
-        ))}
-      </Slider>
-    </CarouselContainer>
+             
+            </PanelButton>
+          ))}
+           <CloseButton style={{ marginTop: "35px" }} onClick={() => setIsPanelOpen(false)}>×</CloseButton>
+        </SidePanel>
+      )}
+    </>
   );
 };
 
@@ -70,11 +93,13 @@ export default CarouselComponent;
 
 // Styled components
 const CarouselContainer = styled.div`
-  width: 100%;
+  width: auto;
   height: 100px;
-  margin: auto;
-  overflow: hidden;
   margin-top: 20px;
+
+  @media (max-width: 600px) {
+    display: none; /* Hide carousel on smaller screens */
+  }
 `;
 
 const CarouselButton = styled(NavLink)`
@@ -82,18 +107,18 @@ const CarouselButton = styled(NavLink)`
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  font-weight: bold; /* Make text bold */
-  color: black; /* Set text color to black */
+  font-weight: bold;
+  color: black;
   border: none;
   cursor: pointer;
   background-color: transparent;
   position: relative;
   white-space: nowrap;
-  width: 150px; /* Set a fixed width */
-  height: 40px; /* Set a fixed height */
+  width: 150px;
+  height: 40px;
   text-align: center;
   text-decoration: none;
-  margin: 0 5px; /* Add margin for spacing between buttons */
+  margin: 0 5px;
 
   &::after {
     content: '';
@@ -112,27 +137,100 @@ const CarouselButton = styled(NavLink)`
   }
 
   &.active {
-    color: #133680; /* Set text color to #133680 when active */
+    color: #133680;
     &::after {
       transform: scaleX(1);
-      background-color: #133680; /* Set active bottom border color to #133680 */
+      background-color: #133680;
     }
   }
 
   @media (max-width: 600px) {
-    width: 120px; /* Adjust the width for smaller screens */
-    font-size: 14px;
+    width: 80px;
+    font-size: 12px;
   }
 
   @media (max-width: 480px) {
-    width: 100px; /* Adjust the width for even smaller screens */
+    width: 100px;
     font-size: 12px;
   }
 `;
-
 
 const SlickSlide = styled.div`
   display: flex;
   justify-content: center;
   padding: 0 10px;
+`;
+
+const OpenPanelButton = styled.button`
+  // position: fixed;
+  width: 150px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  padding: 5px 5px;
+  font-size: 16px;
+  background-color: #133680;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1000;
+  
+  @media (min-width: 601px) {
+    display: none; /* Hide the button on larger screens */
+  }
+
+  @media (max-width: 600px) {
+    display: block; /* Show the button on smaller screens */
+  }
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
+`;
+
+const SidePanel = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 250px;
+  height: 100%;
+  background-color: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  transition: transform 0.3s ease;
+  transform: translateX(0);
+  z-index: 1000;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #133680;
+`;
+
+const PanelButton = styled(NavLink)`
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    color: #133680;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
 `;

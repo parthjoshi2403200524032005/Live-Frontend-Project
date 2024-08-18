@@ -36,18 +36,19 @@ const DEFAULT_IMAGE =
 
 const DocProfile = () => {
   const ResponsiveDiv = styled.div`
-    @media (max-width: 600px) {
-      width: 400px;
+    @media (max-width: 471px) {
+      width: 30%;
     }
+   
 
     /* For medium devices (tablets, 600px to 900px) */
     @media (min-width: 601px) and (max-width: 900px) {
-      width: 600px;
+      width: 50%;
     }
 
     /* For large devices (desktops, 900px and up) */
     @media (min-width: 901px) {
-      width: 1200px;
+      width: 90%;
     }
   `;
 
@@ -65,7 +66,7 @@ const DocProfile = () => {
       },
     },
     typography: {
-      fontFamily: "Montserrat",
+      
     },
   });
 
@@ -249,7 +250,8 @@ const DocProfile = () => {
 
   useEffect(() => {
     forDoctorGet();
-  }, []);
+  }, []); // Ensure this effect runs only once
+  
 
   const forDoctorSubmit = async () => {
     try {
@@ -385,7 +387,7 @@ const DocProfile = () => {
                       height: `${
                         form?.specilization?.length >= 3 ? "auto" : "2.4em"
                       }`,
-                      fontFamily: "Montserrat",
+                      
                     }}
                     multiple
                     displayEmpty
@@ -394,7 +396,7 @@ const DocProfile = () => {
                       <OutlinedInput
                         id="select-multiple-chip"
                         sx={{
-                          fontFamily: "Montserrat",
+                          
                         }}
                       />
                     }
@@ -425,7 +427,7 @@ const DocProfile = () => {
                     <MenuItem disabled value="">
                       <Typography
                         component={"p"}
-                        sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}
+                        sx={{  fontWeight: "bold" }}
                       >
                         Specilizations
                       </Typography>
@@ -488,7 +490,7 @@ const DocProfile = () => {
                       height: `${
                         form.languages?.length >= 3 ? "auto" : "2.4em"
                       }`,
-                      fontFamily: "Montserrat",
+                      
                     }}
                     multiple
                     displayEmpty
@@ -497,7 +499,7 @@ const DocProfile = () => {
                       <OutlinedInput
                         id="select-multiple-chip"
                         sx={{
-                          fontFamily: "Montserrat",
+                          
                         }}
                       />
                     }
@@ -528,7 +530,7 @@ const DocProfile = () => {
                     <MenuItem disabled value="">
                       <Typography
                         component={"p"}
-                        sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}
+                        sx={{  fontWeight: "bold" }}
                       >
                         Languages Known
                       </Typography>
@@ -698,7 +700,7 @@ const DocProfile = () => {
               <UploadButton
                 to="/doctor/about"
                 style={{
-                  fontFamily: "Montserrat",
+                  
                   backgroundColor: "#133680",
                   color: "white",
                   marginLeft: "20px",
