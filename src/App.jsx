@@ -62,7 +62,6 @@ import Videos from "./Components/Videos";
 import Search from "./Components/Search";
 import Forgotpassword from "./Components/forgotpassword";
 
-
 const App = () => {
   const userRoutes = [
     { path: "/", element: <Home /> },
@@ -85,20 +84,21 @@ const App = () => {
     { path: "*", element: <Page404 /> },
     { path: "/privacypolicy", element: <PrivacyPolicy /> },
     { path: "/termofuse", element: <TermofUse /> },
-    
+
     { path: "/refundpolicy", element: <RefundPolicy /> },
+    { path: "/UserProfile", element: <UserProfile /> },
   ];
 
   const authRoutes = [
     { path: "/login", element: <Login /> },
     { path: "/signup", element: <SignUp /> },
-  { path: "/forgotpassword", element: <Forgotpassword/> },
+    { path: "/forgotpassword", element: <Forgotpassword /> },
     { path: "/doctor/login", element: <DocLogin /> },
     { path: "/doctor/signup", element: <DocSignup /> },
     { path: "/doctor/forgotpassword", element: <ForgotPassword /> },
     { path: "/doctor/resetpassword", element: <PasswordReset /> },
     { path: "*", element: <Page404 /> },
-    { path: "/dashboard", element: <DashboardAppPage /> },
+    { path: "/user/dashboard", element: <DashboardAppPage /> },
   ];
 
   const adminRoutes = [
@@ -133,7 +133,7 @@ const App = () => {
     { path: "/doctor/hospitalprofile", element: <DoctorHospital /> },
     { path: "/doctor/leads", element: <DoctorLeads /> },
     { path: "/doctor/fetchvideo", element: <VideoFetch /> },
-    { path: "/user/dashboard", element: <UserProfile /> },
+    { path: "/user/dashboard", element: <DashboardAppPage /> },
     { path: "/doctor/joinhospital", element: <JoinHospital /> },
     { path: "/doctor/requests", element: <Requests /> },
     { path: "/doctor/alert", element: <Alert /> },
@@ -155,7 +155,7 @@ const App = () => {
           </Route>
 
           <Route element={<ProtectedRoute />}>
-            <Route element={<Paperbase />}>
+            <Route  element={<Paperbase />}>
               {doctorRoutes.map((route) => (
                 <Route
                   key={route.path}

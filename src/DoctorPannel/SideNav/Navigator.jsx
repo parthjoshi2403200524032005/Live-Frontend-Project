@@ -192,7 +192,7 @@ const Navigator = (props) => {
               <ListItemText>
                 <Typography
                   component={"p"}
-                  sx={{ fontFamily: "Montserrat" , color:"black"}}
+                  sx={{ fontFamily: "poppins" , color:"black"}}
                   onClick={forLogout}
                 >
                   Logout

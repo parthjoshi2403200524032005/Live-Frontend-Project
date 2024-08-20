@@ -24,14 +24,18 @@ const Header = (props) => {
   const forLogout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
-    navigate(`/${sidenav?'doctor':'user'}/login`);
+    navigate(`${sidenav ? "/doctor/login" : "/login"}`);
+  };
+
+  const forUserProfile = () => {
+    navigate("/UserProfile");
   };
 
   const settings = [
     {
       id: 1,
       name: "Profile",
-      action: () => navigate(sidenav ? "/doctor/profile" : "/user/dashboard"),
+      action: forUserProfile,
     },
     {
       id: 2,
@@ -51,6 +55,7 @@ const Header = (props) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
   useEffect(() => {
     const url = location.pathname.split("/");
     if (url[1] !== "user") {
@@ -70,14 +75,14 @@ const Header = (props) => {
         <Toolbar>
           <Grid container spacing={1} alignItems="center">
             <Grid sx={{ display: { sm: "none", xs: "block" } }} item>
-              <IconButton
+              {/* <IconButton
                 color="inherit"
                 aria-label="open drawer"
                 onClick={onDrawerToggle}
                 edge="start"
               >
                 <MenuIcon sx={{ color: "black" }} />
-              </IconButton>
+              </IconButton> */}
             </Grid>
             <Grid item xs />
             <Grid item>
