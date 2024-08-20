@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import {
-  Toolbar,
+  Avatar,
   Typography,
   Box,
   useMediaQuery,
+  Grid,
+  Menu,
+  MenuItem,
   useTheme,
+  Tooltip,
   BottomNavigation,
   BottomNavigationAction,
   IconButton,
@@ -19,6 +23,8 @@ import TestFooter from "../TestFooter";
 import Logo from "../../assets/Logo.png";
 import DocAccountModal from "../../DoctorPannel/DoctorComponents/DocAccountModal";
 import { MobileActionBar } from "./NavBarStyles";
+import MenuIcon from "@mui/icons-material/Menu";
+import Toolbar from "@mui/material/Toolbar";
 
 const NewNavBar = () => {
   const theme = useTheme();
@@ -29,10 +35,51 @@ const NewNavBar = () => {
   const [open, setOpen] = useState(false);
 
   const [dcopen, setDcopen] = useState(false);
+  const [sidenav, setSidenav] = useState(true);
 
   const forNavChange = (e) => {
     setActive(e);
   };
+
+  const forLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    navigate(`${sidenav ? "/doctor/login" : "/login"}`);
+  };
+
+  const settings = [
+    {
+      id: 1,
+      name: "Profile",
+      action: () => navigate(sidenav ? "/doctor/profile" : "/UserProfile"),
+    },
+    {
+      id: 2,
+      name: "Reset Password",
+      action: () =>
+        navigate(sidenav ? "/doctor/changepassword" : "/user/changepassword"),
+    },
+    { id: 3, name: "Logout", action: forLogout },
+  ];
+
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  useEffect(() => {
+    const url = location.pathname.split("/");
+    if (url[1] !== "user") {
+      setSidenav(true);
+    } else {
+      setSidenav(false);
+    }
+  }, []);
 
   const forOpen = () => setOpen(true);
   const forClose = () => setOpen(false);
@@ -48,7 +95,7 @@ const NewNavBar = () => {
     <React.Fragment>
       <Box>
         <div className="shadow">
-          <Toolbar className=" flex  max-w-8xl mx-auto justify-between mt-4 h-[38px] md:h-[100px]">
+          <Toolbar className=" flex  max-w-8xl mx-auto justify-between mt-4 h-[38px] md:h-[72px]">
             <div
               className="md:block hidden cursor-pointer pl-4 "
               onClick={() => navigate("/")}
@@ -76,9 +123,14 @@ const NewNavBar = () => {
             </div>
             <div className="md:hidden flex">
               <Box sx={{ display: { xs: "flex", md: "flex" } }}>
-                <IconButton size="large" onClick={forOpen} color="inherit">
+                {/* <IconButton size="large" onClick={forOpen} color="inherit">
                   <AccountCircle />
-                </IconButton>
+                </IconButton> */}
+                <Tooltip title="Settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <AccountCircle alt="HM" src={"/static/images/avatar/2.jpg"} />
+                  </IconButton>
+                </Tooltip>
               </Box>
             </div>
 
@@ -175,11 +227,47 @@ const NewNavBar = () => {
             />
           </Button> */}
             <div className="md:block hidden">
-              <Box sx={{ display: { xs: "flex", md: "flex" } }}>
-                <IconButton size="large" onClick={forOpen} color="inherit">
-                  <AccountCircle />
-                </IconButton>
-              </Box>
+              <Grid item>
+                <Box sx={{ flexGrow: 0 }}>
+                  <Tooltip title="Settings">
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                      <AccountCircle alt="HM" src={"/static/images/avatar/2.jpg"} />
+                    </IconButton>
+                  </Tooltip>
+                  <Menu
+                    sx={{ mt: "38px" }}
+                    id="menu-appbar"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                  >
+                    {settings.map((setting) => (
+                      <Box
+                        key={setting.id}
+                        onClick={() => handleCloseUserMenu(setting)}
+                      >
+                        <MenuItem onClick={setting.action}>
+                          <Typography
+                            textAlign="center"
+                            sx={{ fontFamily: "Montserrat" }}
+                          >
+                            {setting.name}
+                          </Typography>
+                        </MenuItem>
+                      </Box>
+                    ))}
+                  </Menu>
+                </Box>
+              </Grid>
             </div>
           </Toolbar>
         </div>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { CiCircleCheck } from "react-icons/ci";
+import RazorPayButton from "./RazorpayButton";
 
 export default function Pricing() {
   const [hoveredCardIndex, setHoveredCardIndex] = useState(null);
@@ -94,7 +95,7 @@ export default function Pricing() {
     borderRadius: "0.6rem",
     fontSize: "15px",
     letterSpacing: "0.1rem",
-    fontWeight: hoveredCardIndex === index ?"400":"400",
+    fontWeight: hoveredCardIndex === index ? "400" : "400",
     padding: "1rem",
     backgroundColor: hoveredCardIndex === index ? "white" : "#133682",
     color: hoveredCardIndex === index ? "#133682" : "white",

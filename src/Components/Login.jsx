@@ -62,25 +62,44 @@ const Login = () => {
   const forUserLogin = async () => {
     const { email, password } = user;
 
+    const isValidEmail = (email) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    };
+
     if (email && password) {
-      setIsLoading(true);
-      try {
-        const response = await userLogin({ email, password });
-        if (response?.data) {
-          localStorage.setItem("accessToken", response.data.accessToken);
-          localStorage.setItem("refreshToken", response.data.refreshToken);
-          localStorage.setItem("type", "users");
-          navigate("/dashboard");
-          toast.success("Logged in successfully!");
-        } else {
-          toast.error("Failed to login");
+      if (!isValidEmail(email)) {
+        toast.error("Please enter a valid email address!");
+      } else {
+        setIsLoading(true);
+        try {
+          const response = await userLogin({ email, password });
+          if (response?.data) {
+            localStorage.setItem("accessToken", response.data.accessToken);
+            localStorage.setItem("refreshToken", response.data.refreshToken);
+            localStorage.setItem("type", "users");
+            navigate("/user/dashboard");
+            toast.success("Logged in successfully!");
+          } else {
+            toast.error("Invalid Credential");
+          }
+        } catch (error) {
+          if (error.response && error.response.status === 401) {
+            toast.error("Invalid email or password. Please try again");
+          } else {
+            toast.error("An error occurred during login");
+          }
         }
-      } catch (error) {
-        toast.error("An error occurred during login");
+        setIsLoading(false);
       }
-      setIsLoading(false);
     } else {
-      toast.error("All fields are required!");
+      if (!email) {
+        toast.error("Email is required!");
+      } else if (!password) {
+        toast.error("password is required!");
+      } else {
+        toast.error("All fields are required!");
+      }
     }
   };
 

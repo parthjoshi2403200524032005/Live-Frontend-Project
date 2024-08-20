@@ -196,7 +196,8 @@ const Paperbase = () => {
           </Box>
         )}
         <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
-          <Header onDrawerToggle={handleDrawerToggle} />
+          {/* <Header onDrawerToggle={handleDrawerToggle} /> */}
+
           <Box component="main" sx={{ flex: 1, p: 2, bgcolor: "#FFFF" }}>
             <Content />
           </Box>
