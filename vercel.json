@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "https://nxjstest.vercel.app/$1"
+      "destination": "https://healthmudraa.com/$1"
     }
   ]
 }
