@@ -43,7 +43,7 @@ const API = "AIzaSyBGjfbfmq3yLfJ7jpkQwJoCSaN2kDfqlmQ";
 const fetchVideos = async (channelId, setChannelVideos, setError) => {
   try {
     const response = await fetch(
-      https://www.googleapis.com/youtube/v3/search?key=${API}&channelId=${channelId}&part=snippet,id&order=date&maxResults=20
+    //  https:www.googleapis.com/youtube/v3/search?key=${API}&channelId=${channelId}&part=snippet,id&order=date&maxResults=20
     );
     const data = await response.json();
     if (response.ok) {
@@ -70,7 +70,7 @@ const addVideosToDatabase = async (
   try {
     // Prepare video data
     const videosData = channelVideos.map((video) => ({
-      link: https://www.youtube.com/watch?v=${video.id.videoId},
+      // link: https://www.youtube.com/watch?v=${video.id.videoId},
       title: video.snippet.title,
       description: video.snippet.description,
       category: "Default Category",
@@ -78,7 +78,7 @@ const addVideosToDatabase = async (
 
     // Make POST request to the backend
     const response = await fetch(
-      https://healthmudraa-backend.vercel.app/video/add-videos,
+     // https:healthmudraa-backend.vercel.app/video/add-videos,
       {
         method: "POST",
         headers: {
@@ -310,7 +310,7 @@ const VideoFetch = () => {
   };
 
   const handleChannelDelete = (videoId) => {
-    console.log(Delete video with ID: ${videoId});
+    // console.log(Delete video with ID: ${videoId});
     setChannelVideos(
       channelVideos.filter((video) => video.id.videoId !== videoId)
     );
@@ -597,7 +597,7 @@ letter-spacing: 1px;}
                       <iframe
                         width="100%"
                         height="200"
-                        src={https://www.youtube.com/embed/${video.id.videoId}}
+                        //</Card>src={//https://www.youtube.com/embed/${video.id.videoId} }
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
