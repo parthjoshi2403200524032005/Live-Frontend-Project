@@ -112,7 +112,7 @@ const Videos = () => {
         <title>Healthmudraa-Videos</title>
         <meta name="description" content="Videos page description comes here" />
       </Helmet>
-      
+
       <Box display="flex" justifyContent="center" marginTop={"1rem"}>
         <TextField
           value={searchTerm}
@@ -173,7 +173,12 @@ const Videos = () => {
   );
 };
 
-const LazyLoadVideoCard = ({ item, navigate, handleShareVideo, handleAppointmentBts }) => {
+const LazyLoadVideoCard = ({
+  item,
+  navigate,
+  handleShareVideo,
+  handleAppointmentBts,
+}) => {
   const { ref, inView } = useInView({
     triggerOnce: true, // Load the video only once when it comes into view
     threshold: 0.5, // Load the video when 50% of it is in view
