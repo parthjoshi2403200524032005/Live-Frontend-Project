@@ -109,15 +109,23 @@ const SignUp = () => {
   const forUserSignup = async () => {
     const { email, password, confirmpassword } = user;
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (!agreeTerms) {
       toast.error("Agree to terms and conditions");
       return;
     }
 
     if (email && password && confirmpassword) {
+      if (!emailRegex.test(email)) {
+        toast.error("Please enter a valid email address");
+        return;
+      }
+
       setIsLoading(true);
+
       if (password !== confirmpassword) {
-        toast.error("Password does not match");
+        toast.error("Passwords do not match");
         setIsLoading(false);
       } else {
         try {
@@ -134,7 +142,7 @@ const SignUp = () => {
     } else {
       toast.error("All fields are required!");
       if (password !== confirmpassword) {
-        toast.error("Password does not match");
+        toast.error("Passwords do not match");
       }
     }
   };
@@ -302,6 +310,7 @@ const SignUp = () => {
                       name="mobileNumber"
                       placeholder="Type your mobile number"
                       onChange={forMobileNumber}
+                      type="number"
                       InputProps={{
                         startAdornment: (
                           <InputAdornment
