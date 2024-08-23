@@ -36,19 +36,18 @@ const DEFAULT_IMAGE =
 
 const DocProfile = () => {
   const ResponsiveDiv = styled.div`
-    @media (max-width: 471px) {
-      width: 30%;
+    @media (max-width: 600px) {
+      width: 400px;
     }
-   
 
     /* For medium devices (tablets, 600px to 900px) */
     @media (min-width: 601px) and (max-width: 900px) {
-      width: 50%;
+      width: 600px;
     }
 
     /* For large devices (desktops, 900px and up) */
     @media (min-width: 901px) {
-      width: 90%;
+      width: 1200px;
     }
   `;
 
@@ -66,7 +65,7 @@ const DocProfile = () => {
       },
     },
     typography: {
-      
+      fontFamily: "Montserrat",
     },
   });
 
@@ -250,8 +249,7 @@ const DocProfile = () => {
 
   useEffect(() => {
     forDoctorGet();
-  }, []); // Ensure this effect runs only once
-  
+  }, []);
 
   const forDoctorSubmit = async () => {
     try {
@@ -387,7 +385,7 @@ const DocProfile = () => {
                       height: `${
                         form?.specilization?.length >= 3 ? "auto" : "2.4em"
                       }`,
-                      
+                      fontFamily: "Montserrat",
                     }}
                     multiple
                     displayEmpty
@@ -396,7 +394,7 @@ const DocProfile = () => {
                       <OutlinedInput
                         id="select-multiple-chip"
                         sx={{
-                          
+                          fontFamily: "Montserrat",
                         }}
                       />
                     }
@@ -427,7 +425,7 @@ const DocProfile = () => {
                     <MenuItem disabled value="">
                       <Typography
                         component={"p"}
-                        sx={{  fontWeight: "bold" }}
+                        sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}
                       >
                         Specilizations
                       </Typography>
@@ -490,7 +488,7 @@ const DocProfile = () => {
                       height: `${
                         form.languages?.length >= 3 ? "auto" : "2.4em"
                       }`,
-                      
+                      fontFamily: "Montserrat",
                     }}
                     multiple
                     displayEmpty
@@ -499,7 +497,7 @@ const DocProfile = () => {
                       <OutlinedInput
                         id="select-multiple-chip"
                         sx={{
-                          
+                          fontFamily: "Montserrat",
                         }}
                       />
                     }
@@ -530,7 +528,7 @@ const DocProfile = () => {
                     <MenuItem disabled value="">
                       <Typography
                         component={"p"}
-                        sx={{  fontWeight: "bold" }}
+                        sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}
                       >
                         Languages Known
                       </Typography>
@@ -586,9 +584,9 @@ const DocProfile = () => {
               </Grid> */}
 
               {/* <Stack direction="row" spacing={1} alignItems="center"></Stack> */}
-              <Grid item xs={12}>
+              <Grid item xs={12} >
                 <Stack
-                  direction={{ xs: "column", sm: "row" }} // Stack items in a column on smaller screens and in a row on larger screens
+                  direction="row"
                   spacing={1}
                   alignItems="center"
                   sx={{
@@ -596,13 +594,12 @@ const DocProfile = () => {
                     padding: 0.28,
                     borderRadius: 1,
                     justifyContent: "space-between",
-                    width: "100%", // Use 100% to make the Stack responsive
+                    width: "1150px", // Increased width here
                   }}
                 >
                   <div
                     style={{
-                      width: "100%", // Full width for each div
-                      maxWidth: "300px", // Set a max-width to control the maximum size of each div
+                      width: "300px",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
@@ -625,8 +622,7 @@ const DocProfile = () => {
 
                   <div
                     style={{
-                      width: "100%",
-                      maxWidth: "300px",
+                      width: "300px",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
@@ -645,8 +641,7 @@ const DocProfile = () => {
 
                   <div
                     style={{
-                      width: "100%",
-                      maxWidth: "300px",
+                      width: "300px", // Adjusted width for this section
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
@@ -700,7 +695,7 @@ const DocProfile = () => {
               <UploadButton
                 to="/doctor/about"
                 style={{
-                  
+                  fontFamily: "Montserrat",
                   backgroundColor: "#133680",
                   color: "white",
                   marginLeft: "20px",
