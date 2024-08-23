@@ -42,8 +42,14 @@ const API = "AIzaSyBGjfbfmq3yLfJ7jpkQwJoCSaN2kDfqlmQ";
 // Function to fetch videos from YouTube API
 const fetchVideos = async (channelId, setChannelVideos, setError) => {
   try {
+
     const response = await fetch();
     //  https:www.googleapis.com/youtube/v3/search?key=${API}&channelId=${channelId}&part=snippet,id&order=date&maxResults=20
+    
+    const response = await fetch(
+    //  https:www.googleapis.com/youtube/v3/search?key=${API}&channelId=${channelId}&part=snippet,id&order=date&maxResults=20
+    );
+    
     const data = await response.json();
     if (response.ok) {
       setChannelVideos(data.items);
@@ -77,7 +83,11 @@ const addVideosToDatabase = async (
 
     // Make POST request to the backend
     const response = await fetch(
+
       // https:healthmudraa-backend.vercel.app/video/add-videos,
+
+     // https:healthmudraa-backend.vercel.app/video/add-videos,
+
       {
         method: "POST",
         headers: {
@@ -116,7 +126,13 @@ const VideoFetch = () => {
         primary: "#000000",
       },
     },
+
     typography: {},
+
+    typography: {
+      
+    },
+
   });
 
   const [view, setView] = useState("single"); // 'single' or 'channel'
@@ -500,9 +516,15 @@ margin-left: 1160px;
                 <div
                   className="my-4"
                   style={{
+
                     width: "100%",
                     color: "#000000",
                     textAlign: "center",
+
+                    color: "",
+                    fontWeight: "bold",
+                    fontSize: "30px",
+
                   }}
                 >
                   Your Channel{" "}
@@ -764,6 +786,133 @@ margin-left: 1160px;
                   </Button>
                 )}
               </div>
+
+              {error && <Typography color="error">{error}</Typography>}
+              <Grid container spacing={2} style={{ marginTop: "20px" }}>
+                {channelVideos.map((video) => (
+                  <Grid item key={video.id.videoId} xs={12} sm={6} md={4}>
+                    <Card>
+                      <iframe
+                        width="100%"
+                        height="200"
+                        //</Card>src={//https://www.youtube.com/embed/${video.id.videoId} }
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        title={video.snippet.title}
+                      ></iframe>
+                      <CardContent>
+                        <Typography gutterBottom variant="h6" component="h2">
+                          {video.snippet.title}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          component="p"
+                        >
+                          {video.snippet.description}
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        <IconButton
+                          onClick={() => handleChannelDelete(video.id.videoId)}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+              {channelVideos.length > 0 && doctorid && (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() =>
+                    addVideosToDatabase(
+                      doctorid,
+                      channelId,
+                      channelVideos,
+                      setChannelId,
+                      setChannelVideos,
+                      setError
+                    )
+                  }
+                  style={{ marginTop: "20px" }}
+                >
+                  Add Videos to database and link my channel id
+                </Button>
+              )}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  fontSize: "30px",
+                  fontWeight: "600",
+                  
+                }}
+              >
+                Or
+              </div>
+            </div>
+          )}
+        </div>
+
+        <ThemeProvider theme={theme}>
+          <Typography
+            variant="h5"
+            component={"h5"}
+            className="mb-2"
+            style={{ fontWeight: "bold", textAlign: "center" ,marginTop:"30px"}}
+          >
+            Upload A Single Video
+          </Typography>
+          <label
+            htmlFor="firstname"
+            style={{
+              paddingBottom: "5px",
+              fontSize: "18px",
+              paddingTop: "18px",
+            }}
+          >
+            Import URL
+          </label>
+          <Stack direction="row" spacing={1} alignItems="center">
+            <TextField
+              required
+              fullWidth
+              value={videoInfo.link}
+              autoComplete="off"
+              name="fetchvideo"
+              type="string"
+              placeholder="Eg. URL"
+              onChange={(e) =>
+                setVideoInfo({ ...videoInfo, link: e.target.value })
+              }
+              InputProps={{
+                sx: {
+                  height: "2.2em",
+                },
+              }}
+            />
+            <UploadButton onClick={forSubmit}>Import</UploadButton>
+          </Stack>
+
+          <Box component={"div"} className="my-2">
+            {source && (
+              <Plyr
+                source={{
+                  type: "video",
+                  sources: [
+                    {
+                      src: source,
+                      provider: "youtube",
+                    },
+                  ],
+                }}
+              />
+
             )}
           </div>
 
@@ -1073,13 +1222,18 @@ margin-left: 1160px;
             <div
               className="d-flex justify-content-between mt-3 "
               style={{
+
                 paddingTop: "5px",
                 paddingBottom: "20px",
                 position: "absolute",
                 right: "5%",
                 marginBottom: "1em",
                 gap: "10px",
+
                 
+                backgroundColor: "#133680",
+                color: "white",
+                     
               }}
             >
                {/* <Button
