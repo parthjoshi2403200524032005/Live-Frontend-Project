@@ -1207,7 +1207,7 @@ import toast from "react-hot-toast";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 //const API = 'AIzaSyBwikqQA3u5E5dbiyNvOrIA4wUF9jd4Gm4';
-const API = "AIzaSyD2pdKI0MSjeXnuhY-iVrdl92EoG88iu6I";
+const API = "AIzaSyBzMOtXpvplDBZ0j8nmsQdkbVrE1aPHRBs";
 //  const doctorId = '6691445df662fec383fb71d3'; // Demo valid doctor ID
 
 // Function to fetch videos from YouTube API
