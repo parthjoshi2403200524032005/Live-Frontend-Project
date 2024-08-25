@@ -1213,7 +1213,7 @@ const API = "AIzaSyC76DOJuowmHnQQSD6FxHtrpw5skaHgfFM";
 // Function to fetch videos from YouTube API
 const fetchVideos = async (channelId, setChannelVideos, setError) => {
   try {
-    const response = await fetch();
+    const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${API}&channelId=${channelId}&part=snippet,id&order=date&maxResults=20`);
     //  https:www.googleapis.com/youtube/v3/search?key=${API}&channelId=${channelId}&part=snippet,id&order=date&maxResults=20
     const data = await response.json();
     if (response.ok) {
