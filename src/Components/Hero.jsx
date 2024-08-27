@@ -32,7 +32,7 @@ const Hero = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    navigate(`/search/${searchValue}`);
+    navigate(`/searchresults/${searchValue}`);
     console.log(searchValue);
   };
 

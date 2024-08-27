@@ -59,15 +59,16 @@ import DoctorLeads from "./DoctorPannel/DoctorComponents/DoctorLeads";
 import DocQuick from "./DoctorPannel/DoctorComponents/DocQuick";
 import Alert from "./DoctorPannel/DoctorComponents/Alert";
 import Videos from "./Components/Videos";
-import Search from "./Components/Search";
+// import Search from "./Components/Search";
 import Forgotpassword from "./Components/forgotpassword";
+// import Searchresults from "./Shared Components/search";
 
 const App = () => {
   const userRoutes = [
     { path: "/", element: <Home /> },
     { path: "/sitemap.xml", element: <Sitemap /> },
     { path: "/videos", element: <Videos /> },
-    { path: "/search/:query", element: <Search /> },
+    // { path: "/search", element: <Searchresults /> },
     { path: "/videos/:videotitle", element: <SpecificVideo /> },
     { path: "/service", element: <Service /> },
     { path: "/about", element: <About /> },

@@ -1,0 +1,32 @@
+#ai-response h1 {
+    font-size: 24px;
+  }
+  
+  #ai-response h2 {
+    font-size: 20px;
+  }
+  
+  #ai-response h3,
+  #ai-response h4,
+  #ai-response h5,
+  #ai-response h6 {
+    font-size: 19px;
+  }
+  
+  @media (min-width: 640px) { 
+    #ai-response h1 {
+      font-size: 20px;
+    }
+    
+    #ai-response h2 {
+      font-size: 16px;
+    }
+    
+    #ai-response h3,
+    #ai-response h4,
+    #ai-response h5,
+    #ai-response h6 {
+      font-size: 15px;
+    }
+    
+    }

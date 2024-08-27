@@ -1,58 +1,58 @@
 import { Box, IconButton, InputBase, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { AiSearch } from "../../Service/Services";
-import VideoCard from "./VideoCard";
+import { AiSearch } from "../Service/Services"; // Update with actual path
+import VideoCard from "./searchresults/VideoCard"; // Update with actual path
 import SearchIcon from "@mui/icons-material/Search";
-import "./styles.css";
-import AICard from "./AICard";
-import VideosLoad from "./ShimmerUI/VideosLoad";
-import MobileAICard from "./MobileAICard";
-import LeadGenerationForm from "../common/Lead-Generation"; // Import the form component
+import AICard from "./searchresults/AICard"; // Update with actual path
+import VideosLoad from "./searchresults/ShimmerUI/VideosLoad"; // Update with actual path
+import MobileAICard from "./searchresults/MobileAICard"; // Update with actual path
+import LeadGenerationForm from "../Components/common/Lead-Generation"; // Update with actual path
+import NavBar from "../Components/NavBar";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom"; // Using react-router-dom for navigation
 
 const primaryColor = "#133682";
 
-const Search = () => {
-  const { query } = useParams();
+const SearchResults = () => {
+  const [inputValue, setInputValue] = useState("");
+  const [apiResults, setApiResults] = useState({ videos: [], aiData: "" });
+  const navigate = useNavigate();
+  const { query } = useParams(); // Assuming you use React Router for routing
 
-  const [apiResults, setApiResults] = useState({ videos: null, aiData: "" });
-  const [searchInput, setSearchInput] = useState("");
+  useEffect(() => {
+    if (query) {
+      setInputValue(query);
+      fetchApiResults(query);
+    }
+  }, [query]);
 
-  const APISearch = async (Searchquery) => {
-    if (Searchquery && Searchquery.trim()) {
-      try {
-        const { data } = await AiSearch(Searchquery);
-        setApiResults({
-          videos: data?.data?.videosData,
-          aiData: data?.data?.aiData,
-        });
-      } catch (error) {
-        console.error("Search error:", error);
-      }
+  const fetchApiResults = async (searchQuery) => {
+    try {
+      const { data } = await AiSearch(searchQuery); // Ensure AiSearch is properly imported and functional
+      setApiResults({
+        videos: data?.data?.videosData || [],
+        aiData: data?.data?.aiData || "AI Data not available",
+      });
+    } catch (error) {
+      console.error("Search error:", error);
+      setApiResults({
+        videos: [],
+        aiData: "Something went wrong. Please try again later.",
+      });
     }
   };
 
-  const handleSearchInput = (e) => {
-    e.preventDefault();
-    setApiResults({
-      videos: null,
-      aiData: null,
-    });
-    APISearch(searchInput);
+  const handleSearch = () => {
+    if (inputValue.trim() === "") {
+      navigate("/search/doctor");
+    } else {
+      navigate(`/searchresults/${inputValue}`);
+    }
   };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    setSearchInput(query);
-    APISearch(query);
-
-    return () => {
-      window.speechSynthesis.cancel();
-    };
-  }, [query]);
 
   return (
     <>
+      <NavBar />
+      {/* <h1>Search Results for: {inputValue}</h1> */}
       <Box
         borderRadius={2}
         margin={{ xs: 0, md: 4 }}
@@ -64,7 +64,13 @@ const Search = () => {
       >
         {/* Search */}
         <Box sx={{ flexGrow: 1, marginTop: "40px" }}>
-          <form onSubmit={handleSearchInput}>
+          <Box
+            component="form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSearch();
+            }}
+          >
             <Box
               sx={{
                 position: "relative",
@@ -81,10 +87,10 @@ const Search = () => {
               <InputBase
                 type="search"
                 required={true}
-                placeholder="Search for Treatments,Doctors or Hospitals"
+                placeholder="Search for Treatments, Doctors, or Hospitals"
                 inputProps={{ "aria-label": "search" }}
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
                 sx={{
                   width: "100%",
                   "& .MuiInputBase-input": {
@@ -105,14 +111,14 @@ const Search = () => {
                   padding: "12px",
                   position: "absolute",
                   right: 0,
-                  color: "#133682 ",
+                  color: "#133682",
                 }}
                 aria-label="search"
               >
                 <SearchIcon />
               </IconButton>
             </Box>
-          </form>
+          </Box>
         </Box>
 
         {/* Mobile View: AI Results First, then Videos, then Form */}
@@ -174,7 +180,7 @@ const Search = () => {
               background: "#F2F2F2",
               boxShadow: "0px 0px 4px 0px rgba(0, 0, 0, 0.25)",
               borderRadius: "12px",
-              padding: 0, // Set padding to 0
+              padding: 0,
             }}
           >
             <LeadGenerationForm
@@ -251,7 +257,7 @@ const Search = () => {
                   background: "#F2F2F2",
                   boxShadow: "0px 0px 4px 0px rgba(0, 0, 0, 0.25)",
                   borderRadius: "12px",
-                  padding: 0, // Set padding to 0
+                  padding: 0,
                 }}
               >
                 <LeadGenerationForm
@@ -268,4 +274,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default SearchResults;
