@@ -32,7 +32,7 @@ const Hero = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    navigate(`https://live-next-project.vercel.app/search`);
+    navigate(`/searchresults/${searchValue}`);
     console.log(searchValue);
   };
 
