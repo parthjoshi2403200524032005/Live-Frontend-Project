@@ -6,7 +6,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import handImage from "../assets/hand.png";
 /*import HeroSlider from "./HeroSlider";  */
 import herodrop from "../assets/herodrop.png";
-import ReactTypingEffect from "react-typing-effect";
+// import ReactTypingEffect from "react-typing-effect";
 
 const primaryColor = "#1B5AE3";
 const TypingEffect = ({ text, speed }) => {
