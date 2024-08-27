@@ -29,12 +29,12 @@ const Hero = () => {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
   const [isSearchClicked, setIsSearchClicked] = useState(false);
-
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    navigate(`/searchresults/${searchValue}`);
+    window.location.href = `https://live-next-project.vercel.app/searchresults/${searchValue}`;
     console.log(searchValue);
   };
+  
 
   const isSmallScreen = useMediaQuery("(max-width:600px)");
 
