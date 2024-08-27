@@ -30,12 +30,33 @@ const Hero = () => {
   const [searchValue, setSearchValue] = useState("");
   const [isSearchClicked, setIsSearchClicked] = useState(false);
 
-  const handleSearchSubmit = (e) => {
+  const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    window.location.href = `https://live-next-project.vercel.app/searchresults/${searchValue}`;
-    console.log(searchValue);
+
+    try {
+      // Construct the URL with the search value
+      const url = `/searchresults/${searchValue}`;
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "text/html", // Assuming you're fetching HTML content
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const htmlContent = await response.text();
+      console.log(htmlContent); // Output the fetched HTML content
+
+      // Example: Set the fetched HTML into a state variable if you want to display it in a component
+      // setFetchedHtml(htmlContent);
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+    }
   };
-  
 
   const isSmallScreen = useMediaQuery("(max-width:600px)");
 
