@@ -72,7 +72,7 @@ const App = () => {
     // { path: "/search:query", element: <Search /> },
     { path: "/videos/:videotitle", element: <SpecificVideo /> },
     { path: "/service", element: <Service /> },
-    { path: "/about", element: <About /> },
+    { path: "/about", element: <About /> },// main/shared/search.jsx
     { path: "/plans", element: <PackageCards /> },
     { path: "/doctor", element: <DoctorProfile /> },
     { path: "/doctor/:id", element: <DoctorProfile /> },
