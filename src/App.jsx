@@ -69,6 +69,7 @@ const App = () => {
     { path: "/sitemap.xml", element: <Sitemap /> },
     { path: "/videos", element: <Videos /> },
     // { path: "/search", element: <Searchresults /> },
+    // { path: "/search:query", element: <Search /> },
     { path: "/videos/:videotitle", element: <SpecificVideo /> },
     { path: "/service", element: <Service /> },
     { path: "/about", element: <About /> },
@@ -156,7 +157,7 @@ const App = () => {
           </Route>
 
           <Route element={<ProtectedRoute />}>
-            <Route  element={<Paperbase />}>
+            <Route element={<Paperbase />}>
               {doctorRoutes.map((route) => (
                 <Route
                   key={route.path}

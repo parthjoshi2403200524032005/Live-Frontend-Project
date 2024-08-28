@@ -1,7 +1,7 @@
 {
     "rewrites": [
       {
-        "source": "/(.*)",
+        "source": "/search",
         "destination": "https://live-next-project.vercel.app/$1"
       }
     ]
