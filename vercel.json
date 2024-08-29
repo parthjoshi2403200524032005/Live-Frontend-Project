@@ -7,7 +7,7 @@
     },
     {
       "source": "/searchresults/:path*",
-      "destination": "https://nx-project-omega.vercel.app/searchresults/:path*",
+      "destination": "https://nx-project-omega.vercel.app/searchresults/$1",
       "permanent": true
     }
   ]

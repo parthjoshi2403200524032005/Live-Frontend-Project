@@ -180,7 +180,7 @@ const Navbar = () => {
                     className="text-decoration-none new text-[#454545] opacity-45 text-[16px]"
                     component={NavLink}
                     to={"/plans"}
-                    target="_blank"
+                 
                     sx={{ ...CustomStyles.navLink }}
                   >
                     Plans
