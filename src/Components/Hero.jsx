@@ -32,7 +32,7 @@ const Hero = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    const searchUrl = `/search/${searchValue}`;
+    const searchUrl = `/searchresults/${searchValue}`;
     window.open(searchUrl, '_blank'); // Opens the URL in a new tab
     console.log(searchValue);
   };

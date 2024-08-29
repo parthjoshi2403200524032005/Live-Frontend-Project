@@ -7,8 +7,8 @@
         "permanent": true
       },
       {
-        "source": "/search:query",
-        "destination": "https://nx-project-omega.vercel.app/search:query",
+        "source": "/searchresults",
+        "destination": "https://nx-project-omega.vercel.app/searchresults/",
         "permanent": true
       }
     ]
