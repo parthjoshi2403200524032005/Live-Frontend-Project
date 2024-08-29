@@ -61,18 +61,20 @@ import Alert from "./DoctorPannel/DoctorComponents/Alert";
 import Videos from "./Components/Videos";
 // import Search from "./Components/Search";
 import Forgotpassword from "./Components/forgotpassword";
+import { Demo } from "./Components/demo";
 // import Searchresults from "./Shared Components/search";
 
 const App = () => {
   const userRoutes = [
     { path: "/", element: <Home /> },
     { path: "/sitemap.xml", element: <Sitemap /> },
+    {path:"/demo",element:<Demo/>},
     { path: "/videos", element: <Videos /> },
     // { path: "/search", element: <Searchresults /> },
     // { path: "/search:query", element: <Search /> },
     { path: "/videos/:videotitle", element: <SpecificVideo /> },
     { path: "/service", element: <Service /> },
-    { path: "/about", element: <About /> },// main/shared/search.jsx
+    { path: "/about", element: <About /> },
     { path: "/plans", element: <PackageCards /> },
     { path: "/doctor", element: <DoctorProfile /> },
     { path: "/doctor/:id", element: <DoctorProfile /> },
