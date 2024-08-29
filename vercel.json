@@ -2,7 +2,7 @@
     "rewrites": [
       {
         "source": "/(.*)",
-        "destination": "https://live-next-project.vercel.app/$1"
+        "destination": "https://nx-project-omega.vercel.app/$1"
       }
     ]
   }
