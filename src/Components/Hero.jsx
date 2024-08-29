@@ -32,15 +32,20 @@ const Hero = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    navigate(`/search/${searchValue}`);
+    const searchUrl = `/search/${searchValue}`;
+    window.open(searchUrl, '_blank'); // Opens the URL in a new tab
     console.log(searchValue);
   };
+  
 
   const isSmallScreen = useMediaQuery("(max-width:600px)");
 
   const handleSearchClick = () => {
-    setIsSearchClicked(true);
+    // const searchUrl = `/search/${searchValue}`;
+    // Opens the URL in a new tab
+    setIsSearchClicked(true)
   };
+  
 
   return (
     <Box
