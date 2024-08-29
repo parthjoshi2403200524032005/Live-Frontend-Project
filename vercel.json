@@ -1,8 +1,14 @@
 {
-  "rewrites": [
+  "redirects": [
     {
-      "source": "/(.*)",
-      "destination": "https://nx-project-omega.vercel.app/$1"
+      "source": "/search",
+      "destination": "https://nx-project-omega.vercel.app/search",
+      "permanent": true
+    },
+    {
+      "source": "/searchresults/:path*",
+      "destination": "https://nx-project-omega.vercel.app/searchresults/:path*",
+      "permanent": true
     }
   ]
 }
