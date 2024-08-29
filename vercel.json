@@ -1,12 +1,12 @@
 {
   "redirects": [
     {
-      "source": "/search",
+      "source": "/(.*)",
       "destination": "https://nx-project-omega.vercel.app/search",
       "permanent": true
     },
     {
-      "source": "/searchresults/:path*",
+      "source": "/(.*)",
       "destination": "https://nx-project-omega.vercel.app/searchresults/$1",
       "permanent": true
     }
